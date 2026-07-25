@@ -59,23 +59,50 @@
 
   .team li { margin: 0; max-width: none; }
 
-  .team__person {
-    height: 100%;
-    background: var(--surface-quiet);
-    border-radius: var(--radius-md);
-    padding: var(--space-6);
-  }
+  /* Flip cards: name plate on the front, portrait on the back, revealed on
+     hover/focus. A decorative enhancement — the name and role live in the
+     always-present front face, so screen readers and no-hover devices lose
+     nothing. Under prefers-reduced-motion the shared --dur tokens collapse to
+     1ms, so the flip is instant rather than animated. */
+  .team__cell { perspective: 1000px; }
 
-  .section--alt .team__person { background: var(--white); }
-
-  .team__portrait {
+  .team__flip {
+    position: relative;
     width: 100%;
     aspect-ratio: 1;
-    object-fit: cover;
-    border-radius: var(--radius-md);
-    margin-bottom: var(--space-5);
-    background: var(--surface-alt);
+    transform-style: preserve-3d;
+    transition: transform var(--dur-slow) var(--ease-out);
   }
+
+  .team__cell:hover  .team__flip,
+  .team__cell:focus-within .team__flip { transform: rotateY(180deg); }
+
+  .team__face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .team__front {
+    justify-content: flex-end;
+    padding: var(--space-6);
+    background: var(--white);
+  }
+
+  .team__back {
+    transform: rotateY(180deg);
+    background: var(--surface-inverse);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .team__portrait { width: 100%; height: 100%; object-fit: cover; }
+  .team__sun { width: 34%; height: auto; opacity: .9; }
 
   .team__name {
     display: block;
@@ -95,7 +122,8 @@
   /* ---- routing cards ------------------------------------------------------- */
 
   .routing { display: grid; gap: var(--space-6); }
-  @media (min-width: 720px) { .routing { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 640px)  { .routing { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 940px)  { .routing { grid-template-columns: 1fr 1fr 1fr; } }
 
   .routing__card {
     position: relative;
@@ -112,6 +140,7 @@
 
   .routing__card--spenden { background: var(--surface-soft); }
   .routing__card--freiwillige { background: var(--surface-quiet); }
+  .routing__card--kochbuch { background: var(--surface-alt); }
 
   .routing__card h3 { font-size: var(--step-h2); }
   .routing__card p { margin: 0; }

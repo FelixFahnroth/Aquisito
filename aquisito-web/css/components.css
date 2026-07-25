@@ -276,6 +276,7 @@
   .band__ph--ground { fill: var(--olive); }
   .band__ph--ridge  { fill: var(--forest); }
   .band__ph--sun    { fill: var(--lemon); }
+  .band__ph--rays   { stroke: var(--lemon); stroke-width: 8; stroke-linecap: round; fill: none; }
 
   .band__line {
     position: absolute;

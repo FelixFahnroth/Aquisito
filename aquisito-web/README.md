@@ -117,7 +117,7 @@ confirm exactly one element is gold on any screenful.
 |---|---|
 | Fonts are not in the repo | `assets/fonts/README.md` |
 | The band has no photography — no recovered image exceeds 1600px, the band needs 2400px | `inventory/assets.md` |
-| Team grid shows name plates, not portraits (3 of ~19 exist; mixing is forbidden) | `inventory/assets.md` |
+| Team cards flip to a portrait on hover — only 4 of ~19 portraits exist, the rest flip to a sun placeholder | `index.html` team grid, `inventory/assets.md` |
 | Statistics, outcome lines and the cost split are placeholders | `inventory/placeholders.md` |
 | Impressum and Datenschutz are drafts needing legal review | both pages carry a visible editorial note |
 | `/api/anmeldung` does not exist — the volunteer form posts into nothing | `inventory/placeholders.md` |
