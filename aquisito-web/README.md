@@ -74,18 +74,18 @@ Sentence case and the ban on exclamation marks still apply.
 **`DESIGN.md` §7 still says `Sie` and needs editing to match** — two files
 disagreeing is how a rule gets silently re-broken later.
 
-### The gold logo, and why the header sun is olive
+### The gold logo and rule 4
 
-The Aquisito sun (`assets/img/sonne.svg`) and wordmark are `#ffc700` — the token
-`--gold`, which rule 4 reserves for "donate". The header is sticky and carries the
-gold donate pill on every page, so a gold sun in the chrome would break rule 4
-permanently.
+The Aquisito sun (`assets/img/sonne.svg`) is `#ffc700` — the same value as the
+token `--gold`, which rule 4 otherwise reserves for "donate". The header renders
+the **real sun in full brand gold** (an `<img>`, so the colour lives in the asset
+and rule 1 stays clean in HTML/CSS), next to a `--forest` wordmark.
 
-The header lockup therefore renders a `--forest` wordmark with the sun in
-`--olive` (permitted for shapes and icons at 3.08:1). Gold survives untouched in
-the favicon, on flyers and in print. On `/spenden` the header's Spenden link is
-not a gold pill either — the gold there belongs to the submit button. It keeps
-its position, it just stops shouting, because the visitor has already arrived.
+This is a deliberate, documented exception to "one gold per screenful": a brand
+mark identifies, it does not ask for an action. The donate button remains the
+only gold *control* on any screen, so the affordance rule 4 protects is intact —
+the eye still has exactly one gold thing to *press*. On `/spenden` the header's
+Spenden link is not a gold pill — the gold there belongs to the submit button.
 
 ## Editing content
 

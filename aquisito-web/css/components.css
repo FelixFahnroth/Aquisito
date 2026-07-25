@@ -59,7 +59,10 @@
   }
 
   .wordmark:hover { text-decoration: none; }
-  .wordmark__mark { color: var(--olive); flex: none; }
+  /* Real Aquisito sun (assets/img/sonne.svg), full brand gold. The gold logo is
+     an accepted exception to the one-gold-per-screenful rule — a brand mark, not
+     an action. The donate button remains the only gold *control*. */
+  .wordmark__mark { flex: none; display: block; }
 
   /* ---- primary navigation ---------------------------------------------- */
 
@@ -479,7 +482,6 @@
   .site-footer :where(h2, h3) { color: var(--text-on-dark); font-size: var(--step-h3); margin-bottom: var(--space-5); }
   .site-footer a { color: var(--white); }
   .site-footer .wordmark { color: var(--white); }
-  .site-footer .wordmark__mark { color: var(--lemon); }
 
   .site-footer__grid {
     display: grid;
