@@ -1,0 +1,173 @@
+/* ==========================================================================
+   pages/freiwillige.css
+   ========================================================================== */
+
+@layer pages {
+
+  /* Lemon hero. Each subpage gets one identifying surface so they are
+     distinguishable at a glance: lemon for volunteering, forest for donating.
+     Forest text on lemon is 7.50:1. PAGES.md §2. */
+  .freiwillige-hero { background: var(--surface-soft); }
+  .freiwillige-hero h1,
+  .freiwillige-hero .eyebrow { color: var(--text-on-lemon); }
+  .freiwillige-hero .eyebrow { opacity: 0.85; }
+  .freiwillige-hero .lead { color: var(--text-on-lemon); }
+
+  .freiwillige-hero__facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4) var(--space-7);
+    list-style: none;
+    padding: 0;
+    margin: var(--space-7) 0 var(--space-7);
+  }
+
+  .freiwillige-hero__facts li {
+    margin: 0;
+    max-width: none;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--font-display);
+    font-weight: var(--weight-medium);
+    color: var(--forest);
+  }
+
+  /* ---- Einsatzbereiche ----------------------------------------------------
+     A list, not cards: this is scannable reference content and cards would
+     waste the vertical space. PAGES.md §2. */
+
+  .routes { max-width: var(--width-prose); margin-top: var(--space-7); }
+
+  .routes details { border-bottom: 1px solid var(--line-hairline); }
+  .routes details:first-child { border-top: 1px solid var(--line-hairline); }
+
+  .routes summary {
+    display: grid;
+    grid-template-columns: 32px 1fr auto;
+    align-items: center;
+    gap: var(--space-5);
+    min-height: 48px;
+    padding: var(--space-6) 0;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .routes summary::-webkit-details-marker { display: none; }
+
+  .routes__icon { color: var(--olive); }
+
+  .routes__name {
+    font-family: var(--font-display);
+    font-weight: var(--weight-medium);
+    font-size: var(--step-h3);
+    color: var(--text-heading);
+  }
+
+  /* The real commitment, stated plainly. Vagueness here converts worse than a
+     demanding number — people who cannot commit self-select out. */
+  .routes__commitment {
+    font-size: var(--step-small);
+    color: var(--text-muted);
+    text-align: right;
+  }
+
+  .routes details > *:not(summary) { margin-left: calc(32px + var(--space-5)); }
+  .routes details[open] summary .routes__name { text-decoration: underline; text-decoration-thickness: 1.5px; }
+
+  @media (max-width: 639px) {
+    .routes summary { grid-template-columns: 32px 1fr; }
+    .routes__commitment { grid-column: 2; text-align: left; }
+    .routes details > *:not(summary) { margin-left: 0; }
+  }
+
+  /* ---- Leben in Bolivien --------------------------------------------------- */
+
+  .life {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-7);
+    margin-top: var(--space-8);
+  }
+
+  .life__item h3 { margin-bottom: var(--space-4); }
+  .life__item p { font-size: var(--step-small); margin: 0; }
+
+  /* ---- Ablauf -------------------------------------------------------------
+     Numbered because the steps genuinely are a sequence. */
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-7);
+    list-style: none;
+    padding: 0;
+    margin: var(--space-8) 0 0;
+    counter-reset: step;
+  }
+
+  .steps li { position: relative; margin: 0; max-width: none; padding-top: var(--space-7); }
+
+  .steps li::before {
+    counter-increment: step;
+    content: "0" counter(step);
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: var(--font-display);
+    font-size: var(--step-h3);
+    font-weight: var(--weight-medium);
+    color: var(--olive);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* The connecting rule. Decorative, so --gray is permitted. */
+  .steps li::after {
+    content: "";
+    position: absolute;
+    top: 0.6em;
+    left: 3.2rem;
+    right: calc(var(--space-7) * -1);
+    height: 1px;
+    background: var(--line-hairline);
+  }
+
+  .steps li:last-child::after { display: none; }
+  @media (max-width: 819px) { .steps li::after { display: none; } }
+
+  .steps h3 { margin-bottom: var(--space-3); }
+  .steps p { font-size: var(--step-small); margin: 0; }
+
+  /* ---- form --------------------------------------------------------------- */
+
+  .signup { max-width: 40rem; margin-top: var(--space-7); }
+  .signup__required { font-size: var(--step-small); color: var(--text-muted); margin-bottom: var(--space-7); }
+
+  .signup fieldset { border: 0; padding: 0; margin: 0 0 var(--space-6); }
+
+  .signup legend {
+    font-family: var(--font-display);
+    font-weight: var(--weight-medium);
+    font-size: var(--step-small);
+    color: var(--text-heading);
+    margin-bottom: var(--space-4);
+    padding: 0;
+  }
+
+  .signup__options { display: grid; gap: var(--space-4); }
+
+  .signup__status:not(:empty) {
+    margin-bottom: var(--space-6);
+    padding: var(--space-5);
+    background: var(--surface-quiet);
+    border-radius: var(--radius-sm);
+    color: var(--forest);
+    font-weight: var(--weight-bold);
+  }
+
+  /* ---- background essay ---------------------------------------------------
+     Long-form, deliberately below the form so it cannot push the sign-up down. */
+
+  .background { max-width: var(--width-prose); }
+  .background h3 { margin-top: var(--space-7); margin-bottom: var(--space-4); }
+}

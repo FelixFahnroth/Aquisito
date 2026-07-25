@@ -1,0 +1,147 @@
+/* ==========================================================================
+   pages/spenden.css
+   ========================================================================== */
+
+@layer pages {
+
+  /* ---- hero -------------------------------------------------------------
+     Forest surface, white text, white widget card on it. The gold submit on a
+     white card on forest is the highest-contrast moment on the site — correct,
+     because it is the most important button on the site. PAGES.md §3. */
+
+  .spenden-hero { padding-block: var(--space-9) var(--space-10); }
+
+  .spenden-hero__grid {
+    display: grid;
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  @media (min-width: 900px) {
+    .spenden-hero__grid { grid-template-columns: 1fr minmax(360px, 26rem); gap: var(--space-9); }
+  }
+
+  .spenden-hero__trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-6);
+    list-style: none;
+    padding: 0;
+    margin: var(--space-7) 0 0;
+    font-size: var(--step-small);
+    color: var(--lemon);
+  }
+
+  .spenden-hero__trust li { margin: 0; max-width: none; display: flex; align-items: center; gap: var(--space-3); }
+
+  /* ---- widget ------------------------------------------------------------
+     Above the fold, no scrolling to find it. On mobile it sits directly under
+     the lead, before anything else — source order already guarantees this. */
+
+  .widget {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-7);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .widget__title { font-size: var(--step-h3); margin-bottom: var(--space-6); }
+
+  .widget .pills { gap: var(--space-3); }
+  .widget .pill span { min-width: 76px; padding-inline: var(--space-5); }
+
+  .widget__custom {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+  }
+
+  .widget__custom input {
+    width: 8rem;
+    min-height: 48px;
+    padding: var(--space-4) var(--space-5);
+    font: inherit;
+    border: 1.5px solid var(--line-control);
+    border-radius: var(--radius-pill);
+    background: var(--white);
+    color: var(--text-body);
+  }
+
+  .widget__outcome {
+    min-height: 3.2em;
+    margin: 0 0 var(--space-6);
+    padding: var(--space-4) var(--space-5);
+    background: var(--surface-soft);
+    border-radius: var(--radius-sm);
+    color: var(--text-on-lemon);
+    font-size: var(--step-small);
+    font-weight: var(--weight-bold);
+  }
+
+  .widget__note { font-size: var(--step-small); color: var(--text-muted); margin: var(--space-5) 0 0; }
+
+  .widget__alt {
+    margin-top: var(--space-6);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--line-hairline);
+  }
+
+  .widget__alt dl { margin: var(--space-4) 0 0; font-size: var(--step-small); }
+  .widget__alt dt { color: var(--text-muted); }
+  .widget__alt dd { margin: 0 0 var(--space-4); font-variant-numeric: tabular-nums; }
+
+  /* ---- where the money goes ---------------------------------------------
+     Forest / olive / gray are distinguishable by lightness as well as hue, and
+     every segment is labelled in text beside the bar, not inside it.
+     ACCESSIBILITY.md §Beyond contrast. */
+
+  .split { max-width: var(--width-prose); margin-top: var(--space-7); }
+
+  .split__bar {
+    display: flex;
+    height: 2.5rem;
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    border: 1px solid var(--line-hairline);
+  }
+
+  .split__segment--projekte    { background: var(--forest); }
+  .split__segment--verwaltung  { background: var(--olive); }
+  .split__segment--fundraising { background: var(--gray); }
+
+  .split__key { display: grid; gap: var(--space-4); list-style: none; padding: 0; margin: var(--space-6) 0 0; }
+  .split__key li { display: flex; align-items: baseline; gap: var(--space-4); margin: 0; max-width: none; }
+
+  .split__swatch { flex: none; width: 14px; height: 14px; border-radius: 3px; }
+  .split__value { font-variant-numeric: tabular-nums; font-weight: var(--weight-bold); min-width: 3.5rem; }
+
+  /* ---- reports ----------------------------------------------------------- */
+
+  .reports { display: grid; gap: var(--space-4); list-style: none; padding: 0; margin: var(--space-7) 0 0; }
+  .reports li { margin: 0; max-width: none; }
+  .reports .muted { font-variant-numeric: tabular-nums; }
+
+  /* ---- Kochbuch ---------------------------------------------------------- */
+
+  .kochbuch { display: grid; gap: var(--space-7); align-items: center; }
+  @media (min-width: 900px) { .kochbuch { grid-template-columns: 1fr 1fr; } }
+
+  /* 9.7 MB file: preload="none" plus a poster. Never autoplay. */
+  .kochbuch video { width: 100%; border-radius: var(--radius-md); background: var(--forest-tint); }
+
+  /* ---- trust ------------------------------------------------------------- */
+
+  .trust { display: grid; gap: var(--space-7); }
+  @media (min-width: 900px) { .trust { grid-template-columns: 2fr 1fr; gap: var(--space-9); } }
+
+  .trust__seal { max-width: 260px; }
+
+  .trust__contact {
+    background: var(--surface-quiet);
+    border-radius: var(--radius-md);
+    padding: var(--space-6);
+  }
+
+  .trust__contact p:last-child { margin-bottom: 0; }
+}

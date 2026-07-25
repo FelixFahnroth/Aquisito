@@ -1,0 +1,508 @@
+/* ==========================================================================
+   components.css
+   Only things used on at least two of the three core pages. Anything used once
+   is page markup and lives in css/pages/ — COMPONENTS.md, opening line.
+   ========================================================================== */
+
+@layer components {
+
+  /* ======================================================================
+     Header
+     Sticky. Transparent over the hero on /, solid after 80px of scroll.
+     Solid from the start on subpages (.site-header--solid).
+     ====================================================================== */
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background-color var(--dur-base) var(--ease-out),
+                border-color var(--dur-base) var(--ease-out);
+  }
+
+  .site-header--solid,
+  .site-header.is-stuck {
+    background: var(--white);
+    border-bottom-color: var(--line-hairline);
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-5);
+    min-height: 80px;
+    max-width: var(--width-content);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  /* ---- wordmark -------------------------------------------------------- */
+  /* The sun mark is OLIVE, not the brand gold. CLAUDE.md rule 4 reserves gold
+     for "donate", and the header carries the gold donate pill on every page —
+     a gold sun beside it would break the rule permanently. Olive is permitted
+     for shapes and icons at 3.08:1 (ACCESSIBILITY.md §Large text and non-text).
+     Gold survives untouched in the favicon and in print. */
+
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-4);
+    font-family: var(--font-display);
+    font-weight: var(--weight-medium);
+    font-size: 1.375rem;
+    color: var(--forest);
+    text-decoration: none;
+    letter-spacing: var(--tracking-snug);
+  }
+
+  .wordmark:hover { text-decoration: none; }
+  .wordmark__mark { color: var(--olive); flex: none; }
+
+  /* ---- primary navigation ---------------------------------------------- */
+
+  .nav { display: flex; align-items: center; gap: var(--space-6); }
+
+  .nav__list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav__list li { margin: 0; max-width: none; }
+
+  .nav__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;                    /* touch target — DESIGN.md §8 */
+    font-family: var(--font-display);
+    font-weight: var(--weight-medium);
+    font-size: var(--step-body);
+    color: var(--forest);
+    text-decoration: none;
+    white-space: nowrap;                 /* must survive "Fördervereinbarung" */
+  }
+
+  .nav__link:hover { text-decoration: underline; text-decoration-thickness: 1.5px; }
+  .nav__link[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 3px; }
+
+  /* ---- mobile menu ------------------------------------------------------ */
+
+  .nav__toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 48px; height: 48px;
+    padding: 0;
+    background: transparent;
+    border: 1.5px solid var(--forest);
+    border-radius: var(--radius-pill);
+    color: var(--forest);
+    cursor: pointer;
+  }
+
+  @media (max-width: 899px) {
+    .nav__toggle { display: inline-flex; }
+
+    /* Full-screen overlay. The gold donate pill stays in the BAR and does not
+       move into the menu — PAGES.md §Header. It is the one piece of interface
+       that should never move. */
+    .nav__list {
+      position: fixed;
+      inset: 0;
+      z-index: 150;
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--space-7);
+      padding: var(--space-9) var(--gutter);
+      background: var(--white);
+      font-size: var(--step-h3);
+    }
+
+    .nav__list[hidden] { display: none; }
+    .nav__link { min-height: 48px; font-size: var(--step-h3); }
+  }
+
+  /* Without JS the toggle is useless, so it is hidden and the links stay
+     visible — the site must work fully with JavaScript disabled. */
+  html:not(.js) .nav__toggle { display: none; }
+  html:not(.js) .nav__list { position: static; flex-direction: row; flex-wrap: wrap; background: none; padding: 0; font-size: var(--step-body); }
+  html:not(.js) .nav__list[hidden] { display: flex; }
+
+  /* ======================================================================
+     Buttons — three variants, one size. A small button is a link.
+     ====================================================================== */
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    min-height: 48px;
+    padding: 0.875rem 1.75rem;
+    font-family: var(--font-display);
+    font-size: var(--step-body);
+    font-weight: var(--weight-medium);
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    border: 1.5px solid transparent;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: transform var(--dur-fast) var(--ease-out),
+                box-shadow var(--dur-fast) var(--ease-out),
+                background-color var(--dur-fast) var(--ease-out);
+  }
+
+  .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); text-decoration: none; }
+  .btn:active { transform: translateY(0); }
+
+  .btn--primary { background: var(--forest); color: var(--white); }
+  .btn--primary:active { background: var(--forest-press); }
+
+  .btn--donate { background: var(--gold); color: var(--text-on-gold); }
+  .btn--donate:active { background: var(--gold-press); }
+
+  .btn--ghost { background: transparent; color: var(--forest); border-color: var(--forest); }
+  .btn--ghost:active { background: var(--forest-tint); }
+
+  .btn--block { width: 100%; }
+
+  /* ---- arrow link ------------------------------------------------------- */
+
+  .arrow-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--font-display);
+    font-weight: var(--weight-medium);
+    color: var(--forest);
+    text-decoration: none;
+  }
+
+  .arrow-link:hover { text-decoration: underline; text-decoration-thickness: 1.5px; }
+  .arrow-link span { transition: transform var(--dur-fast) var(--ease-out); }
+  .arrow-link:hover span { transform: translateX(4px); }
+
+  .section--inverse .arrow-link { color: var(--lemon); }
+
+  /* ======================================================================
+     Card
+     ====================================================================== */
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-6);
+    margin-top: var(--space-8);
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface-alt);
+    border-radius: var(--radius-md);
+    padding: var(--space-6);
+    transition: transform var(--dur-fast) var(--ease-out),
+                box-shadow var(--dur-fast) var(--ease-out);
+  }
+
+  /* Surface flips so the card is always distinguishable from its section. */
+  .section--alt .card,
+  .section--quiet .card { background: var(--white); }
+
+  .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+
+  .card__icon { color: var(--olive); margin-bottom: var(--space-5); }
+  .card__title { margin-bottom: var(--space-4); }
+  .card__body { font-size: var(--step-small); margin-bottom: var(--space-5); }
+  .card__link { margin-top: auto; font-size: var(--step-small); }
+
+  /* Whole-card link: a stretched pseudo-element on the inner <a>, so the
+     heading stays a real heading in the accessibility tree rather than being
+     swallowed by an outer anchor — COMPONENTS.md §Card. */
+  .card--linked { position: relative; }
+  .card--linked .card__link::after { content: ""; position: absolute; inset: 0; }
+
+  /* ======================================================================
+     The band — the signature element. One per page. DESIGN.md §5.1.
+     ====================================================================== */
+
+  .band {
+    position: relative;
+    isolation: isolate;
+    height: var(--band-height);
+    overflow: hidden;
+  }
+
+  .band__media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .band__scrim { position: absolute; inset: 0; background: var(--band-scrim); }
+
+  /* Arcs are SVG fills in --white, NOT clip-path: clip-path on the section
+     would clip the focus ring of anything focusable inside it.
+     preserveAspectRatio="none" keeps the arc depth stable past 1920px. */
+  .band__arc {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: var(--band-arc);
+    display: block;
+    fill: var(--white);
+  }
+
+  .band__arc--top { top: 0; }
+  .band__arc--bottom { bottom: 0; }
+
+  /* Placeholder graphic, standing in until real photography exists. Its fills
+     are tokens rather than literal values, so it obeys rule 1 like everything
+     else: an SVG presentation attribute cannot read a CSS variable, so the
+     shapes carry classes and are filled from here instead. Delete this block
+     once every band carries a <picture>. */
+  .band__ph--ground { fill: var(--olive); }
+  .band__ph--ridge  { fill: var(--forest); }
+  .band__ph--sun    { fill: var(--lemon); }
+
+  .band__line {
+    position: absolute;
+    left: var(--gutter);
+    bottom: calc(var(--band-arc) + var(--space-8));
+    max-width: min(20ch, 70%);
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: var(--weight-medium);
+    font-size: clamp(1.75rem, 1rem + 3vw, 3.25rem);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    color: var(--lemon);
+    text-wrap: balance;
+  }
+
+  /* ======================================================================
+     Marker — one per page, in the <h1> only.
+     ====================================================================== */
+
+  .marker { position: relative; display: inline; }
+
+  /* The one permitted hardcoded colour in the codebase: a data-URI SVG cannot
+     read a CSS variable. If --lemon ever changes, grep for f7f166.
+     COMPONENTS.md §Marker highlight documents this exception. */
+  .marker::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: -0.08em; right: -0.08em; bottom: 0.02em;
+    height: 0.62em;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40' preserveAspectRatio='none'%3E%3Cpath d='M2,32 C40,25 70,36 108,29 C141,23 170,32 198,24 L196,9 C164,16 134,6 104,13 C71,20 37,9 3,17 Z' fill='%23f7f166'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    transform-origin: left center;
+    animation: marker-draw var(--dur-slow) var(--ease-out) both;
+  }
+
+  @keyframes marker-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+  /* ======================================================================
+     Statistic
+     ====================================================================== */
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: var(--space-7);
+  }
+
+  .stat__figure {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--step-h1);
+    font-weight: var(--weight-medium);
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: var(--tracking-tight);
+    line-height: 1;
+  }
+
+  .stat__label {
+    display: block;
+    margin-top: var(--space-4);
+    font-size: var(--step-small);
+    color: rgb(255 255 255 / 0.82);
+  }
+
+  /* ======================================================================
+     Form field
+     ====================================================================== */
+
+  .field { margin-bottom: var(--space-6); max-width: 32rem; }
+
+  .field label {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: var(--weight-medium);
+    font-size: var(--step-small);
+    color: var(--text-heading);
+    margin-bottom: var(--space-3);
+  }
+
+  .field input,
+  .field textarea,
+  .field select {
+    width: 100%;
+    min-height: 48px;
+    padding: var(--space-4) var(--space-5);
+    font: inherit;
+    font-size: var(--step-body);
+    color: var(--text-body);
+    background: var(--white);
+    border: 1.5px solid var(--line-control);   /* --gray is 2.05:1 and fails */
+    border-radius: var(--radius-sm);
+  }
+
+  .field textarea { min-height: 8rem; resize: vertical; }
+  .field input:hover, .field textarea:hover { border-color: var(--forest); }
+
+  .field__hint {
+    font-size: var(--step-small);
+    color: var(--text-muted);
+    margin: var(--space-3) 0 0;
+  }
+
+  /* Errors are forest with an icon — never red. Red is not in the palette and
+     reads as an alien element. PAGES.md §Form. */
+  .field__error {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    font-size: var(--step-small);
+    font-weight: var(--weight-bold);
+    color: var(--forest);
+    margin: var(--space-3) 0 0;
+  }
+
+  .field__error svg { flex: none; margin-top: 0.15em; }
+  .field input[aria-invalid="true"], .field textarea[aria-invalid="true"] { border-width: 3px; border-color: var(--forest); }
+
+  .field--checkbox { display: flex; align-items: flex-start; gap: var(--space-4); max-width: var(--measure); }
+  .field--checkbox input { width: 24px; height: 24px; min-height: 0; flex: none; margin-top: 0.15em; accent-color: var(--forest); }
+  .field--checkbox label { margin: 0; font-family: var(--font-body); font-weight: var(--weight-regular); font-size: var(--step-body); color: var(--text-body); }
+
+  /* Honeypot — a real field, visually and programmatically removed from the
+     flow, that only a bot fills in. Not a CAPTCHA: a CAPTCHA on a volunteer
+     form costs more sign-ups than it saves spam. */
+  .honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  /* ======================================================================
+     Pills — radio group. Radios, not buttons: the browser gives keyboard
+     arrow navigation and correct grouping for free.
+     ====================================================================== */
+
+  .pills { display: flex; flex-wrap: wrap; gap: var(--space-4); border: 0; padding: 0; margin: 0 0 var(--space-5); }
+  .pill input { position: absolute; opacity: 0; pointer-events: none; }
+
+  .pill span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    min-width: 88px;
+    padding: 0 var(--space-6);
+    font-family: var(--font-display);
+    font-weight: var(--weight-medium);
+    border: 1.5px solid var(--line-control);
+    border-radius: var(--radius-pill);
+    background: var(--white);
+    color: var(--forest);
+    cursor: pointer;
+    transition: background-color var(--dur-fast) var(--ease-out);
+  }
+
+  .pill input:checked + span { background: var(--forest); color: var(--white); border-color: var(--forest); }
+  .pill input:focus-visible + span { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+
+  /* ======================================================================
+     Accordion — native <details>/<summary>. No JS, no ARIA authoring.
+     ====================================================================== */
+
+  .accordion { max-width: var(--width-prose); }
+
+  .accordion details { border-bottom: 1px solid var(--line-hairline); }
+
+  .accordion summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-5);
+    min-height: 48px;
+    padding: var(--space-5) 0;
+    font-family: var(--font-display);
+    font-weight: var(--weight-medium);
+    font-size: var(--step-h3);
+    color: var(--text-heading);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .accordion summary::-webkit-details-marker { display: none; }
+
+  /* The default marker is removed, so a visible replacement is required. */
+  .accordion summary::after {
+    content: "";
+    flex: none;
+    width: 20px; height: 20px;
+    background: currentColor;
+    color: var(--olive);
+    clip-path: polygon(50% 70%, 8% 28%, 20% 18%, 50% 48%, 80% 18%, 92% 28%);
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+
+  .accordion details[open] summary::after { transform: rotate(180deg); }
+  .accordion details > *:not(summary) { margin-bottom: var(--space-5); }
+
+  /* ======================================================================
+     Footer
+     ====================================================================== */
+
+  .site-footer { background: var(--surface-inverse); color: var(--text-on-dark); padding-block: var(--space-9) var(--space-7); }
+
+  .site-footer :where(h2, h3) { color: var(--text-on-dark); font-size: var(--step-h3); margin-bottom: var(--space-5); }
+  .site-footer a { color: var(--white); }
+  .site-footer .wordmark { color: var(--white); }
+  .site-footer .wordmark__mark { color: var(--lemon); }
+
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-8);
+  }
+
+  .site-footer ul { list-style: none; padding: 0; margin: 0; }
+  .site-footer li { margin-bottom: var(--space-4); max-width: none; }
+  .site-footer p { color: rgb(255 255 255 / 0.9); }
+
+  /* The transparency line. Non-profit credibility is carried by boring details
+     in the footer, and people do look — PAGES.md §Footer. */
+  .site-footer__legal {
+    margin-top: var(--space-8);
+    padding-top: var(--space-6);
+    border-top: 1px solid rgb(255 255 255 / 0.25);
+    font-size: var(--step-small);
+    color: var(--lemon);
+    max-width: none;
+  }
+
+  @media (max-width: 639px) {
+    .site-footer__grid { grid-template-columns: 1fr; }
+  }
+}
