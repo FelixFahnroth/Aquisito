@@ -18,207 +18,6 @@
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/components.css">
 <link rel="stylesheet" href="css/pages/index.css">
-<style>
-  /* Hero & Background Setup */
-  .hero {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    margin-top: -80px;
-    padding-top: 140px;
-    padding-bottom: 80px;
-    min-height: 85vh;
-    display: flex;
-    align-items: center;
-  }
-  .hero__bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-  }
-  .hero__bg-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-  }
-  /* Sanfter weißer rechteckiger Verlauf mit maximal 28% Weiß-Transparenz */
-  .hero__scrim {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, 
-      rgba(255, 255, 255, 0.28) 0%, 
-      rgba(255, 255, 255, 0.18) 40%, 
-      rgba(255, 255, 255, 0) 75%
-    );
-  }
-  /* Dichterer weißer Verlauf ganz oben für die Navigation */
-  .hero__top-scrim {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 160px;
-    background: linear-gradient(180deg, 
-      rgba(255, 255, 255, 0.9) 0%, 
-      rgba(255, 255, 255, 0.6) 60px, 
-      rgba(255, 255, 255, 0) 100%
-    );
-  }
-  .hero .wrap {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-  }
-
-  /* Wörterbuch-Stil für Aquisito */
-  .dictionary-card {
-    background: #ffffff;
-    border: 1px solid var(--color-border, #e5e7eb);
-    border-left: 4px solid #2d6a4f;
-    border-radius: 16px;
-    padding: 24px 32px;
-    max-width: 720px;
-    margin: 0 auto;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-  }
-  .dictionary-card__header {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    margin-bottom: 10px;
-    flex-wrap: wrap;
-  }
-  .dictionary-card__word {
-    font-family: var(--font-heading, sans-serif);
-    font-size: 2rem;
-    font-weight: 700;
-    color: #111827;
-  }
-  .dictionary-card__phonetic {
-    font-family: monospace;
-    font-size: 1.05rem;
-    color: #6b7280;
-    background: #f3f4f6;
-    padding: 2px 8px;
-    border-radius: 6px;
-  }
-  .dictionary-card__pos {
-    font-style: italic;
-    font-size: 0.95rem;
-    color: #2d6a4f;
-    font-weight: 600;
-  }
-  .dictionary-card__def {
-    font-size: 1.05rem;
-    line-height: 1.6;
-    margin: 0;
-    color: #374151;
-  }
-
-  /* Kochbuch-Sektion & Leseprobe-Slider */
-  .kochbuch-section {
-    background: #f9fafb;
-    border-top: 1px solid #e5e7eb;
-    border-bottom: 1px solid #e5e7eb;
-    padding: 64px 0;
-  }
-  .kochbuch-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: center;
-  }
-  @media (max-width: 860px) {
-    .kochbuch-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-  .kochbuch-slider {
-    position: relative;
-    overflow: hidden;
-    border-radius: 16px;
-    background: #ffffff;
-    padding: 16px;
-    box-shadow: 0 12px 32px rgba(0,0,0,0.06);
-    border: 1px solid #e5e7eb;
-  }
-  .kochbuch-slider__track {
-    display: flex;
-    gap: 16px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    padding-bottom: 8px;
-  }
-  .kochbuch-slider__track::-webkit-scrollbar {
-    display: none;
-  }
-  .kochbuch-slider__item {
-    flex: 0 0 220px;
-    scroll-snap-align: start;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #f3f4f6;
-    aspect-ratio: 3/4;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-    transition: transform 0.3s ease;
-  }
-  .kochbuch-slider__item:hover {
-    transform: translateY(-4px);
-  }
-  .kochbuch-slider__preview-page {
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    text-align: center;
-    font-size: 0.85rem;
-    box-sizing: border-box;
-  }
-  .kochbuch-slider__preview-title {
-    font-weight: 700;
-    color: #2d6a4f;
-    font-size: 1rem;
-    margin-bottom: 6px;
-  }
-  .kochbuch-slider__controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    margin-top: 16px;
-  }
-  .kochbuch-slider__btn {
-    background: #ffffff;
-    border: 1px solid #d1d5db;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  .kochbuch-slider__btn:hover {
-    background: #2d6a4f;
-    color: #ffffff;
-    border-color: #2d6a4f;
-  }
-</style>
 <script>document.documentElement.className = 'js';</script>
 </head>
 <body>
@@ -238,9 +37,9 @@
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       </button>
       <ul class="nav__list" id="nav-list">
+        <li><a class="nav__link" href="#was-wir-tun">Was wir tun</a></li>
         <li><a class="nav__link" href="#team">Über uns</a></li>
-        <li><a class="nav__link" href="#kochbuch">Kochbuch</a></li>
-        <li><a class="nav__link" href="freiwillige.html">Freiwilligendienst</a></li>
+        <li><a class="nav__link" href="freiwillige.html">Freiwillige</a></li>
       </ul>
       <a class="btn btn--donate" href="spenden.html">Spenden</a>
     </nav>
@@ -250,28 +49,37 @@
 <main id="main">
 
   <!-- ====================================================================
-       Hero Section
+       Hero — one marker, no gold. A playful framed photo (client override of
+       the original no-image hero) overlaps the lead. The gold pill in the
+       header is the donate affordance above the fold.
        ==================================================================== -->
   <section class="section hero">
-    <div class="hero__bg" aria-hidden="true">
-      <img class="hero__bg-img" src="assets/img/Aquisito_Header.png" alt="" loading="eager" decoding="async">
-      <div class="hero__scrim"></div>
-      <div class="hero__top-scrim"></div>
-    </div>
-    <div class="wrap">
-      <h1>Gemeinsam <span class="marker">groß</span> werden</h1>
-      <p class="lead" style="margin-top: var(--space-6); max-width: 600px;">
-        Unter diesem Motto engagiert sich Aquisito e.V. für das Kinder- und Jugendzentrum CADSE in Cochabamba, Bolivien. Wir arbeiten Hand in Hand mit dem lokalen Team vor Ort, um Kindern und Jugendlichen mit Hausaufgabenbetreuung, Freizeitangeboten und gesunder Ernährung neue Perspektiven zu eröffnen.
-      </p>
-      <div class="hero__actions" style="margin-top: var(--space-6);">
-        <a class="btn btn--primary" href="freiwillige.html">Freiwillig mitmachen</a>
-        <a class="arrow-link" href="spenden.html">Spenden <span aria-hidden="true">→</span></a>
+    <div class="wrap hero__grid">
+      <div class="hero__text">
+        <p class="eyebrow">CADSE Cochabamba · Aquisito e.V.</p>
+        <h1>Gemeinsam <span class="marker">groß</span> werden</h1>
+        <p class="lead" style="margin-top: var(--space-6);">
+          Eine Kooperation zwischen dem Kinder- und Jugendzentrum CADSE in Bolivien und
+          Aquisito e.V. in Deutschland. Wir finanzieren, was Mery und ihr Team in
+          Cochabamba vor Ort für richtig halten.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="freiwillige.html">Freiwillig mitmachen</a>
+          <a class="arrow-link" href="spenden.html">Spenden <span aria-hidden="true">→</span></a>
+        </div>
       </div>
+      <figure class="hero__photo">
+        <picture>
+          <source type="image/webp" srcset="assets/img/hero-arts-750.webp 750w, assets/img/hero-arts-1500.webp 1500w" sizes="(min-width: 820px) 40vw, 82vw">
+          <img src="assets/img/hero-arts-750.jpg" srcset="assets/img/hero-arts-750.jpg 750w, assets/img/hero-arts-1500.jpg 1500w" sizes="(min-width: 820px) 40vw, 82vw" width="1500" height="1000" alt="Ein Kind malt mit Fingerfarben bei CADSE" decoding="async">
+        </picture>
+      </figure>
     </div>
   </section>
 
   <!-- ====================================================================
-       Statistics — real numbers
+       Statistics — real numbers only. If one cannot be verified, delete the
+       column rather than inventing it. PAGES.md §1.
        ==================================================================== -->
   <section class="section section--inverse on-dark">
     <div class="wrap">
@@ -285,7 +93,7 @@
           <span class="stat__label">Kinder erreicht</span>
         </div>
         <div class="stat">
-          <span class="stat__figure">10.000 €</span>
+          <span class="stat__figure">10.000 €</span>
           <span class="stat__label">für CADSE gefördert</span>
         </div>
       </div>
@@ -293,40 +101,49 @@
   </section>
 
   <!-- ====================================================================
-       Ziele von Aquisito e.V. (Wofür das Geld gebraucht wird)
+       Was wir tun — three cards. The old site had four pillars; Bildung and
+       Lernen are merged because they are the same thing.
        ==================================================================== -->
   <section class="section reveal" id="was-wir-tun">
     <div class="wrap">
       <p class="eyebrow">Was wir tun</p>
-      <h2>Ziele von Aquisito e.V.</h2>
+      <h2>Wofür das Geld gebraucht wird</h2>
       <p class="prose">
-        Unser Verein wurde gegründet, um Kindern und Jugendlichen in benachteiligten Regionen ein sicheres, chancenreiches Aufwachsen zu ermöglichen. Wir fokussieren uns dabei auf drei zentrale Schwerpunkte: die ganzheitliche Förderung von Erziehung und Bildung, die nachhaltige Stärkung der Jugendhilfe sowie den aktiven Einsatz für die Gleichberechtigung von Frauen und Männern.
+        Der Tag bei CADSE beginnt mit Schularbeit und endet meistens mit Sport. Was
+        dazwischen passiert, entscheidet das Team in Cochabamba — wir finanzieren es
+        und rechnen es Projekt für Projekt ab.
       </p>
 
       <div class="cards">
         <article class="card card--linked">
           <svg class="card__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A2.5 2.5 0 0 1 5.5 4H11v16H5.5A2.5 2.5 0 0 1 3 17.5Z"/><path d="M21 6.5A2.5 2.5 0 0 0 18.5 4H13v16h5.5a2.5 2.5 0 0 0 2.5-2.5Z"/></svg>
-          <h3 class="card__title">Erziehung &amp; Bildung</h3>
+          <h3 class="card__title">Bildung &amp; Lernen</h3>
           <p class="card__body">
-            Ganzheitliche Förderung durch gezielte Hausaufgabenbetreuung, Unterstützung beim Erlernen der englischen Sprache sowie praxisnahe Lern- und Kreativangebote, die schulische Lücken schließen und den Spaß am Lernen wecken.
+            Jedes Kind macht zuerst mit Hilfe der Freiwilligen seine Hausaufgaben und
+            arbeitet dann mit selbstgebauten Lernspielen an dem, was ihm schwerfällt.
+            Dazu Englisch- und Computerunterricht, den die Schule nicht leistet.
           </p>
           <a class="card__link arrow-link" href="transparenz.html#projekte">Was das kostet <span aria-hidden="true">→</span></a>
         </article>
 
         <article class="card card--linked">
           <svg class="card__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3c2.6 2.4 2.6 15.6 0 18M12 3C9.4 5.4 9.4 18.6 12 21M3.2 9.5h17.6M3.2 14.5h17.6"/></svg>
-          <h3 class="card__title">Jugendhilfe &amp; Schutzraum</h3>
+          <h3 class="card__title">Freizeit &amp; Sport</h3>
           <p class="card__body">
-            Ein sicherer Rückzugsort im Stadtteil Ushpa Ushpa, der Schutz vor Gefahren wie Straßenkriminalität bietet. Durch persönliche Begleitung, offene Ohren und Hausbesuche werden Kinder und Familien in schwierigen Lebenslagen gestärkt.
+            Einmal pro Woche Kunst, einmal Sport. Beim Basteln lernen die Kinder,
+            eigene Ideen zu entwickeln — in der Schule bleibt dafür keine Zeit. Beim
+            Sport blühen Kinder auf, die im Unterricht untergehen.
           </p>
           <a class="card__link arrow-link" href="transparenz.html#projekte">Was das kostet <span aria-hidden="true">→</span></a>
         </article>
 
         <article class="card card--linked">
           <svg class="card__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8Z"/><path d="M12 12c0-3.3 2.7-6 6-6 0 3.3-2.7 6-6 6Z"/><path d="M12 12C12 9.2 9.8 7 7 7c0 2.8 2.2 5 5 5Z"/></svg>
-          <h3 class="card__title">Gleichberechtigung &amp; Entwicklung</h3>
+          <h3 class="card__title">Ernährung &amp; Jugend</h3>
           <p class="card__body">
-            Aktive Förderung des selbstbestimmten und verlässlichen Miteinanders durch gemeinsame Projekte in Sport, Kunst und Umwelt. Es wird Raum geschaffen für die freie Entfaltung aller Kinder und Jugendlichen – unabhängig vom Geschlecht.
+            Von Paprikagesichtern bis zu Kiwi-Schildkröten: gesunde Ernährung wird
+            erklärt, indem sie zubereitet wird. Seit ein Ofen gespendet wurde,
+            organisiert die Jugendgruppe ihre Pizzatage und Tanzkurse selbst.
           </p>
           <a class="card__link arrow-link" href="transparenz.html#projekte">Was das kostet <span aria-hidden="true">→</span></a>
         </article>
@@ -335,7 +152,7 @@
   </section>
 
   <!-- ====================================================================
-       The band — quote section
+       The band — the pivot from what we do to who does it. One per page.
        ==================================================================== -->
   <section class="band" aria-labelledby="band-line">
     <picture>
@@ -345,98 +162,35 @@
            width="2400" height="1350" alt="" loading="lazy" decoding="async">
     </picture>
     <div class="band__scrim" aria-hidden="true"></div>
-    <svg class="band__arc band__arc--top" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0,44 C480,10 960,38 1440,12 L1440,0 L0,0 Z"/></svg>
-    <svg class="band__arc band__arc--bottom" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0,36 C480,2 960,30 1440,4 L1440,48 L0,48 Z"/></svg>
+    <svg class="band__arc band__arc--top" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0,30 Q120,6 240,30 T480,30 T720,30 T960,30 T1200,30 T1440,30 V0 H0 Z"/></svg>
+    <svg class="band__arc band__arc--bottom" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0,30 Q120,54 240,30 T480,30 T720,30 T960,30 T1200,30 T1440,30 V60 H0 Z"/></svg>
     <p class="band__line" id="band-line">Wo Mery hingeht, da sind auch Kinder.</p>
   </section>
 
   <!-- ====================================================================
-       Textblock "Aquisito" im Wörterbuch-Stil (Duden-Karte)
+       The name — promoted out of the bottom of the old landing page, where it
+       sat under a code-formatted heading. It is the best writing the
+       organisation has.
        ==================================================================== -->
-  <section class="section reveal" id="aquisito">
+  <section class="section reveal">
     <div class="wrap">
-      <div class="dictionary-card">
-        <div class="dictionary-card__header">
-          <span class="dictionary-card__word" lang="es">aquisito</span>
-          <span class="dictionary-card__phonetic">[a.ki.ˈsi.to]</span>
-          <span class="dictionary-card__pos">Spanische Verniedlichung für „hier“</span>
-        </div>
-        <p class="dictionary-card__def">
-          Das Wort wird besonders in Cochabamba, Bolivien benutzt – hier wird wirklich alles verniedlicht. Mery und ihr Team kommen selbst aus dem Stadtteil und kennen die Bedürfnisse der Familien genau. Deshalb entscheidet Cochabamba lokal und gezielt, wo Unterstützung gebraucht wird.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====================================================================
-       Neue Kochbuch-Sektion mit Leseprobe-Slider
-       ==================================================================== -->
-  <section class="section kochbuch-section reveal" id="kochbuch">
-    <div class="wrap">
-      <div class="kochbuch-grid">
+      <div class="name-note">
         <div>
-          <p class="eyebrow">Ein Stück Bolivien für Zuhause</p>
-          <h2>Unser bolivianisches Kochbuch</h2>
-          <p class="prose" style="margin-top: 16px;">
-            Mehr als nur Rezepte: Unser bolivianisches Kochbuch öffnet eine Tür zur lebendigen Kultur des Landes und rückt die Menschen bei CADSE in den Mittelpunkt, die ihre Küchen und ihre liebsten Familiengerichte für uns geöffnet haben.
-          </p>
-          <div style="margin-top: 24px;">
-            <a class="btn btn--primary" href="spenden.html#kochbuch">Kochbuch bestellen <span aria-hidden="true">→</span></a>
-          </div>
+          <p class="name-note__word" lang="es">aquisito</p>
+          <p class="name-note__gloss">spanische Verniedlichung für „hier“</p>
         </div>
-
-        <div class="kochbuch-slider">
-          <div class="kochbuch-slider__track" id="kochbuch-slider-track">
-            <div class="kochbuch-slider__item">
-              <div class="kochbuch-slider__preview-page">
-                <div>
-                  <div class="kochbuch-slider__preview-title">Empanadas de Queso</div>
-                  <p style="color: #6b7280; margin-top: 4px;">Käsegefülltes Gebäck zum Frühstück</p>
-                </div>
-                <div style="background: #fdf2f8; padding: 12px; border-radius: 8px; font-style: italic; color: #9d174d;">
-                  „Ein Rezept von Mery aus Ushpa Ushpa“
-                </div>
-              </div>
-            </div>
-            <div class="kochbuch-slider__item">
-              <div class="kochbuch-slider__preview-page">
-                <div>
-                  <div class="kochbuch-slider__preview-title">Sopa de Maní</div>
-                  <p style="color: #6b7280; margin-top: 4px;">Traditionelle Erdnusssuppe</p>
-                </div>
-                <div style="background: #fef3c7; padding: 12px; border-radius: 8px; font-style: italic; color: #92400e;">
-                  „Das Lieblingsgericht der Kinder bei CADSE“
-                </div>
-              </div>
-            </div>
-            <div class="kochbuch-slider__item">
-              <div class="kochbuch-slider__preview-page">
-                <div>
-                  <div class="kochbuch-slider__preview-title">Silpancho Cochabambino</div>
-                  <p style="color: #6b7280; margin-top: 4px;">Klassiker aus Cochabamba</p>
-                </div>
-                <div style="background: #ecfdf5; padding: 12px; border-radius: 8px; font-style: italic; color: #065f46;">
-                  „Ein Festmahl für die ganze Familie“
-                </div>
-              </div>
-            </div>
-            <div class="kochbuch-slider__item">
-              <div class="kochbuch-slider__preview-page">
-                <div>
-                  <div class="kochbuch-slider__preview-title">Majadito de Charque</div>
-                  <p style="color: #6b7280; margin-top: 4px;">Reisgericht mit Bananen &amp; Ei</p>
-                </div>
-                <div style="background: #eff6ff; padding: 12px; border-radius: 8px; font-style: italic; color: #1e40af;">
-                  „Gemeinsam zubereitet am Pizzatag“
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="kochbuch-slider__controls">
-            <button class="kochbuch-slider__btn" id="kochbuch-slider-prev" type="button" aria-label="Vorheriges Rezept">←</button>
-            <span style="font-size: 0.85rem; color: #6b7280; font-weight: 500;">Leseprobe scrollen</span>
-            <button class="kochbuch-slider__btn" id="kochbuch-slider-next" type="button" aria-label="Nächstes Rezept">→</button>
-          </div>
+        <div>
+          <p>
+            Das Wort wird vor allem in Cochabamba benutzt. Wir wollen niemandem
+            vorschreiben, was Entwicklungszusammenarbeit ist, und wissen auch nicht
+            immer, wo die meiste Unterstützung gebraucht wird.
+          </p>
+          <p>
+            Mery und ihr Team kommen selbst aus dem Stadtteil und kennen die
+            Bedürfnisse und Umstände der Familien. Deshalb kann CADSE lokal und
+            gezielt Probleme anpacken — und deshalb entscheidet Cochabamba, nicht
+            Deutschland.
+          </p>
         </div>
       </div>
     </div>
@@ -450,12 +204,17 @@
       <p class="eyebrow">Über uns</p>
       <h2>Wer hinter Aquisito steckt</h2>
       <p class="prose">
-        Wir sind {{STAT_MITGLIEDER}} aktive Mitglieder, alle ehrenamtlich, in
+        Wir sind 5 aktive Mitglieder, alle ehrenamtlich, in
         Deutschland und in Bolivien. Wenn du Teil der Aquisito-Familie werden
         möchtest, schreib uns an
         <a href="mailto:info@aquisito.de">info@aquisito.de</a>.
       </p>
 
+      <!-- Flip cards: name plate front, portrait back, revealed on hover/focus.
+           Four portraits exist (Mery, Toni, Natha, Thomas); the rest flip to the
+           branded sun placeholder. Swap team__back--placeholder for a real
+           <img class="team__portrait"> as portraits arrive — see
+           inventory/placeholders.md {{PORTRAIT_*}}. -->
       <ul class="team">
         <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Mery</span><span class="team__role">Koordinatorin von CADSE · Leitung und Außenrepräsentation</span></div><div class="team__face team__back"><img class="team__portrait" src="assets/img/mery.jpg" alt="Porträt von Mery" loading="lazy"></div></div></li>
         <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Erika</span><span class="team__role">Interne Leitung von CADSE · Management und Betreuung</span></div><div class="team__face team__back"><img class="team__portrait" src="assets/img/erika.jpg" alt="Porträt von Erika" loading="lazy"></div></div></li>
@@ -476,6 +235,12 @@
         <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Lukas</span><span class="team__role">Aquisito-Familie</span></div><div class="team__face team__back team__back--placeholder"><img class="team__sun" src="assets/img/sonne.svg" alt="" aria-hidden="true" width="56" height="56"></div></div></li>
       </ul>
 
+      <!-- TODO before launch, from inventory/content.md:
+           · team.md lists "Toni" and "Antonia" separately, while footer.md names
+             the Vorsitzende as Antonia Tröll. Same person? Currently listed once.
+           · team.md lists "Felix" twice with different roles. Two people or a
+             duplicate? Currently listed once. -->
+
       <p style="margin-top: var(--space-8);">
         <a class="arrow-link" href="freiwillige.html">Selbst mitmachen <span aria-hidden="true">→</span></a>
       </p>
@@ -483,18 +248,18 @@
   </section>
 
   <!-- ====================================================================
-       Teaser-Kacheln in neuer Reihenfolge (1. Kochbuch, 2. Spenden, 3. Freiwilligendienst)
+       Routing
        ==================================================================== -->
   <section class="section reveal">
     <div class="wrap">
       <div class="routing">
-        <article class="routing__card routing__card--kochbuch">
-          <h3>Kochbuch</h3>
+        <article class="routing__card routing__card--freiwillige">
+          <h3>Freiwillig mitmachen</h3>
           <p>
-            Bolivianische Rezepte, gesammelt von der Aquisito-Familie. Der ganze
-            Erlös geht an CADSE in Cochabamba.
+            Sechs bis zwölf Monate bei CADSE in Cochabamba, teilfinanziert durch das
+            BMFSFJ — oder auf eigene Faust ab drei Monaten.
           </p>
-          <a class="arrow-link" href="#kochbuch">Zum Kochbuch <span aria-hidden="true">→</span></a>
+          <a class="arrow-link" href="freiwillige.html">Zu den Einsatzbereichen <span aria-hidden="true">→</span></a>
         </article>
 
         <article class="routing__card routing__card--spenden">
@@ -506,13 +271,13 @@
           <a class="arrow-link" href="spenden.html">Zur Spendenseite <span aria-hidden="true">→</span></a>
         </article>
 
-        <article class="routing__card routing__card--freiwillige">
-          <h3>Freiwilligendienst</h3>
+        <article class="routing__card routing__card--kochbuch">
+          <h3>Kochbuch</h3>
           <p>
-            Sechs bis zwölf Monate bei CADSE in Cochabamba, teilfinanziert durch das
-            BMFSFJ — oder auf eigene Faust ab drei Monaten.
+            Bolivianische Rezepte, gesammelt von der Aquisito-Familie. Der ganze
+            Erlös geht an CADSE in Cochabamba.
           </p>
-          <a class="arrow-link" href="freiwillige.html">Zu den Einsatzbereichen <span aria-hidden="true">→</span></a>
+          <a class="arrow-link" href="spenden.html#kochbuch">Zum Kochbuch <span aria-hidden="true">→</span></a>
         </article>
       </div>
     </div>
@@ -561,54 +326,15 @@
       </div>
     </div>
     <p class="site-footer__legal">
-      Aquisito e.V. · Vereinsregister {{REGISTERGERICHT}} VR 6037 · SteuerNr. 201/5905/6228 ·
+      Aquisito e.V. · Vereinsregister Aachen VR 6037 · SteuerNr. 201/5905/6228 ·
       als gemeinnützig anerkannt nach § 5 Abs. 1 Nr. 9 KStG (Freistellungsbescheid 2023) ·
       <a href="transparenz.html">Finanzberichte 2020–2025</a>
     </p>
   </div>
 </footer>
 
-<!-- Script für automatischen Kochbuch-Slider -->
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const track = document.getElementById('kochbuch-slider-track');
-    const prevBtn = document.getElementById('kochbuch-slider-prev');
-    const nextBtn = document.getElementById('kochbuch-slider-next');
-    if (!track) return;
-
-    let autoScrollSpeed = 1.2;
-    let isPaused = false;
-
-    function autoStep() {
-      if (!isPaused) {
-        if (track.scrollLeft >= (track.scrollWidth - track.clientWidth - 5)) {
-          track.scrollLeft = 0;
-        } else {
-          track.scrollLeft += autoScrollSpeed;
-        }
-      }
-    }
-
-    let interval = setInterval(autoStep, 30);
-
-    track.addEventListener('mouseenter', () => isPaused = true);
-    track.addEventListener('mouseleave', () => isPaused = false);
-    track.addEventListener('touchstart', () => isPaused = true);
-    track.addEventListener('touchend', () => isPaused = false);
-
-    if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
-        track.scrollBy({ left: -240, behavior: 'smooth' });
-      });
-    }
-    if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
-        track.scrollBy({ left: 240, behavior: 'smooth' });
-      });
-    }
-  });
-</script>
 <script type="module" src="js/nav.js"></script>
 <script type="module" src="js/reveal.js"></script>
+<script type="module" src="js/parallax.js"></script>
 </body>
 </html>
