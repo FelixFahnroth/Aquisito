@@ -257,12 +257,13 @@
   }
 
   /* Parallax: js/parallax.js translates the photo as the band scrolls past. The
-     image is over-tall (180%) with 40% vertical slack each side so the translate
-     never reveals an edge. Only real photo bands (img), never the placeholder. */
+     image is over-tall (260%) with 80% vertical slack each side so the large
+     translate never reveals an edge. Only real photo bands (img), never the
+     placeholder. NB the tall image is a deep crop — object-fit keeps it centred. */
   .js img.band__media {
-    top: -40%;
+    top: -80%;
     bottom: auto;
-    height: 180%;
+    height: 260%;
     will-change: transform;
   }
   @media (prefers-reduced-motion: reduce) {
