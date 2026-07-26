@@ -32,16 +32,7 @@
     order: -1;                     /* mobile: photo above the copy */
     transform: rotate(-2deg);
     z-index: 1;
-  }
-  .hero__photo picture { display: block; }
-  .hero__photo img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-md);
-    border: 10px solid var(--white);
-    box-shadow: var(--shadow-lift);
-    background: var(--white);
+    aspect-ratio: 3 / 2;           /* cards are absolute, so the frame needs size */
   }
   .hero__photo::before {
     content: "";
@@ -52,6 +43,33 @@
     border-radius: var(--radius-lg);
     transform: rotate(-9deg);
   }
+
+  /* Auto-advancing photo stack (js/hero-stack.js): the top card is the current
+     photo, the next one peeks behind it, the rest wait hidden. Two cards ever
+     visible, so it reads as a little pile of snapshots flipping through. Under
+     prefers-reduced-motion the script never advances — card 0 just stays put. */
+  .hero__card {
+    position: absolute;
+    inset: 0;
+    border: 10px solid var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lift);
+    background: var(--white);
+    overflow: hidden;
+    opacity: 0;
+    transform: rotate(-6deg) scale(0.98);
+    transition: opacity var(--dur-slow) var(--ease-out),
+                transform var(--dur-slow) var(--ease-out);
+    will-change: opacity, transform;
+  }
+  .hero__card picture { display: block; height: 100%; }
+  .hero__card img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+  .hero__card.is-peek { opacity: 1; z-index: 1; transform: rotate(-6deg) translate(-5%, 4%); }
+  .hero__card.is-top  { opacity: 1; z-index: 2; transform: rotate(0deg); }
+
+  /* Without JS there is no stack behaviour — show the first card as one photo. */
+  html:not(.js) .hero__card:first-child { opacity: 1; transform: none; }
 
   /* Two columns sized to the text, so the photo's negative margin overlaps the
      copy reliably rather than an inconsistent flex gap. */
