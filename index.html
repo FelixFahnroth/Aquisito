@@ -26,8 +26,8 @@
     width: 100%;
     margin-top: -80px;
     padding-top: 140px;
-    padding-bottom: 80px;
-    min-height: 85vh;
+    padding-bottom: 60px;
+    min-height: 80vh;
     display: flex;
     align-items: center;
   }
@@ -63,7 +63,6 @@
     filter: drop-shadow(0 12px 24px rgba(0,0,0,0.12));
   }
 
-  /* Verlangsamte, sanfte Schweb-Animation */
   @keyframes floatBalloon {
     0% {
       transform: translateY(0px) translateX(0px) rotate(0deg);
@@ -89,7 +88,7 @@
     }
   }
 
-  /* Exakter Verlauf: 80% Weiß hinter dem Text, Übergang direkt rechts der Textbox, danach 0% Weiß */
+  /* Exakter Verlauf hinter dem Hero-Text */
   .hero__scrim {
     position: absolute;
     inset: 0;
@@ -121,33 +120,55 @@
     width: 100%;
   }
 
-  /* Wörterbuch-Stil für Aquisito */
+  /* Kompakter Statistik-Block (nur so breit wie der Inhalt) */
+  .stats-compact-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 0 16px;
+    margin-top: -32px;
+    position: relative;
+    z-index: 2;
+  }
+  .stats-compact {
+    background: #111827;
+    color: #ffffff;
+    border-radius: 24px;
+    padding: 16px 36px;
+    width: fit-content;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  }
+
+  /* Wörterbuch-Stil für Aquisito (mit minimalem Puffer oben & unten) */
+  #aquisito {
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+  }
   .dictionary-card {
     background: #ffffff;
     border: 1px solid var(--color-border, #e5e7eb);
     border-left: 4px solid #2d6a4f;
     border-radius: 16px;
-    padding: 24px 32px;
+    padding: 20px 28px;
     max-width: 720px;
     margin: 0 auto;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.03);
   }
   .dictionary-card__header {
     display: flex;
     align-items: baseline;
     gap: 12px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     flex-wrap: wrap;
   }
   .dictionary-card__word {
     font-family: var(--font-heading, sans-serif);
-    font-size: 2rem;
+    font-size: 1.85rem;
     font-weight: 700;
     color: #111827;
   }
   .dictionary-card__phonetic {
     font-family: monospace;
-    font-size: 1.05rem;
+    font-size: 1rem;
     color: #6b7280;
     background: #f3f4f6;
     padding: 2px 8px;
@@ -160,8 +181,8 @@
     font-weight: 600;
   }
   .dictionary-card__def {
-    font-size: 1.05rem;
-    line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.5;
     margin: 0;
     color: #374151;
   }
@@ -171,7 +192,7 @@
     background: #f9fafb;
     border-top: 1px solid #e5e7eb;
     border-bottom: 1px solid #e5e7eb;
-    padding: 64px 0;
+    padding: 56px 0;
   }
   .kochbuch-grid {
     display: grid;
@@ -297,7 +318,7 @@
 <main id="main">
 
   <!-- ====================================================================
-       1. Hero Section (inkl. Luftballon & Statistik)
+       1. Hero Section (ohne Buttons)
        ==================================================================== -->
   <section class="section hero">
     <div class="hero__bg" aria-hidden="true">
@@ -316,16 +337,12 @@
       <p class="lead" style="margin-top: var(--space-6); max-width: 540px;">
         Unter diesem Motto engagiert sich Aquisito e.V. für das Kinder- und Jugendzentrum CADSE in Cochabamba, Bolivien. Wir arbeiten Hand in Hand mit dem lokalen Team vor Ort, um Kindern und Jugendlichen mit Hausaufgabenbetreuung, Freizeitangeboten und gesunder Ernährung neue Perspektiven zu eröffnen.
       </p>
-      <div class="hero__actions" style="margin-top: var(--space-6);">
-        <a class="btn btn--primary" href="freiwillige.html">Freiwillig mitmachen</a>
-        <a class="arrow-link" href="spenden.html">Spenden <span aria-hidden="true">→</span></a>
-      </div>
     </div>
   </section>
 
-  <!-- Statistics — real numbers -->
-  <section class="section section--inverse on-dark">
-    <div class="wrap">
+  <!-- 2. Kompakter Statistik-Block (nur so breit wie nötig) -->
+  <div class="stats-compact-wrap">
+    <div class="stats-compact">
       <div class="stats">
         <div class="stat">
           <span class="stat__figure">9</span>
@@ -341,10 +358,10 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- ====================================================================
-       2. Textblock "Aquisito" im Wörterbuch-Stil (Duden-Karte)
+       3. Textblock "Aquisito" im Wörterbuch-Stil (Puffer reduziert)
        ==================================================================== -->
   <section class="section reveal" id="aquisito">
     <div class="wrap">
@@ -362,7 +379,7 @@
   </section>
 
   <!-- ====================================================================
-       3. Kochbuch-Sektion mit Leseprobe-Slider
+       4. Kochbuch-Sektion mit Leseprobe-Slider
        ==================================================================== -->
   <section class="section kochbuch-section reveal" id="kochbuch">
     <div class="wrap">
@@ -436,13 +453,12 @@
   </section>
 
   <!-- ====================================================================
-       4. Ziele von Aquisito e.V. (Wofür das Geld gebraucht wird)
+       5. Ziele von Aquisito e.V. (Ohne "WAS WIR TUN" Dachzeile)
        ==================================================================== -->
   <section class="section reveal" id="was-wir-tun">
     <div class="wrap">
-      <p class="eyebrow">Was wir tun</p>
       <h2>Ziele von Aquisito e.V.</h2>
-      <p class="prose">
+      <p class="prose" style="margin-top: 16px;">
         Unser Verein wurde gegründet, um Kindern und Jugendlichen in benachteiligten Regionen ein sicheres, chancenreiches Aufwachsen zu ermöglichen. Wir fokussieren uns dabei auf drei zentrale Schwerpunkte: die ganzheitliche Förderung von Erziehung und Bildung, die nachhaltige Stärkung der Jugendhilfe sowie den aktiven Einsatz für die Gleichberechtigung von Frauen und Männern.
       </p>
 
@@ -478,23 +494,7 @@
   </section>
 
   <!-- ====================================================================
-       The band — quote section
-       ==================================================================== -->
-  <section class="band" aria-labelledby="band-line">
-    <picture>
-      <source type="image/webp" srcset="assets/img/band-index-1200.webp 1200w, assets/img/band-index-2400.webp 2400w" sizes="100vw">
-      <img class="band__media" src="assets/img/band-index-1200.jpg"
-           srcset="assets/img/band-index-1200.jpg 1200w, assets/img/band-index-2400.jpg 2400w" sizes="100vw"
-           width="2400" height="1350" alt="" loading="lazy" decoding="async">
-    </picture>
-    <div class="band__scrim" aria-hidden="true"></div>
-    <svg class="band__arc band__arc--top" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0,44 C480,10 960,38 1440,12 L1440,0 L0,0 Z"/></svg>
-    <svg class="band__arc band__arc--bottom" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0,36 C480,2 960,30 1440,4 L1440,48 L0,48 Z"/></svg>
-    <p class="band__line" id="band-line">Wo Mery hingeht, da sind auch Kinder.</p>
-  </section>
-
-  <!-- ====================================================================
-       5. Team (Über uns)
+       6. Team (Über uns)
        ==================================================================== -->
   <section class="section section--alt reveal" id="team">
     <div class="wrap">
@@ -534,7 +534,23 @@
   </section>
 
   <!-- ====================================================================
-       6. Dreier-Box (Kacheln in Reihenfolge: Freiwilligendienst, Kochbuch, Spenden)
+       7. Zitat-Banner (unter "Wer hinter Aquisito steckt")
+       ==================================================================== -->
+  <section class="band" aria-labelledby="band-line">
+    <picture>
+      <source type="image/webp" srcset="assets/img/band-index-1200.webp 1200w, assets/img/band-index-2400.webp 2400w" sizes="100vw">
+      <img class="band__media" src="assets/img/band-index-1200.jpg"
+           srcset="assets/img/band-index-1200.jpg 1200w, assets/img/band-index-2400.jpg 2400w" sizes="100vw"
+           width="2400" height="1350" alt="" loading="lazy" decoding="async">
+    </picture>
+    <div class="band__scrim" aria-hidden="true"></div>
+    <svg class="band__arc band__arc--top" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0,44 C480,10 960,38 1440,12 L1440,0 L0,0 Z"/></svg>
+    <svg class="band__arc band__arc--bottom" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0,36 C480,2 960,30 1440,4 L1440,48 L0,48 Z"/></svg>
+    <p class="band__line" id="band-line">Wo Mery hingeht, da sind auch Kinder.</p>
+  </section>
+
+  <!-- ====================================================================
+       8. Dreier-Box (Freiwilligendienst, Kochbuch, Spenden)
        ==================================================================== -->
   <section class="section reveal">
     <div class="wrap">
