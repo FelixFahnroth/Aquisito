@@ -267,14 +267,13 @@
     margin-top: 14px;
   }
 
-  /* Reduzierter Zeilenabstand bei den Stichpunkten */
   .kochbuch-features {
     list-style: none;
     padding: 0;
     margin: 14px 0;
     display: flex;
     flex-direction: column;
-    gap: 4px; /* Engerer Abstand */
+    gap: 4px;
   }
 
   .kochbuch-feature-item {
@@ -398,7 +397,25 @@
     color: #1b4332;
   }
 </style>
-<script>document.documentElement.className = 'js';</script>
+<script>
+  document.documentElement.className = 'js';
+  // Automatischer Fallback-Tester für Rezept-Bilder
+  function tryNextImgSrc(img) {
+    if (!img.dataset.fallbacks) {
+      img.style.display = 'none';
+      if (img.nextElementSibling) img.nextElementSibling.style.display = 'flex';
+      return;
+    }
+    const fallbacks = img.dataset.fallbacks.split(',');
+    const nextSrc = fallbacks.shift();
+    if (fallbacks.length > 0) {
+      img.dataset.fallbacks = fallbacks.join(',');
+    } else {
+      delete img.dataset.fallbacks;
+    }
+    img.src = nextSrc;
+  }
+</script>
 </head>
 <body>
 
@@ -490,7 +507,7 @@
   </section>
 
   <!-- ====================================================================
-       4. Kochbuch-Sektion (Genau 3 Rezepte, huancaína.jpeg Pfad & engere Abstände)
+       4. Kochbuch-Sektion (Mit robusten Bild-Fallbacks)
        ==================================================================== -->
   <section class="section kochbuch-new-section reveal" id="kochbuch">
     <div class="wrap">
@@ -516,14 +533,14 @@
           </div>
         </div>
 
-        <!-- Rechte Spalte: Genau 3 Rezept-Karten -->
+        <!-- Rechte Spalte: 3 Rezept-Karten -->
         <div class="kochbuch-right">
           <div class="kochbuch-cards-track" id="kochbuch-cards-track">
             
             <!-- Karte 1: Sopa de Quinoa -->
             <div class="kochbuch-card-item">
               <div class="kochbuch-card-img-wrap">
-                <img class="kochbuch-card-img" src="assets/img/quinoa.jpeg" alt="Sopa de Quinoa" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <img class="kochbuch-card-img" src="assets/img/quinoa.jpeg" alt="Sopa de Quinoa" data-fallbacks="assets/img/quinoa.jpg,assets/img/quinoa.png,assets/img/Quinoa.jpeg" onerror="tryNextImgSrc(this)">
                 <div style="display:none; width:100%; height:100%; background:#fef3c7; color:#92400e; align-items:center; justify-content:center; text-align:center; padding:12px; font-weight:bold; font-size:0.9rem;">
                   Sopa de Quinoa
                 </div>
@@ -534,10 +551,10 @@
               </p>
             </div>
 
-            <!-- Karte 2: Papas a la Huancaína (Pfad huancaína.jpeg & Fallback) -->
+            <!-- Karte 2: Papas a la Huancaína (Multi-Fallback) -->
             <div class="kochbuch-card-item">
               <div class="kochbuch-card-img-wrap">
-                <img class="kochbuch-card-img" src="assets/img/huancaína.jpeg" alt="Papas a la Huancaína" onerror="this.src='assets/img/huancaina.jpeg'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='flex';};">
+                <img class="kochbuch-card-img" src="assets/img/huancaína.jpeg" alt="Papas a la Huancaína" data-fallbacks="assets/img/huancaina.jpeg,assets/img/huancaína.jpeg,assets/img/huancaína.jpg,assets/img/huancaina.jpg,assets/img/huancaína.jpg,assets/img/huancaiba.jpeg" onerror="tryNextImgSrc(this)">
                 <div style="display:none; width:100%; height:100%; background:#fdf2f8; color:#9d174d; align-items:center; justify-content:center; text-align:center; padding:12px; font-weight:bold; font-size:0.9rem;">
                   Papas a la Huancaína
                 </div>
@@ -548,10 +565,10 @@
               </p>
             </div>
 
-            <!-- Karte 3: Brownie Boliviano -->
+            <!-- Karte 3: Brownie Boliviano (Multi-Fallback) -->
             <div class="kochbuch-card-item">
               <div class="kochbuch-card-img-wrap">
-                <img class="kochbuch-card-img" src="assets/img/brownie.jpg" alt="Brownie Boliviano" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <img class="kochbuch-card-img" src="assets/img/brownie.jpg" alt="Brownie Boliviano" data-fallbacks="assets/img/brownie.jpeg,assets/img/brownie.png,assets/img/Brownie.jpg,assets/img/Brownie.jpeg" onerror="tryNextImgSrc(this)">
                 <div style="display:none; width:100%; height:100%; background:#ecfdf5; color:#065f46; align-items:center; justify-content:center; text-align:center; padding:12px; font-weight:bold; font-size:0.9rem;">
                   Brownie Boliviano
                 </div>
