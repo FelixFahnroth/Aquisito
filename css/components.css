@@ -239,7 +239,12 @@
   .band {
     position: relative;
     isolation: isolate;
-    height: var(--band-height);
+    /* Grown from the token default (which maxed at 32rem and became a thin
+       letterbox on ultra-wide screens). Scales with the viewport but caps at
+       40rem, so every screen from ~1900px up — FHD, 1440p and 4K alike — gets
+       an identical 40rem band instead of the same height at wildly different
+       aspect ratios. */
+    height: clamp(20rem, 34vw, 40rem);
     overflow: hidden;
   }
 
@@ -255,9 +260,9 @@
      image is over-tall with vertical slack so the translate never reveals an
      edge. Only real photo bands (img), never the SVG placeholder. */
   .js img.band__media {
-    top: -16%;
+    top: -20%;
     bottom: auto;
-    height: 132%;
+    height: 140%;
     will-change: transform;
   }
   @media (prefers-reduced-motion: reduce) {

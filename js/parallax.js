@@ -7,7 +7,7 @@ const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const medias = [...document.querySelectorAll("img.band__media")];
 
 if (!reduce && medias.length) {
-  const SHIFT = 0.14; // max translate, as a fraction of band height (< the 16% slack)
+  const SHIFT = 0.18; // max translate, as a fraction of band height (< the 20% slack)
   let ticking = false;
 
   const update = () => {

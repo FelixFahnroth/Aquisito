@@ -78,9 +78,22 @@ if (toggle && list) {
     if (event.target.closest('a') && isOpen()) close({ restoreFocus: false });
   });
 
-  /* Resizing past the breakpoint leaves the overlay in a state the CSS no
-     longer styles, so reset it. */
-  matchMedia('(min-width: 900px)').addEventListener('change', (event) => {
-    if (event.matches && isOpen()) close({ restoreFocus: false });
-  });
+  /* The overlay must START closed on mobile — the CSS turns .nav__list into a
+     full-screen fixed layer ≤899px, so without this the menu covers the whole
+     page on load. On desktop the same list is the inline nav and must stay
+     visible and exposed to assistive tech (hidden would remove it from the
+     a11y tree even though display:flex keeps it painted). Sync on load and
+     whenever the viewport crosses the breakpoint. */
+  const desktop = matchMedia('(min-width: 900px)');
+  function applyBreakpoint() {
+    if (desktop.matches) {
+      list.hidden = false;
+      document.body.style.overflow = '';
+      toggle.setAttribute('aria-expanded', 'false');
+    } else if (!isOpen()) {
+      list.hidden = true;
+    }
+  }
+  applyBreakpoint();
+  desktop.addEventListener('change', applyBreakpoint);
 }
