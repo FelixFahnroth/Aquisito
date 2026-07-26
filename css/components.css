@@ -257,12 +257,12 @@
   }
 
   /* Parallax: js/parallax.js translates the photo as the band scrolls past. The
-     image is over-tall with vertical slack so the translate never reveals an
-     edge. Only real photo bands (img), never the SVG placeholder. */
+     image is over-tall (180%) with 40% vertical slack each side so the translate
+     never reveals an edge. Only real photo bands (img), never the placeholder. */
   .js img.band__media {
-    top: -20%;
+    top: -40%;
     bottom: auto;
-    height: 140%;
+    height: 180%;
     will-change: transform;
   }
   @media (prefers-reduced-motion: reduce) {
