@@ -27,6 +27,16 @@ three landing figures. Now filled and out of the register:
 - **Team portraits** — 5 of ~19 now real (Mery, Erika, Toni, Natha, Thomas). The
   rest still flip to the sun placeholder; `{{PORTRAIT_*}}` stays open below.
 
+## Resolved 2026-07-26 (second batch)
+
+- **Spenden band** swapped to the funded playground in use (`KidsPlayingAtNewPlayground1`).
+- **Hero photo** — client override of the "no image" hero: a framed `ArtsPictureOfKidsHand`
+  slightly overlapping the lead. `index.css` records the override.
+- **`{{REGISTERGERICHT}}` → Aachen** (client-confirmed). Note: the Sitz in the
+  footer is Raesfeld while the register is Aachen — flag this Sitz/Registergericht
+  pairing for the legal review, but the register value is now decided.
+- **`{{STAT_MITGLIEDER}}` → 5**, **`{{STAT_FOERDERMITGLIEDER}}` → 25** (client-confirmed).
+
 ## Blocked on content from the Verein
 
 | Token | Where | Needs |
@@ -35,16 +45,12 @@ three landing figures. Now filled and out of the register:
 | `{{SPLIT_PROJEKTE}}` / `{{SPLIT_VERWALTUNG}}` / `{{SPLIT_FUNDRAISING}}` | `spenden.html` | percentages from Finanzbericht 2025. Must total 100. |
 | `{{KONTAKT_SPENDEN_NAME}}` / `{{KONTAKT_SPENDEN_TEL}}` | `spenden.html` | a named human for the trust block — a named contact converts better than any badge |
 | `{{PORTRAIT_*}}` | `index.html` | the full team portrait set, or none at all |
-| `{{STAT_MITGLIEDER}}` | `index.html`, `transparenz.html` | current count of active members — `transparenz.md` said 22, undated |
-| `{{STAT_FOERDERMITGLIEDER}}` | `transparenz.html` | current count of Fördermitglieder — `transparenz.md` said 16, undated |
-| `{{KONTAKT_SPENDEN_NAME}}` / `{{KONTAKT_SPENDEN_TEL}}` | `spenden.html` | named human for the trust block |
 | `{{KOCHBUCH_POSTER}}` | `spenden.html` | poster frame for the 9,7 MB cookbook video. Optional but better than an empty box: `ffmpeg -i assets/video/kochbuch.mp4 -ss 3 -frames:v 1 assets/img/kochbuch-poster.jpg` |
 
 ## Blocked on a factual decision
 
 | Token | Where | Blocker |
 |---|---|---|
-| `{{REGISTERGERICHT}}` | `impressum.html`, every footer | `footer.md` says *Vereinsregister Aachen*; the Sitz is Raesfeld; the Satzung §1(2) says *Sitz ist Aachen*. Three sources, two answers. See `content.md` §Contradictions. |
 | `{{IMPRESSUM_MSTV}}` | `impressum.html` | the person responsible under §18 Abs. 2 MStV |
 
 ## Blocked on operations

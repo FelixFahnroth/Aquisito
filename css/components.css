@@ -251,6 +251,24 @@
     object-fit: cover;
   }
 
+  /* Parallax: js/parallax.js translates the photo as the band scrolls past. The
+     image is over-tall with vertical slack so the translate never reveals an
+     edge. Only real photo bands (img), never the SVG placeholder. */
+  .js img.band__media {
+    top: -16%;
+    bottom: auto;
+    height: 132%;
+    will-change: transform;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .js img.band__media {
+      top: 0;
+      height: 100%;
+      will-change: auto;
+      transform: none !important;
+    }
+  }
+
   .band__scrim { position: absolute; inset: 0; background: var(--band-scrim); }
 
   /* Arcs are SVG fills in --white, NOT clip-path: clip-path on the section
