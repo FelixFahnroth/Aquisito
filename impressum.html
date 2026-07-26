@@ -3,23 +3,426 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Impressum — Aquisito e.V.</title>
-<meta name="description" content="Impressum von Aquisito e.V. nach § 5 DDG.">
-<link rel="canonical" href="https://aquisito.de/impressum">
+<title>Aquisito e.V. — Gemeinsam groß werden</title>
+<meta name="description" content="Aquisito e.V. unterstützt das Kinder- und Jugendzentrum CADSE in Cochabamba, Bolivien: Hausaufgabenhilfe, Sport, Kunst und Englischunterricht für Kinder aus Ushpa Ushpa.">
+<link rel="canonical" href="https://aquisito.de/">
 <link rel="icon" href="assets/img/sonne.ico" sizes="any">
+<meta property="og:title" content="Aquisito e.V. — Gemeinsam groß werden">
+<meta property="og:description" content="Eine Kooperation zwischen dem Kinder- und Jugendzentrum CADSE in Bolivien und Aquisito e.V. in Deutschland.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aquisito.de/">
+<meta property="og:locale" content="de_DE">
 <link rel="preload" href="assets/fonts/familjen-grotesk-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/atkinson-hyperlegible-400-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/pages/legal.css">
-<script>document.documentElement.className = 'js';</script>
+<link rel="stylesheet" href="css/pages/index.css">
+<style>
+  /* Hero & Background Setup */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin-top: -80px;
+    padding-top: 140px;
+    padding-bottom: 60px;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+  }
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .hero__bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+  
+  /* Animierter Luftballon über dem Mädchen */
+  .hero__balloon-wrapper {
+    position: absolute;
+    right: 24%;
+    top: 22%;
+    z-index: 1;
+    pointer-events: none;
+    will-change: transform;
+    transition: transform 0.15s ease-out;
+  }
+  .hero__balloon {
+    width: clamp(160px, 24vw, 300px);
+    height: auto;
+    animation: floatBalloon 12s ease-in-out infinite;
+    filter: drop-shadow(0 12px 24px rgba(0,0,0,0.12));
+  }
+
+  @keyframes floatBalloon {
+    0% {
+      transform: translateY(0px) translateX(0px) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-16px) translateX(10px) rotate(2.5deg);
+    }
+    50% {
+      transform: translateY(-28px) translateX(-8px) rotate(-3deg);
+    }
+    75% {
+      transform: translateY(-12px) translateX(12px) rotate(1.5deg);
+    }
+    100% {
+      transform: translateY(0px) translateX(0px) rotate(0deg);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .hero__balloon-wrapper {
+      right: 12%;
+      top: 18%;
+    }
+  }
+
+  /* Exakter Verlauf hinter dem Hero-Text */
+  .hero__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, 
+      rgba(255, 255, 255, 0.8) 0%, 
+      rgba(255, 255, 255, 0.8) 42%, 
+      rgba(255, 255, 255, 0.4) 58%, 
+      rgba(255, 255, 255, 0) 70%
+    );
+  }
+  
+  /* Dichterer weißer Verlauf ganz oben für die Navigation */
+  .hero__top-scrim {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 160px;
+    background: linear-gradient(180deg, 
+      rgba(255, 255, 255, 0.9) 0%, 
+      rgba(255, 255, 255, 0.6) 60px, 
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+  
+  .hero .wrap {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+
+  /* Helle Statistik-Sektion über die volle Breite mit minimaler Höhe */
+  .stats-light-section {
+    background: #ffffff;
+    border-top: 1px solid var(--color-border, #e5e7eb);
+    border-bottom: 1px solid var(--color-border, #e5e7eb);
+    padding: 18px 0;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+  .stats-light-grid {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .stat-light-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .stat-light-figure {
+    font-family: var(--font-heading, sans-serif);
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #2d6a4f;
+    line-height: 1;
+  }
+  .stat-light-label {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #4b5563;
+    max-width: 160px;
+    line-height: 1.25;
+  }
+
+  /* Wörterbuch-Stil für Aquisito */
+  #aquisito {
+    padding-top: 28px !important;
+    padding-bottom: 20px !important;
+  }
+  .dictionary-card {
+    background: #ffffff;
+    border: 1px solid var(--color-border, #e5e7eb);
+    border-left: 4px solid #2d6a4f;
+    border-radius: 16px;
+    padding: 20px 28px;
+    max-width: 720px;
+    margin: 0 auto;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.03);
+  }
+  .dictionary-card__header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .dictionary-card__word {
+    font-family: var(--font-heading, sans-serif);
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: #111827;
+  }
+  .dictionary-card__phonetic {
+    font-family: monospace;
+    font-size: 1rem;
+    color: #6b7280;
+    background: #f3f4f6;
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+  .dictionary-card__pos {
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #2d6a4f;
+    font-weight: 600;
+  }
+  .dictionary-card__def {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+    color: #374151;
+  }
+
+  /* ====================================================================
+     Kochbuch Sektion
+     ==================================================================== */
+  .kochbuch-new-section {
+    background: #fdfbf7 url('assets/img/Hintergrund_Kochbuch.png') center/cover no-repeat;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 64px 0;
+    position: relative;
+  }
+  .kochbuch-new-grid {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  @media (max-width: 1024px) {
+    .kochbuch-new-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+
+  .kochbuch-left {
+    padding-right: 32px;
+    border-right: 1px solid rgba(45, 106, 79, 0.2);
+  }
+  @media (max-width: 1024px) {
+    .kochbuch-left {
+      padding-right: 0;
+      border-right: none;
+      border-bottom: 1px solid rgba(45, 106, 79, 0.2);
+      padding-bottom: 32px;
+    }
+  }
+
+  .kochbuch-eyebrow {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #6b7280;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .kochbuch-title-text {
+    font-family: var(--font-heading, sans-serif);
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #1b4332;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  .kochbuch-desc {
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: #374151;
+    margin-top: 14px;
+  }
+
+  .kochbuch-features {
+    list-style: none;
+    padding: 0;
+    margin: 14px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .kochbuch-feature-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: #1b4332;
+    line-height: 1.3;
+  }
+  .kochbuch-feature-item::before {
+    content: "•";
+    color: #2d6a4f;
+    font-size: 1.3rem;
+  }
+
+  .kochbuch-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: hidden;
+  }
+
+  .kochbuch-cards-track {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding: 6px 4px 14px 4px;
+  }
+  .kochbuch-cards-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .kochbuch-card-item {
+    flex: 0 0 240px;
+    scroll-snap-align: start;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 16px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .kochbuch-card-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+  }
+
+  .kochbuch-card-img-wrap {
+    width: 100%;
+    height: 160px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f3f4f6;
+    margin-bottom: 12px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .kochbuch-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .kochbuch-card-subtitle {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #1b4332;
+    margin-bottom: 6px;
+  }
+
+  .kochbuch-card-text {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: #4b5563;
+    margin: 0;
+  }
+
+  .kochbuch-slider-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .kochbuch-nav-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .kochbuch-nav-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid #1b4332;
+    background: #ffffff;
+    color: #1b4332;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: bold;
+    transition: all 0.2s ease;
+  }
+  .kochbuch-nav-btn:hover {
+    background: #1b4332;
+    color: #ffffff;
+  }
+  .kochbuch-nav-label {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #1b4332;
+  }
+</style>
+<script>
+  document.documentElement.className = 'js';
+  // Automatischer Fallback-Tester für Rezept-Bilder
+  function tryNextImgSrc(img) {
+    if (!img.dataset.fallbacks) {
+      img.style.display = 'none';
+      if (img.nextElementSibling) img.nextElementSibling.style.display = 'flex';
+      return;
+    }
+    const fallbacks = img.dataset.fallbacks.split(',');
+    const nextSrc = fallbacks.shift();
+    if (fallbacks.length > 0) {
+      img.dataset.fallbacks = fallbacks.join(',');
+    } else {
+      delete img.dataset.fallbacks;
+    }
+    img.src = nextSrc;
+  }
+</script>
 </head>
 <body>
 
 <a class="skip-link" href="#main">Zum Inhalt springen</a>
 
-<header class="site-header site-header--solid">
+<!-- Transparent over the hero, solid after 80px — js/nav.js toggles .is-stuck -->
+<header class="site-header">
   <div class="site-header__inner">
     <a class="wordmark" href="index.html">
       <img class="wordmark__mark" src="assets/img/sonne.svg" width="34" height="34" alt="" aria-hidden="true">
@@ -31,9 +434,9 @@
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       </button>
       <ul class="nav__list" id="nav-list">
-        <li><a class="nav__link" href="index.html#was-wir-tun">Was wir tun</a></li>
-        <li><a class="nav__link" href="index.html#team">Über uns</a></li>
-        <li><a class="nav__link" href="freiwillige.html">Freiwillige</a></li>
+        <li><a class="nav__link" href="#team">Über uns</a></li>
+        <li><a class="nav__link" href="#kochbuch">Kochbuch</a></li>
+        <li><a class="nav__link" href="freiwillige.html">Freiwilligendienst</a></li>
       </ul>
       <a class="btn btn--donate" href="spenden.html">Spenden</a>
     </nav>
@@ -41,113 +444,291 @@
 </header>
 
 <main id="main">
-  <section class="section legal-hero">
+
+  <!-- ====================================================================
+       1. Hero Section (ohne Buttons)
+       ==================================================================== -->
+  <section class="section hero">
+    <div class="hero__bg" aria-hidden="true">
+      <img class="hero__bg-img" src="assets/img/Aquisito_Header.png" alt="" loading="eager" decoding="async">
+      
+      <!-- Separierter, vergrößerter & verlangsamter Luftballon -->
+      <div class="hero__balloon-wrapper" id="balloon-wrapper">
+        <img class="hero__balloon" src="assets/img/Ballon.png" alt="" aria-hidden="true">
+      </div>
+
+      <div class="hero__scrim"></div>
+      <div class="hero__top-scrim"></div>
+    </div>
     <div class="wrap">
-      <p class="eyebrow">Rechtliches</p>
-      <h1>Impressum</h1>
-      <p class="lead">Angaben gemäß § 5 Digitale-Dienste-Gesetz (DDG).</p>
+      <h1>Gemeinsam <span class="marker">groß</span> werden</h1>
+      <p class="lead" style="margin-top: var(--space-6); max-width: 540px;">
+        Unter diesem Motto engagiert sich Aquisito e.V. für das Kinder- und Jugendzentrum CADSE in Cochabamba, Bolivien. Wir arbeiten Hand in Hand mit dem lokalen Team vor Ort, um Kindern und Jugendlichen mit Hausaufgabenbetreuung, Freizeitangeboten und gesunder Ernährung neue Perspektiven zu eröffnen.
+      </p>
     </div>
   </section>
 
-  <section class="section" style="padding-top: 0;">
+  <!-- 2. Helle Statistik-Sektion über die volle Breite mit minimaler Höhe -->
+  <section class="stats-light-section">
     <div class="wrap">
-      <div class="legal">
+      <div class="stats-light-grid">
+        <div class="stat-light-item">
+          <span class="stat-light-figure">9</span>
+          <span class="stat-light-label">Jahre gemeinsam mit CADSE</span>
+        </div>
+        <div class="stat-light-item">
+          <span class="stat-light-figure">120</span>
+          <span class="stat-light-label">Kinder erreicht</span>
+        </div>
+        <div class="stat-light-item">
+          <span class="stat-light-figure">10.000 €</span>
+          <span class="stat-light-label">für CADSE gefördert</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <h2>Anbieter</h2>
-        <dl>
-          <dt>Verein</dt>
-          <dd>Aquisito e.V.</dd>
-          <dt>Anschrift</dt>
-          <dd>Ant Stäppken 33<br>46348 Raesfeld<br>Deutschland</dd>
-        </dl>
-
-        <h2>Vertreten durch</h2>
-        <p>
-          Antonia Tröll, erste Vorsitzende<br>
-          Vorstand nach § 26 BGB. Jedes Vorstandsmitglied ist einzeln zur Vertretung
-          des Vereins berechtigt (§ 7 Abs. 1 der Satzung).
+  <!-- ====================================================================
+       3. Textblock "Aquisito" im Wörterbuch-Stil
+       ==================================================================== -->
+  <section class="section reveal" id="aquisito">
+    <div class="wrap">
+      <div class="dictionary-card">
+        <div class="dictionary-card__header">
+          <span class="dictionary-card__word" lang="es">aquisito</span>
+          <span class="dictionary-card__phonetic">[a.ki.ˈsi.to]</span>
+          <span class="dictionary-card__pos">Spanische Verniedlichung für „hier“</span>
+        </div>
+        <p class="dictionary-card__def">
+          Das Wort wird besonders in Cochabamba, Bolivien benutzt – hier wird wirklich alles verniedlicht. Mery und ihr Team kommen selbst aus dem Stadtteil und kennen die Bedürfnisse der Familien genau. Deshalb entscheidet Cochabamba lokal und gezielt, wo Unterstützung gebraucht wird.
         </p>
-        <p class="small"><a href="satzung.html">Zur vollständigen Satzung</a></p>
+      </div>
+    </div>
+  </section>
 
-        <h2>Kontakt</h2>
-        <dl>
-          <dt>E-Mail</dt>
-          <dd><a href="mailto:info@aquisito.de">info@aquisito.de</a></dd>
-          <dt>Telefon</dt>
-          <dd><a href="tel:+4915774266766">0157 7426 6766</a></dd>
-        </dl>
+  <!-- ====================================================================
+       4. Kochbuch-Sektion (Papas a la Huancaína mit assets/img/huancaina.jpeg)
+       ==================================================================== -->
+  <section class="section kochbuch-new-section reveal" id="kochbuch">
+    <div class="wrap">
+      <div class="kochbuch-new-grid">
+        
+        <!-- Linke Spalte: Text & Features -->
+        <div class="kochbuch-left">
+          <div class="kochbuch-eyebrow">ENTDECKE BOLIVIEN KOCHT!</div>
+          <h2 class="kochbuch-title-text">Unser bolivianisches Kochbuch</h2>
 
-        <h2>Registereintrag</h2>
-        <dl>
-          <dt>Registergericht</dt>
-          <dd>Amtsgericht Aachen</dd>
-          <dt>Registernummer</dt>
-          <dd>VR 6037</dd>
-        </dl>
+          <p class="kochbuch-desc">
+            Mehr als nur Rezepte: Unser bolivianisches Kochbuch öffnet eine Tür zur lebendigen Kultur des Landes und rückt die Menschen bei CADSE in den Mittelpunkt, die ihre Küchen und ihre liebsten Familiengerichte für uns geöffnet haben. <strong>Über 180 Rezepte! Gedruckt auf 100% Recyclingpapier.</strong>
+          </p>
 
-        <h2>Steuerliche Angaben</h2>
-        <dl>
-          <dt>Finanzamt</dt>
-          <dd>Aachen-Stadt</dd>
-          <dt>Steuernummer</dt>
-          <dd>201/5905/6228</dd>
-        </dl>
-        <p>
-          Aquisito e.V. ist nach § 5 Abs. 1 Nr. 9 KStG von der Körperschaftsteuer und
-          nach § 3 Nr. 6 GewStG von der Gewerbesteuer befreit. Der Verein verfolgt
-          ausschließlich und unmittelbar gemeinnützige und mildtätige Zwecke im Sinne
-          der §§ 51 ff. AO. Letzter Freistellungsbescheid: 2023.
-        </p>
+          <ul class="kochbuch-features">
+            <li class="kochbuch-feature-item">Authentisch</li>
+            <li class="kochbuch-feature-item">Traditionell &amp; Vegan</li>
+            <li class="kochbuch-feature-item">Persönliche Geschichten</li>
+          </ul>
 
-        <h2>Verantwortlich für den Inhalt</h2>
-        <p>
-          Nach § 18 Abs. 2 Medienstaatsvertrag (MStV):<br>
-          {{IMPRESSUM_MSTV}}<br>
-          Ant Stäppken 33, 46348 Raesfeld
-        </p>
+          <div style="margin-top: 24px;">
+            <a class="btn btn--primary" href="spenden.html#kochbuch">Kochbuch bestellen <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
 
-        <h2>Verbraucherstreitbeilegung</h2>
-        <p>
-          Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren
-          vor einer Verbraucherschlichtungsstelle teilzunehmen (§ 36 VSBG).
-        </p>
+        <!-- Rechte Spalte: Genau 3 Rezept-Karten -->
+        <div class="kochbuch-right">
+          <div class="kochbuch-cards-track" id="kochbuch-cards-track">
+            
+            <!-- Karte 1: Sopa de Quinoa -->
+            <div class="kochbuch-card-item">
+              <div class="kochbuch-card-img-wrap">
+                <img class="kochbuch-card-img" src="assets/img/quinoa.jpeg" alt="Sopa de Quinoa" data-fallbacks="assets/img/quinoa.jpg,assets/img/quinoa.png,assets/img/Quinoa.jpeg" onerror="tryNextImgSrc(this)">
+                <div style="display:none; width:100%; height:100%; background:#fef3c7; color:#92400e; align-items:center; justify-content:center; text-align:center; padding:12px; font-weight:bold; font-size:0.9rem;">
+                  Sopa de Quinoa
+                </div>
+              </div>
+              <div class="kochbuch-card-subtitle">Sopa de Quinoa</div>
+              <p class="kochbuch-card-text">
+                Traditionelle Quinoasuppe aus den Anden – nahrhaft, wärmend und voll von bolivianischem Geschmack.
+              </p>
+            </div>
 
-        <h2>Haftung für Links</h2>
-        <p>
-          Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte
-          wir keinen Einfluss haben. Für diese fremden Inhalte ist stets der jeweilige
-          Anbieter verantwortlich. Zum Zeitpunkt der Verlinkung waren keine
-          Rechtsverstöße erkennbar. Werden uns Rechtsverletzungen bekannt, entfernen
-          wir die entsprechenden Links umgehend.
-        </p>
+            <!-- Karte 2: Papas a la Huancaína -->
+            <div class="kochbuch-card-item">
+              <div class="kochbuch-card-img-wrap">
+                <img class="kochbuch-card-img" src="assets/img/huancaina.jpeg" alt="Papas a la Huancaína" data-fallbacks="assets/img/huancaína.jpeg,assets/img/huancaína.jpeg,assets/img/huancaína.jpg,assets/img/huancaina.jpg,assets/img/huancaína.jpg" onerror="tryNextImgSrc(this)">
+                <div style="display:none; width:100%; height:100%; background:#fdf2f8; color:#9d174d; align-items:center; justify-content:center; text-align:center; padding:12px; font-weight:bold; font-size:0.9rem;">
+                  Papas a la Huancaína
+                </div>
+              </div>
+              <div class="kochbuch-card-subtitle">Papas a la Huancaína</div>
+              <p class="kochbuch-card-text">
+                Würzige Kartoffeln in cremig-pikanter Käsesauce – ein beliebter Südamerika-Klassiker.
+              </p>
+            </div>
 
-        <h2>Bildnachweis</h2>
-        <p>
-          Alle Fotos stammen von Mitgliedern von Aquisito e.V. und CADSE und werden
-          mit Einwilligung der abgebildeten Personen beziehungsweise ihrer
-          Erziehungsberechtigten veröffentlicht.
-        </p>
+            <!-- Karte 3: Brownie Boliviano -->
+            <div class="kochbuch-card-item">
+              <div class="kochbuch-card-img-wrap">
+                <img class="kochbuch-card-img" src="assets/img/brownie.jpg" alt="Brownie Boliviano" data-fallbacks="assets/img/brownie.jpeg,assets/img/brownie.png,assets/img/Brownie.jpg,assets/img/Brownie.jpeg" onerror="tryNextImgSrc(this)">
+                <div style="display:none; width:100%; height:100%; background:#ecfdf5; color:#065f46; align-items:center; justify-content:center; text-align:center; padding:12px; font-weight:bold; font-size:0.9rem;">
+                  Brownie Boliviano
+                </div>
+              </div>
+              <div class="kochbuch-card-subtitle">Brownie Boliviano</div>
+              <p class="kochbuch-card-text">
+                Saftiger Schokoladenbrownie mit bolivianischem Kakao und feiner Würze.
+              </p>
+            </div>
 
-        <div class="legal__meta">
-          <!-- ENTWURF. Vor Veröffentlichung juristisch prüfen lassen.
-               Offene Punkte, siehe inventory/content.md §Contradictions:
-               1. Aachen — footer.md der alten Seite nennt
-                  "Vereinsregister Aachen", der Sitz ist aber Raesfeld, und
-                  Satzung § 1 Abs. 2 nennt Aachen als Sitz. Drei Quellen, zwei
-                  Antworten. Vor Veröffentlichung im Vereinsregister prüfen.
-               2. {{IMPRESSUM_MSTV}} — benannte Person für redaktionelle Inhalte.
-               3. Die alte Datenschutzerklärung nennt eine abweichende Anschrift
-                  (Pontwall 2, Aachen) und eine abweichende vertretungsberechtigte
-                  Person (Julia Moj). Beides ist vermutlich veraltet. -->
-          <p><strong>Hinweis für die Redaktion:</strong> Diese Seite ist ein Entwurf.
-            Vor der Veröffentlichung müssen Registergericht und die nach § 18 Abs. 2
-            MStV verantwortliche Person bestätigt und von einer qualifizierten Person
-            geprüft werden.</p>
+          </div>
+
+          <!-- Slider Navigation & Grüner "Blick ins Buch" Button unten -->
+          <div class="kochbuch-slider-footer">
+            <div class="kochbuch-nav-row">
+              <button class="kochbuch-nav-btn" id="kochbuch-new-prev" type="button" aria-label="Vorheriges Rezept">←</button>
+              <span class="kochbuch-nav-label">Schau ins Buch und stöbere</span>
+              <button class="kochbuch-nav-btn" id="kochbuch-new-next" type="button" aria-label="Nächstes Rezept">→</button>
+            </div>
+            <a class="btn btn--primary" href="spenden.html#kochbuch" style="margin-top: 4px;">Blick ins Buch <span aria-hidden="true">→</span></a>
+          </div>
         </div>
 
       </div>
     </div>
   </section>
+
+  <!-- ====================================================================
+       5. Ziele von Aquisito e.V.
+       ==================================================================== -->
+  <section class="section reveal" id="was-wir-tun">
+    <div class="wrap">
+      <h2>Ziele von Aquisito e.V.</h2>
+      <p class="prose" style="margin-top: 16px;">
+        Unser Verein wurde gegründet, um Kindern und Jugendlichen in benachteiligten Regionen ein sicheres, chancenreiches Aufwachsen zu ermöglichen. Wir fokussieren uns dabei auf drei zentrale Schwerpunkte: die ganzheitliche Förderung von Erziehung und Bildung, die nachhaltige Stärkung der Jugendhilfe sowie den aktiven Einsatz für die Gleichberechtigung von Frauen und Männern.
+      </p>
+
+      <div class="cards">
+        <article class="card card--linked">
+          <svg class="card__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A2.5 2.5 0 0 1 5.5 4H11v16H5.5A2.5 2.5 0 0 1 3 17.5Z"/><path d="M21 6.5A2.5 2.5 0 0 0 18.5 4H13v16h5.5a2.5 2.5 0 0 0 2.5-2.5Z"/></svg>
+          <h3 class="card__title">Erziehung &amp; Bildung</h3>
+          <p class="card__body">
+            Ganzheitliche Förderung durch gezielte Hausaufgabenbetreuung, Unterstützung beim Erlernen der englischen Sprache sowie praxisnahe Lern- und Kreativangebote, die schulische Lücken schließen und den Spaß am Lernen wecken.
+          </p>
+          <a class="card__link arrow-link" href="transparenz.html#projekte">Was das kostet <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="card card--linked">
+          <svg class="card__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3c2.6 2.4 2.6 15.6 0 18M12 3C9.4 5.4 9.4 18.6 12 21M3.2 9.5h17.6M3.2 14.5h17.6"/></svg>
+          <h3 class="card__title">Jugendhilfe &amp; Schutzraum</h3>
+          <p class="card__body">
+            Ein sicherer Rückzugsort im Stadtteil Ushpa Ushpa, der Schutz vor Gefahren wie Straßenkriminalität bietet. Durch persönliche Begleitung, offene Ohren und Hausbesuche werden Kinder und Familien in schwierigen Lebenslagen gestärkt.
+          </p>
+          <a class="card__link arrow-link" href="transparenz.html#projekte">Was das kostet <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="card card--linked">
+          <svg class="card__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8Z"/><path d="M12 12c0-3.3 2.7-6 6-6 0 3.3-2.7 6-6 6Z"/><path d="M12 12C12 9.2 9.8 7 7 7c0 2.8 2.2 5 5 5Z"/></svg>
+          <h3 class="card__title">Gleichberechtigung &amp; Entwicklung</h3>
+          <p class="card__body">
+            Aktive Förderung des selbstbestimmten und verlässlichen Miteinanders durch gemeinsame Projekte in Sport, Kunst und Umwelt. Es wird Raum geschaffen für die freie Entfaltung aller Kinder und Jugendlichen – unabhängig vom Geschlecht.
+          </p>
+          <a class="card__link arrow-link" href="transparenz.html#projekte">Was das kostet <span aria-hidden="true">→</span></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       6. Team (Über uns)
+       ==================================================================== -->
+  <section class="section section--alt reveal" id="team">
+    <div class="wrap">
+      <p class="eyebrow">Über uns</p>
+      <h2>Wer hinter Aquisito steckt</h2>
+      <p class="prose">
+        Wir sind {{STAT_MITGLIEDER}} aktive Mitglieder, alle ehrenamtlich, in
+        Deutschland und in Bolivien. Wenn du Teil der Aquisito-Familie werden
+        möchtest, schreib uns an
+        <a href="mailto:info@aquisito.de">info@aquisito.de</a>.
+      </p>
+
+      <ul class="team">
+        <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Mery</span><span class="team__role">Koordinatorin von CADSE · Leitung und Außenrepräsentation</span></div><div class="team__face team__back"><img class="team__portrait" src="assets/img/mery.jpg" alt="Porträt von Mery" loading="lazy"></div></div></li>
+        <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Erika</span><span class="team__role">Interne Leitung von CADSE · Management und Betreuung</span></div><div class="team__face team__back"><img class="team__portrait" src="assets/img/erika.jpg" alt="Porträt von Erika" loading="lazy"></div></div></li>
+        <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Toni</span><span class="team__role">Erste Vorsitzende</span></div><div class="team__face team__back"><img class="team__portrait" src="assets/img/toni.jpg" alt="Porträt von Toni" loading="lazy"></div></div></li>
+        <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Natha</span><span class="team__role">Stellvertretende Vorsitzende · Kooperationen</span></div><div class="team__face team__back"><img class="team__portrait" src="assets/img/natha.jpg" alt="Porträt von Natha" loading="lazy"></div></div></li>
+        <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Thomas</span><span class="team__role">Rechnungsführer · Finanzen und Kooperationen</span></div><div class="team__face team__back"><img class="team__portrait" src="assets/img/thomas.jpeg" alt="Porträt von Thomas" loading="lazy"></div></div></li>
+        <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Maria</span><span class="team__role">Vorstandsbeisitzerin · Marketing</span></div><div class="team__face team__back team__back--placeholder"><img class="team__sun" src="assets/img/sonne.svg" alt="" aria-hidden="true" width="56" height="56"></div></div></li>
+        <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Felix</span><span class="team__role">Vorstandsbeisitzer · Marketing</span></div><div class="team__face team__back team__back--placeholder"><img class="team__sun" src="assets/img/sonne.svg" alt="" aria-hidden="true" width="56" height="56"></div></div></li>
+        <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Melvy</span><span class="team__role">Kinderbetreuung · Kreativität und Psychologie</span></div><div class="team__face team__back team__back--placeholder"><img class="team__sun" src="assets/img/sonne.svg" alt="" aria-hidden="true" width="56" height="56"></div></div></li>
+        <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Pamela</span><span class="team__role">Kinderbetreuung · Kunst und Kreativität</span></div><div class="team__face team__back team__back--placeholder"><img class="team__sun" src="assets/img/sonne.svg" alt="" aria-hidden="true" width="56" height="56"></div></div></li>
+        <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Fernando</span><span class="team__role">Kinderbetreuung · IT-Unterricht und Englisch</span></div><div class="team__face team__back team__back--placeholder"><img class="team__sun" src="assets/img/sonne.svg" alt="" aria-hidden="true" width="56" height="56"></div></div></li>
+        <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Julia</span><span class="team__role">Aquisito-Familie · Kochbuch</span></div><div class="team__face team__back team__back--placeholder"><img class="team__sun" src="assets/img/sonne.svg" alt="" aria-hidden="true" width="56" height="56"></div></div></li>
+        <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Olli</span><span class="team__role">Aquisito-Familie</span></div><div class="team__face team__back team__back--placeholder"><img class="team__sun" src="assets/img/sonne.svg" alt="" aria-hidden="true" width="56" height="56"></div></div></li>
+        <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Kathi</span><span class="team__role">Aquisito-Familie</span></div><div class="team__face team__back team__back--placeholder"><img class="team__sun" src="assets/img/sonne.svg" alt="" aria-hidden="true" width="56" height="56"></div></div></li>
+        <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">JD</span><span class="team__role">Aquisito-Familie</span></div><div class="team__face team__back team__back--placeholder"><img class="team__sun" src="assets/img/sonne.svg" alt="" aria-hidden="true" width="56" height="56"></div></div></li>
+        <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Marit</span><span class="team__role">Aquisito-Familie</span></div><div class="team__face team__back team__back--placeholder"><img class="team__sun" src="assets/img/sonne.svg" alt="" aria-hidden="true" width="56" height="56"></div></div></li>
+        <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Lea</span><span class="team__role">Aquisito-Familie</span></div><div class="team__face team__back team__back--placeholder"><img class="team__sun" src="assets/img/sonne.svg" alt="" aria-hidden="true" width="56" height="56"></div></div></li>
+        <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Lukas</span><span class="team__role">Aquisito-Familie</span></div><div class="team__face team__back team__back--placeholder"><img class="team__sun" src="assets/img/sonne.svg" alt="" aria-hidden="true" width="56" height="56"></div></div></li>
+      </ul>
+
+      <p style="margin-top: var(--space-8);">
+        <a class="arrow-link" href="freiwillige.html">Selbst mitmachen <span aria-hidden="true">→</span></a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       7. Zitat-Banner (unter "Wer hinter Aquisito steckt")
+       ==================================================================== -->
+  <section class="band" aria-labelledby="band-line">
+    <picture>
+      <source type="image/webp" srcset="assets/img/band-index-1200.webp 1200w, assets/img/band-index-2400.webp 2400w" sizes="100vw">
+      <img class="band__media" src="assets/img/band-index-1200.jpg"
+           srcset="assets/img/band-index-1200.jpg 1200w, assets/img/band-index-2400.jpg 2400w" sizes="100vw"
+           width="2400" height="1350" alt="" loading="lazy" decoding="async">
+    </picture>
+    <div class="band__scrim" aria-hidden="true"></div>
+    <svg class="band__arc band__arc--top" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0,44 C480,10 960,38 1440,12 L1440,0 L0,0 Z"/></svg>
+    <svg class="band__arc band__arc--bottom" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0,36 C480,2 960,30 1440,4 L1440,48 L0,48 Z"/></svg>
+    <p class="band__line" id="band-line">Wo Mery hingeht, da sind auch Kinder.</p>
+  </section>
+
+  <!-- ====================================================================
+       8. Dreier-Box (Freiwilligendienst, Kochbuch, Spenden)
+       ==================================================================== -->
+  <section class="section reveal">
+    <div class="wrap">
+      <div class="routing">
+        <article class="routing__card routing__card--freiwillige">
+          <h3>Freiwilligendienst</h3>
+          <p>
+            Sechs bis zwölf Monate bei CADSE in Cochabamba, teilfinanziert durch das
+            BMFSFJ — oder auf eigene Faust ab drei Monaten.
+          </p>
+          <a class="arrow-link" href="freiwillige.html">Zu den Einsatzbereichen <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="routing__card routing__card--kochbuch">
+          <h3>Kochbuch</h3>
+          <p>
+            Bolivianische Rezepte, gesammelt von der Aquisito-Familie. Der ganze
+            Erlös geht an CADSE in Cochabamba.
+          </p>
+          <a class="arrow-link" href="#kochbuch">Zum Kochbuch <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="routing__card routing__card--spenden">
+          <h3>Spenden</h3>
+          <p>
+            Per PayPal, Überweisung oder als Fördermitglied. Alle Finanzberichte seit
+            2020 sind öffentlich, Position für Position.
+          </p>
+          <a class="arrow-link" href="spenden.html">Zur Spendenseite <span aria-hidden="true">→</span></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer class="site-footer on-dark">
@@ -175,7 +756,7 @@
       <div>
         <h2>Rechtliches</h2>
         <ul class="small">
-          <li><a href="impressum.html" aria-current="page">Impressum</a></li>
+          <li><a href="impressum.html">Impressum</a></li>
           <li><a href="datenschutz.html">Datenschutz</a></li>
           <li><a href="satzung.html">Satzung</a></li>
           <li><a href="foerdervereinbarung.html">Fördervereinbarung</a></li>
@@ -191,13 +772,51 @@
       </div>
     </div>
     <p class="site-footer__legal">
-      Aquisito e.V. · Vereinsregister Aachen VR 6037 · SteuerNr. 201/5905/6228 ·
+      Aquisito e.V. · Vereinsregister {{REGISTERGERICHT}} VR 6037 · SteuerNr. 201/5905/6228 ·
       als gemeinnützig anerkannt nach § 5 Abs. 1 Nr. 9 KStG (Freistellungsbescheid 2023) ·
       <a href="transparenz.html">Finanzberichte 2020–2025</a>
     </p>
   </div>
 </footer>
 
+<!-- Script für sanften Scroll-Parallax des Luftballons -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const balloonWrapper = document.getElementById('balloon-wrapper');
+    if (!balloonWrapper) return;
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      if (scrollY < 1000) {
+        const scrollOffsetY = scrollY * -0.2;
+        const scrollRotate = Math.sin(scrollY * 0.005) * 4;
+        balloonWrapper.style.transform = `translateY(${scrollOffsetY}px) rotate(${scrollRotate}deg)`;
+      }
+    }, { passive: true });
+  });
+</script>
+
+<!-- Script für Karten-Slider in der Kochbuch-Sektion -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const track = document.getElementById('kochbuch-cards-track');
+    const prevBtn = document.getElementById('kochbuch-new-prev');
+    const nextBtn = document.getElementById('kochbuch-new-next');
+    if (!track) return;
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        track.scrollBy({ left: -260, behavior: 'smooth' });
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        track.scrollBy({ left: 260, behavior: 'smooth' });
+      });
+    }
+  });
+</script>
 <script type="module" src="js/nav.js"></script>
+<script type="module" src="js/reveal.js"></script>
 </body>
 </html>
