@@ -46,36 +46,36 @@
     object-position: center top;
   }
   
-  /* Animierter Luftballon über dem Mädchen */
+  /* Animierter Luftballon über dem Mädchen (200% vergrößert, verlangsamt & weiter unten) */
   .hero__balloon-wrapper {
     position: absolute;
-    right: 27%; /* Platzierung direkt über dem Kopf des Mädchens */
-    top: 10%;
+    right: 24%;
+    top: 22%; /* Weiter unten platziert */
     z-index: 1;
     pointer-events: none;
     will-change: transform;
-    transition: transform 0.1s ease-out;
+    transition: transform 0.15s ease-out;
   }
   .hero__balloon {
-    width: clamp(80px, 12vw, 150px);
+    width: clamp(160px, 24vw, 300px); /* 200% Größe */
     height: auto;
-    animation: floatBalloon 6s ease-in-out infinite;
-    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));
+    animation: floatBalloon 12s ease-in-out infinite; /* Auf 12s verlangsamt */
+    filter: drop-shadow(0 12px 24px rgba(0,0,0,0.12));
   }
 
-  /* Natürliche Schweb-Animation */
+  /* Verlangsamte, sanfte Schweb-Animation */
   @keyframes floatBalloon {
     0% {
       transform: translateY(0px) translateX(0px) rotate(0deg);
     }
     25% {
-      transform: translateY(-14px) translateX(8px) rotate(3deg);
+      transform: translateY(-16px) translateX(10px) rotate(2.5deg);
     }
     50% {
-      transform: translateY(-24px) translateX(-6px) rotate(-4deg);
+      transform: translateY(-28px) translateX(-8px) rotate(-3deg);
     }
     75% {
-      transform: translateY(-10px) translateX(10px) rotate(2deg);
+      transform: translateY(-12px) translateX(12px) rotate(1.5deg);
     }
     100% {
       transform: translateY(0px) translateX(0px) rotate(0deg);
@@ -84,8 +84,8 @@
 
   @media (max-width: 900px) {
     .hero__balloon-wrapper {
-      right: 15%;
-      top: 8%;
+      right: 12%;
+      top: 18%;
     }
   }
 
@@ -303,7 +303,7 @@
     <div class="hero__bg" aria-hidden="true">
       <img class="hero__bg-img" src="assets/img/Aquisito_Header.png" alt="" loading="eager" decoding="async">
       
-      <!-- Separierter, animierter Luftballon über dem Mädchen -->
+      <!-- Separierter, vergrößerter & verlangsamter Luftballon -->
       <div class="hero__balloon-wrapper" id="balloon-wrapper">
         <img class="hero__balloon" src="assets/img/Ballon.png" alt="" aria-hidden="true">
       </div>
@@ -621,7 +621,7 @@
   </div>
 </footer>
 
-<!-- Script für Scroll-Parallax des Luftballons -->
+<!-- Script für sanften Scroll-Parallax des Luftballons -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const balloonWrapper = document.getElementById('balloon-wrapper');
@@ -630,9 +630,9 @@
     window.addEventListener('scroll', () => {
       const scrollY = window.scrollY;
       if (scrollY < 1000) {
-        // Luftballon steigt beim Scrollen dynamisch nach oben und dreht sich sanft
-        const scrollOffsetY = scrollY * -0.35;
-        const scrollRotate = Math.sin(scrollY * 0.008) * 6;
+        // Sanftere, verlangsamte Scroll-Bewegung
+        const scrollOffsetY = scrollY * -0.2;
+        const scrollRotate = Math.sin(scrollY * 0.005) * 4;
         balloonWrapper.style.transform = `translateY(${scrollOffsetY}px) rotate(${scrollRotate}deg)`;
       }
     }, { passive: true });
