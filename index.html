@@ -42,18 +42,31 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center top; /* Zeigt das gesamte Motiv: Backsteinwand links, Wandbild Mitte, Mädchen rechts */
+    object-position: center top;
   }
-  .hero__scrim {
+  /* Dichterer weißer Verlauf von oben für lesbare Navigationspunkte */
+  .hero__top-scrim {
     position: absolute;
-    inset: 0;
-    /* Halbe Transparenz links: Lässt Backsteinwand & Pflanze durchscheinen und garantiert Textlesbarkeit */
-    background: linear-gradient(90deg, 
-      rgba(255, 255, 255, 0.82) 0%, 
-      rgba(255, 255, 255, 0.65) 28%, 
-      rgba(255, 255, 255, 0.3) 52%, 
-      rgba(255, 255, 255, 0) 72%
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 160px;
+    background: linear-gradient(180deg, 
+      rgba(255, 255, 255, 0.95) 0%, 
+      rgba(255, 255, 255, 0.7) 60px, 
+      rgba(255, 255, 255, 0) 100%
     );
+  }
+  /* Wolkenartiger Hintergrund (60% Weiß, stark weichgezeichnet) direkt hinter dem Text */
+  .hero__cloud {
+    max-width: 620px;
+    padding: var(--space-6, 24px) var(--space-8, 32px);
+    margin-left: -16px;
+    border-radius: 40px;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.55) 70%, rgba(255, 255, 255, 0) 100%);
+    box-shadow: 0 0 60px 40px rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
   }
   @media (max-width: 900px) {
     .hero {
@@ -61,15 +74,10 @@
       padding-top: 110px;
       padding-bottom: 60px;
     }
-    .hero__bg-img {
-      object-position: 60% top;
-    }
-    .hero__scrim {
-      background: linear-gradient(180deg, 
-        rgba(255, 255, 255, 0.85) 0%, 
-        rgba(255, 255, 255, 0.6) 40%, 
-        rgba(255, 255, 255, 0.15) 100%
-      );
+    .hero__cloud {
+      margin-left: 0;
+      padding: var(--space-4, 16px);
+      box-shadow: 0 0 40px 30px rgba(255, 255, 255, 0.7);
     }
   }
   .hero .wrap {
@@ -109,24 +117,26 @@
 <main id="main">
 
   <!-- ====================================================================
-       Hero — full-width background image with soft transparent gradient
+       Hero — full-width background image with cloud blurred text-backdrop
        ==================================================================== -->
   <section class="section hero">
     <div class="hero__bg" aria-hidden="true">
       <img class="hero__bg-img" src="assets/img/Aquisito_Header.png" alt="" loading="eager" decoding="async">
-      <div class="hero__scrim"></div>
+      <div class="hero__top-scrim"></div>
     </div>
     <div class="wrap">
-      <p class="eyebrow">CADSE Cochabamba · Aquisito e.V.</p>
-      <h1>Gemeinsam <span class="marker">groß</span> werden</h1>
-      <p class="lead" style="margin-top: var(--space-6);">
-        Eine Kooperation zwischen dem Kinder- und Jugendzentrum CADSE in Bolivien und
-        Aquisito e.V. in Deutschland. Wir finanzieren, was Mery und ihr Team in
-        Cochabamba vor Ort für richtig halten.
-      </p>
-      <div class="hero__actions">
-        <a class="btn btn--primary" href="freiwillige.html">Freiwillig mitmachen</a>
-        <a class="arrow-link" href="spenden.html">Spenden <span aria-hidden="true">→</span></a>
+      <div class="hero__cloud">
+        <p class="eyebrow">CADSE Cochabamba · Aquisito e.V.</p>
+        <h1>Gemeinsam <span class="marker">groß</span> werden</h1>
+        <p class="lead" style="margin-top: var(--space-6);">
+          Eine Kooperation zwischen dem Kinder- und Jugendzentrum CADSE in Bolivien und
+          Aquisito e.V. in Deutschland. Wir finanzieren, was Mery und ihr Team in
+          Cochabamba vor Ort für richtig halten.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="freiwillige.html">Freiwillig mitmachen</a>
+          <a class="arrow-link" href="spenden.html">Spenden <span aria-hidden="true">→</span></a>
+        </div>
       </div>
     </div>
   </section>
