@@ -207,28 +207,16 @@
        The band — one per page
        ==================================================================== -->
   <section class="band" aria-labelledby="band-line">
-    <!-- PLACEHOLDER {{BAND_IMG_2}} — see inventory/assets.md §Photography brief.
-         Replace with <picture> at ≥2400px, alt="", loading="lazy". -->
-    <svg class="band__media" viewBox="0 0 1440 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <rect class="band__ph--ground" width="1440" height="520"/>
-      <path d="M0,330 C260,270 460,360 720,310 C980,262 1180,340 1440,296 L1440,520 L0,520 Z" class="band__ph--ridge" opacity=".55"/>
-      <path d="M0,410 C300,368 520,442 800,404 C1060,368 1220,428 1440,398 L1440,520 L0,520 Z" class="band__ph--ridge" opacity=".8"/>
-      <circle class="band__ph--sun" cx="1180" cy="128" r="62" opacity=".5"/>
-      <g class="band__ph--rays" opacity=".5">
-        <line x1="1256" y1="128" x2="1284" y2="128"/>
-        <line x1="1233.7" y1="181.7" x2="1252.5" y2="200.5"/>
-        <line x1="1180" y1="204" x2="1180" y2="232"/>
-        <line x1="1126.3" y1="181.7" x2="1107.5" y2="200.5"/>
-        <line x1="1104" y1="128" x2="1076" y2="128"/>
-        <line x1="1126.3" y1="74.3" x2="1107.5" y2="55.5"/>
-        <line x1="1180" y1="52" x2="1180" y2="24"/>
-        <line x1="1233.7" y1="74.3" x2="1252.5" y2="55.5"/>
-      </g>
-    </svg>
+    <picture>
+      <source type="image/webp" srcset="assets/img/band-freiwillige-1200.webp 1200w, assets/img/band-freiwillige-2400.webp 2400w" sizes="100vw">
+      <img class="band__media" src="assets/img/band-freiwillige-1200.jpg"
+           srcset="assets/img/band-freiwillige-1200.jpg 1200w, assets/img/band-freiwillige-2400.jpg 2400w" sizes="100vw"
+           width="2400" height="1800" alt="" loading="lazy" decoding="async">
+    </picture>
     <div class="band__scrim" aria-hidden="true"></div>
     <svg class="band__arc band__arc--top" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0,44 C480,10 960,38 1440,12 L1440,0 L0,0 Z"/></svg>
     <svg class="band__arc band__arc--bottom" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0,36 C480,2 960,30 1440,4 L1440,48 L0,48 Z"/></svg>
-    <p class="band__line" id="band-line">{{BAND_LINE_2}}</p>
+    <p class="band__line" id="band-line">Sechs Monate, die dich länger begleiten.</p>
   </section>
 
   <!-- ====================================================================

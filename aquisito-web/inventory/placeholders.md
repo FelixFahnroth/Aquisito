@@ -12,19 +12,25 @@ It must return nothing.
 
 ---
 
+## Resolved 2026-07-26 — content delivered by the Verein
+
+The Verein supplied camera-original photography (`pictures_for_website/`) and the
+three landing figures. Now filled and out of the register:
+
+- **Band photography** — `{{BAND_IMG_1..3}}` → real `<picture>` on all three pages
+  (`band-index`, `band-freiwillige`, `band-spenden`, WebP + JPG at 2400/1200px).
+- **Band lines** — `{{BAND_LINE_1..3}}` → the documented candidate sentences.
+  Editorial, still swappable.
+- **Landing figures** — `9` Jahre gemeinsam mit CADSE · `120` Kinder erreicht ·
+  `10.000 €` für CADSE gefördert. Given by the client; confirm the exact euro
+  figure against the Finanzberichte before launch.
+- **Team portraits** — 5 of ~19 now real (Mery, Erika, Toni, Natha, Thomas). The
+  rest still flip to the sun placeholder; `{{PORTRAIT_*}}` stays open below.
+
 ## Blocked on content from the Verein
 
 | Token | Where | Needs |
 |---|---|---|
-| `{{BAND_IMG_1}}` | `index.html` | landscape photo ≥2400px — see `assets.md` §Photography brief |
-| `{{BAND_IMG_2}}` | `freiwillige.html` | as above |
-| `{{BAND_IMG_3}}` | `spenden.html` | as above |
-| `{{BAND_LINE_1}}` | `index.html` | ≤8 words. Candidate: `Wo Mery hingeht, da sind auch Kinder.` (real, from `landing.md:106`, exactly eight words) |
-| `{{BAND_LINE_2}}` | `freiwillige.html` | ≤8 words. Candidate: `Sechs Monate, die dich länger begleiten.` |
-| `{{BAND_LINE_3}}` | `spenden.html` | ≤8 words. Candidate: `Aquisito heißt hier. Nicht dort, nicht irgendwann.` |
-| `{{STAT_1_FIGURE}}` / `{{STAT_1_LABEL}}` | `index.html` | verified figure — candidates below |
-| `{{STAT_2_FIGURE}}` / `{{STAT_2_LABEL}}` | `index.html` | as above |
-| `{{STAT_3_FIGURE}}` / `{{STAT_3_LABEL}}` | `index.html` | as above |
 | `{{OUTCOME_20}}` / `{{OUTCOME_40}}` / `{{OUTCOME_80}}` | `spenden.html` | cost-per-amount lines, confirmed by Thomas against Finanzbericht 2025 |
 | `{{SPLIT_PROJEKTE}}` / `{{SPLIT_VERWALTUNG}}` / `{{SPLIT_FUNDRAISING}}` | `spenden.html` | percentages from Finanzbericht 2025. Must total 100. |
 | `{{KONTAKT_SPENDEN_NAME}}` / `{{KONTAKT_SPENDEN_TEL}}` | `spenden.html` | a named human for the trust block — a named contact converts better than any badge |
