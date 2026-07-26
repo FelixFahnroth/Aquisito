@@ -45,16 +45,19 @@
     object-fit: cover;
     object-position: center top;
   }
-  /* Sanfter weißer rechteckiger Verlauf mit maximal 28% Weiß-Transparenz */
+  
+  /* Exakter Verlauf: 80% Weiß hinter dem Text, Übergang direkt rechts der Textbox, danach 0% Weiß */
   .hero__scrim {
     position: absolute;
     inset: 0;
     background: linear-gradient(90deg, 
-      rgba(255, 255, 255, 0.28) 0%, 
-      rgba(255, 255, 255, 0.18) 40%, 
-      rgba(255, 255, 255, 0) 75%
+      rgba(255, 255, 255, 0.8) 0%, 
+      rgba(255, 255, 255, 0.8) 42%, 
+      rgba(255, 255, 255, 0.4) 58%, 
+      rgba(255, 255, 255, 0) 70%
     );
   }
+  
   /* Dichterer weißer Verlauf ganz oben für die Navigation */
   .hero__top-scrim {
     position: absolute;
@@ -68,6 +71,7 @@
       rgba(255, 255, 255, 0) 100%
     );
   }
+  
   .hero .wrap {
     position: relative;
     z-index: 1;
@@ -260,7 +264,7 @@
     </div>
     <div class="wrap">
       <h1>Gemeinsam <span class="marker">groß</span> werden</h1>
-      <p class="lead" style="margin-top: var(--space-6); max-width: 600px;">
+      <p class="lead" style="margin-top: var(--space-6); max-width: 540px;">
         Unter diesem Motto engagiert sich Aquisito e.V. für das Kinder- und Jugendzentrum CADSE in Cochabamba, Bolivien. Wir arbeiten Hand in Hand mit dem lokalen Team vor Ort, um Kindern und Jugendlichen mit Hausaufgabenbetreuung, Freizeitangeboten und gesunder Ernährung neue Perspektiven zu eröffnen.
       </p>
       <div class="hero__actions" style="margin-top: var(--space-6);">
