@@ -46,6 +46,49 @@
     object-position: center top;
   }
   
+  /* Animierter Luftballon über dem Mädchen */
+  .hero__balloon-wrapper {
+    position: absolute;
+    right: 27%; /* Platzierung direkt über dem Kopf des Mädchens */
+    top: 10%;
+    z-index: 1;
+    pointer-events: none;
+    will-change: transform;
+    transition: transform 0.1s ease-out;
+  }
+  .hero__balloon {
+    width: clamp(80px, 12vw, 150px);
+    height: auto;
+    animation: floatBalloon 6s ease-in-out infinite;
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));
+  }
+
+  /* Natürliche Schweb-Animation */
+  @keyframes floatBalloon {
+    0% {
+      transform: translateY(0px) translateX(0px) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-14px) translateX(8px) rotate(3deg);
+    }
+    50% {
+      transform: translateY(-24px) translateX(-6px) rotate(-4deg);
+    }
+    75% {
+      transform: translateY(-10px) translateX(10px) rotate(2deg);
+    }
+    100% {
+      transform: translateY(0px) translateX(0px) rotate(0deg);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .hero__balloon-wrapper {
+      right: 15%;
+      top: 8%;
+    }
+  }
+
   /* Exakter Verlauf: 80% Weiß hinter dem Text, Übergang direkt rechts der Textbox, danach 0% Weiß */
   .hero__scrim {
     position: absolute;
@@ -259,6 +302,12 @@
   <section class="section hero">
     <div class="hero__bg" aria-hidden="true">
       <img class="hero__bg-img" src="assets/img/Aquisito_Header.png" alt="" loading="eager" decoding="async">
+      
+      <!-- Separierter, animierter Luftballon über dem Mädchen -->
+      <div class="hero__balloon-wrapper" id="balloon-wrapper">
+        <img class="hero__balloon" src="assets/img/Ballon.png" alt="" aria-hidden="true">
+      </div>
+
       <div class="hero__scrim"></div>
       <div class="hero__top-scrim"></div>
     </div>
@@ -571,6 +620,24 @@
     </p>
   </div>
 </footer>
+
+<!-- Script für Scroll-Parallax des Luftballons -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const balloonWrapper = document.getElementById('balloon-wrapper');
+    if (!balloonWrapper) return;
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      if (scrollY < 1000) {
+        // Luftballon steigt beim Scrollen dynamisch nach oben und dreht sich sanft
+        const scrollOffsetY = scrollY * -0.35;
+        const scrollRotate = Math.sin(scrollY * 0.008) * 6;
+        balloonWrapper.style.transform = `translateY(${scrollOffsetY}px) rotate(${scrollRotate}deg)`;
+      }
+    }, { passive: true });
+  });
+</script>
 
 <!-- Script für automatischen Kochbuch-Slider -->
 <script>
