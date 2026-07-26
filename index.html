@@ -269,7 +269,7 @@
 
   .kochbuch-pot-icon {
     width: 60px;
-    height: 60px;
+    height: auto;
     flex-shrink: 0;
   }
 
@@ -292,10 +292,15 @@
   .kochbuch-feature-item {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     font-size: 1rem;
     font-weight: 700;
     color: #1b4332;
+  }
+  .kochbuch-feature-item::before {
+    content: "•";
+    color: #2d6a4f;
+    font-size: 1.3rem;
   }
 
   .kochbuch-right {
@@ -328,7 +333,6 @@
     box-shadow: 0 8px 24px rgba(0,0,0,0.04);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
   .kochbuch-card-item:hover {
@@ -338,7 +342,7 @@
 
   .kochbuch-card-img-wrap {
     width: 100%;
-    height: 150px;
+    height: 160px;
     border-radius: 12px;
     overflow: hidden;
     background: #f3f4f6;
@@ -355,44 +359,30 @@
   }
 
   .kochbuch-card-subtitle {
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: 700;
     color: #1b4332;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
 
   .kochbuch-card-text {
-    font-size: 0.86rem;
+    font-size: 0.88rem;
     line-height: 1.45;
     color: #4b5563;
-    margin-bottom: 14px;
-    flex-grow: 1;
-  }
-
-  .kochbuch-card-btn {
-    display: inline-block;
-    width: 100%;
-    text-align: center;
-    background: #1b4332;
-    color: #ffffff;
-    font-size: 0.85rem;
-    font-weight: 600;
-    padding: 9px 14px;
-    border-radius: 20px;
-    text-decoration: none;
-    transition: background 0.2s ease;
-  }
-  .kochbuch-card-btn:hover {
-    background: #2d6a4f;
-    color: #ffffff;
+    margin: 0;
   }
 
   .kochbuch-slider-footer {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .kochbuch-nav-row {
+    display: flex;
+    align-items: center;
     gap: 14px;
-    margin-top: 6px;
   }
   .kochbuch-nav-btn {
     width: 36px;
@@ -511,7 +501,7 @@
   </section>
 
   <!-- ====================================================================
-       4. Kochbuch-Sektion NEUES DESIGN (mit Hintergrund & Karten-Slider)
+       4. Kochbuch-Sektion (Genau 3 Rezepte, Kochtopf-Bild & Blick ins Buch Button)
        ==================================================================== -->
   <section class="section kochbuch-new-section reveal" id="kochbuch">
     <div class="wrap">
@@ -522,14 +512,8 @@
           <div class="kochbuch-eyebrow">ENTDECKE BOLIVIEN KOCHT!</div>
           <div class="kochbuch-title-row">
             <h2 class="kochbuch-title-text">Unser bolivianisches Kochbuch</h2>
-            <!-- Topf-Illustration -->
-            <svg class="kochbuch-pot-icon" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-              <path d="M12 28h40v20a8 8 0 01-8 8H20a8 8 0 01-8-8V28z" fill="#4d7c0f" opacity="0.15"/>
-              <path d="M12 28h40v20a8 8 0 01-8 8H20a8 8 0 01-8-8V28z" stroke="#1b4332" stroke-width="2.5"/>
-              <path d="M8 28h48v-4H8v4z" fill="#1b4332"/>
-              <path d="M24 14l-4 6m12-8v8m12-6l4 6" stroke="#1b4332" stroke-width="2.5" stroke-linecap="round"/>
-              <circle cx="32" cy="10" r="3" fill="#d97706"/>
-            </svg>
+            <!-- Kochtopf Bild -->
+            <img class="kochbuch-pot-icon" src="assets/img/Kochtopf.png" alt="" aria-hidden="true">
           </div>
 
           <p class="kochbuch-desc">
@@ -537,15 +521,9 @@
           </p>
 
           <ul class="kochbuch-features">
-            <li class="kochbuch-feature-item">
-              <span class="kochbuch-feature-icon">☀️</span> Authentisch
-            </li>
-            <li class="kochbuch-feature-item">
-              <span class="kochbuch-feature-icon">🍲</span> Traditionell &amp; Vegan
-            </li>
-            <li class="kochbuch-feature-item">
-              <span class="kochbuch-feature-icon">👥</span> Persönliche Geschichten
-            </li>
+            <li class="kochbuch-feature-item">Authentisch</li>
+            <li class="kochbuch-feature-item">Traditionell &amp; Vegan</li>
+            <li class="kochbuch-feature-item">Persönliche Geschichten</li>
           </ul>
 
           <div style="margin-top: 24px;">
@@ -553,87 +531,62 @@
           </div>
         </div>
 
-        <!-- Rechte Spalte: Karten-Slider -->
+        <!-- Rechte Spalte: Genau 3 Rezept-Karten -->
         <div class="kochbuch-right">
           <div class="kochbuch-cards-track" id="kochbuch-cards-track">
             
-            <!-- Karte 1: Inhaltsverzeichnis -->
+            <!-- Karte 1: Sopa de Quinoa -->
             <div class="kochbuch-card-item">
-              <div>
-                <div class="kochbuch-card-img-wrap">
-                  <img class="kochbuch-card-img" src="assets/img/Kochbuch_Cover.png" alt="Bolivien kocht Kochbuch Cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                  <!-- Fallback-Platzhalter falls Bild noch nicht hochgeladen -->
-                  <div style="display:none; width:100%; height:100%; background:#fef3c7; color:#92400e; align-items:center; justify-content:center; text-align:center; padding:12px; font-weight:bold; font-size:0.9rem;">
-                    Bolivien kocht<br><span style="font-size:0.75rem; font-weight:normal;">Cover Platzhalter</span>
-                  </div>
+              <div class="kochbuch-card-img-wrap">
+                <img class="kochbuch-card-img" src="assets/img/quinoa.jpeg" alt="Sopa de Quinoa" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div style="display:none; width:100%; height:100%; background:#fef3c7; color:#92400e; align-items:center; justify-content:center; text-align:center; padding:12px; font-weight:bold; font-size:0.9rem;">
+                  Sopa de Quinoa
                 </div>
-                <div class="kochbuch-card-subtitle">Was dich erwartet:</div>
-                <p class="kochbuch-card-text">
-                  Ein detailliertes Inhaltsverzeichnis mit über 180 Rezepten von Salteñas bis Pique Macho.
-                </p>
               </div>
-              <a class="kochbuch-card-btn" href="spenden.html#kochbuch">Inhaltsverzeichnis lesen</a>
+              <div class="kochbuch-card-subtitle">Sopa de Quinoa</div>
+              <p class="kochbuch-card-text">
+                Traditionelle Quinoasuppe aus den Anden – nahrhaft, wärmend und voll von bolivianischem Geschmack.
+              </p>
             </div>
 
-            <!-- Karte 2: Julia Moj Quinoasuppe -->
+            <!-- Karte 2: Papas a la Huancaína -->
             <div class="kochbuch-card-item">
-              <div>
-                <div class="kochbuch-card-img-wrap">
-                  <img class="kochbuch-card-img" src="assets/img/Julia_Moj.png" alt="Julia Moj Porträt" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                  <!-- Fallback-Platzhalter -->
-                  <div style="display:none; width:100%; height:100%; background:#fdf2f8; color:#9d174d; align-items:center; justify-content:center; text-align:center; padding:12px; font-weight:bold; font-size:0.9rem;">
-                    Julia Moj<br><span style="font-size:0.75rem; font-weight:normal;">Porträt Platzhalter</span>
-                  </div>
+              <div class="kochbuch-card-img-wrap">
+                <img class="kochbuch-card-img" src="assets/img/huancaína.jpg" alt="Papas a la Huancaína" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div style="display:none; width:100%; height:100%; background:#fdf2f8; color:#9d174d; align-items:center; justify-content:center; text-align:center; padding:12px; font-weight:bold; font-size:0.9rem;">
+                  Papas a la Huancaína
                 </div>
-                <div class="kochbuch-card-subtitle">Julia Moj Quinoasuppe</div>
-                <p class="kochbuch-card-text">
-                  Julia Moj kocht gerne für kühle Tage. Entdecke ihr Rezept und ihre Tipps.
-                </p>
               </div>
-              <a class="kochbuch-card-btn" href="spenden.html#kochbuch">Rezept ansehen</a>
+              <div class="kochbuch-card-subtitle">Papas a la Huancaína</div>
+              <p class="kochbuch-card-text">
+                Würzige Kartoffeln in cremig-pikanter Käsesauce – ein beliebter Südamerika-Klassiker.
+              </p>
             </div>
 
-            <!-- Karte 3: Streetfood & Vegan -->
+            <!-- Karte 3: Brownie Boliviano -->
             <div class="kochbuch-card-item">
-              <div>
-                <div class="kochbuch-card-img-wrap">
-                  <img class="kochbuch-card-img" src="assets/img/Foodtruck.png" alt="Streetfood Roller Illustration" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                  <!-- Fallback-Platzhalter -->
-                  <div style="display:none; width:100%; height:100%; background:#ecfdf5; color:#065f46; align-items:center; justify-content:center; text-align:center; padding:12px; font-weight:bold; font-size:0.9rem;">
-                    Streetfood &amp; Vegan<br><span style="font-size:0.75rem; font-weight:normal;">Illustration Platzhalter</span>
-                  </div>
+              <div class="kochbuch-card-img-wrap">
+                <img class="kochbuch-card-img" src="assets/img/brownie.jpg" alt="Brownie Boliviano" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div style="display:none; width:100%; height:100%; background:#ecfdf5; color:#065f46; align-items:center; justify-content:center; text-align:center; padding:12px; font-weight:bold; font-size:0.9rem;">
+                  Brownie Boliviano
                 </div>
-                <div class="kochbuch-card-subtitle">Streetfood &amp; Vegan</div>
-                <p class="kochbuch-card-text">
-                  Innovative Menüs und moderne Streetfood-Klassiker von Cochabamba.
-                </p>
               </div>
-              <a class="kochbuch-card-btn" href="spenden.html#kochbuch">Foodtruck-Rezepte entdecken</a>
-            </div>
-
-            <!-- Karte 4: Platzhalter für weitere Rezepte -->
-            <div class="kochbuch-card-item">
-              <div>
-                <div class="kochbuch-card-img-wrap">
-                  <div style="width:100%; height:100%; background:#eff6ff; color:#1e40af; display:flex; align-items:center; justify-content:center; text-align:center; padding:12px; font-weight:bold; font-size:0.9rem;">
-                    Familienrezepte<br><span style="font-size:0.75rem; font-weight:normal;">Weitere Kapitel Platzhalter</span>
-                  </div>
-                </div>
-                <div class="kochbuch-card-subtitle">Familienrezepte &amp; Kultur</div>
-                <p class="kochbuch-card-text">
-                  Persönliche Einblicke und Familiengerichte direkt aus Cochabamba.
-                </p>
-              </div>
-              <a class="kochbuch-card-btn" href="spenden.html#kochbuch">Rezept entdecken</a>
+              <div class="kochbuch-card-subtitle">Brownie Boliviano</div>
+              <p class="kochbuch-card-text">
+                Saftiger Schokoladenbrownie mit bolivianischem Kakao und feiner Würze.
+              </p>
             </div>
 
           </div>
 
-          <!-- Slider Navigationsteuerung -->
+          <!-- Slider Navigation & Grüner "Blick ins Buch" Button unten -->
           <div class="kochbuch-slider-footer">
-            <button class="kochbuch-nav-btn" id="kochbuch-new-prev" type="button" aria-label="Vorherige Karte">←</button>
-            <span class="kochbuch-nav-label">Schau ins Buch und stöbere</span>
-            <button class="kochbuch-nav-btn" id="kochbuch-new-next" type="button" aria-label="Nächste Karte">→</button>
+            <div class="kochbuch-nav-row">
+              <button class="kochbuch-nav-btn" id="kochbuch-new-prev" type="button" aria-label="Vorheriges Rezept">←</button>
+              <span class="kochbuch-nav-label">Schau ins Buch und stöbere</span>
+              <button class="kochbuch-nav-btn" id="kochbuch-new-next" type="button" aria-label="Nächstes Rezept">→</button>
+            </div>
+            <a class="btn btn--primary" href="spenden.html#kochbuch" style="margin-top: 4px;">Blick ins Buch <span aria-hidden="true">→</span></a>
           </div>
         </div>
 
