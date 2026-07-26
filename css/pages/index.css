@@ -1,0 +1,152 @@
+/* ==========================================================================
+   pages/index.css
+   ========================================================================== */
+
+@layer pages {
+
+  /* ---- hero ---------------------------------------------------------------
+     No image. Deliberate: the band later is the photographic moment, and a hero
+     image would spend it early. The headline is the only display-size type
+     above the fold. PAGES.md §1.
+     Extra top padding clears the transparent sticky header. */
+
+  .hero { padding-block: calc(var(--section-y) + 80px) var(--section-y); }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-5);
+    margin-top: var(--space-8);
+  }
+
+  /* ---- Aquisito, the name --------------------------------------------------
+     Promoted out of the bottom of the old landing page. */
+
+  .name-note { display: grid; gap: var(--space-7); align-items: center; }
+  @media (min-width: 900px) { .name-note { grid-template-columns: 1fr 1fr; gap: var(--space-9); } }
+
+  .name-note__word {
+    font-family: var(--font-display);
+    font-size: var(--step-display);
+    font-weight: var(--weight-medium);
+    line-height: 1;
+    letter-spacing: var(--tracking-tight);
+    color: var(--olive);          /* display size — 3.08:1 is permitted here */
+    margin: 0;
+  }
+
+  .name-note__gloss {
+    font-family: var(--font-display);
+    font-size: var(--step-h3);
+    color: var(--text-muted);
+    margin-top: var(--space-4);
+  }
+
+  /* ---- team ----------------------------------------------------------------
+     Photographed and unphotographed people are never mixed: it is all portraits
+     or all name plates. Three of ~19 portraits exist, so name plates it is
+     until the full set arrives. PAGES.md §1. */
+
+  .team {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-5);
+    list-style: none;
+    padding: 0;
+    margin: var(--space-8) 0 0;
+  }
+
+  .team li { margin: 0; max-width: none; }
+
+  /* Flip cards: name plate on the front, portrait on the back, revealed on
+     hover/focus. A decorative enhancement — the name and role live in the
+     always-present front face, so screen readers and no-hover devices lose
+     nothing. Under prefers-reduced-motion the shared --dur tokens collapse to
+     1ms, so the flip is instant rather than animated. */
+  .team__cell { perspective: 1000px; }
+
+  .team__flip {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    transform-style: preserve-3d;
+    transition: transform var(--dur-slow) var(--ease-out);
+  }
+
+  .team__cell:hover  .team__flip,
+  .team__cell:focus-within .team__flip { transform: rotateY(180deg); }
+
+  .team__face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .team__front {
+    justify-content: flex-end;
+    padding: var(--space-6);
+    background: var(--white);
+  }
+
+  .team__back {
+    transform: rotateY(180deg);
+    background: var(--surface-inverse);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .team__portrait { width: 100%; height: 100%; object-fit: cover; }
+  .team__sun { width: 34%; height: auto; opacity: .9; }
+
+  .team__name {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: var(--weight-medium);
+    font-size: var(--step-h3);
+    color: var(--text-heading);
+  }
+
+  .team__role {
+    display: block;
+    margin-top: var(--space-3);
+    font-size: var(--step-small);
+    color: var(--text-muted);
+  }
+
+  /* ---- routing cards ------------------------------------------------------- */
+
+  .routing { display: grid; gap: var(--space-6); }
+  @media (min-width: 640px)  { .routing { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 940px)  { .routing { grid-template-columns: 1fr 1fr 1fr; } }
+
+  .routing__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    padding: var(--space-8);
+    border-radius: var(--radius-lg);
+    transition: transform var(--dur-fast) var(--ease-out),
+                box-shadow var(--dur-fast) var(--ease-out);
+  }
+
+  .routing__card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+
+  .routing__card--spenden { background: var(--surface-soft); }
+  .routing__card--freiwillige { background: var(--surface-quiet); }
+  .routing__card--kochbuch { background: var(--surface-alt); }
+
+  .routing__card h3 { font-size: var(--step-h2); }
+  .routing__card p { margin: 0; }
+
+  /* Stretched pseudo-element, so the heading stays a heading in the
+     accessibility tree instead of being swallowed by an outer anchor. */
+  .routing__card .arrow-link { margin-top: auto; }
+  .routing__card .arrow-link::after { content: ""; position: absolute; inset: 0; }
+}
