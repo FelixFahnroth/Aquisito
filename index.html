@@ -46,20 +46,20 @@
     object-position: center top;
   }
   
-  /* Animierter Luftballon über dem Mädchen (200% vergrößert, verlangsamt & weiter unten) */
+  /* Animierter Luftballon über dem Mädchen */
   .hero__balloon-wrapper {
     position: absolute;
     right: 24%;
-    top: 22%; /* Weiter unten platziert */
+    top: 22%;
     z-index: 1;
     pointer-events: none;
     will-change: transform;
     transition: transform 0.15s ease-out;
   }
   .hero__balloon {
-    width: clamp(160px, 24vw, 300px); /* 200% Größe */
+    width: clamp(160px, 24vw, 300px);
     height: auto;
-    animation: floatBalloon 12s ease-in-out infinite; /* Auf 12s verlangsamt */
+    animation: floatBalloon 12s ease-in-out infinite;
     filter: drop-shadow(0 12px 24px rgba(0,0,0,0.12));
   }
 
@@ -297,7 +297,7 @@
 <main id="main">
 
   <!-- ====================================================================
-       Hero Section
+       1. Hero Section (inkl. Luftballon & Statistik)
        ==================================================================== -->
   <section class="section hero">
     <div class="hero__bg" aria-hidden="true">
@@ -323,9 +323,7 @@
     </div>
   </section>
 
-  <!-- ====================================================================
-       Statistics — real numbers
-       ==================================================================== -->
+  <!-- Statistics — real numbers -->
   <section class="section section--inverse on-dark">
     <div class="wrap">
       <div class="stats">
@@ -346,65 +344,7 @@
   </section>
 
   <!-- ====================================================================
-       Ziele von Aquisito e.V. (Wofür das Geld gebraucht wird)
-       ==================================================================== -->
-  <section class="section reveal" id="was-wir-tun">
-    <div class="wrap">
-      <p class="eyebrow">Was wir tun</p>
-      <h2>Ziele von Aquisito e.V.</h2>
-      <p class="prose">
-        Unser Verein wurde gegründet, um Kindern und Jugendlichen in benachteiligten Regionen ein sicheres, chancenreiches Aufwachsen zu ermöglichen. Wir fokussieren uns dabei auf drei zentrale Schwerpunkte: die ganzheitliche Förderung von Erziehung und Bildung, die nachhaltige Stärkung der Jugendhilfe sowie den aktiven Einsatz für die Gleichberechtigung von Frauen und Männern.
-      </p>
-
-      <div class="cards">
-        <article class="card card--linked">
-          <svg class="card__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A2.5 2.5 0 0 1 5.5 4H11v16H5.5A2.5 2.5 0 0 1 3 17.5Z"/><path d="M21 6.5A2.5 2.5 0 0 0 18.5 4H13v16h5.5a2.5 2.5 0 0 0 2.5-2.5Z"/></svg>
-          <h3 class="card__title">Erziehung &amp; Bildung</h3>
-          <p class="card__body">
-            Ganzheitliche Förderung durch gezielte Hausaufgabenbetreuung, Unterstützung beim Erlernen der englischen Sprache sowie praxisnahe Lern- und Kreativangebote, die schulische Lücken schließen und den Spaß am Lernen wecken.
-          </p>
-          <a class="card__link arrow-link" href="transparenz.html#projekte">Was das kostet <span aria-hidden="true">→</span></a>
-        </article>
-
-        <article class="card card--linked">
-          <svg class="card__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3c2.6 2.4 2.6 15.6 0 18M12 3C9.4 5.4 9.4 18.6 12 21M3.2 9.5h17.6M3.2 14.5h17.6"/></svg>
-          <h3 class="card__title">Jugendhilfe &amp; Schutzraum</h3>
-          <p class="card__body">
-            Ein sicherer Rückzugsort im Stadtteil Ushpa Ushpa, der Schutz vor Gefahren wie Straßenkriminalität bietet. Durch persönliche Begleitung, offene Ohren und Hausbesuche werden Kinder und Familien in schwierigen Lebenslagen gestärkt.
-          </p>
-          <a class="card__link arrow-link" href="transparenz.html#projekte">Was das kostet <span aria-hidden="true">→</span></a>
-        </article>
-
-        <article class="card card--linked">
-          <svg class="card__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8Z"/><path d="M12 12c0-3.3 2.7-6 6-6 0 3.3-2.7 6-6 6Z"/><path d="M12 12C12 9.2 9.8 7 7 7c0 2.8 2.2 5 5 5Z"/></svg>
-          <h3 class="card__title">Gleichberechtigung &amp; Entwicklung</h3>
-          <p class="card__body">
-            Aktive Förderung des selbstbestimmten und verlässlichen Miteinanders durch gemeinsame Projekte in Sport, Kunst und Umwelt. Es wird Raum geschaffen für die freie Entfaltung aller Kinder und Jugendlichen – unabhängig vom Geschlecht.
-          </p>
-          <a class="card__link arrow-link" href="transparenz.html#projekte">Was das kostet <span aria-hidden="true">→</span></a>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====================================================================
-       The band — quote section
-       ==================================================================== -->
-  <section class="band" aria-labelledby="band-line">
-    <picture>
-      <source type="image/webp" srcset="assets/img/band-index-1200.webp 1200w, assets/img/band-index-2400.webp 2400w" sizes="100vw">
-      <img class="band__media" src="assets/img/band-index-1200.jpg"
-           srcset="assets/img/band-index-1200.jpg 1200w, assets/img/band-index-2400.jpg 2400w" sizes="100vw"
-           width="2400" height="1350" alt="" loading="lazy" decoding="async">
-    </picture>
-    <div class="band__scrim" aria-hidden="true"></div>
-    <svg class="band__arc band__arc--top" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0,44 C480,10 960,38 1440,12 L1440,0 L0,0 Z"/></svg>
-    <svg class="band__arc band__arc--bottom" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0,36 C480,2 960,30 1440,4 L1440,48 L0,48 Z"/></svg>
-    <p class="band__line" id="band-line">Wo Mery hingeht, da sind auch Kinder.</p>
-  </section>
-
-  <!-- ====================================================================
-       Textblock "Aquisito" im Wörterbuch-Stil (Duden-Karte)
+       2. Textblock "Aquisito" im Wörterbuch-Stil (Duden-Karte)
        ==================================================================== -->
   <section class="section reveal" id="aquisito">
     <div class="wrap">
@@ -422,7 +362,7 @@
   </section>
 
   <!-- ====================================================================
-       Neue Kochbuch-Sektion mit Leseprobe-Slider
+       3. Kochbuch-Sektion mit Leseprobe-Slider
        ==================================================================== -->
   <section class="section kochbuch-section reveal" id="kochbuch">
     <div class="wrap">
@@ -496,7 +436,65 @@
   </section>
 
   <!-- ====================================================================
-       Team
+       4. Ziele von Aquisito e.V. (Wofür das Geld gebraucht wird)
+       ==================================================================== -->
+  <section class="section reveal" id="was-wir-tun">
+    <div class="wrap">
+      <p class="eyebrow">Was wir tun</p>
+      <h2>Ziele von Aquisito e.V.</h2>
+      <p class="prose">
+        Unser Verein wurde gegründet, um Kindern und Jugendlichen in benachteiligten Regionen ein sicheres, chancenreiches Aufwachsen zu ermöglichen. Wir fokussieren uns dabei auf drei zentrale Schwerpunkte: die ganzheitliche Förderung von Erziehung und Bildung, die nachhaltige Stärkung der Jugendhilfe sowie den aktiven Einsatz für die Gleichberechtigung von Frauen und Männern.
+      </p>
+
+      <div class="cards">
+        <article class="card card--linked">
+          <svg class="card__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A2.5 2.5 0 0 1 5.5 4H11v16H5.5A2.5 2.5 0 0 1 3 17.5Z"/><path d="M21 6.5A2.5 2.5 0 0 0 18.5 4H13v16h5.5a2.5 2.5 0 0 0 2.5-2.5Z"/></svg>
+          <h3 class="card__title">Erziehung &amp; Bildung</h3>
+          <p class="card__body">
+            Ganzheitliche Förderung durch gezielte Hausaufgabenbetreuung, Unterstützung beim Erlernen der englischen Sprache sowie praxisnahe Lern- und Kreativangebote, die schulische Lücken schließen und den Spaß am Lernen wecken.
+          </p>
+          <a class="card__link arrow-link" href="transparenz.html#projekte">Was das kostet <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="card card--linked">
+          <svg class="card__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3c2.6 2.4 2.6 15.6 0 18M12 3C9.4 5.4 9.4 18.6 12 21M3.2 9.5h17.6M3.2 14.5h17.6"/></svg>
+          <h3 class="card__title">Jugendhilfe &amp; Schutzraum</h3>
+          <p class="card__body">
+            Ein sicherer Rückzugsort im Stadtteil Ushpa Ushpa, der Schutz vor Gefahren wie Straßenkriminalität bietet. Durch persönliche Begleitung, offene Ohren und Hausbesuche werden Kinder und Familien in schwierigen Lebenslagen gestärkt.
+          </p>
+          <a class="card__link arrow-link" href="transparenz.html#projekte">Was das kostet <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="card card--linked">
+          <svg class="card__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8Z"/><path d="M12 12c0-3.3 2.7-6 6-6 0 3.3-2.7 6-6 6Z"/><path d="M12 12C12 9.2 9.8 7 7 7c0 2.8 2.2 5 5 5Z"/></svg>
+          <h3 class="card__title">Gleichberechtigung &amp; Entwicklung</h3>
+          <p class="card__body">
+            Aktive Förderung des selbstbestimmten und verlässlichen Miteinanders durch gemeinsame Projekte in Sport, Kunst und Umwelt. Es wird Raum geschaffen für die freie Entfaltung aller Kinder und Jugendlichen – unabhängig vom Geschlecht.
+          </p>
+          <a class="card__link arrow-link" href="transparenz.html#projekte">Was das kostet <span aria-hidden="true">→</span></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       The band — quote section
+       ==================================================================== -->
+  <section class="band" aria-labelledby="band-line">
+    <picture>
+      <source type="image/webp" srcset="assets/img/band-index-1200.webp 1200w, assets/img/band-index-2400.webp 2400w" sizes="100vw">
+      <img class="band__media" src="assets/img/band-index-1200.jpg"
+           srcset="assets/img/band-index-1200.jpg 1200w, assets/img/band-index-2400.jpg 2400w" sizes="100vw"
+           width="2400" height="1350" alt="" loading="lazy" decoding="async">
+    </picture>
+    <div class="band__scrim" aria-hidden="true"></div>
+    <svg class="band__arc band__arc--top" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0,44 C480,10 960,38 1440,12 L1440,0 L0,0 Z"/></svg>
+    <svg class="band__arc band__arc--bottom" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0,36 C480,2 960,30 1440,4 L1440,48 L0,48 Z"/></svg>
+    <p class="band__line" id="band-line">Wo Mery hingeht, da sind auch Kinder.</p>
+  </section>
+
+  <!-- ====================================================================
+       5. Team (Über uns)
        ==================================================================== -->
   <section class="section section--alt reveal" id="team">
     <div class="wrap">
@@ -536,11 +534,20 @@
   </section>
 
   <!-- ====================================================================
-       Teaser-Kacheln in neuer Reihenfolge (1. Kochbuch, 2. Spenden, 3. Freiwilligendienst)
+       6. Dreier-Box (Kacheln in Reihenfolge: Freiwilligendienst, Kochbuch, Spenden)
        ==================================================================== -->
   <section class="section reveal">
     <div class="wrap">
       <div class="routing">
+        <article class="routing__card routing__card--freiwillige">
+          <h3>Freiwilligendienst</h3>
+          <p>
+            Sechs bis zwölf Monate bei CADSE in Cochabamba, teilfinanziert durch das
+            BMFSFJ — oder auf eigene Faust ab drei Monaten.
+          </p>
+          <a class="arrow-link" href="freiwillige.html">Zu den Einsatzbereichen <span aria-hidden="true">→</span></a>
+        </article>
+
         <article class="routing__card routing__card--kochbuch">
           <h3>Kochbuch</h3>
           <p>
@@ -557,15 +564,6 @@
             2020 sind öffentlich, Position für Position.
           </p>
           <a class="arrow-link" href="spenden.html">Zur Spendenseite <span aria-hidden="true">→</span></a>
-        </article>
-
-        <article class="routing__card routing__card--freiwillige">
-          <h3>Freiwilligendienst</h3>
-          <p>
-            Sechs bis zwölf Monate bei CADSE in Cochabamba, teilfinanziert durch das
-            BMFSFJ — oder auf eigene Faust ab drei Monaten.
-          </p>
-          <a class="arrow-link" href="freiwillige.html">Zu den Einsatzbereichen <span aria-hidden="true">→</span></a>
         </article>
       </div>
     </div>
@@ -630,7 +628,6 @@
     window.addEventListener('scroll', () => {
       const scrollY = window.scrollY;
       if (scrollY < 1000) {
-        // Sanftere, verlangsamte Scroll-Bewegung
         const scrollOffsetY = scrollY * -0.2;
         const scrollRotate = Math.sin(scrollY * 0.005) * 4;
         balloonWrapper.style.transform = `translateY(${scrollOffsetY}px) rotate(${scrollRotate}deg)`;
