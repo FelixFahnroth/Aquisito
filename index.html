@@ -157,10 +157,10 @@
     line-height: 1.25;
   }
 
-  /* Wörterbuch-Stil für Aquisito (mit minimalem Puffer oben & unten) */
+  /* Wörterbuch-Stil für Aquisito */
   #aquisito {
-    padding-top: 24px !important;
-    padding-bottom: 16px !important;
+    padding-top: 28px !important;
+    padding-bottom: 20px !important;
   }
   .dictionary-card {
     background: #ffffff;
@@ -206,104 +206,217 @@
     color: #374151;
   }
 
-  /* Kochbuch-Sektion & Leseprobe-Slider */
-  .kochbuch-section {
-    background: #f9fafb;
+  /* ====================================================================
+     Kochbuch Sektion - NEUES DESIGN (mit Hintergrundbild)
+     ==================================================================== */
+  .kochbuch-new-section {
+    background: #fdfbf7 url('assets/img/Hintergrund_Kochbuch.png') center/cover no-repeat;
     border-top: 1px solid #e5e7eb;
     border-bottom: 1px solid #e5e7eb;
-    padding: 56px 0;
+    padding: 64px 0;
+    position: relative;
   }
-  .kochbuch-grid {
+  .kochbuch-new-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 420px 1fr;
     gap: 40px;
     align-items: center;
   }
-  @media (max-width: 860px) {
-    .kochbuch-grid {
+  @media (max-width: 1024px) {
+    .kochbuch-new-grid {
       grid-template-columns: 1fr;
+      gap: 32px;
     }
   }
-  .kochbuch-slider {
-    position: relative;
-    overflow: hidden;
-    border-radius: 16px;
-    background: #ffffff;
-    padding: 16px;
-    box-shadow: 0 12px 32px rgba(0,0,0,0.06);
-    border: 1px solid #e5e7eb;
+
+  .kochbuch-left {
+    padding-right: 32px;
+    border-right: 1px solid rgba(45, 106, 79, 0.2);
   }
-  .kochbuch-slider__track {
+  @media (max-width: 1024px) {
+    .kochbuch-left {
+      padding-right: 0;
+      border-right: none;
+      border-bottom: 1px solid rgba(45, 106, 79, 0.2);
+      padding-bottom: 32px;
+    }
+  }
+
+  .kochbuch-eyebrow {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #6b7280;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .kochbuch-title-row {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .kochbuch-title-text {
+    font-family: var(--font-heading, sans-serif);
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: #1b4332;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  .kochbuch-pot-icon {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+  }
+
+  .kochbuch-desc {
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: #374151;
+    margin-top: 14px;
+  }
+
+  .kochbuch-features {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .kochbuch-feature-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1b4332;
+  }
+
+  .kochbuch-right {
+    display: flex;
+    flex-direction: column;
     gap: 16px;
+    overflow: hidden;
+  }
+
+  .kochbuch-cards-track {
+    display: flex;
+    gap: 20px;
     overflow-x: auto;
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
-    padding-bottom: 8px;
+    padding: 6px 4px 14px 4px;
   }
-  .kochbuch-slider__track::-webkit-scrollbar {
+  .kochbuch-cards-track::-webkit-scrollbar {
     display: none;
   }
-  .kochbuch-slider__item {
-    flex: 0 0 220px;
+
+  .kochbuch-card-item {
+    flex: 0 0 240px;
     scroll-snap-align: start;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #f3f4f6;
-    aspect-ratio: 3/4;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-    transition: transform 0.3s ease;
-  }
-  .kochbuch-slider__item:hover {
-    transform: translateY(-4px);
-  }
-  .kochbuch-slider__preview-page {
-    width: 100%;
-    height: 100%;
-    background: #fff;
+    background: #ffffff;
+    border-radius: 16px;
     padding: 16px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    text-align: center;
-    font-size: 0.85rem;
-    box-sizing: border-box;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
-  .kochbuch-slider__preview-title {
-    font-weight: 700;
-    color: #2d6a4f;
-    font-size: 1rem;
-    margin-bottom: 6px;
+  .kochbuch-card-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.08);
   }
-  .kochbuch-slider__controls {
+
+  .kochbuch-card-img-wrap {
+    width: 100%;
+    height: 150px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f3f4f6;
+    margin-bottom: 12px;
+    position: relative;
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 16px;
-    margin-top: 16px;
+    justify-content: center;
   }
-  .kochbuch-slider__btn {
-    background: #ffffff;
-    border: 1px solid #d1d5db;
-    border-radius: 50%;
+  .kochbuch-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .kochbuch-card-subtitle {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1b4332;
+    margin-bottom: 4px;
+  }
+
+  .kochbuch-card-text {
+    font-size: 0.86rem;
+    line-height: 1.45;
+    color: #4b5563;
+    margin-bottom: 14px;
+    flex-grow: 1;
+  }
+
+  .kochbuch-card-btn {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    background: #1b4332;
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 9px 14px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+  .kochbuch-card-btn:hover {
+    background: #2d6a4f;
+    color: #ffffff;
+  }
+
+  .kochbuch-slider-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 6px;
+  }
+  .kochbuch-nav-btn {
     width: 36px;
     height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid #1b4332;
+    background: #ffffff;
+    color: #1b4332;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: bold;
     transition: all 0.2s ease;
   }
-  .kochbuch-slider__btn:hover {
-    background: #2d6a4f;
+  .kochbuch-nav-btn:hover {
+    background: #1b4332;
     color: #ffffff;
-    border-color: #2d6a4f;
+  }
+  .kochbuch-nav-label {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #1b4332;
   }
 </style>
 <script>document.documentElement.className = 'js';</script>
@@ -380,7 +493,7 @@
   </section>
 
   <!-- ====================================================================
-       3. Textblock "Aquisito" im Wörterbuch-Stil (Puffer reduziert)
+       3. Textblock "Aquisito" im Wörterbuch-Stil
        ==================================================================== -->
   <section class="section reveal" id="aquisito">
     <div class="wrap">
@@ -398,81 +511,138 @@
   </section>
 
   <!-- ====================================================================
-       4. Kochbuch-Sektion mit Leseprobe-Slider
+       4. Kochbuch-Sektion NEUES DESIGN (mit Hintergrund & Karten-Slider)
        ==================================================================== -->
-  <section class="section kochbuch-section reveal" id="kochbuch">
+  <section class="section kochbuch-new-section reveal" id="kochbuch">
     <div class="wrap">
-      <div class="kochbuch-grid">
-        <div>
-          <p class="eyebrow">Ein Stück Bolivien für Zuhause</p>
-          <h2>Unser bolivianisches Kochbuch</h2>
-          <p class="prose" style="margin-top: 16px;">
-            Mehr als nur Rezepte: Unser bolivianisches Kochbuch öffnet eine Tür zur lebendigen Kultur des Landes und rückt die Menschen bei CADSE in den Mittelpunkt, die ihre Küchen und ihre liebsten Familiengerichte für uns geöffnet haben.
+      <div class="kochbuch-new-grid">
+        
+        <!-- Linke Spalte: Text & Features -->
+        <div class="kochbuch-left">
+          <div class="kochbuch-eyebrow">ENTDECKE BOLIVIEN KOCHT!</div>
+          <div class="kochbuch-title-row">
+            <h2 class="kochbuch-title-text">Unser bolivianisches Kochbuch</h2>
+            <!-- Topf-Illustration -->
+            <svg class="kochbuch-pot-icon" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+              <path d="M12 28h40v20a8 8 0 01-8 8H20a8 8 0 01-8-8V28z" fill="#4d7c0f" opacity="0.15"/>
+              <path d="M12 28h40v20a8 8 0 01-8 8H20a8 8 0 01-8-8V28z" stroke="#1b4332" stroke-width="2.5"/>
+              <path d="M8 28h48v-4H8v4z" fill="#1b4332"/>
+              <path d="M24 14l-4 6m12-8v8m12-6l4 6" stroke="#1b4332" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="32" cy="10" r="3" fill="#d97706"/>
+            </svg>
+          </div>
+
+          <p class="kochbuch-desc">
+            Mehr als nur Rezepte: Unser bolivianisches Kochbuch öffnet eine Tür zur lebendigen Kultur des Landes und rückt die Menschen bei CADSE in den Mittelpunkt, die ihre Küchen und ihre liebsten Familiengerichte für uns geöffnet haben. <strong>Über 180 Rezepte! Gedruckt auf 100% Recyclingpapier.</strong>
           </p>
+
+          <ul class="kochbuch-features">
+            <li class="kochbuch-feature-item">
+              <span class="kochbuch-feature-icon">☀️</span> Authentisch
+            </li>
+            <li class="kochbuch-feature-item">
+              <span class="kochbuch-feature-icon">🍲</span> Traditionell &amp; Vegan
+            </li>
+            <li class="kochbuch-feature-item">
+              <span class="kochbuch-feature-icon">👥</span> Persönliche Geschichten
+            </li>
+          </ul>
+
           <div style="margin-top: 24px;">
             <a class="btn btn--primary" href="spenden.html#kochbuch">Kochbuch bestellen <span aria-hidden="true">→</span></a>
           </div>
         </div>
 
-        <div class="kochbuch-slider">
-          <div class="kochbuch-slider__track" id="kochbuch-slider-track">
-            <div class="kochbuch-slider__item">
-              <div class="kochbuch-slider__preview-page">
-                <div>
-                  <div class="kochbuch-slider__preview-title">Empanadas de Queso</div>
-                  <p style="color: #6b7280; margin-top: 4px;">Käsegefülltes Gebäck zum Frühstück</p>
+        <!-- Rechte Spalte: Karten-Slider -->
+        <div class="kochbuch-right">
+          <div class="kochbuch-cards-track" id="kochbuch-cards-track">
+            
+            <!-- Karte 1: Inhaltsverzeichnis -->
+            <div class="kochbuch-card-item">
+              <div>
+                <div class="kochbuch-card-img-wrap">
+                  <img class="kochbuch-card-img" src="assets/img/Kochbuch_Cover.png" alt="Bolivien kocht Kochbuch Cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                  <!-- Fallback-Platzhalter falls Bild noch nicht hochgeladen -->
+                  <div style="display:none; width:100%; height:100%; background:#fef3c7; color:#92400e; align-items:center; justify-content:center; text-align:center; padding:12px; font-weight:bold; font-size:0.9rem;">
+                    Bolivien kocht<br><span style="font-size:0.75rem; font-weight:normal;">Cover Platzhalter</span>
+                  </div>
                 </div>
-                <div style="background: #fdf2f8; padding: 12px; border-radius: 8px; font-style: italic; color: #9d174d;">
-                  „Ein Rezept von Mery aus Ushpa Ushpa“
-                </div>
+                <div class="kochbuch-card-subtitle">Was dich erwartet:</div>
+                <p class="kochbuch-card-text">
+                  Ein detailliertes Inhaltsverzeichnis mit über 180 Rezepten von Salteñas bis Pique Macho.
+                </p>
               </div>
+              <a class="kochbuch-card-btn" href="spenden.html#kochbuch">Inhaltsverzeichnis lesen</a>
             </div>
-            <div class="kochbuch-slider__item">
-              <div class="kochbuch-slider__preview-page">
-                <div>
-                  <div class="kochbuch-slider__preview-title">Sopa de Maní</div>
-                  <p style="color: #6b7280; margin-top: 4px;">Traditionelle Erdnusssuppe</p>
+
+            <!-- Karte 2: Julia Moj Quinoasuppe -->
+            <div class="kochbuch-card-item">
+              <div>
+                <div class="kochbuch-card-img-wrap">
+                  <img class="kochbuch-card-img" src="assets/img/Julia_Moj.png" alt="Julia Moj Porträt" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                  <!-- Fallback-Platzhalter -->
+                  <div style="display:none; width:100%; height:100%; background:#fdf2f8; color:#9d174d; align-items:center; justify-content:center; text-align:center; padding:12px; font-weight:bold; font-size:0.9rem;">
+                    Julia Moj<br><span style="font-size:0.75rem; font-weight:normal;">Porträt Platzhalter</span>
+                  </div>
                 </div>
-                <div style="background: #fef3c7; padding: 12px; border-radius: 8px; font-style: italic; color: #92400e;">
-                  „Das Lieblingsgericht der Kinder bei CADSE“
-                </div>
+                <div class="kochbuch-card-subtitle">Julia Moj Quinoasuppe</div>
+                <p class="kochbuch-card-text">
+                  Julia Moj kocht gerne für kühle Tage. Entdecke ihr Rezept und ihre Tipps.
+                </p>
               </div>
+              <a class="kochbuch-card-btn" href="spenden.html#kochbuch">Rezept ansehen</a>
             </div>
-            <div class="kochbuch-slider__item">
-              <div class="kochbuch-slider__preview-page">
-                <div>
-                  <div class="kochbuch-slider__preview-title">Silpancho Cochabambino</div>
-                  <p style="color: #6b7280; margin-top: 4px;">Klassiker aus Cochabamba</p>
+
+            <!-- Karte 3: Streetfood & Vegan -->
+            <div class="kochbuch-card-item">
+              <div>
+                <div class="kochbuch-card-img-wrap">
+                  <img class="kochbuch-card-img" src="assets/img/Foodtruck.png" alt="Streetfood Roller Illustration" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                  <!-- Fallback-Platzhalter -->
+                  <div style="display:none; width:100%; height:100%; background:#ecfdf5; color:#065f46; align-items:center; justify-content:center; text-align:center; padding:12px; font-weight:bold; font-size:0.9rem;">
+                    Streetfood &amp; Vegan<br><span style="font-size:0.75rem; font-weight:normal;">Illustration Platzhalter</span>
+                  </div>
                 </div>
-                <div style="background: #ecfdf5; padding: 12px; border-radius: 8px; font-style: italic; color: #065f46;">
-                  „Ein Festmahl für die ganze Familie“
-                </div>
+                <div class="kochbuch-card-subtitle">Streetfood &amp; Vegan</div>
+                <p class="kochbuch-card-text">
+                  Innovative Menüs und moderne Streetfood-Klassiker von Cochabamba.
+                </p>
               </div>
+              <a class="kochbuch-card-btn" href="spenden.html#kochbuch">Foodtruck-Rezepte entdecken</a>
             </div>
-            <div class="kochbuch-slider__item">
-              <div class="kochbuch-slider__preview-page">
-                <div>
-                  <div class="kochbuch-slider__preview-title">Majadito de Charque</div>
-                  <p style="color: #6b7280; margin-top: 4px;">Reisgericht mit Bananen &amp; Ei</p>
+
+            <!-- Karte 4: Platzhalter für weitere Rezepte -->
+            <div class="kochbuch-card-item">
+              <div>
+                <div class="kochbuch-card-img-wrap">
+                  <div style="width:100%; height:100%; background:#eff6ff; color:#1e40af; display:flex; align-items:center; justify-content:center; text-align:center; padding:12px; font-weight:bold; font-size:0.9rem;">
+                    Familienrezepte<br><span style="font-size:0.75rem; font-weight:normal;">Weitere Kapitel Platzhalter</span>
+                  </div>
                 </div>
-                <div style="background: #eff6ff; padding: 12px; border-radius: 8px; font-style: italic; color: #1e40af;">
-                  „Gemeinsam zubereitet am Pizzatag“
-                </div>
+                <div class="kochbuch-card-subtitle">Familienrezepte &amp; Kultur</div>
+                <p class="kochbuch-card-text">
+                  Persönliche Einblicke und Familiengerichte direkt aus Cochabamba.
+                </p>
               </div>
+              <a class="kochbuch-card-btn" href="spenden.html#kochbuch">Rezept entdecken</a>
             </div>
+
           </div>
-          <div class="kochbuch-slider__controls">
-            <button class="kochbuch-slider__btn" id="kochbuch-slider-prev" type="button" aria-label="Vorheriges Rezept">←</button>
-            <span style="font-size: 0.85rem; color: #6b7280; font-weight: 500;">Leseprobe scrollen</span>
-            <button class="kochbuch-slider__btn" id="kochbuch-slider-next" type="button" aria-label="Nächstes Rezept">→</button>
+
+          <!-- Slider Navigationsteuerung -->
+          <div class="kochbuch-slider-footer">
+            <button class="kochbuch-nav-btn" id="kochbuch-new-prev" type="button" aria-label="Vorherige Karte">←</button>
+            <span class="kochbuch-nav-label">Schau ins Buch und stöbere</span>
+            <button class="kochbuch-nav-btn" id="kochbuch-new-next" type="button" aria-label="Nächste Karte">→</button>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
   <!-- ====================================================================
-       5. Ziele von Aquisito e.V. (Ohne "WAS WIR TUN" Dachzeile)
+       5. Ziele von Aquisito e.V.
        ==================================================================== -->
   <section class="section reveal" id="was-wir-tun">
     <div class="wrap">
@@ -671,42 +841,22 @@
   });
 </script>
 
-<!-- Script für automatischen Kochbuch-Slider -->
+<!-- Script für Karten-Slider in der Kochbuch-Sektion -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const track = document.getElementById('kochbuch-slider-track');
-    const prevBtn = document.getElementById('kochbuch-slider-prev');
-    const nextBtn = document.getElementById('kochbuch-slider-next');
+    const track = document.getElementById('kochbuch-cards-track');
+    const prevBtn = document.getElementById('kochbuch-new-prev');
+    const nextBtn = document.getElementById('kochbuch-new-next');
     if (!track) return;
-
-    let autoScrollSpeed = 1.2;
-    let isPaused = false;
-
-    function autoStep() {
-      if (!isPaused) {
-        if (track.scrollLeft >= (track.scrollWidth - track.clientWidth - 5)) {
-          track.scrollLeft = 0;
-        } else {
-          track.scrollLeft += autoScrollSpeed;
-        }
-      }
-    }
-
-    let interval = setInterval(autoStep, 30);
-
-    track.addEventListener('mouseenter', () => isPaused = true);
-    track.addEventListener('mouseleave', () => isPaused = false);
-    track.addEventListener('touchstart', () => isPaused = true);
-    track.addEventListener('touchend', () => isPaused = false);
 
     if (prevBtn) {
       prevBtn.addEventListener('click', () => {
-        track.scrollBy({ left: -240, behavior: 'smooth' });
+        track.scrollBy({ left: -260, behavior: 'smooth' });
       });
     }
     if (nextBtn) {
       nextBtn.addEventListener('click', () => {
-        track.scrollBy({ left: 240, behavior: 'smooth' });
+        track.scrollBy({ left: 260, behavior: 'smooth' });
       });
     }
   });
