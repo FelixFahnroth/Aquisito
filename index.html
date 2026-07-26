@@ -45,6 +45,17 @@
     object-fit: cover;
     object-position: center top;
   }
+  /* Sanfter weißer rechteckiger Verlauf mit maximal 28% Weiß-Transparenz */
+  .hero__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, 
+      rgba(255, 255, 255, 0.28) 0%, 
+      rgba(255, 255, 255, 0.18) 40%, 
+      rgba(255, 255, 255, 0) 75%
+    );
+  }
+  /* Dichterer weißer Verlauf ganz oben für die Navigation */
   .hero__top-scrim {
     position: absolute;
     top: 0;
@@ -52,32 +63,10 @@
     right: 0;
     height: 160px;
     background: linear-gradient(180deg, 
-      rgba(255, 255, 255, 0.95) 0%, 
-      rgba(255, 255, 255, 0.7) 60px, 
+      rgba(255, 255, 255, 0.9) 0%, 
+      rgba(255, 255, 255, 0.6) 60px, 
       rgba(255, 255, 255, 0) 100%
     );
-  }
-  .hero__cloud {
-    max-width: 620px;
-    padding: var(--space-6, 24px) var(--space-8, 32px);
-    margin-left: -16px;
-    border-radius: 40px;
-    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.55) 70%, rgba(255, 255, 255, 0) 100%);
-    box-shadow: 0 0 60px 40px rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-  }
-  @media (max-width: 900px) {
-    .hero {
-      min-height: auto;
-      padding-top: 110px;
-      padding-bottom: 60px;
-    }
-    .hero__cloud {
-      margin-left: 0;
-      padding: var(--space-4, 16px);
-      box-shadow: 0 0 40px 30px rgba(255, 255, 255, 0.7);
-    }
   }
   .hero .wrap {
     position: relative;
@@ -266,18 +255,17 @@
   <section class="section hero">
     <div class="hero__bg" aria-hidden="true">
       <img class="hero__bg-img" src="assets/img/Aquisito_Header.png" alt="" loading="eager" decoding="async">
+      <div class="hero__scrim"></div>
       <div class="hero__top-scrim"></div>
     </div>
     <div class="wrap">
-      <div class="hero__cloud">
-        <h1>Gemeinsam <span class="marker">groß</span> werden</h1>
-        <p class="lead" style="margin-top: var(--space-6);">
-          Unter diesem Motto engagiert sich Aquisito e.V. für das Kinder- und Jugendzentrum CADSE in Cochabamba, Bolivien. Wir arbeiten Hand in Hand mit dem lokalen Team vor Ort, um Kindern und Jugendlichen mit Hausaufgabenbetreuung, Freizeitangeboten und gesunder Ernährung neue Perspektiven zu eröffnen.
-        </p>
-        <div class="hero__actions">
-          <a class="btn btn--primary" href="freiwillige.html">Freiwillig mitmachen</a>
-          <a class="arrow-link" href="spenden.html">Spenden <span aria-hidden="true">→</span></a>
-        </div>
+      <h1>Gemeinsam <span class="marker">groß</span> werden</h1>
+      <p class="lead" style="margin-top: var(--space-6); max-width: 600px;">
+        Unter diesem Motto engagiert sich Aquisito e.V. für das Kinder- und Jugendzentrum CADSE in Cochabamba, Bolivien. Wir arbeiten Hand in Hand mit dem lokalen Team vor Ort, um Kindern und Jugendlichen mit Hausaufgabenbetreuung, Freizeitangeboten und gesunder Ernährung neue Perspektiven zu eröffnen.
+      </p>
+      <div class="hero__actions" style="margin-top: var(--space-6);">
+        <a class="btn btn--primary" href="freiwillige.html">Freiwillig mitmachen</a>
+        <a class="arrow-link" href="spenden.html">Spenden <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>
