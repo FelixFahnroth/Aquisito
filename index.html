@@ -14,10 +14,10 @@
 <meta property="og:locale" content="de_DE">
 <link rel="preload" href="assets/fonts/familjen-grotesk-500-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/atkinson-hyperlegible-400-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=20260913d">
-<link rel="stylesheet" href="css/base.css?v=20260913d">
-<link rel="stylesheet" href="css/components.css?v=20260913d">
-<link rel="stylesheet" href="css/pages/index.css?v=20260913d">
+<link rel="stylesheet" href="css/tokens.css?v=20260913e">
+<link rel="stylesheet" href="css/base.css?v=20260913e">
+<link rel="stylesheet" href="css/components.css?v=20260913e">
+<link rel="stylesheet" href="css/pages/index.css?v=20260913e">
 <style>
   /* Der Hero liegt vollständig in css/pages/index.css: zweispaltiges Raster mit
      dem Foto-Stapel (js/hero-stack.js) statt Hintergrundbild und Luftballon. */
@@ -32,7 +32,7 @@
     z-index: 2;
   }
 
-  /* Reihe 1: die laufende Dauer. */
+  /* Reihe 1: Überschrift und laufende Dauer. */
   .stats-band__since {
     margin: 0;
     text-align: center;
@@ -41,13 +41,57 @@
     font-weight: var(--weight-medium);
     color: var(--text-heading);
     line-height: 1.3;
-    text-wrap: balance;
   }
-  /* tabular-nums hält die Sekunden ruhig, statt die Zeile im Sekundentakt
-     springen zu lassen. */
-  .stats-band__timer {
+  /* Das Gründungsdatum ist die Fassung ohne JavaScript; sobald das Skript
+     laufen kann, übernimmt die Uhr darunter. */
+  .js .stats-band__fallback { display: none; }
+  html:not(.js) .clock { display: none; }
+
+  /* Die Uhr: sechs Felder in einer Reihe, Doppelpunkte sitzen in den Spalten-
+     abständen. --clock-gap steuert beides, damit der Doppelpunkt immer mittig
+     zwischen zwei Feldern landet. */
+  .clock {
+    --clock-gap: var(--space-7);
+    display: grid;
+    grid-template-columns: repeat(6, auto);
+    justify-content: center;
+    column-gap: var(--clock-gap);
+    margin-top: var(--space-5);
+  }
+  .clock__unit {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 2px;
+  }
+  .clock__unit:not(:last-child)::after {
+    content: ":";
+    position: absolute;
+    top: 0;
+    right: calc(var(--clock-gap) / -2);
+    transform: translateX(50%);
+    font-family: var(--font-display);
+    font-size: var(--step-h1);
+    font-weight: var(--weight-medium);
+    line-height: 1;
+    color: rgb(0 87 0 / 0.35);
+  }
+  .clock__value {
+    font-family: var(--font-display);
+    font-size: var(--step-h1);
+    font-weight: var(--weight-bold);
+    color: var(--text-heading);
+    line-height: 1;
+    /* tabular-nums hält die Breite konstant, sonst zappelt die Zeile im
+       Sekundentakt. */
     font-variant-numeric: tabular-nums;
-    white-space: normal;
+  }
+  .clock__abbr {
+    font-size: var(--step-small);
+    font-weight: var(--weight-medium);
+    color: var(--text-muted);
+    line-height: 1;
+    letter-spacing: 0.04em;
   }
 
   /* Reihe 2: die beiden Jahreszahlen. */
@@ -81,7 +125,15 @@
     line-height: 1.25;
   }
 
+  /* Schmale Schirme: die Uhr bricht auf zwei Reihen zu drei Feldern um. Der
+     Doppelpunkt des dritten Feldes fällt weg, sonst hinge er am Zeilenende. */
   @media (max-width: 560px) {
+    .clock {
+      --clock-gap: var(--space-6);
+      grid-template-columns: repeat(3, auto);
+      row-gap: var(--space-5);
+    }
+    .clock__unit:nth-child(3)::after { content: none; }
     .stats-band__figures { flex-direction: column; align-items: center; gap: var(--space-5); }
   }
 
@@ -444,9 +496,18 @@
   <section class="stats-band" aria-label="Aquisito in Zahlen">
     <div class="wrap">
       <p class="stats-band__since">
-        Kinder unterstützen seit
-        <time class="stats-band__timer" id="aktiv-seit" datetime="2020-05-09T12:00:00+02:00">dem 9. Mai 2020</time>
+        Kinder unterstützen seit<span class="stats-band__fallback"> dem 9. Mai 2020</span>
       </p>
+      <!-- Sechs Felder, je Wert und Kürzel. Ohne JavaScript bleibt stattdessen
+           das Gründungsdatum in der Zeile darüber stehen. -->
+      <time class="clock" id="aktiv-seit" datetime="2020-05-09T12:00:00+02:00">
+        <span class="clock__unit"><span class="clock__value" data-unit="0">0</span><span class="clock__abbr">J</span></span>
+        <span class="clock__unit"><span class="clock__value" data-unit="1">0</span><span class="clock__abbr">M</span></span>
+        <span class="clock__unit"><span class="clock__value" data-unit="2">0</span><span class="clock__abbr">T</span></span>
+        <span class="clock__unit"><span class="clock__value" data-unit="3">00</span><span class="clock__abbr">Std</span></span>
+        <span class="clock__unit"><span class="clock__value" data-unit="4">00</span><span class="clock__abbr">Min</span></span>
+        <span class="clock__unit"><span class="clock__value" data-unit="5">00</span><span class="clock__abbr">Sek</span></span>
+      </time>
       <div class="stats-band__figures">
         <div class="stats-band__item">
           <span class="stats-band__figure">&gt;50</span>
@@ -750,10 +811,10 @@
     }
   });
 </script>
-<script type="module" src="js/nav.js?v=20260913d"></script>
-<script type="module" src="js/reveal.js?v=20260913d"></script>
-<script type="module" src="js/hero-stack.js?v=20260913d"></script>
-<script type="module" src="js/team-flip.js?v=20260913d"></script>
-<script type="module" src="js/stats-timer.js?v=20260913d"></script>
+<script type="module" src="js/nav.js?v=20260913e"></script>
+<script type="module" src="js/reveal.js?v=20260913e"></script>
+<script type="module" src="js/hero-stack.js?v=20260913e"></script>
+<script type="module" src="js/team-flip.js?v=20260913e"></script>
+<script type="module" src="js/stats-timer.js?v=20260913e"></script>
 </body>
 </html>

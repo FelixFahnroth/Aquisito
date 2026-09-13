@@ -4,28 +4,24 @@
    inside summer time, so the instant is 12:00+02:00 (CEST) — written as an
    explicit offset in the datetime attribute rather than left to the parser.
 
-   Without this script the markup keeps reading "seit dem 9. Mai 2020", which
-   stays true forever; the script upgrades it to "seit 6 Jahren, 4 Monaten …".
+   The markup already contains the six fields (J M T Std Min Sek); this only
+   writes numbers into them, so the layout never depends on the script. Without
+   JavaScript the fields stay hidden and the line above keeps reading "seit dem
+   9. Mai 2020", which stays true forever.
+
    There is deliberately no aria-live: a value that changes every second would
    make a screen reader talk over everything else. The <time datetime> carries
    the founding instant for anything reading the page programmatically. */
 
-const el = document.getElementById('aktiv-seit');
+const clock = document.getElementById('aktiv-seit');
 
-if (el) {
-  const start = new Date(el.getAttribute('datetime'));
+if (clock) {
+  const start = new Date(clock.getAttribute('datetime'));
+  const cells = [...clock.querySelectorAll('.clock__value')].sort(
+    (a, b) => a.dataset.unit - b.dataset.unit
+  );
 
-  if (!Number.isNaN(start.getTime())) {
-    /* Singular is the dative after "seit": seit einem Jahr, seit zwei Jahren. */
-    const UNITS = [
-      ['Jahr', 'Jahren'],
-      ['Monat', 'Monaten'],
-      ['Tag', 'Tagen'],
-      ['Stunde', 'Stunden'],
-      ['Minute', 'Minuten'],
-      ['Sekunde', 'Sekunden'],
-    ];
-
+  if (!Number.isNaN(start.getTime()) && cells.length === 6) {
     /* Calendar-aware, so "ein Monat" means a real month rather than 30 days.
        Borrowing runs from the smallest unit up; days borrow the length of the
        month before the current one, which is what makes month ends behave. */
@@ -49,24 +45,21 @@ if (el) {
       return [y, mo, d, h, mi, s];
     };
 
-    const format = (values) => {
-      const parts = [];
-      for (const [i, n] of values.entries()) {
-        /* Skip leading zeroes only — once something is on the clock, keep the
-           smaller units so the seconds never vanish mid-tick. */
-        if (!parts.length && n === 0 && i < values.length - 1) continue;
-        /* U+00A0 between number and unit: a line break there would leave a
-           stray digit hanging at the end of a line. */
-        parts.push(`${n} ${UNITS[i][n === 1 ? 0 : 1]}`);
-      }
-      if (parts.length === 1) return parts[0];
-      return `${parts.slice(0, -1).join(', ')} und ${parts[parts.length - 1]}`;
-    };
+    /* Only the clock-like tail is zero-padded. "06" years would read as a
+       stopwatch rather than an age. */
+    const PAD_FROM = 3;
 
     const tick = () => {
       const now = new Date();
-      if (now < start) return;            // clock skew: leave the date in place
-      el.textContent = format(breakdown(start, now));
+      if (now < start) return;            // clock skew: leave the fields alone
+
+      const values = breakdown(start, now);
+      values.forEach((n, i) => {
+        const text = i >= PAD_FROM ? String(n).padStart(2, '0') : String(n);
+        /* Touch the DOM only when the number actually changed — five of the six
+           fields are unchanged on almost every tick. */
+        if (cells[i].textContent !== text) cells[i].textContent = text;
+      });
     };
 
     tick();
