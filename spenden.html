@@ -87,10 +87,15 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 6px 12px;
     font-size: 0.85rem;
     color: #4b5563;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+  }
+  .bank-box__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
   }
   .bank-box__meta strong {
     color: var(--forest, #1b4332);
@@ -107,6 +112,12 @@
     font-weight: 700;
     color: #4b5563;
   }
+  .bank-box__iban-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
   .bank-box__iban {
     font-size: 1.15rem;
     font-weight: 800;
@@ -115,6 +126,51 @@
     word-break: break-all;
     line-height: 1.25;
   }
+
+  /* Minimalistische Kopierbuttons */
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    border: 1px solid rgba(27, 67, 50, 0.2);
+    background: #ffffff;
+    color: var(--forest, #1b4332);
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.15s ease;
+  }
+  .copy-btn:hover {
+    background: rgba(27, 67, 50, 0.08);
+    border-color: var(--forest, #1b4332);
+  }
+  .copy-btn:focus-visible {
+    outline: 2px solid var(--forest, #1b4332);
+    outline-offset: 1px;
+  }
+  .copy-btn--iban {
+    width: 26px;
+    height: 26px;
+  }
+  .copy-btn__icon--check {
+    display: none;
+    stroke: #2d6a4f;
+  }
+  .copy-btn.is-copied {
+    background: #e8f5e9;
+    border-color: #2d6a4f;
+    color: #2d6a4f;
+  }
+  .copy-btn.is-copied .copy-btn__icon--copy {
+    display: none;
+  }
+  .copy-btn.is-copied .copy-btn__icon--check {
+    display: block;
+  }
+
   .widget__alt p,
   .widget__alt .muted {
     color: #4b5563 !important;
@@ -219,7 +275,7 @@
 
             <div class="widget__custom">
               <label class="sr-only" for="betrag-custom">Eigener Betrag in Euro</label>
-              <input type="number" id="betrag-custom" name="betrag_eigener" min="1" step="1" inputmode="numeric" placeholder="Betrag">
+              <input type="number" id="betrag-custom" name="betrag_eigener" min="1" step="1" inputmode="numeric" placeholder="Oder freier Betrag">
               <span class="widget__custom-unit" aria-hidden="true">€</span>
             </div>
 
@@ -234,12 +290,30 @@
             <h3 class="small">Lieber überweisen?</h3>
             <div class="bank-box">
               <div class="bank-box__meta">
-                <span>Empfänger: <strong>Aquisito e.V.</strong></span>
-                <span>BIC: <strong>GENODEM1GLS</strong></span>
+                <span class="bank-box__item">
+                  Empfänger: <strong>Aquisito e.V.</strong>
+                  <button type="button" class="copy-btn" data-copy="Aquisito e.V." data-copy-label="Empfänger kopieren" aria-label="Empfänger kopieren" title="Empfänger kopieren">
+                    <svg class="copy-btn__icon copy-btn__icon--copy" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    <svg class="copy-btn__icon copy-btn__icon--check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </button>
+                </span>
+                <span class="bank-box__item">
+                  BIC: <strong>GENODEM1GLS</strong>
+                  <button type="button" class="copy-btn" data-copy="GENODEM1GLS" data-copy-label="BIC kopieren" aria-label="BIC kopieren" title="BIC kopieren">
+                    <svg class="copy-btn__icon copy-btn__icon--copy" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    <svg class="copy-btn__icon copy-btn__icon--check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </button>
+                </span>
               </div>
               <div class="bank-box__iban-wrap">
                 <span class="bank-box__label">IBAN</span>
-                <span class="bank-box__iban">DE72 4306 0967 1003 9179 00</span>
+                <div class="bank-box__iban-row">
+                  <span class="bank-box__iban">DE72 4306 0967 1003 9179 00</span>
+                  <button type="button" class="copy-btn copy-btn--iban" data-copy="DE72430609671003917900" data-copy-label="IBAN kopieren" aria-label="IBAN kopieren" title="IBAN kopieren">
+                    <svg class="copy-btn__icon copy-btn__icon--copy" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    <svg class="copy-btn__icon copy-btn__icon--check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </button>
+                </div>
               </div>
             </div>
             <p class="small" style="margin-bottom: 0;">
@@ -520,6 +594,49 @@
         });
       }
     }
+  });
+</script>
+
+<!-- Skript fuer die Kopierbuttons -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const copyButtons = document.querySelectorAll('.copy-btn');
+    copyButtons.forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const textToCopy = btn.getAttribute('data-copy');
+        if (!textToCopy) return;
+
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(textToCopy);
+          } else {
+            const textArea = document.createElement('textarea');
+            textArea.value = textToCopy;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            document.execCommand('copy');
+            textArea.remove();
+          }
+
+          btn.classList.add('is-copied');
+          btn.setAttribute('aria-label', 'Kopiert!');
+          btn.setAttribute('title', 'Kopiert!');
+
+          setTimeout(() => {
+            btn.classList.remove('is-copied');
+            const originalLabel = btn.getAttribute('data-copy-label') || 'In Zwischenablage kopieren';
+            btn.setAttribute('aria-label', originalLabel);
+            btn.setAttribute('title', originalLabel);
+          }, 2000);
+        } catch (err) {
+          console.error('Fehler beim Kopieren:', err);
+        }
+      });
+    });
   });
 </script>
 
