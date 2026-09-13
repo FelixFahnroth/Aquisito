@@ -17,7 +17,42 @@
   /* Optimale Lesbarkeit und Proportionen im Spenden-Widget */
   .widget .widget__title {
     color: var(--forest, #1b4332) !important;
+    font-size: 1.7rem;
+    line-height: 1.15;
+    margin-bottom: 28px;
   }
+  
+  /* Neue Zwischenueberschriften und Trenner */
+  .method-heading {
+    color: var(--forest, #1b4332) !important;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .widget__divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 28px 0;
+    color: #6b7280;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .widget__divider::before,
+  .widget__divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid rgba(27, 67, 50, 0.15);
+  }
+  .widget__divider::before {
+    margin-right: 14px;
+  }
+  .widget__divider::after {
+    margin-left: 14px;
+  }
+
   .widget .pills {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr) !important;
@@ -65,17 +100,8 @@
   .widget .widget__note {
     color: #4b5563 !important;
   }
-  .widget__alt {
-    border-top: 1px solid rgba(27, 67, 50, 0.15);
-    padding-top: 18px;
-    margin-top: 18px;
-  }
-  .widget__alt h3 {
-    color: var(--forest, #1b4332) !important;
-    font-weight: 700;
-    font-size: 1.05rem;
-    margin-bottom: 10px;
-  }
+  
+  /* Bank-Box & Alt */
   .bank-box {
     background: rgba(27, 67, 50, 0.04);
     border: 1px solid rgba(27, 67, 50, 0.12);
@@ -251,6 +277,7 @@
         <div class="widget">
           <h2 class="widget__title">Deine Spende zum Kochbuch oder einfach so</h2>
 
+          <h3 class="method-heading">Online per PayPal oder Karte</h3>
           <form id="spenden-form" action="https://www.paypal.com/donate" method="post" target="_blank" rel="noopener">
             <input type="hidden" name="hosted_button_id" value="BWK48NNFGLMQJ">
             <input type="hidden" name="currency_code" value="EUR">
@@ -286,8 +313,10 @@
             </p>
           </form>
 
+          <div class="widget__divider">Oder</div>
+
           <div class="widget__alt">
-            <h3 class="small">Lieber überweisen?</h3>
+            <h3 class="method-heading">Per Banküberweisung</h3>
             <div class="bank-box">
               <div class="bank-box__meta">
                 <span class="bank-box__item">
@@ -539,10 +568,11 @@
       <div>
         <h2>Rechtliches</h2>
         <ul class="small">
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="datenschutz.html">Datenschutz</a></li>
           <li><a href="satzung.html">Satzung</a></li>
           <li><a href="foerdervereinbarung.html">Fördervereinbarung</a></li>
           <li><a href="transparenz.html">Transparenz</a></li>
-          <li><a href="transparenz.html#finanzberichte">Finanzberichte</a></li>
         </ul>
       </div>
       <div>
@@ -553,9 +583,9 @@
       </div>
     </div>
     <p class="site-footer__legal">
-      Aquisito e.V. ·
-      <a href="impressum.html">Impressum</a> ·
-      <a href="datenschutz.html">Datenschutz</a>
+      Aquisito e.V. · Vereinsregister Aachen VR 6037 · SteuerNr. 201/5905/6228 ·
+      als gemeinnützig anerkannt nach § 5 Abs. 1 Nr. 9 KStG (Freistellungsbescheid 2023) ·
+      <a href="transparenz.html">Finanzberichte 2020 bis 2025</a>
     </p>
   </div>
 </footer>
