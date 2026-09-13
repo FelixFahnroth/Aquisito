@@ -107,16 +107,14 @@
     border: 1px solid rgba(27, 67, 50, 0.12);
     border-radius: 8px;
     padding: 12px 14px;
-    margin-bottom: 12px;
+    margin-bottom: 0;
   }
   .bank-box__meta {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 6px 12px;
+    flex-direction: column;
+    gap: 8px;
     font-size: 0.85rem;
     color: #4b5563;
-    margin-bottom: 10px;
   }
   .bank-box__item {
     display: inline-flex;
@@ -125,32 +123,6 @@
   }
   .bank-box__meta strong {
     color: var(--forest, #1b4332);
-  }
-  .bank-box__iban-wrap {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  .bank-box__label {
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-weight: 700;
-    color: #4b5563;
-  }
-  .bank-box__iban-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-  }
-  .bank-box__iban {
-    font-size: 1.15rem;
-    font-weight: 800;
-    color: var(--forest, #1b4332);
-    letter-spacing: 0.03em;
-    word-break: break-all;
-    line-height: 1.25;
   }
 
   /* Minimalistische Kopierbuttons */
@@ -176,10 +148,6 @@
   .copy-btn:focus-visible {
     outline: 2px solid var(--forest, #1b4332);
     outline-offset: 1px;
-  }
-  .copy-btn--iban {
-    width: 26px;
-    height: 26px;
   }
   .copy-btn__icon--check {
     display: none;
@@ -338,22 +306,15 @@
                     <svg class="copy-btn__icon copy-btn__icon--check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
                   </button>
                 </span>
-              </div>
-              <div class="bank-box__iban-wrap">
-                <span class="bank-box__label">IBAN</span>
-                <div class="bank-box__iban-row">
-                  <span class="bank-box__iban">DE72 4306 0967 1003 9179 00</span>
-                  <button type="button" class="copy-btn copy-btn--iban" data-copy="DE72430609671003917900" data-copy-label="IBAN kopieren" aria-label="IBAN kopieren" title="IBAN kopieren">
-                    <svg class="copy-btn__icon copy-btn__icon--copy" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                    <svg class="copy-btn__icon copy-btn__icon--check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span class="bank-box__item">
+                  IBAN: <strong>DE72 4306 0967 1003 9179 00</strong>
+                  <button type="button" class="copy-btn" data-copy="DE72430609671003917900" data-copy-label="IBAN kopieren" aria-label="IBAN kopieren" title="IBAN kopieren">
+                    <svg class="copy-btn__icon copy-btn__icon--copy" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    <svg class="copy-btn__icon copy-btn__icon--check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
                   </button>
-                </div>
+                </span>
               </div>
             </div>
-            <p class="small" style="margin-bottom: 0;">
-              Regelmäßig helfen? Das geht als
-              <a href="#foerdermitglied">Fördermitglied</a>.
-            </p>
           </div>
         </div>
 
