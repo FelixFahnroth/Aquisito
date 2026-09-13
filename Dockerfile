@@ -33,11 +33,22 @@ RUN echo 'server { \
     # Das Freiwilligen-Formular. Der Weiterleiter laeuft als eigener Dienst \
     # im internen Netz (siehe docker-compose.yml) und ist von aussen nur \
     # ueber genau diesen Pfad erreichbar. \
+    # \
+    # Der Name steht bewusst in einer Variablen. Bei einem festen Namen im \
+    # proxy_pass loest nginx ihn schon beim Start auf und verweigert den \
+    # Dienst komplett, wenn es den Container gerade nicht gibt ("host not \
+    # found in upstream") — dann steht die ganze Website, nicht nur das \
+    # Formular. Mit Variable plus resolver wird erst pro Anfrage aufgeloest: \
+    # nginx startet immer, und faellt der Weiterleiter aus, betrifft das nur \
+    # diesen einen Pfad. 127.0.0.11 ist der DNS von Docker. \
     location = /api/anmeldung { \
-        proxy_pass http://anmeldung:8080; \
+        resolver 127.0.0.11 ipv6=off valid=10s; \
+        set $upstream_anmeldung anmeldung:8080; \
+        proxy_pass http://$upstream_anmeldung; \
         proxy_set_header Host $host; \
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; \
         proxy_set_header X-Forwarded-Proto $scheme; \
+        proxy_connect_timeout 5s; \
         proxy_read_timeout 30s; \
         client_max_body_size 64k; \
     } \
