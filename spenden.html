@@ -14,9 +14,14 @@
 <link rel="stylesheet" href="css/components.css?v=20260913">
 <link rel="stylesheet" href="css/pages/spenden.css?v=20260913">
 <style>
-  /* Optimale Lesbarkeit im Spenden-Widget */
+  /* Optimale Lesbarkeit und Proportionen im Spenden-Widget */
   .widget .widget__title {
     color: var(--forest, #1b4332) !important;
+  }
+  .widget .pills {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px;
   }
   .widget .widget__note {
     color: #4b5563 !important;
@@ -24,62 +29,58 @@
   .widget__alt {
     border-top: 1px solid rgba(27, 67, 50, 0.15);
     padding-top: 18px;
-    margin-top: 20px;
+    margin-top: 18px;
   }
-  .widget__alt-title {
+  .widget__alt h3 {
     color: var(--forest, #1b4332) !important;
-    font-size: 1.05rem;
     font-weight: 700;
-    margin: 0 0 10px 0;
+    font-size: 1.05rem;
+    margin-bottom: 10px;
   }
-  .bank-details {
+  .bank-box {
     background: rgba(27, 67, 50, 0.04);
     border: 1px solid rgba(27, 67, 50, 0.12);
     border-radius: 8px;
     padding: 12px 14px;
     margin-bottom: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
   }
-  .bank-details__item {
+  .bank-box__meta {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    font-size: 0.88rem;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: #4b5563;
+    margin-bottom: 8px;
   }
-  .bank-details__item--iban {
+  .bank-box__meta strong {
+    color: var(--forest, #1b4332);
+  }
+  .bank-box__iban-wrap {
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: 2px;
-    padding: 3px 0;
   }
-  .bank-details__label {
-    font-size: 0.75rem;
-    font-weight: 600;
+  .bank-box__label {
+    font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: #6b7280;
-  }
-  .bank-details__val {
-    color: #1f2937;
-    font-weight: 600;
-  }
-  .bank-details__val--iban {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 1.15rem;
     font-weight: 700;
+    color: #4b5563;
+  }
+  .bank-box__iban {
+    font-size: 1.15rem;
+    font-weight: 800;
     color: var(--forest, #1b4332);
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
+    word-break: break-all;
     line-height: 1.25;
-    user-select: all;
   }
-  .widget__alt-note {
-    font-size: 0.88rem;
+  .widget__alt p,
+  .widget__alt .muted {
     color: #4b5563 !important;
-    margin: 0;
   }
-  .widget__alt-note a {
+  .widget__alt a {
     color: var(--forest, #1b4332) !important;
     text-decoration: underline;
     font-weight: 600;
@@ -177,7 +178,7 @@
               </label>
             </fieldset>
 
-            <button class="btn btn--donate btn--block" type="submit">Jetzt spenden</button>
+            <button class="btn btn--donate btn--block" type="submit" style="margin-top: 16px;">Jetzt spenden</button>
 
             <p class="widget__note">
               Weiter zu PayPal. Dort kannst du auch mit Karte zahlen, ohne PayPal-Konto.
@@ -185,22 +186,18 @@
           </form>
 
           <div class="widget__alt">
-            <h3 class="widget__alt-title">Lieber überweisen?</h3>
-            <div class="bank-details">
-              <div class="bank-details__item">
-                <span class="bank-details__label">Empfänger</span>
-                <span class="bank-details__val">Aquisito e.V.</span>
+            <h3 class="small">Lieber überweisen?</h3>
+            <div class="bank-box">
+              <div class="bank-box__meta">
+                <span>Empfänger: <strong>Aquisito e.V.</strong></span>
+                <span>BIC: <strong>GENODEM1GLS</strong></span>
               </div>
-              <div class="bank-details__item bank-details__item--iban">
-                <span class="bank-details__label">IBAN</span>
-                <span class="bank-details__val bank-details__val--iban">DE72 4306 0967 1003 9179 00</span>
-              </div>
-              <div class="bank-details__item">
-                <span class="bank-details__label">BIC</span>
-                <span class="bank-details__val">GENODEM1GLS</span>
+              <div class="bank-box__iban-wrap">
+                <span class="bank-box__label">IBAN</span>
+                <span class="bank-box__iban">DE72 4306 0967 1003 9179 00</span>
               </div>
             </div>
-            <p class="widget__alt-note">
+            <p class="small" style="margin-bottom: 0;">
               Regelmäßig helfen? Das geht als
               <a href="#foerdermitglied">Fördermitglied</a>.
             </p>
