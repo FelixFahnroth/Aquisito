@@ -14,10 +14,10 @@
 <meta property="og:locale" content="de_DE">
 <link rel="preload" href="assets/fonts/familjen-grotesk-500-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/atkinson-hyperlegible-400-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=20260913j">
-<link rel="stylesheet" href="css/base.css?v=20260913j">
-<link rel="stylesheet" href="css/components.css?v=20260913j">
-<link rel="stylesheet" href="css/pages/index.css?v=20260913j">
+<link rel="stylesheet" href="css/tokens.css?v=20260913k">
+<link rel="stylesheet" href="css/base.css?v=20260913k">
+<link rel="stylesheet" href="css/components.css?v=20260913k">
+<link rel="stylesheet" href="css/pages/index.css?v=20260913k">
 <style>
   /* Der Hero liegt vollständig in css/pages/index.css: zweispaltiges Raster mit
      dem Foto-Stapel (js/hero-stack.js) statt Hintergrundbild und Luftballon. */
@@ -194,7 +194,12 @@
      Kochbuch Sektion
      ==================================================================== */
   .kochbuch-new-section {
-    background: #fdfbf7 url('assets/img/Hintergrund_Kochbuch.png') center/cover no-repeat;
+    /* War ein 3,9-MB-PNG ohne echte Transparenz. image-set liefert WebP,
+       wo der Browser es kann, sonst das JPEG. */
+    background: #fdfbf7 image-set(
+        url('assets/img/hintergrund-kochbuch.webp') type('image/webp'),
+        url('assets/img/hintergrund-kochbuch.jpg') type('image/jpeg')
+      ) center/cover no-repeat;
     border-top: 1px solid #e5e7eb;
     border-bottom: 1px solid #e5e7eb;
     padding: 64px 0;
@@ -577,7 +582,10 @@
             <!-- Karte 1: Sopa de Quinoa -->
             <div class="kochbuch-card-item">
               <div class="kochbuch-card-img-wrap">
-                <img class="kochbuch-card-img" src="assets/img/quinoa.jpeg" alt="Sopa de Quinoa" loading="lazy" decoding="async">
+                <picture>
+                  <source type="image/webp" srcset="assets/img/quinoa.webp">
+                  <img class="kochbuch-card-img" src="assets/img/quinoa.jpeg" alt="Sopa de Quinoa" width="480" height="320" loading="lazy" decoding="async">
+                </picture>
               </div>
               <div class="kochbuch-card-subtitle">Sopa de Quinoa</div>
               <p class="kochbuch-card-text">
@@ -588,7 +596,10 @@
             <!-- Karte 2: Papas a la Huancaína -->
             <div class="kochbuch-card-item">
               <div class="kochbuch-card-img-wrap">
-                <img class="kochbuch-card-img" src="assets/img/huancaina.jpeg" alt="Papas a la Huancaína" loading="lazy" decoding="async">
+                <picture>
+                  <source type="image/webp" srcset="assets/img/huancaina.webp">
+                  <img class="kochbuch-card-img" src="assets/img/huancaina.jpeg" alt="Papas a la Huancaína" width="480" height="320" loading="lazy" decoding="async">
+                </picture>
               </div>
               <div class="kochbuch-card-subtitle">Papas a la Huancaína</div>
               <p class="kochbuch-card-text">
@@ -599,7 +610,10 @@
             <!-- Karte 3: Brownie Boliviano -->
             <div class="kochbuch-card-item">
               <div class="kochbuch-card-img-wrap">
-                <img class="kochbuch-card-img" src="assets/img/brownie.jpeg" alt="Brownie Boliviano" loading="lazy" decoding="async">
+                <picture>
+                  <source type="image/webp" srcset="assets/img/brownie.webp">
+                  <img class="kochbuch-card-img" src="assets/img/brownie.jpeg" alt="Brownie Boliviano" width="480" height="320" loading="lazy" decoding="async">
+                </picture>
               </div>
               <div class="kochbuch-card-subtitle">Brownie Boliviano</div>
               <p class="kochbuch-card-text">
@@ -825,10 +839,10 @@
     }
   });
 </script>
-<script type="module" src="js/nav.js?v=20260913j"></script>
-<script type="module" src="js/reveal.js?v=20260913j"></script>
-<script type="module" src="js/hero-stack.js?v=20260913j"></script>
-<script type="module" src="js/team-flip.js?v=20260913j"></script>
-<script type="module" src="js/stats-timer.js?v=20260913j"></script>
+<script type="module" src="js/nav.js?v=20260913k"></script>
+<script type="module" src="js/reveal.js?v=20260913k"></script>
+<script type="module" src="js/hero-stack.js?v=20260913k"></script>
+<script type="module" src="js/team-flip.js?v=20260913k"></script>
+<script type="module" src="js/stats-timer.js?v=20260913k"></script>
 </body>
 </html>
