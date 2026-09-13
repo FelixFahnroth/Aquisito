@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Spenden — Aquisito e.V.</title>
+<title>Spenden Aquisito e.V.</title>
 <meta name="description" content="Jede Spende an Aquisito e.V. geht an das Kinder- und Jugendzentrum CADSE in Cochabamba, Bolivien. Per PayPal, Überweisung oder als Fördermitglied.">
 <link rel="canonical" href="https://aquisito.de/spenden">
 <link rel="icon" href="assets/img/sonne.ico" sizes="any">
@@ -246,9 +246,6 @@
           <h2 class="widget__title">Deine Spende zum Kochbuch oder einfach so</h2>
 
           <h3 class="method-heading">Online per PayPal oder Karte</h3>
-          <!-- action/method sind der Weg ohne JavaScript. Läuft js/donate.js,
-               fängt es das Absenden ab und leitet mit dem Betrag in der URL
-               weiter; im selben Tab, deshalb hier kein target="_blank". -->
           <form id="spenden-form" action="https://www.paypal.com/donate" method="post">
             <input type="hidden" name="hosted_button_id" value="BWK48NNFGLMQJ">
             <input type="hidden" name="currency_code" value="EUR">
@@ -273,8 +270,6 @@
 
             <div class="widget__custom">
               <label class="sr-only" for="betrag-custom">Eigener Betrag in Euro</label>
-              <!-- step="0.01": mit step="1" wies der Browser 12,50 € schon vor
-                   dem Absenden ab, und der eigene Betrag konnte nie Cent haben. -->
               <input type="number" id="betrag-custom" name="betrag_eigener" min="1" step="0.01" inputmode="decimal" placeholder="Eigener Betrag">
               <span class="widget__custom-unit" aria-hidden="true">€</span>
             </div>
@@ -330,167 +325,38 @@
            width="2400" height="1350" alt="" loading="lazy" decoding="async">
     </picture>
     <div class="band__scrim" aria-hidden="true"></div>
-    <svg class="band__arc band__arc--top" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0,30 Q120,6 240,30 T480,30 T720,30 T960,30 T1200,30 T1440,30 V0 H0 Z"/></svg>
-    <svg class="band__arc band__arc--bottom" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0,30 Q120,54 240,30 T480,30 T720,30 T960,30 T1200,30 T1440,30 V60 H0 Z"/></svg>
     <p class="band__line" id="band-line">Aquisito heißt hier. Nicht dort, nicht irgendwann.</p>
-  </section>
-
-  <section class="section" id="mittelverwendung">
-    <div class="wrap">
-      <p class="eyebrow">Mittelverwendung</p>
-      <h2>Wohin dein Geld geht</h2>
-      <p class="prose">
-        Wir arbeiten ausschließlich ehrenamtlich: niemand bei Aquisito bekommt ein
-        Gehalt. Die Zahlen stammen aus dem Finanzbericht und sind Jahr für Jahr
-        nachlesbar.
-      </p>
-
-      <div class="split">
-        <div class="split__bar" role="img" aria-label="Mittelverwendung: {{SPLIT_PROJEKTE}} Prozent Projekte, {{SPLIT_VERWALTUNG}} Prozent Verwaltung, {{SPLIT_FUNDRAISING}} Prozent Öffentlichkeitsarbeit">
-          <div class="split__segment split__segment--projekte" style="width: {{SPLIT_PROJEKTE}}%"></div>
-          <div class="split__segment split__segment--verwaltung" style="width: {{SPLIT_VERWALTUNG}}%"></div>
-          <div class="split__segment split__segment--fundraising" style="width: {{SPLIT_FUNDRAISING}}%"></div>
-        </div>
-
-        <ul class="split__key">
-          <li><span class="split__swatch" style="background: var(--forest)" aria-hidden="true"></span><span class="split__value">{{SPLIT_PROJEKTE}} %</span> Projekte bei CADSE in Bolivien</li>
-          <li><span class="split__swatch" style="background: var(--olive)" aria-hidden="true"></span><span class="split__value">{{SPLIT_VERWALTUNG}} %</span> Verwaltung, Kontoführung, Vereinsrecht</li>
-          <li><span class="split__swatch" style="background: var(--gray)" aria-hidden="true"></span><span class="split__value">{{SPLIT_FUNDRAISING}} %</span> Öffentlichkeitsarbeit und Material</li>
-        </ul>
-      </div>
-
-      <h3 style="margin-top: var(--space-8);">Die Berichte im Volltext</h3>
-      <ul class="reports">
-        <li><a href="documents/Finanzbericht-2025.pdf">Finanzbericht 2025</a> <span class="muted small">PDF, 0,7 MB</span></li>
-        <li><a href="documents/Finanzbericht-2024.pdf">Finanzbericht 2024</a> <span class="muted small">PDF, 4,2 MB</span></li>
-        <li><a href="documents/Finanzbericht-2023.pdf">Finanzbericht 2023</a> <span class="muted small">PDF, 1,6 MB</span></li>
-        <li><a href="transparenz.html">Alle Berichte seit 2020 und die Kassenstände</a></li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="section section--alt">
-    <div class="wrap">
-      <p class="eyebrow">Andere Wege</p>
-      <h2>Es geht auch anders</h2>
-
-      <div class="cards">
-        <article class="card" id="foerdermitglied">
-          <svg class="card__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5S3.5 15.4 3.5 9.6A4.6 4.6 0 0 1 12 7a4.6 4.6 0 0 1 8.5 2.6c0 5.8-8.5 10.9-8.5 10.9Z"/></svg>
-          <h3 class="card__title">Fördermitglied werden</h3>
-          <p class="card__body">
-            Der beste Weg, uns zu helfen. CADSE kann mit einem festen Betrag rechnen
-            und für die Zukunft planen. Du bestimmst die Höhe selbst, hast sonst
-            keine Verpflichtungen und kannst jederzeit austreten.
-          </p>
-          <a class="arrow-link card__link" href="documents/Aquisito_Fördermitgliedsantrag.pdf">
-            Antrag herunterladen <span aria-hidden="true">→</span>
-          </a>
-        </article>
-
-        <article class="card">
-          <svg class="card__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12v8.5H4V12"/><path d="M2.5 7.5h19V12h-19z"/><path d="M12 21V7.5"/><path d="M12 7.5H7.75a2.25 2.25 0 1 1 0-4.5C10.5 3 12 7.5 12 7.5Z"/><path d="M12 7.5h4.25a2.25 2.25 0 1 0 0-4.5C13.5 3 12 7.5 12 7.5Z"/></svg>
-          <h3 class="card__title">Anlassspende</h3>
-          <p class="card__body">
-            Geburtstag, Hochzeit, Jubiläum: statt Geschenken um eine Spende für CADSE
-            bitten. Wir stellen für alle Beteiligten Bescheinigungen aus und schicken
-            dir hinterher, was damit passiert ist.
-          </p>
-          <a class="arrow-link card__link" href="mailto:info@aquisito.de?subject=Anlassspende">
-            Schreib uns <span aria-hidden="true">→</span>
-          </a>
-        </article>
-
-        <article class="card">
-          <svg class="card__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V8l7-4 7 4v13"/><path d="M9.5 21v-5h5v5"/></svg>
-          <h3 class="card__title">Als Unternehmen</h3>
-          <p class="card__body">
-            Wir arbeiten mit Stiftungen und Unternehmen zusammen: die Schmitz
-            Stiftung hat mit 9.990 € den zweiten CADSE-Standort ermöglicht. Für
-            Kooperationen melde dich bei Natha oder Thomas.
-          </p>
-          <a class="arrow-link card__link" href="mailto:nathalie@aquisito.de?subject=Kooperation">
-            Kooperation anfragen <span aria-hidden="true">→</span>
-          </a>
-        </article>
-      </div>
-
-      <div class="kochbuch" id="kochbuch" style="margin-top: var(--space-10);">
-        <div>
-          <h3>Unser Kochbuch</h3>
-          <p>
-            In einem großen Gemeinschaftsprojekt haben CADSE und Aquisito zusammen ein
-            Kochbuch geschrieben, das Deutschland die Türen zur bolivianischen Küche
-            öffnet. Bestell dir dein Exemplar und unterstütze damit die Arbeit von
-            CADSE in Bolivien.
-          </p>
-          <a class="btn btn--ghost" href="https://www.paypal.com/donate/?hosted_button_id=7LRKA636K85E6" target="_blank" rel="noopener">
-            Kochbuch bestellen
-          </a>
-        </div>
-        <div>
-          <video controls preload="none" playsinline width="1280" height="720">
-            <source src="assets/video/kochbuch.mp4" type="video/mp4">
-            <p>Dein Browser kann das Video nicht abspielen.
-              <a href="assets/video/kochbuch.mp4">Video herunterladen</a> (MP4, 9,7 MB).</p>
-          </video>
-        </div>
-      </div>
-    </div>
   </section>
 
   <section class="section">
     <div class="wrap">
-      <p class="eyebrow">Vertrauen</p>
-      <h2>Was mit deiner Spende passiert</h2>
+      <h2>Wohin dein Geld geht</h2>
+      
+      <h3 style="margin-top: var(--space-8);">Fast 100 Prozent kommen direkt in Bolivien an</h3>
+      <p class="prose">
+        Wir arbeiten vollständig ehrenamtlich. Niemand bei Aquisito bezieht ein Gehalt und wir halten Verwaltungskosten minimal. Dadurch fließt dein Geld nahezu ungeschmälert in die Projekte von CADSE vor Ort.
+      </p>
 
-      <div class="trust" style="margin-top: var(--space-7);">
-        <div>
-          <h3>Spendenbescheinigung</h3>
-          <p>
-            Sowohl der Beitrag von Fördermitgliedern als auch einzelne Spenden können
-            steuerlich abgesetzt werden. Für Beträge bis 300 € im Jahr genügt dem
-            Finanzamt dein Kontoauszug. Darüber stellen wir eine Bescheinigung aus und
-            verschicken sie im Februar des Folgejahres.
-          </p>
-          <p class="small muted">
-            Für eine Bescheinigung schick uns deine Adresse an
-            <a href="mailto:info@aquisito.de?subject=Spendenbescheinigung">info@aquisito.de</a>.
-          </p>
+      <h3 style="margin-top: var(--space-8);">Lückenlose Transparenz</h3>
+      <p class="prose">
+        Wir legen alle Einnahmen und Ausgaben offen. Unsere Kassenstände und die ausführlichen Finanzberichte der letzten Jahre kannst du jederzeit online nachlesen und herunterladen.
+      </p>
 
-          <h3 style="margin-top: var(--space-8);">Gemeinnützigkeit</h3>
-          <p>
-            Aquisito e.V. ist nach § 5 Abs. 1 Nr. 9 KStG von der Körperschaftsteuer und
-            nach § 3 Nr. 6 GewStG von der Gewerbesteuer befreit. Zuständig ist das
-            Finanzamt Aachen-Stadt, Steuernummer 201/5905/6228. Wir fördern
-            ausschließlich Jugendhilfe, Erziehung und die Gleichberechtigung von Frauen
-            und Männern.
-          </p>
+      <h3 style="margin-top: var(--space-8);">Geprüfte Gemeinnützigkeit</h3>
+      <p class="prose">
+        Aquisito e.V. ist vom Finanzamt Aachen-Stadt (Steuernummer 201/5905/6228) offiziell als gemeinnützig anerkannt und fördert Jugendhilfe sowie Bildung. Jede Spende ist steuerlich absetzbar. Bis 300 Euro genügt dein Kontoauszug als Nachweis für das Finanzamt, für höhere Beträge stellen wir dir gerne eine Spendenbescheinigung aus.
+      </p>
 
-          <div class="trust__contact" style="margin-top: var(--space-8);">
-            <h3>Fragen zur Spende?</h3>
-            <p>
-              {{KONTAKT_SPENDEN_NAME}} führt bei uns die Kasse und beantwortet alles zu
-              Bescheinigungen, Fördermitgliedschaft und Finanzberichten.
-            </p>
-            <p>
-              <a href="mailto:thomas@aquisito.de">thomas@aquisito.de</a><br>
-              <a href="tel:{{KONTAKT_SPENDEN_TEL}}">{{KONTAKT_SPENDEN_TEL}}</a>
-            </p>
-          </div>
-        </div>
+      <h3 style="margin-top: var(--space-8);">Anlassspenden</h3>
+      <p class="prose">
+        Ob Geburtstag, Hochzeit oder Jubiläum: Du kannst deinen Anlass nutzen, um gemeinsam mit deinen Gästen Spenden für CADSE zu sammeln. Wir stellen für alle Beteiligten Bescheinigungen aus und zeigen euch genau, was mit den Spenden bewirkt wurde.
+      </p>
 
-        <div>
-          <h3>Offene Zahlen</h3>
-          <p class="small">
-            Wir legen die wesentlichen Angaben über den Verein offen und halten sie
-            aktuell: von der Satzung bis zur Mittelherkunft.
-          </p>
-          <p class="small" style="margin-top: var(--space-5);">
-            <a href="transparenz.html">Alle Angaben ansehen</a>
-          </p>
-        </div>
-      </div>
+      <h3 style="margin-top: var(--space-8);">Fragen zur Spende?</h3>
+      <p class="prose">
+        Bei Fragen zu Spenden, Bescheinigungen oder unseren Finanzberichten erreichst du uns direkt per E-Mail:<br>
+        <a href="mailto:info@aquisito.de">info@aquisito.de</a>
+      </p>
     </div>
   </section>
 
@@ -536,8 +402,8 @@
       </div>
     </div>
     <p class="site-footer__legal">
-      Aquisito e.V. · Vereinsregister Aachen VR 6037 · SteuerNr. 201/5905/6228 ·
-      als gemeinnützig anerkannt nach § 5 Abs. 1 Nr. 9 KStG (Freistellungsbescheid 2023) ·
+      Aquisito e.V. Vereinsregister Aachen VR 6037 SteuerNr. 201/5905/6228 
+      als gemeinnützig anerkannt nach § 5 Abs. 1 Nr. 9 KStG (Freistellungsbescheid 2023) 
       <a href="transparenz.html">Finanzberichte 2020 bis 2025</a>
     </p>
   </div>
