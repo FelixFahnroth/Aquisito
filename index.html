@@ -14,49 +14,75 @@
 <meta property="og:locale" content="de_DE">
 <link rel="preload" href="assets/fonts/familjen-grotesk-500-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/atkinson-hyperlegible-400-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=20260913c">
-<link rel="stylesheet" href="css/base.css?v=20260913c">
-<link rel="stylesheet" href="css/components.css?v=20260913c">
-<link rel="stylesheet" href="css/pages/index.css?v=20260913c">
+<link rel="stylesheet" href="css/tokens.css?v=20260913d">
+<link rel="stylesheet" href="css/base.css?v=20260913d">
+<link rel="stylesheet" href="css/components.css?v=20260913d">
+<link rel="stylesheet" href="css/pages/index.css?v=20260913d">
 <style>
   /* Der Hero liegt vollständig in css/pages/index.css: zweispaltiges Raster mit
      dem Foto-Stapel (js/hero-stack.js) statt Hintergrundbild und Luftballon. */
 
-  /* Helle Statistik-Sektion über die volle Breite mit minimaler Höhe */
-  .stats-light-section {
-    background: #ffffff;
-    border-top: 1px solid var(--color-border, #e5e7eb);
-    border-bottom: 1px solid var(--color-border, #e5e7eb);
-    padding: 18px 0;
+  /* Kennzahlen-Banner. Dieselbe ruhige grüne Fläche wie die
+     Freiwilligendienst-Kachel weiter unten (--surface-quiet). */
+  .stats-band {
+    background: var(--surface-quiet);
+    padding: var(--space-7) 0;
     width: 100%;
     position: relative;
     z-index: 2;
   }
-  .stats-light-grid {
+
+  /* Reihe 1: die laufende Dauer. */
+  .stats-band__since {
+    margin: 0;
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: var(--step-h3);
+    font-weight: var(--weight-medium);
+    color: var(--text-heading);
+    line-height: 1.3;
+    text-wrap: balance;
+  }
+  /* tabular-nums hält die Sekunden ruhig, statt die Zeile im Sekundentakt
+     springen zu lassen. */
+  .stats-band__timer {
+    font-variant-numeric: tabular-nums;
+    white-space: normal;
+  }
+
+  /* Reihe 2: die beiden Jahreszahlen. */
+  .stats-band__figures {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    gap: 32px;
+    justify-content: center;
+    align-items: baseline;
     flex-wrap: wrap;
+    gap: var(--space-5) var(--space-9);
+    margin-top: var(--space-6);
+    padding-top: var(--space-6);
+    border-top: 1px solid rgb(0 87 0 / 0.12);
   }
-  .stat-light-item {
+  .stats-band__item {
     display: flex;
-    align-items: center;
-    gap: 12px;
+    align-items: baseline;
+    gap: var(--space-4);
   }
-  .stat-light-figure {
-    font-family: var(--font-heading, sans-serif);
-    font-size: 2.25rem;
-    font-weight: 800;
-    color: #2d6a4f;
+  .stats-band__figure {
+    font-family: var(--font-display);
+    font-size: var(--step-h2);
+    font-weight: var(--weight-bold);
+    color: var(--text-heading);
     line-height: 1;
+    font-variant-numeric: tabular-nums;
   }
-  .stat-light-label {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: #4b5563;
-    max-width: 160px;
+  .stats-band__label {
+    font-size: var(--step-small);
+    font-weight: var(--weight-medium);
+    color: var(--text-muted);
     line-height: 1.25;
+  }
+
+  @media (max-width: 560px) {
+    .stats-band__figures { flex-direction: column; align-items: center; gap: var(--space-5); }
   }
 
   /* Wörterbuch-Stil für Aquisito */
@@ -410,21 +436,25 @@
     </div>
   </section>
 
-  <!-- 2. Helle Statistik-Sektion über die volle Breite mit minimaler Höhe -->
-  <section class="stats-light-section">
+  <!-- ====================================================================
+       2. Kennzahlen-Banner. Zwei Reihen: oben die laufende Dauer seit der
+       Gründung, darunter die beiden Jahreszahlen. Ohne JavaScript bleibt das
+       Gründungsdatum stehen — js/stats-timer.js ersetzt es durch die Dauer.
+       ==================================================================== -->
+  <section class="stats-band" aria-label="Aquisito in Zahlen">
     <div class="wrap">
-      <div class="stats-light-grid">
-        <div class="stat-light-item">
-          <span class="stat-light-figure">9</span>
-          <span class="stat-light-label">Jahre gemeinsam mit CADSE</span>
+      <p class="stats-band__since">
+        Kinder unterstützen seit
+        <time class="stats-band__timer" id="aktiv-seit" datetime="2020-05-09T12:00:00+02:00">dem 9. Mai 2020</time>
+      </p>
+      <div class="stats-band__figures">
+        <div class="stats-band__item">
+          <span class="stats-band__figure">&gt;50</span>
+          <span class="stats-band__label">Kinder jährlich</span>
         </div>
-        <div class="stat-light-item">
-          <span class="stat-light-figure">120</span>
-          <span class="stat-light-label">Kinder erreicht</span>
-        </div>
-        <div class="stat-light-item">
-          <span class="stat-light-figure">10.000 €</span>
-          <span class="stat-light-label">für CADSE gefördert</span>
+        <div class="stats-band__item">
+          <span class="stats-band__figure">~10.000 €</span>
+          <span class="stats-band__label">pro Jahr gespendet</span>
         </div>
       </div>
     </div>
@@ -720,9 +750,10 @@
     }
   });
 </script>
-<script type="module" src="js/nav.js?v=20260913c"></script>
-<script type="module" src="js/reveal.js?v=20260913c"></script>
-<script type="module" src="js/hero-stack.js?v=20260913c"></script>
-<script type="module" src="js/team-flip.js?v=20260913c"></script>
+<script type="module" src="js/nav.js?v=20260913d"></script>
+<script type="module" src="js/reveal.js?v=20260913d"></script>
+<script type="module" src="js/hero-stack.js?v=20260913d"></script>
+<script type="module" src="js/team-flip.js?v=20260913d"></script>
+<script type="module" src="js/stats-timer.js?v=20260913d"></script>
 </body>
 </html>
