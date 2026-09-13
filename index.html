@@ -12,12 +12,12 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://aquisito.de/">
 <meta property="og:locale" content="de_DE">
-<link rel="preload" href="assets/fonts/familjen-grotesk-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/familjen-grotesk-500-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/atkinson-hyperlegible-400-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=20260913b">
-<link rel="stylesheet" href="css/base.css?v=20260913b">
-<link rel="stylesheet" href="css/components.css?v=20260913b">
-<link rel="stylesheet" href="css/pages/index.css?v=20260913b">
+<link rel="stylesheet" href="css/tokens.css?v=20260913c">
+<link rel="stylesheet" href="css/base.css?v=20260913c">
+<link rel="stylesheet" href="css/components.css?v=20260913c">
+<link rel="stylesheet" href="css/pages/index.css?v=20260913c">
 <style>
   /* Der Hero liegt vollständig in css/pages/index.css: zweispaltiges Raster mit
      dem Foto-Stapel (js/hero-stack.js) statt Hintergrundbild und Luftballon. */
@@ -301,22 +301,6 @@
 </style>
 <script>
   document.documentElement.className = 'js';
-  // Automatischer Fallback-Tester für Rezept-Bilder
-  function tryNextImgSrc(img) {
-    if (!img.dataset.fallbacks) {
-      img.style.display = 'none';
-      if (img.nextElementSibling) img.nextElementSibling.style.display = 'flex';
-      return;
-    }
-    const fallbacks = img.dataset.fallbacks.split(',');
-    const nextSrc = fallbacks.shift();
-    if (fallbacks.length > 0) {
-      img.dataset.fallbacks = fallbacks.join(',');
-    } else {
-      delete img.dataset.fallbacks;
-    }
-    img.src = nextSrc;
-  }
 </script>
 </head>
 <body>
@@ -498,10 +482,7 @@
             <!-- Karte 1: Sopa de Quinoa -->
             <div class="kochbuch-card-item">
               <div class="kochbuch-card-img-wrap">
-                <img class="kochbuch-card-img" src="assets/img/quinoa.jpeg" alt="Sopa de Quinoa" data-fallbacks="assets/img/quinoa.jpg,assets/img/quinoa.png,assets/img/Quinoa.jpeg" onerror="tryNextImgSrc(this)">
-                <div style="display:none; width:100%; height:100%; background:#fef3c7; color:#92400e; align-items:center; justify-content:center; text-align:center; padding:12px; font-weight:bold; font-size:0.9rem;">
-                  Sopa de Quinoa
-                </div>
+                <img class="kochbuch-card-img" src="assets/img/quinoa.jpeg" alt="Sopa de Quinoa" loading="lazy" decoding="async">
               </div>
               <div class="kochbuch-card-subtitle">Sopa de Quinoa</div>
               <p class="kochbuch-card-text">
@@ -509,13 +490,10 @@
               </p>
             </div>
 
-            <!-- Karte 2: Papas a la Huancaína (Multi-Fallback) -->
+            <!-- Karte 2: Papas a la Huancaína -->
             <div class="kochbuch-card-item">
               <div class="kochbuch-card-img-wrap">
-                <img class="kochbuch-card-img" src="assets/img/huancaína.jpeg" alt="Papas a la Huancaína" data-fallbacks="assets/img/huancaina.jpeg,assets/img/huancaína.jpeg,assets/img/huancaína.jpg,assets/img/huancaina.jpg,assets/img/huancaína.jpg,assets/img/huancaiba.jpeg" onerror="tryNextImgSrc(this)">
-                <div style="display:none; width:100%; height:100%; background:#fdf2f8; color:#9d174d; align-items:center; justify-content:center; text-align:center; padding:12px; font-weight:bold; font-size:0.9rem;">
-                  Papas a la Huancaína
-                </div>
+                <img class="kochbuch-card-img" src="assets/img/huancaina.jpeg" alt="Papas a la Huancaína" loading="lazy" decoding="async">
               </div>
               <div class="kochbuch-card-subtitle">Papas a la Huancaína</div>
               <p class="kochbuch-card-text">
@@ -523,13 +501,10 @@
               </p>
             </div>
 
-            <!-- Karte 3: Brownie Boliviano (Multi-Fallback) -->
+            <!-- Karte 3: Brownie Boliviano -->
             <div class="kochbuch-card-item">
               <div class="kochbuch-card-img-wrap">
-                <img class="kochbuch-card-img" src="assets/img/brownie.jpg" alt="Brownie Boliviano" data-fallbacks="assets/img/brownie.jpeg,assets/img/brownie.png,assets/img/Brownie.jpg,assets/img/Brownie.jpeg" onerror="tryNextImgSrc(this)">
-                <div style="display:none; width:100%; height:100%; background:#ecfdf5; color:#065f46; align-items:center; justify-content:center; text-align:center; padding:12px; font-weight:bold; font-size:0.9rem;">
-                  Brownie Boliviano
-                </div>
+                <img class="kochbuch-card-img" src="assets/img/brownie.jpeg" alt="Brownie Boliviano" loading="lazy" decoding="async">
               </div>
               <div class="kochbuch-card-subtitle">Brownie Boliviano</div>
               <p class="kochbuch-card-text">
@@ -745,9 +720,9 @@
     }
   });
 </script>
-<script type="module" src="js/nav.js?v=20260913b"></script>
-<script type="module" src="js/reveal.js?v=20260913b"></script>
-<script type="module" src="js/hero-stack.js?v=20260913b"></script>
-<script type="module" src="js/team-flip.js?v=20260913b"></script>
+<script type="module" src="js/nav.js?v=20260913c"></script>
+<script type="module" src="js/reveal.js?v=20260913c"></script>
+<script type="module" src="js/hero-stack.js?v=20260913c"></script>
+<script type="module" src="js/team-flip.js?v=20260913c"></script>
 </body>
 </html>

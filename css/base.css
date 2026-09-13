@@ -11,10 +11,36 @@
    (LG München I, 3 O 17493/20) and a render-blocking third party.
    -------------------------------------------------------------------------- */
 
+/* Familjen Grotesk ships here as three static weights rather than one variable
+   file. Google serves the variable build split per unicode subset, which cannot
+   sit behind the single combined unicode-range below; the static instances from
+   google-webfonts-helper carry latin and latin-ext together. The display face is
+   set at 400, 500 and 600 across the stylesheets, so all three are needed —
+   a lone 400 would have the browser synthesise the other two. */
 @font-face {
   font-family: "Familjen Grotesk";
-  src: url("../assets/fonts/familjen-grotesk-latin-ext.woff2") format("woff2");
-  font-weight: 400 600;
+  src: url("../assets/fonts/familjen-grotesk-400-latin-ext.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0100-024F, U+0259, U+1E00-1EFF, U+2000-206F,
+                 U+2074, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Familjen Grotesk";
+  src: url("../assets/fonts/familjen-grotesk-500-latin-ext.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0100-024F, U+0259, U+1E00-1EFF, U+2000-206F,
+                 U+2074, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Familjen Grotesk";
+  src: url("../assets/fonts/familjen-grotesk-600-latin-ext.woff2") format("woff2");
+  font-weight: 600;
   font-style: normal;
   font-display: swap;
   unicode-range: U+0000-00FF, U+0100-024F, U+0259, U+1E00-1EFF, U+2000-206F,

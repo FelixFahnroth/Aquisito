@@ -1,15 +1,30 @@
-# Fonts — action required before launch
+# Fonts — self-hosted, present
 
-The `@font-face` rules in `css/base.css` expect three files in this directory.
-**They are not in the repo and must be added.** Until then the site renders in
-the fallback stack from `tokens.css` (Helvetica Neue / Arial), which is legible
-but is not the design.
+Added 2026-09-13 via Route A below. Five files, 93 KB in total:
 
-| Expected filename | Family | Weights |
-|---|---|---|
-| `familjen-grotesk-latin-ext.woff2` | Familjen Grotesk (variable) | 400–600 |
-| `atkinson-hyperlegible-400-latin-ext.woff2` | Atkinson Hyperlegible | 400 |
-| `atkinson-hyperlegible-700-latin-ext.woff2` | Atkinson Hyperlegible | 700 |
+| Filename | Family | Weight | Size |
+|---|---|---|---|
+| `familjen-grotesk-400-latin-ext.woff2` | Familjen Grotesk | 400 | 16 KB |
+| `familjen-grotesk-500-latin-ext.woff2` | Familjen Grotesk | 500 | 17 KB |
+| `familjen-grotesk-600-latin-ext.woff2` | Familjen Grotesk | 600 | 17 KB |
+| `atkinson-hyperlegible-400-latin-ext.woff2` | Atkinson Hyperlegible | 400 | 20 KB |
+| `atkinson-hyperlegible-700-latin-ext.woff2` | Atkinson Hyperlegible | 700 | 21 KB |
+
+## Why three static weights and not one variable file
+
+This file originally specified a single variable `familjen-grotesk-latin-ext.woff2`
+covering 400–600. Google serves the variable build **split per unicode subset** —
+one file for `latin`, another for `latin-ext` — and neither can sit behind the
+single combined `unicode-range` in `base.css` without dropping half the
+characters. The static instances from google-webfonts-helper carry latin and
+latin-ext together in one file, which is what that `unicode-range` needs.
+
+Three weights because the display face is set at 400, 500 and 600 across the
+stylesheets — `--weight-medium` (500) alone is used eighteen times. Shipping only
+400 would leave the browser to synthesise the other two, which looks wrong at
+heading sizes.
+
+Only the body 400 and the display 500 are preloaded; those two carry first paint.
 
 ## Why self-hosted and not Google Fonts
 
@@ -62,7 +77,7 @@ than any file-size saving is worth.
 
 ## Verifying
 
-After adding the files:
+After changing any file here:
 
 ```bash
 # Both preloads must resolve — a 404 here silently costs you the whole design
