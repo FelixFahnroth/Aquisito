@@ -14,10 +14,10 @@
 <meta property="og:locale" content="de_DE">
 <link rel="preload" href="assets/fonts/familjen-grotesk-500-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/atkinson-hyperlegible-400-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=20260913h">
-<link rel="stylesheet" href="css/base.css?v=20260913h">
-<link rel="stylesheet" href="css/components.css?v=20260913h">
-<link rel="stylesheet" href="css/pages/index.css?v=20260913h">
+<link rel="stylesheet" href="css/tokens.css?v=20260913i">
+<link rel="stylesheet" href="css/base.css?v=20260913i">
+<link rel="stylesheet" href="css/components.css?v=20260913i">
+<link rel="stylesheet" href="css/pages/index.css?v=20260913i">
 <style>
   /* Der Hero liegt vollständig in css/pages/index.css: zweispaltiges Raster mit
      dem Foto-Stapel (js/hero-stack.js) statt Hintergrundbild und Luftballon. */
@@ -641,7 +641,10 @@
           <p class="card__body">
             Ganzheitliche Förderung durch gezielte Hausaufgabenbetreuung, Unterstützung beim Erlernen der englischen Sprache sowie praxisnahe Lern- und Kreativangebote, die schulische Lücken schließen und den Spaß am Lernen wecken.
           </p>
-          <a class="card__link arrow-link" href="jahresrueckblicke.html">Unsere Jahresrückblicke <span aria-hidden="true">→</span></a>
+          <!-- Sichtbar bleibt nur der Pfeil. Der Linktext steht weiter im Markup, nur
+                 visuell versteckt: der Pfeil ist aria-hidden, ohne ihn hätte der Link
+                 gar keinen Namen — und .card--linked legt ihn über die ganze Kachel. -->
+          <a class="card__link arrow-link" href="jahresrueckblicke.html"><span class="sr-only">Jahresrückblicke ansehen</span><span aria-hidden="true">→</span></a>
         </article>
 
         <article class="card card--linked">
@@ -650,7 +653,10 @@
           <p class="card__body">
             Ein sicherer Rückzugsort im Stadtteil Ushpa Ushpa, der Schutz vor Gefahren wie Straßenkriminalität bietet. Durch persönliche Begleitung, offene Ohren und Hausbesuche werden Kinder und Familien in schwierigen Lebenslagen gestärkt.
           </p>
-          <a class="card__link arrow-link" href="jahresrueckblicke.html">Unsere Jahresrückblicke <span aria-hidden="true">→</span></a>
+          <!-- Sichtbar bleibt nur der Pfeil. Der Linktext steht weiter im Markup, nur
+                 visuell versteckt: der Pfeil ist aria-hidden, ohne ihn hätte der Link
+                 gar keinen Namen — und .card--linked legt ihn über die ganze Kachel. -->
+          <a class="card__link arrow-link" href="jahresrueckblicke.html"><span class="sr-only">Jahresrückblicke ansehen</span><span aria-hidden="true">→</span></a>
         </article>
 
         <article class="card card--linked">
@@ -659,7 +665,10 @@
           <p class="card__body">
             Aktive Förderung des selbstbestimmten und verlässlichen Miteinanders durch gemeinsame Projekte in Sport, Kunst und Umwelt. Es wird Raum geschaffen für die freie Entfaltung aller Kinder und Jugendlichen – unabhängig vom Geschlecht.
           </p>
-          <a class="card__link arrow-link" href="jahresrueckblicke.html">Unsere Jahresrückblicke <span aria-hidden="true">→</span></a>
+          <!-- Sichtbar bleibt nur der Pfeil. Der Linktext steht weiter im Markup, nur
+                 visuell versteckt: der Pfeil ist aria-hidden, ohne ihn hätte der Link
+                 gar keinen Namen — und .card--linked legt ihn über die ganze Kachel. -->
+          <a class="card__link arrow-link" href="jahresrueckblicke.html"><span class="sr-only">Jahresrückblicke ansehen</span><span aria-hidden="true">→</span></a>
         </article>
       </div>
     </div>
@@ -816,10 +825,10 @@
     }
   });
 </script>
-<script type="module" src="js/nav.js?v=20260913h"></script>
-<script type="module" src="js/reveal.js?v=20260913h"></script>
-<script type="module" src="js/hero-stack.js?v=20260913h"></script>
-<script type="module" src="js/team-flip.js?v=20260913h"></script>
-<script type="module" src="js/stats-timer.js?v=20260913h"></script>
+<script type="module" src="js/nav.js?v=20260913i"></script>
+<script type="module" src="js/reveal.js?v=20260913i"></script>
+<script type="module" src="js/hero-stack.js?v=20260913i"></script>
+<script type="module" src="js/team-flip.js?v=20260913i"></script>
+<script type="module" src="js/stats-timer.js?v=20260913i"></script>
 </body>
 </html>
