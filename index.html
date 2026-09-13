@@ -19,106 +19,8 @@
 <link rel="stylesheet" href="css/components.css">
 <link rel="stylesheet" href="css/pages/index.css">
 <style>
-  /* Hero & Background Setup */
-  .hero {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    margin-top: -80px;
-    padding-top: 140px;
-    padding-bottom: 60px;
-    min-height: 80vh;
-    display: flex;
-    align-items: center;
-  }
-  .hero__bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-  }
-  .hero__bg-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-  }
-  
-  /* Animierter Luftballon über dem Mädchen */
-  .hero__balloon-wrapper {
-    position: absolute;
-    right: 24%;
-    top: 22%;
-    z-index: 1;
-    pointer-events: none;
-    will-change: transform;
-    transition: transform 0.15s ease-out;
-  }
-  .hero__balloon {
-    width: clamp(160px, 24vw, 300px);
-    height: auto;
-    animation: floatBalloon 12s ease-in-out infinite;
-    filter: drop-shadow(0 12px 24px rgba(0,0,0,0.12));
-  }
-
-  @keyframes floatBalloon {
-    0% {
-      transform: translateY(0px) translateX(0px) rotate(0deg);
-    }
-    25% {
-      transform: translateY(-16px) translateX(10px) rotate(2.5deg);
-    }
-    50% {
-      transform: translateY(-28px) translateX(-8px) rotate(-3deg);
-    }
-    75% {
-      transform: translateY(-12px) translateX(12px) rotate(1.5deg);
-    }
-    100% {
-      transform: translateY(0px) translateX(0px) rotate(0deg);
-    }
-  }
-
-  @media (max-width: 900px) {
-    .hero__balloon-wrapper {
-      right: 12%;
-      top: 18%;
-    }
-  }
-
-  /* Exakter Verlauf hinter dem Hero-Text */
-  .hero__scrim {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, 
-      rgba(255, 255, 255, 0.8) 0%, 
-      rgba(255, 255, 255, 0.8) 42%, 
-      rgba(255, 255, 255, 0.4) 58%, 
-      rgba(255, 255, 255, 0) 70%
-    );
-  }
-  
-  /* Dichterer weißer Verlauf ganz oben für die Navigation */
-  .hero__top-scrim {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 160px;
-    background: linear-gradient(180deg, 
-      rgba(255, 255, 255, 0.9) 0%, 
-      rgba(255, 255, 255, 0.6) 60px, 
-      rgba(255, 255, 255, 0) 100%
-    );
-  }
-  
-  .hero .wrap {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-  }
+  /* Der Hero liegt vollständig in css/pages/index.css: zweispaltiges Raster mit
+     dem Foto-Stapel (js/hero-stack.js) statt Hintergrundbild und Luftballon. */
 
   /* Helle Statistik-Sektion über die volle Breite mit minimaler Höhe */
   .stats-light-section {
@@ -447,24 +349,80 @@
 
   <!-- ====================================================================
        1. Hero Section (ohne Buttons)
+       Zweispaltiges Raster mit einem automatisch blätternden Foto-Stapel
+       (js/hero-stack.js) statt Hintergrundbild und Luftballon: flexibler und
+       auf kleinen Bildschirmen verlässlicher.
        ==================================================================== -->
   <section class="section hero">
-    <div class="hero__bg" aria-hidden="true">
-      <img class="hero__bg-img" src="/assets/img/Aquisito_Header.png" alt="" loading="eager" decoding="async">
-      
-      <!-- Separierter, vergrößerter & verlangsamter Luftballon -->
-      <div class="hero__balloon-wrapper" id="balloon-wrapper">
-        <img class="hero__balloon" src="assets/img/Ballon.png" alt="" aria-hidden="true">
+    <div class="wrap hero__grid">
+      <div class="hero__text">
+        <h1>Gemeinsam <span class="marker">groß</span> werden</h1>
+        <p class="lead" style="margin-top: var(--space-6);">
+          Unter diesem Motto engagiert sich Aquisito e.V. für das Kinder- und Jugendzentrum CADSE in Cochabamba, Bolivien. Gemeinsam mit dem Team vor Ort fördern wir Kinder und Jugendliche durch Hausaufgabenhilfe, Freizeitangebote und gesunde Ernährung.
+        </p>
       </div>
-
-      <div class="hero__scrim"></div>
-      <div class="hero__top-scrim"></div>
-    </div>
-    <div class="wrap">
-      <h1>Gemeinsam <span class="marker">groß</span> werden</h1>
-      <p class="lead" style="margin-top: var(--space-6); max-width: 540px;">
-        Unter diesem Motto engagiert sich Aquisito e.V. für das Kinder- und Jugendzentrum CADSE in Cochabamba, Bolivien. Gemeinsam mit dem Team vor Ort fördern wir Kinder und Jugendliche durch Hausaufgabenhilfe, Freizeitangebote und gesunde Ernährung.
-      </p>
+      <figure class="hero__photo hero__stack" aria-label="Eindrücke aus dem Kinder- und Jugendzentrum CADSE in Cochabamba">
+        <div class="hero__card">
+          <picture>
+            <source type="image/webp" srcset="assets/img/hero-stack-0.webp">
+            <img src="assets/img/hero-stack-0.jpg" width="1000" height="667" alt="" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__card">
+          <picture>
+            <source type="image/webp" srcset="assets/img/hero-stack-1.webp">
+            <img src="assets/img/hero-stack-1.jpg" width="1000" height="667" alt="" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__card">
+          <picture>
+            <source type="image/webp" srcset="assets/img/hero-stack-2.webp">
+            <img src="assets/img/hero-stack-2.jpg" width="1000" height="667" alt="" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__card">
+          <picture>
+            <source type="image/webp" srcset="assets/img/hero-stack-3.webp">
+            <img src="assets/img/hero-stack-3.jpg" width="1000" height="667" alt="" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__card">
+          <picture>
+            <source type="image/webp" srcset="assets/img/hero-stack-4.webp">
+            <img src="assets/img/hero-stack-4.jpg" width="1000" height="667" alt="" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__card">
+          <picture>
+            <source type="image/webp" srcset="assets/img/hero-stack-5.webp">
+            <img src="assets/img/hero-stack-5.jpg" width="1000" height="667" alt="" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__card">
+          <picture>
+            <source type="image/webp" srcset="assets/img/hero-stack-6.webp">
+            <img src="assets/img/hero-stack-6.jpg" width="1000" height="667" alt="" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__card">
+          <picture>
+            <source type="image/webp" srcset="assets/img/hero-stack-7.webp">
+            <img src="assets/img/hero-stack-7.jpg" width="1000" height="667" alt="" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__card">
+          <picture>
+            <source type="image/webp" srcset="assets/img/hero-stack-8.webp">
+            <img src="assets/img/hero-stack-8.jpg" width="1000" height="667" alt="" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__card">
+          <picture>
+            <source type="image/webp" srcset="assets/img/hero-stack-9.webp">
+            <img src="assets/img/hero-stack-9.jpg" width="1000" height="667" alt="" loading="lazy" decoding="async">
+          </picture>
+        </div>
+      </figure>
     </div>
   </section>
 
@@ -768,23 +726,6 @@
   </div>
 </footer>
 
-<!-- Script für sanften Scroll-Parallax des Luftballons -->
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const balloonWrapper = document.getElementById('balloon-wrapper');
-    if (!balloonWrapper) return;
-
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      if (scrollY < 1000) {
-        const scrollOffsetY = scrollY * -0.2;
-        const scrollRotate = Math.sin(scrollY * 0.005) * 4;
-        balloonWrapper.style.transform = `translateY(${scrollOffsetY}px) rotate(${scrollRotate}deg)`;
-      }
-    }, { passive: true });
-  });
-</script>
-
 <!-- Script für Karten-Slider in der Kochbuch-Sektion -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -807,5 +748,6 @@
 </script>
 <script type="module" src="js/nav.js"></script>
 <script type="module" src="js/reveal.js"></script>
+<script type="module" src="js/hero-stack.js"></script>
 </body>
 </html>
