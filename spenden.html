@@ -9,10 +9,10 @@
 <link rel="icon" href="assets/img/sonne.ico" sizes="any">
 <link rel="preload" href="assets/fonts/familjen-grotesk-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/atkinson-hyperlegible-400-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=20260913b">
-<link rel="stylesheet" href="css/base.css?v=20260913b">
-<link rel="stylesheet" href="css/components.css?v=20260913b">
-<link rel="stylesheet" href="css/pages/spenden.css?v=20260913b">
+<link rel="stylesheet" href="css/tokens.css?v=20260913">
+<link rel="stylesheet" href="css/base.css?v=20260913">
+<link rel="stylesheet" href="css/components.css?v=20260913">
+<link rel="stylesheet" href="css/pages/spenden.css?v=20260913">
 <style>
   /* Optimale Lesbarkeit im Spenden-Widget */
   .widget .widget__title {
@@ -23,27 +23,63 @@
   }
   .widget__alt {
     border-top: 1px solid rgba(27, 67, 50, 0.15);
+    padding-top: 18px;
+    margin-top: 20px;
   }
-  .widget__alt h3 {
+  .widget__alt-title {
     color: var(--forest, #1b4332) !important;
+    font-size: 1.05rem;
     font-weight: 700;
+    margin: 0 0 10px 0;
   }
-  .widget__alt dl {
+  .bank-details {
+    background: rgba(27, 67, 50, 0.04);
+    border: 1px solid rgba(27, 67, 50, 0.12);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .bank-details__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.88rem;
+  }
+  .bank-details__item--iban {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    padding: 3px 0;
+  }
+  .bank-details__label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6b7280;
+  }
+  .bank-details__val {
     color: #1f2937;
-  }
-  .widget__alt dt {
-    color: #4b5563 !important;
     font-weight: 600;
   }
-  .widget__alt dd {
-    color: var(--forest, #1b4332) !important;
+  .bank-details__val--iban {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 1.15rem;
     font-weight: 700;
+    color: var(--forest, #1b4332);
+    letter-spacing: 0.04em;
+    line-height: 1.25;
+    user-select: all;
   }
-  .widget__alt p,
-  .widget__alt .muted {
+  .widget__alt-note {
+    font-size: 0.88rem;
     color: #4b5563 !important;
+    margin: 0;
   }
-  .widget__alt a {
+  .widget__alt-note a {
     color: var(--forest, #1b4332) !important;
     text-decoration: underline;
     font-weight: 600;
@@ -117,7 +153,7 @@
 
         <!-- Widget -->
         <div class="widget">
-          <h2 class="widget__title" style="color: var(--forest, #1b4332);">Deine Spende zum Kochbuch oder einfach so</h2>
+          <h2 class="widget__title">Deine Spende zum Kochbuch oder einfach so</h2>
 
           <form id="spenden-form" action="https://www.paypal.com/donate" method="post" target="_blank" rel="noopener">
             <input type="hidden" name="hosted_button_id" value="BWK48NNFGLMQJ">
@@ -139,38 +175,34 @@
                 <input type="radio" name="betrag" value="50">
                 <span>50 €</span>
               </label>
-              <label class="pill">
-                <input type="radio" name="betrag" value="custom" id="betrag-eigener">
-                <span>Anderer Betrag</span>
-              </label>
             </fieldset>
-
-            <div class="widget__custom">
-              <label class="sr-only" for="betrag-custom">Eigener Betrag in Euro</label>
-              <input type="number" id="betrag-custom" name="betrag_eigener" min="1" step="1" inputmode="numeric" placeholder="Betrag">
-              <span aria-hidden="true">€</span>
-            </div>
 
             <button class="btn btn--donate btn--block" type="submit">Jetzt spenden</button>
 
-            <p class="widget__note" style="color: #4b5563;">
+            <p class="widget__note">
               Weiter zu PayPal. Dort kannst du auch mit Karte zahlen, ohne PayPal-Konto.
             </p>
           </form>
 
           <div class="widget__alt">
-            <h3 class="small" style="color: var(--forest, #1b4332); font-weight: 700;">Lieber überweisen?</h3>
-            <dl style="color: #1f2937;">
-              <dt style="color: #4b5563; font-weight: 600;">Empfänger</dt>
-              <dd style="color: var(--forest, #1b4332); font-weight: 700;">Aquisito e.V.</dd>
-              <dt style="color: #4b5563; font-weight: 600;">IBAN</dt>
-              <dd style="color: var(--forest, #1b4332); font-weight: 700; letter-spacing: 0.03em;">DE72 4306 0967 1003 9179 00</dd>
-              <dt style="color: #4b5563; font-weight: 600;">BIC</dt>
-              <dd style="color: var(--forest, #1b4332); font-weight: 700;">GENODEM1GLS</dd>
-            </dl>
-            <p class="small" style="color: #4b5563; margin-bottom: 0;">
+            <h3 class="widget__alt-title">Lieber überweisen?</h3>
+            <div class="bank-details">
+              <div class="bank-details__item">
+                <span class="bank-details__label">Empfänger</span>
+                <span class="bank-details__val">Aquisito e.V.</span>
+              </div>
+              <div class="bank-details__item bank-details__item--iban">
+                <span class="bank-details__label">IBAN</span>
+                <span class="bank-details__val bank-details__val--iban">DE72 4306 0967 1003 9179 00</span>
+              </div>
+              <div class="bank-details__item">
+                <span class="bank-details__label">BIC</span>
+                <span class="bank-details__val">GENODEM1GLS</span>
+              </div>
+            </div>
+            <p class="widget__alt-note">
               Regelmäßig helfen? Das geht als
-              <a href="#foerdermitglied" style="color: var(--forest, #1b4332); text-decoration: underline; font-weight: 600;">Fördermitglied</a>.
+              <a href="#foerdermitglied">Fördermitglied</a>.
             </p>
           </div>
         </div>
@@ -413,8 +445,8 @@
   </div>
 </footer>
 
-<script type="module" src="js/nav.js?v=20260913b"></script>
-<script type="module" src="js/donate.js?v=20260913b"></script>
-<script type="module" src="js/parallax.js?v=20260913b"></script>
+<script type="module" src="js/nav.js?v=20260913"></script>
+<script type="module" src="js/donate.js?v=20260913"></script>
+<script type="module" src="js/parallax.js?v=20260913"></script>
 </body>
 </html>
