@@ -135,8 +135,6 @@
   .trust { display: grid; gap: var(--space-7); }
   @media (min-width: 900px) { .trust { grid-template-columns: 2fr 1fr; gap: var(--space-9); } }
 
-  .trust__seal { max-width: 260px; }
-
   .trust__contact {
     background: var(--surface-quiet);
     border-radius: var(--radius-md);

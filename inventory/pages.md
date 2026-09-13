@@ -21,7 +21,7 @@ launch — not sampled.**
 | `/news_germany` | underscore variant | `/spenden#kochbuch` | 301 |
 | `/volunteers` | volunteering + Bolivia background essay | `/freiwillige` | 301 |
 | `/donations` | donations | `/spenden` | 301 |
-| `/transparenz` | 10 Initiative points | `/transparenz` | unchanged |
+| `/transparenz` | 10 disclosure points (no longer branded as the Initiative) | `/transparenz` | unchanged |
 | `/impressum` | heading only, 13 bytes | `/impressum` | unchanged, content written from scratch |
 | `/satzung` | statutes | `/satzung` | unchanged |
 | `/datenschutz` | privacy policy, 2020 | `/datenschutz` | unchanged, content rewritten |

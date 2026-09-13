@@ -248,7 +248,7 @@ Incahuasi, casero/-as*.
 
 | File | Source | Treatment |
 |---|---|---|
-| `/transparenz` | `transparenz.md` (3.2 KB) + `news_bolivia.md` catalogue + `what-we-do.md` long form | ten Initiative points verbatim; project table under `#projekte` |
+| `/transparenz` | `transparenz.md` (3.2 KB) + `news_bolivia.md` catalogue + `what-we-do.md` long form | ten disclosure points; project table under `#projekte`. The points originated as the Initiative catalogue — the Verein left the Initiative on 2026-09-13, so the page must not name or badge it |
 | `/satzung` | `satzung.md` (11.4 KB) | near-verbatim |
 | `/foerdervereinbarung` | `foerdervereinbarung.md` (5.3 KB) | near-verbatim |
 | `/datenschutz` | `datenschutz.md` (71 KB, 2020) | **rewritten, not copied** |

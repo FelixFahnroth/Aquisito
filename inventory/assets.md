@@ -27,7 +27,7 @@ Dimensions measured with `System.Drawing`, not estimated. Source:
 | `Logo21_dark_ohneHintergrund.svg` | vector | wordmark + sun lockup, `rgb(100%,78%,0%)` = `#ffc700` |
 | `sonne.svg` | vector | standalone sun, `#ffc700` + `#f7f166` |
 | `sonne.ico` | — | favicon, keeps gold |
-| `Transparente_ZivilgesellschaftPNG.png` | 735×200 | Initiative seal, fine at native size |
+| ~~`Transparente_ZivilgesellschaftPNG.png`~~ | 735×200 | Initiative seal. **Removed 2026-09-13** — the Verein left the Initiative Transparente Zivilgesellschaft. Do not reinstate. |
 
 ## Not migrated
 
