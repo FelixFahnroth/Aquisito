@@ -165,7 +165,6 @@
     display: block;
   }
 
-  /* Entfernt die doppelte Trennlinie unterhalb des Oder-Trenners */
   .widget__alt {
     border-top: none !important;
     padding-top: 0 !important;
@@ -210,9 +209,6 @@
 
 <main id="main">
 
-  <!-- ====================================================================
-       Hero: Spenden-Widget
-       ==================================================================== -->
   <section class="section section--inverse spenden-hero on-dark">
     <div class="wrap">
       <div class="spenden-hero__grid">
@@ -246,16 +242,12 @@
           </ul>
         </div>
 
-        <!-- Widget -->
         <div class="widget">
           <h2 class="widget__title">Deine Spende zum Kochbuch oder einfach so</h2>
 
           <h3 class="method-heading">Online per PayPal oder Karte</h3>
-          <form id="spenden-form" action="https://www.paypal.com/donate" method="post" target="_blank" rel="noopener">
-            <input type="hidden" name="hosted_button_id" value="BWK48NNFGLMQJ">
-            <input type="hidden" name="currency_code" value="EUR">
-            <input type="hidden" name="return" value="https://aquisito.de/spenden/danke">
-            <input type="hidden" name="amount" id="paypal-amount" value="40">
+          <form id="spenden-form">
+            <input type="hidden" id="paypal-amount" value="40">
 
             <fieldset class="pills">
               <legend class="sr-only">Spendenbetrag wählen</legend>
@@ -322,9 +314,6 @@
     </div>
   </section>
 
-  <!-- ====================================================================
-       Mittelverwendung
-       ==================================================================== -->
   <section class="section" id="mittelverwendung">
     <div class="wrap">
       <p class="eyebrow">Mittelverwendung</p>
@@ -359,9 +348,6 @@
     </div>
   </section>
 
-  <!-- ====================================================================
-       Band
-       ==================================================================== -->
   <section class="band" aria-labelledby="band-line">
     <picture>
       <source type="image/webp" srcset="assets/img/band-spenden-1200.webp 1200w, assets/img/band-spenden-2400.webp 2400w" sizes="100vw">
@@ -375,9 +361,6 @@
     <p class="band__line" id="band-line">Aquisito heißt hier. Nicht dort, nicht irgendwann.</p>
   </section>
 
-  <!-- ====================================================================
-       Andere Wege
-       ==================================================================== -->
   <section class="section section--alt">
     <div class="wrap">
       <p class="eyebrow">Andere Wege</p>
@@ -424,7 +407,6 @@
         </article>
       </div>
 
-      <!-- Kochbuch -->
       <div class="kochbuch" id="kochbuch" style="margin-top: var(--space-10);">
         <div>
           <h3>Unser Kochbuch</h3>
@@ -449,9 +431,6 @@
     </div>
   </section>
 
-  <!-- ====================================================================
-       Trust
-       ==================================================================== -->
   <section class="section">
     <div class="wrap">
       <p class="eyebrow">Vertrauen</p>
@@ -556,7 +535,6 @@
   </div>
 </footer>
 
-<!-- Automatische Synchronisation von Freifeld und Vorauswahl -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('spenden-form');
@@ -582,17 +560,24 @@
       });
 
       if (form) {
-        form.addEventListener('submit', () => {
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          
+          let finalAmount = paypalAmount.value;
           if (customInput.value && Number(customInput.value) > 0) {
-            paypalAmount.value = customInput.value;
+            finalAmount = customInput.value;
           }
+          
+          const returnUrl = encodeURIComponent("https://aquisito.de/spenden/danke");
+          const paypalUrl = `https://www.paypal.com/donate/?hosted_button_id=BWK48NNFGLMQJ&amount=${encodeURIComponent(finalAmount)}&currency_code=EUR&return=${returnUrl}`;
+          
+          window.open(paypalUrl, '_blank', 'noopener');
         });
       }
     }
   });
 </script>
 
-<!-- Skript fuer die Kopierbuttons -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const copyButtons = document.querySelectorAll('.copy-btn');
