@@ -148,16 +148,14 @@ confirm exactly one element is gold on any screenful.
 
 | Gap | Where it is written down |
 |---|---|
-| Fonts are not in the repo | `assets/fonts/README.md` |
-| Statistics and cost split are still placeholders — but the landing figures (`9`/`120`/`10.000 €`) are now filled | `inventory/placeholders.md` |
-| Team cards flip to a portrait on hover — 5 of ~19 portraits exist (Mery, Erika, Toni, Natha, Thomas), the rest flip to a sun placeholder | `index.html` team grid, `inventory/assets.md` |
-| Statistics, outcome lines and the cost split are placeholders | `inventory/placeholders.md` |
+| `spenden.html` still has open placeholders: outcome lines and the cost split | `inventory/placeholders.md` |
+| Team tiles show the portrait first — Maria and Felix have none and show a sun placeholder instead | `index.html` team grid, `inventory/assets.md` |
 | Impressum and Datenschutz are drafts needing legal review | both pages carry a visible editorial note |
-| `/api/anmeldung` does not exist — the volunteer form posts into nothing | `inventory/placeholders.md` |
 | Pre-outage URLs are not in `_redirects` | `inventory/pages.md` §Gap |
 
 ## Hosting
 
-Needs a host that serves `_redirects` (Cloudflare Pages, Netlify) — GitHub Pages
-cannot issue 301s, and Phase 1 of the playbook depends on them. The volunteer
-form also needs a server-side endpoint.
+Runs as two containers from `docker-compose.yml` behind nginx; the redirect map
+in `_redirects` is mirrored by the `location` blocks in `Dockerfile`, which is
+what actually serves them. The volunteer form needs the `anmeldung` service —
+see Deploy it above.
