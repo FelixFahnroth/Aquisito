@@ -14,10 +14,10 @@
 <meta property="og:locale" content="de_DE">
 <link rel="preload" href="assets/fonts/familjen-grotesk-500-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/atkinson-hyperlegible-400-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=20260913e">
-<link rel="stylesheet" href="css/base.css?v=20260913e">
-<link rel="stylesheet" href="css/components.css?v=20260913e">
-<link rel="stylesheet" href="css/pages/index.css?v=20260913e">
+<link rel="stylesheet" href="css/tokens.css?v=20260913f">
+<link rel="stylesheet" href="css/base.css?v=20260913f">
+<link rel="stylesheet" href="css/components.css?v=20260913f">
+<link rel="stylesheet" href="css/pages/index.css?v=20260913f">
 <style>
   /* Der Hero liegt vollständig in css/pages/index.css: zweispaltiges Raster mit
      dem Foto-Stapel (js/hero-stack.js) statt Hintergrundbild und Luftballon. */
@@ -34,7 +34,11 @@
 
   /* Reihe 1: Überschrift und laufende Dauer. */
   .stats-band__since {
-    margin: 0;
+    /* base.css gibt jedem <p> die Lesebreite --measure. Die zentriert den Text
+       dann innerhalb eines schmaleren Kastens am linken Rand, also rund 86px
+       neben der Uhr. Hier ist die Zeile eine Überschrift, kein Fließtext. */
+    max-width: none;
+    margin: 0 auto;
     text-align: center;
     font-family: var(--font-display);
     font-size: var(--step-h3);
@@ -501,9 +505,9 @@
       <!-- Sechs Felder, je Wert und Kürzel. Ohne JavaScript bleibt stattdessen
            das Gründungsdatum in der Zeile darüber stehen. -->
       <time class="clock" id="aktiv-seit" datetime="2020-05-09T12:00:00+02:00">
-        <span class="clock__unit"><span class="clock__value" data-unit="0">0</span><span class="clock__abbr">J</span></span>
-        <span class="clock__unit"><span class="clock__value" data-unit="1">0</span><span class="clock__abbr">M</span></span>
-        <span class="clock__unit"><span class="clock__value" data-unit="2">0</span><span class="clock__abbr">T</span></span>
+        <span class="clock__unit"><span class="clock__value" data-unit="0">00</span><span class="clock__abbr">J</span></span>
+        <span class="clock__unit"><span class="clock__value" data-unit="1">00</span><span class="clock__abbr">M</span></span>
+        <span class="clock__unit"><span class="clock__value" data-unit="2">00</span><span class="clock__abbr">T</span></span>
         <span class="clock__unit"><span class="clock__value" data-unit="3">00</span><span class="clock__abbr">Std</span></span>
         <span class="clock__unit"><span class="clock__value" data-unit="4">00</span><span class="clock__abbr">Min</span></span>
         <span class="clock__unit"><span class="clock__value" data-unit="5">00</span><span class="clock__abbr">Sek</span></span>
@@ -811,10 +815,10 @@
     }
   });
 </script>
-<script type="module" src="js/nav.js?v=20260913e"></script>
-<script type="module" src="js/reveal.js?v=20260913e"></script>
-<script type="module" src="js/hero-stack.js?v=20260913e"></script>
-<script type="module" src="js/team-flip.js?v=20260913e"></script>
-<script type="module" src="js/stats-timer.js?v=20260913e"></script>
+<script type="module" src="js/nav.js?v=20260913f"></script>
+<script type="module" src="js/reveal.js?v=20260913f"></script>
+<script type="module" src="js/hero-stack.js?v=20260913f"></script>
+<script type="module" src="js/team-flip.js?v=20260913f"></script>
+<script type="module" src="js/stats-timer.js?v=20260913f"></script>
 </body>
 </html>

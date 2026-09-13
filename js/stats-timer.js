@@ -45,17 +45,15 @@ if (clock) {
       return [y, mo, d, h, mi, s];
     };
 
-    /* Only the clock-like tail is zero-padded. "06" years would read as a
-       stopwatch rather than an age. */
-    const PAD_FROM = 3;
-
     const tick = () => {
       const now = new Date();
       if (now < start) return;            // clock skew: leave the fields alone
 
       const values = breakdown(start, now);
       values.forEach((n, i) => {
-        const text = i >= PAD_FROM ? String(n).padStart(2, '0') : String(n);
+        /* Every field is two digits, so the six columns stay the same width
+           whatever the numbers do. */
+        const text = String(n).padStart(2, '0');
         /* Touch the DOM only when the number actually changed — five of the six
            fields are unchanged on almost every tick. */
         if (cells[i].textContent !== text) cells[i].textContent = text;
