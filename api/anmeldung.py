@@ -32,7 +32,27 @@ LISTEN_PORT = int(os.environ.get("PORT", "8080"))
 SMTP_HOST = os.environ.get("SMTP_HOST", "")
 SMTP_PORT = int(os.environ.get("SMTP_PORT", "587"))
 SMTP_USER = os.environ.get("SMTP_USER", "")
-SMTP_PASSWORD = os.environ.get("SMTP_PASSWORD", "")
+
+
+def _read_password() -> str:
+    """Passwort entweder direkt aus SMTP_PASSWORD oder aus einer Datei, auf die
+    SMTP_PASSWORD_FILE zeigt.
+
+    Die Datei-Variante ist die bessere: damit lässt sich ein Docker-Secret oder
+    eine Datei mit 600-Rechten nutzen, und das Passwort taucht dann weder in
+    'docker inspect' noch in der Prozess-Umgebung auf."""
+    path = os.environ.get("SMTP_PASSWORD_FILE", "")
+    if path:
+        try:
+            with open(path, encoding="utf-8") as fh:
+                return fh.read().strip()
+        except OSError as exc:
+            sys.stderr.write(f"SMTP_PASSWORD_FILE nicht lesbar: {exc}\n")
+            return ""
+    return os.environ.get("SMTP_PASSWORD", "")
+
+
+SMTP_PASSWORD = _read_password()
 # Absender. Die meisten Mailserver erlauben nur die Adresse, mit der man sich
 # auch angemeldet hat — im Zweifel also dieselbe wie SMTP_USER. Eine fremde
 # Adresse wird entweder abgelehnt oder scheitert später an SPF/DKIM.

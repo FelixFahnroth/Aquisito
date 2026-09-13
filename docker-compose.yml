@@ -32,5 +32,8 @@ services:
       SMTP_PORT: ${SMTP_PORT:-587}
       SMTP_USER: ${SMTP_USER:-info@aquisito.de}
       SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      # Alternative: Pfad zu einer Datei mit dem Passwort (Docker-Secret o. Ä.).
+      # Ist sie gesetzt, hat sie Vorrang vor SMTP_PASSWORD.
+      SMTP_PASSWORD_FILE: ${SMTP_PASSWORD_FILE:-}
       MAIL_FROM: ${MAIL_FROM:-info@aquisito.de}
       MAIL_TO: ${MAIL_TO:-info@aquisito.de}
