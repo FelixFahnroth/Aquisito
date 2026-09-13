@@ -20,6 +20,7 @@
 /satzung                /satzung.html                200
 /foerdervereinbarung    /foerdervereinbarung.html    200
 /jahresrueckblicke      /jahresrueckblicke.html      200
+/anfrage-gesendet       /anfrage-gesendet.html       200
 
 # ---------------------------------------------------------------------------
 # HIGHEST PRIORITY — printed on flyers as a QR code (commit 629cceb).

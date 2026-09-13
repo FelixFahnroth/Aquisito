@@ -165,6 +165,15 @@
     font-weight: var(--weight-bold);
   }
 
+  /* Die Meldung trägt sonst nur Farbe über den Text. Ein linker Balken macht
+     den Unterschied zwischen "angekommen" und "schiefgegangen" auch dann
+     erkennbar, wenn Farbe allein nicht ankommt. */
+  .signup__status.is-success { border-left: 4px solid var(--forest); }
+  .signup__status.is-error {
+    background: var(--surface-alt);
+    border-left: 4px solid var(--gold);
+  }
+
   /* ---- background essay ---------------------------------------------------
      Long-form, deliberately below the form so it cannot push the sign-up down. */
 

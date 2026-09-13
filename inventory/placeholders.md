@@ -66,9 +66,20 @@ the site actually does, so none can be dropped — they have to be answered.
 | `{{DATENSCHUTZBEAUFTRAGTE}}` | `datenschutz.html` | Satzung § 10 provides for electing one *if legally required*. If none is required, replace the whole line with a sentence saying so — do not leave it blank |
 | `{{DATENSCHUTZ_STAND}}` | `datenschutz.html` | the date the reviewed policy is signed off |
 
-The volunteer form posts to `/api/anmeldung`, which **does not exist yet**. Until
-an endpoint is live the form submits into nothing. Whatever handles it becomes a
-processor and has to be named in the Datenschutzerklärung.
+~~The volunteer form posts to `/api/anmeldung`, which **does not exist yet**.~~
+**Resolved 2026-09-13.** `/api/anmeldung` is now a small self-hosted service
+(`api/anmeldung.py`, started by `docker-compose.yml`, reached through an nginx
+`proxy_pass`). It takes the POST, sends the contents to `MAIL_TO` over SMTP and
+keeps nothing — no database, no log of form contents.
+
+Because it runs on the Verein's own infrastructure, **no new processor is
+involved** and `{{HOSTING_ANBIETER}}` remains the only one to name. The mailbox
+provider behind `SMTP_HOST` does process the message in transit, so if that is
+someone other than the host already named, add them.
+
+`{{ANFRAGE_SPEICHERDAUER}}` is still open and now means something concrete: how
+long enquiries stay in the `info@aquisito.de` mailbox, since that is the only
+place they are kept.
 
 ---
 

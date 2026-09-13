@@ -30,6 +30,18 @@ RUN echo 'server { \
         try_files /danke.html =404; \
     } \
     \
+    # Das Freiwilligen-Formular. Der Weiterleiter laeuft als eigener Dienst \
+    # im internen Netz (siehe docker-compose.yml) und ist von aussen nur \
+    # ueber genau diesen Pfad erreichbar. \
+    location = /api/anmeldung { \
+        proxy_pass http://anmeldung:8080; \
+        proxy_set_header Host $host; \
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; \
+        proxy_set_header X-Forwarded-Proto $scheme; \
+        proxy_read_timeout 30s; \
+        client_max_body_size 64k; \
+    } \
+    \
     # Clean URLs: Versucht erst Datei, dann .html-Endung, dann Ordner \
     location / { \
         try_files $uri $uri.html $uri/ =404; \

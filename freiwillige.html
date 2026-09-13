@@ -9,10 +9,10 @@
 <link rel="icon" href="assets/img/sonne.ico" sizes="any">
 <link rel="preload" href="assets/fonts/familjen-grotesk-500-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/atkinson-hyperlegible-400-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=20260913i">
-<link rel="stylesheet" href="css/base.css?v=20260913i">
-<link rel="stylesheet" href="css/components.css?v=20260913i">
-<link rel="stylesheet" href="css/pages/freiwillige.css?v=20260913i">
+<link rel="stylesheet" href="css/tokens.css?v=20260913j">
+<link rel="stylesheet" href="css/base.css?v=20260913j">
+<link rel="stylesheet" href="css/components.css?v=20260913j">
+<link rel="stylesheet" href="css/pages/freiwillige.css?v=20260913j">
 <script>document.documentElement.className = 'js';</script>
 </head>
 <body>
@@ -334,8 +334,11 @@
         innerhalb einer Woche — auch wenn wir gerade keinen Platz haben.
       </p>
 
-      <!-- action is a placeholder until the endpoint exists. Without JS the form
-           still posts; js/form.js only replaces the native error bubbles. -->
+      <!-- /api/anmeldung ist der Mail-Weiterleiter aus api/anmeldung.py, den
+           nginx durchreicht (docker-compose.yml). Mit JavaScript sendet
+           js/form.js im Hintergrund und die Antwort erscheint oben im
+           Statusabsatz; ohne JavaScript verschickt der Browser dasselbe
+           Formular ganz normal und landet auf /anfrage-gesendet. -->
       <form class="signup" id="anmeldung" method="post" action="/api/anmeldung">
         <p class="signup__required">Felder mit * brauchen wir. Alles andere ist freiwillig.</p>
 
@@ -515,9 +518,9 @@
   </div>
 </footer>
 
-<script type="module" src="js/nav.js?v=20260913i"></script>
-<script type="module" src="js/reveal.js?v=20260913i"></script>
-<script type="module" src="js/parallax.js?v=20260913i"></script>
-<script type="module" src="js/form.js?v=20260913i"></script>
+<script type="module" src="js/nav.js?v=20260913j"></script>
+<script type="module" src="js/reveal.js?v=20260913j"></script>
+<script type="module" src="js/parallax.js?v=20260913j"></script>
+<script type="module" src="js/form.js?v=20260913j"></script>
 </body>
 </html>

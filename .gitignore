@@ -1,1 +1,4 @@
 _preview_server.py
+
+# Zugangsdaten für den Mail-Weiterleiter — niemals einchecken.
+.env

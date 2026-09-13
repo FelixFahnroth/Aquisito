@@ -78,21 +78,72 @@ if (form) {
     if (event.target.matches('[required][aria-invalid="true"]')) validate(event.target);
   });
 
-  form.addEventListener('submit', (event) => {
+  form.addEventListener('submit', async (event) => {
     const fields = [...form.querySelectorAll('[required]')];
     const invalid = fields.filter((field) => !validate(field));
 
-    if (invalid.length === 0) return;   /* let it submit — never clear the form */
+    if (invalid.length > 0) {
+      event.preventDefault();
 
-    event.preventDefault();
+      if (summary) {
+        summary.textContent =
+          invalid.length === 1
+            ? 'Ein Feld fehlt noch. Es ist unten markiert.'
+            : `${invalid.length} Felder fehlen noch. Sie sind unten markiert.`;
+      }
 
-    if (summary) {
-      summary.textContent =
-        invalid.length === 1
-          ? 'Ein Feld fehlt noch. Es ist unten markiert.'
-          : `${invalid.length} Felder fehlen noch. Sie sind unten markiert.`;
+      invalid[0].focus();
+      return;
     }
 
-    invalid[0].focus();
+    /* Alles ausgefüllt: im Hintergrund absenden, damit die Seite stehen bleibt
+       und die Antwort hier erscheint. Ohne JavaScript verschickt der Browser
+       dasselbe Formular ganz normal an dieselbe Adresse und landet auf
+       /anfrage-gesendet — die Weiche dafür sitzt im Dienst, nicht hier. */
+    event.preventDefault();
+
+    const button = form.querySelector('button[type="submit"]');
+    const original = button?.textContent;
+    if (button) { button.disabled = true; button.textContent = 'Wird gesendet …'; }
+    if (summary) summary.textContent = 'Anfrage wird gesendet …';
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new URLSearchParams(new FormData(form)),
+      });
+      const result = await response.json().catch(() => ({}));
+
+      if (response.ok && result.ok) {
+        /* Die Felder werden entfernt, nicht geleert — ein leeres Formular unter
+           einer Erfolgsmeldung sieht aus, als wäre nichts passiert. Der Knopf
+           geht mit, deshalb wird er unten auch nicht wiederhergestellt.
+           role="status" am Meldungsabsatz sagt es Screenreadern von selbst. */
+        if (summary) {
+          summary.classList.add('is-success');
+          summary.textContent = result.message || 'Danke, deine Anfrage ist angekommen.';
+        }
+        form.querySelectorAll('.field, fieldset, button, .signup__required, .honeypot')
+            .forEach((el) => el.remove());
+        return;
+      }
+
+      if (summary) {
+        summary.classList.add('is-error');
+        summary.textContent = result.message
+          || 'Das hat gerade nicht geklappt. Schreib uns bitte an info@aquisito.de.';
+      }
+    } catch {
+      if (summary) {
+        summary.classList.add('is-error');
+        summary.textContent =
+          'Keine Verbindung. Bitte versuch es später noch einmal oder schreib an info@aquisito.de.';
+      }
+    }
+
+    /* Nur der Fehlerfall kommt hier an — im Erfolgsfall ist oben schon
+       zurückgekehrt und der Knopf existiert nicht mehr. */
+    if (button) { button.disabled = false; button.textContent = original; }
   });
 }

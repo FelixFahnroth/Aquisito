@@ -1,0 +1,25 @@
+# Zwei Dienste: der Webserver wie bisher, dazu der kleine Mail-Weiterleiter
+# für das Freiwilligen-Formular. nginx reicht /api/anmeldung an ihn weiter,
+# alles andere bleibt statisch.
+#
+# Start:  docker compose up -d --build
+# Die Zugangsdaten stehen in .env (nicht im Repo, siehe .env.example).
+
+services:
+  web:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - anmeldung
+
+  anmeldung:
+    build: ./api
+    restart: unless-stopped
+    # Kein ports-Eintrag: der Dienst ist nur im internen Netz erreichbar,
+    # von außen kommt man ausschließlich über nginx an ihn heran.
+    env_file:
+      - .env
+    environment:
+      MAIL_TO: ${MAIL_TO:-info@aquisito.de}

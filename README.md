@@ -18,6 +18,30 @@ python -m http.server 8080     # or any static server
 Then open <http://127.0.0.1:8080/>. There is nothing to install and nothing to
 compile.
 
+The one exception is the volunteer form, which needs a server that can send
+mail. Everything else on the site works without it.
+
+## Deploy it
+
+```bash
+cp .env.example .env           # then fill in the SMTP details
+docker compose up -d --build
+```
+
+Two containers: `web` is the nginx image built from `Dockerfile` and serves
+every page; `anmeldung` is a ~200-line Python service (standard library only)
+that receives `POST /api/anmeldung` from the volunteer form and mails it to
+`MAIL_TO`. nginx proxies that one path to it and nothing else — the service is
+not published on a port of its own.
+
+It stores nothing: no database, and form contents never reach a log. `.env`
+holds the mailbox password and is git-ignored; `.env.example` documents the
+variables and contains no secrets.
+
+Check it is alive with `docker compose logs -f anmeldung`. Without `SMTP_HOST`
+set, the service starts and warns, and submissions fail with a message pointing
+the visitor at `info@aquisito.de`.
+
 ## Layout
 
 ```
