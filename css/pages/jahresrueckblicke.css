@@ -1,0 +1,74 @@
+/* ==========================================================================
+   pages/jahresrueckblicke.css
+   Drei Jahresrückblicke als Titelbild plus Download. Bewusst nichts weiter:
+   kein eingebetteter PDF-Viewer, keine Bibliothek. Das Titelbild ist ein
+   statisches Bild von rund 80 KB, das PDF lädt erst auf Klick, und der Browser
+   zeigt es mit seiner eigenen Anzeige. Der Server rechnet dabei nichts.
+   ========================================================================== */
+
+@layer pages {
+
+  .rueckblicke {
+    display: grid;
+    gap: var(--space-8);
+    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+    list-style: none;
+    padding: 0;
+    margin: var(--space-8) 0 0;
+  }
+
+  .rueckblicke li { margin: 0; max-width: none; }
+
+  .rueckblick {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    height: 100%;
+  }
+
+  /* Das Titelbild ist der Link. A4 hochkant, deshalb das feste Seitenverhältnis
+     — so springt das Raster nicht, während die Bilder laden. */
+  .rueckblick__cover {
+    display: block;
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--surface-alt);
+    box-shadow: var(--shadow-lift);
+    transition: transform var(--dur-slow) var(--ease-out),
+                box-shadow var(--dur-slow) var(--ease-out);
+  }
+  .rueckblick__cover img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 700 / 991;
+    object-fit: cover;
+  }
+  .rueckblick__cover:hover,
+  .rueckblick__cover:focus-visible {
+    transform: translateY(-3px);
+  }
+
+  .rueckblick__year {
+    font-family: var(--font-display);
+    font-size: var(--step-h3);
+    font-weight: var(--weight-medium);
+    color: var(--text-heading);
+    margin: 0;
+  }
+
+  .rueckblick__meta {
+    font-size: var(--step-small);
+    color: var(--text-muted);
+    margin: calc(var(--space-4) * -1) 0 0;
+  }
+
+  /* Die Originaldatei ist bewusst der leisere zweite Link — die meisten wollen
+     die kleine Fassung. */
+  .rueckblick__original {
+    font-size: var(--step-small);
+    margin: auto 0 0;
+  }
+  .rueckblick__original a { color: var(--text-muted); }
+}

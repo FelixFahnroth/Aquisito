@@ -230,6 +230,19 @@
     color: var(--text-muted);
   }
 
+  /* ---- Ziele: zentrierte Einleitung ---------------------------------------
+     Überschrift und Fließtext sind schmaler als die Kartenreihe darunter
+     (--width-prose gegen die volle Breite von .wrap). Linksbündig ergab das
+     rechts eine große tote Fläche. Der Block steht jetzt mittig, der Abstand
+     ist links und rechts derselbe. */
+  #was-wir-tun > .wrap > h2,
+  #was-wir-tun > .wrap > .prose {
+    max-width: var(--width-prose);
+    margin-inline: auto;
+    text-align: center;
+    text-wrap: balance;
+  }
+
   /* ---- routing cards ------------------------------------------------------- */
 
   .routing { display: grid; gap: var(--space-6); }
