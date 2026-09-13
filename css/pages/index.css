@@ -131,23 +131,39 @@
 
   .team li { margin: 0; max-width: none; }
 
-  /* Flip cards: name plate on the front, portrait on the back, revealed on
-     hover/focus. A decorative enhancement — the name and role live in the
-     always-present front face, so screen readers and no-hover devices lose
-     nothing. Under prefers-reduced-motion the shared --dur tokens collapse to
-     1ms, so the flip is instant rather than animated. */
+  /* Flip cards: portrait on the front, name plate on the back, turned by hover
+     on a pointer and by tap or keyboard anywhere else. The flip lives on a real
+     <button>, so the turn is reachable without a mouse and the name and role are
+     announced as the button's own label — nothing depends on the visual side.
+     Under prefers-reduced-motion the shared --dur tokens collapse to 1ms, so the
+     flip is instant rather than animated. */
   .team__cell { perspective: 1000px; }
 
+  /* The button is only a hit area and a focus target; every visual belongs to
+     the faces inside it. */
   .team__flip {
     position: relative;
+    display: block;
     width: 100%;
     aspect-ratio: 1;
+    appearance: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    color: inherit;
+    text-align: inherit;
+    cursor: pointer;
     transform-style: preserve-3d;
     transition: transform var(--dur-slow) var(--ease-out);
   }
 
   .team__cell:hover  .team__flip,
   .team__cell:focus-within .team__flip { transform: rotateY(180deg); }
+
+  .team__flip:focus-visible { outline: none; }
+  .team__cell:focus-within { border-radius: var(--radius-md); outline: 2px solid var(--forest); outline-offset: 3px; }
 
   .team__face {
     position: absolute;
@@ -161,16 +177,39 @@
   }
 
   .team__front {
+    background: var(--surface-inverse);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .team__back {
+    transform: rotateY(180deg);
     justify-content: flex-end;
     padding: var(--space-6);
     background: var(--white);
   }
 
-  .team__back {
-    transform: rotateY(180deg);
-    background: var(--surface-inverse);
-    align-items: center;
-    justify-content: center;
+  /* Hint: one full turn the first time a tile scrolls into view, pausing on the
+     name plate halfway through. Nothing else on the page announces that these
+     tiles turn, and on touch there is no hover to discover it with. Fires once
+     per tile (js/team-flip.js removes the class), and never while a pointer is
+     already turning the tile by hand.
+
+     Deliberately no fill-mode: the first and last keyframes are the same face,
+     so there is nothing to hold, and a filled animation would keep overriding
+     the hover transform if the class ever outlived its animationend — which a
+     backgrounded tab can cause. Without fill, a stuck class is harmless. */
+  .team__flip.is-hinting { animation: team-hint 1800ms var(--ease-out); }
+
+  @keyframes team-hint {
+    0%   { transform: rotateY(0deg); }
+    30%  { transform: rotateY(180deg); }
+    62%  { transform: rotateY(180deg); }
+    100% { transform: rotateY(360deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .team__flip.is-hinting { animation: none; }
   }
 
   .team__portrait { width: 100%; height: 100%; object-fit: cover; }

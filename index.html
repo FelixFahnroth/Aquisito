@@ -14,10 +14,10 @@
 <meta property="og:locale" content="de_DE">
 <link rel="preload" href="assets/fonts/familjen-grotesk-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/atkinson-hyperlegible-400-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=20260913">
-<link rel="stylesheet" href="css/base.css?v=20260913">
-<link rel="stylesheet" href="css/components.css?v=20260913">
-<link rel="stylesheet" href="css/pages/index.css?v=20260913">
+<link rel="stylesheet" href="css/tokens.css?v=20260913b">
+<link rel="stylesheet" href="css/base.css?v=20260913b">
+<link rel="stylesheet" href="css/components.css?v=20260913b">
+<link rel="stylesheet" href="css/pages/index.css?v=20260913b">
 <style>
   /* Der Hero liegt vollständig in css/pages/index.css: zweispaltiges Raster mit
      dem Foto-Stapel (js/hero-stack.js) statt Hintergrundbild und Luftballon. */
@@ -610,13 +610,13 @@
       </p>
 
       <ul class="team">
-        <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Mery</span><span class="team__role">Koordinatorin von CADSE · Leitung und Außenrepräsentation</span></div><div class="team__face team__back"><img class="team__portrait" src="assets/img/mery.jpg" alt="Porträt von Mery" loading="lazy"></div></div></li>
-        <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Erika</span><span class="team__role">Interne Leitung von CADSE · Management und Betreuung</span></div><div class="team__face team__back"><img class="team__portrait" src="assets/img/erika.jpg" alt="Porträt von Erika" loading="lazy"></div></div></li>
-        <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Toni</span><span class="team__role">Erste Vorsitzende</span></div><div class="team__face team__back"><img class="team__portrait" src="assets/img/toni.jpg" alt="Porträt von Toni" loading="lazy"></div></div></li>
-        <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Natha</span><span class="team__role">Stellvertretende Vorsitzende · Kooperationen</span></div><div class="team__face team__back"><img class="team__portrait" src="assets/img/natha.jpg" alt="Porträt von Natha" loading="lazy"></div></div></li>
-        <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Thomas</span><span class="team__role">Rechnungsführer · Finanzen und Kooperationen</span></div><div class="team__face team__back"><img class="team__portrait" src="assets/img/thomas.jpeg" alt="Porträt von Thomas" loading="lazy"></div></div></li>
-        <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Maria</span><span class="team__role">Vorstandsbeisitzerin · Marketing</span></div><div class="team__face team__back team__back--placeholder"><img class="team__sun" src="assets/img/sonne.svg" alt="" aria-hidden="true" width="56" height="56"></div></div></li>
-        <li class="team__cell"><div class="team__flip"><div class="team__face team__front"><span class="team__name">Felix</span><span class="team__role">Vorstandsbeisitzer · Marketing</span></div><div class="team__face team__back team__back--placeholder"><img class="team__sun" src="assets/img/sonne.svg" alt="" aria-hidden="true" width="56" height="56"></div></div></li>
+        <li class="team__cell"><button class="team__flip" type="button"><span class="team__face team__front"><img class="team__portrait" src="assets/img/mery.jpg" alt="" loading="lazy"></span><span class="team__face team__back"><span class="team__name">Mery</span><span class="team__role">Koordinatorin von CADSE · Leitung und Außenrepräsentation</span></span></button></li>
+        <li class="team__cell"><button class="team__flip" type="button"><span class="team__face team__front"><img class="team__portrait" src="assets/img/erika.jpg" alt="" loading="lazy"></span><span class="team__face team__back"><span class="team__name">Erika</span><span class="team__role">Interne Leitung von CADSE · Management und Betreuung</span></span></button></li>
+        <li class="team__cell"><button class="team__flip" type="button"><span class="team__face team__front"><img class="team__portrait" src="assets/img/toni.jpg" alt="" loading="lazy"></span><span class="team__face team__back"><span class="team__name">Toni</span><span class="team__role">Erste Vorsitzende</span></span></button></li>
+        <li class="team__cell"><button class="team__flip" type="button"><span class="team__face team__front"><img class="team__portrait" src="assets/img/natha.jpg" alt="" loading="lazy"></span><span class="team__face team__back"><span class="team__name">Natha</span><span class="team__role">Stellvertretende Vorsitzende · Kooperationen</span></span></button></li>
+        <li class="team__cell"><button class="team__flip" type="button"><span class="team__face team__front"><img class="team__portrait" src="assets/img/thomas.jpeg" alt="" loading="lazy"></span><span class="team__face team__back"><span class="team__name">Thomas</span><span class="team__role">Rechnungsführer · Finanzen und Kooperationen</span></span></button></li>
+        <li class="team__cell"><button class="team__flip" type="button"><span class="team__face team__front team__front--placeholder"><img class="team__sun" src="assets/img/sonne.svg" alt="" aria-hidden="true" width="56" height="56"></span><span class="team__face team__back"><span class="team__name">Maria</span><span class="team__role">Vorstandsbeisitzerin · Marketing</span></span></button></li>
+        <li class="team__cell"><button class="team__flip" type="button"><span class="team__face team__front team__front--placeholder"><img class="team__sun" src="assets/img/sonne.svg" alt="" aria-hidden="true" width="56" height="56"></span><span class="team__face team__back"><span class="team__name">Felix</span><span class="team__role">Vorstandsbeisitzer · Marketing</span></span></button></li>
       </ul>
 
       <p style="margin-top: var(--space-8);">
@@ -746,8 +746,9 @@
     }
   });
 </script>
-<script type="module" src="js/nav.js?v=20260913"></script>
-<script type="module" src="js/reveal.js?v=20260913"></script>
-<script type="module" src="js/hero-stack.js?v=20260913"></script>
+<script type="module" src="js/nav.js?v=20260913b"></script>
+<script type="module" src="js/reveal.js?v=20260913b"></script>
+<script type="module" src="js/hero-stack.js?v=20260913b"></script>
+<script type="module" src="js/team-flip.js?v=20260913b"></script>
 </body>
 </html>
