@@ -35,10 +35,19 @@ RUN echo 'server { \
         try_files $uri $uri.html $uri/ =404; \
     } \
     \
-    # Caching für Assets (Bilder, CSS, JS, Fonts) \
-    location ~* \.(css|js|png|jpg|jpeg|gif|ico|svg|woff2?)$ { \
+    # Caching für Bilder und Fonts: Dateinamen aendern sich, wenn der Inhalt \
+    # sich aendert, also darf lange gecacht werden. \
+    location ~* \.(png|jpg|jpeg|gif|ico|svg|woff2?)$ { \
         expires 7d; \
         add_header Cache-Control "public, no-transform"; \
+    } \
+    \
+    # CSS und JS behalten ihren Dateinamen. Mit "expires 7d" haben Besucher \
+    # nach einem Redesign bis zu sieben Tage lang altes CSS zum neuen HTML \
+    # bekommen. Deshalb: immer revalidieren. Unveraendert kostet das nur ein \
+    # 304, und ein Cache-Bust kann nie wieder vergessen werden. \
+    location ~* \.(css|js)$ { \
+        add_header Cache-Control "public, no-cache, must-revalidate"; \
     } \
 }' > /etc/nginx/conf.d/default.conf
 
