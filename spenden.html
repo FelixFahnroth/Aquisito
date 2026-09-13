@@ -13,6 +13,42 @@
 <link rel="stylesheet" href="css/base.css?v=20260913">
 <link rel="stylesheet" href="css/components.css?v=20260913">
 <link rel="stylesheet" href="css/pages/spenden.css?v=20260913">
+<style>
+  /* Optimale Lesbarkeit im Spenden-Widget */
+  .widget .widget__title {
+    color: var(--forest, #1b4332) !important;
+  }
+  .widget .widget__note {
+    color: #4b5563 !important;
+  }
+  .widget__alt {
+    border-top: 1px solid rgba(27, 67, 50, 0.15);
+  }
+  .widget__alt h3 {
+    color: var(--forest, #1b4332) !important;
+    font-weight: 700;
+  }
+  .widget__alt dl {
+    color: #1f2937;
+  }
+  .widget__alt dt {
+    color: #4b5563 !important;
+    font-weight: 600;
+  }
+  .widget__alt dd {
+    color: var(--forest, #1b4332) !important;
+    font-weight: 700;
+  }
+  .widget__alt p,
+  .widget__alt .muted {
+    color: #4b5563 !important;
+  }
+  .widget__alt a {
+    color: var(--forest, #1b4332) !important;
+    text-decoration: underline;
+    font-weight: 600;
+  }
+</style>
 <script>document.documentElement.className = 'js';</script>
 </head>
 <body>
@@ -81,7 +117,7 @@
 
         <!-- Widget -->
         <div class="widget">
-          <h2 class="widget__title">Deine Spende zum Kochbuch oder einfach so</h2>
+          <h2 class="widget__title" style="color: var(--forest, #1b4332);">Deine Spende zum Kochbuch oder einfach so</h2>
 
           <form id="spenden-form" action="https://www.paypal.com/donate" method="post" target="_blank" rel="noopener">
             <input type="hidden" name="hosted_button_id" value="BWK48NNFGLMQJ">
@@ -117,24 +153,24 @@
 
             <button class="btn btn--donate btn--block" type="submit">Jetzt spenden</button>
 
-            <p class="widget__note">
+            <p class="widget__note" style="color: #4b5563;">
               Weiter zu PayPal. Dort kannst du auch mit Karte zahlen, ohne PayPal-Konto.
             </p>
           </form>
 
           <div class="widget__alt">
-            <h3 class="small">Lieber überweisen?</h3>
-            <dl>
-              <dt>Empfänger</dt>
-              <dd>Aquisito e.V.</dd>
-              <dt>IBAN</dt>
-              <dd>DE72 4306 0967 1003 9179 00</dd>
-              <dt>BIC</dt>
-              <dd>GENODEM1GLS</dd>
+            <h3 class="small" style="color: var(--forest, #1b4332); font-weight: 700;">Lieber überweisen?</h3>
+            <dl style="color: #1f2937;">
+              <dt style="color: #4b5563; font-weight: 600;">Empfänger</dt>
+              <dd style="color: var(--forest, #1b4332); font-weight: 700;">Aquisito e.V.</dd>
+              <dt style="color: #4b5563; font-weight: 600;">IBAN</dt>
+              <dd style="color: var(--forest, #1b4332); font-weight: 700; letter-spacing: 0.03em;">DE72 4306 0967 1003 9179 00</dd>
+              <dt style="color: #4b5563; font-weight: 600;">BIC</dt>
+              <dd style="color: var(--forest, #1b4332); font-weight: 700;">GENODEM1GLS</dd>
             </dl>
-            <p class="small muted" style="margin-bottom:0;">
+            <p class="small" style="color: #4b5563; margin-bottom: 0;">
               Regelmäßig helfen? Das geht als
-              <a href="#foerdermitglied">Fördermitglied</a>.
+              <a href="#foerdermitglied" style="color: var(--forest, #1b4332); text-decoration: underline; font-weight: 600;">Fördermitglied</a>.
             </p>
           </div>
         </div>
