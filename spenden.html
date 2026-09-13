@@ -9,10 +9,10 @@
 <link rel="icon" href="assets/img/sonne.ico" sizes="any">
 <link rel="preload" href="assets/fonts/familjen-grotesk-500-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/atkinson-hyperlegible-400-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=20260913e">
-<link rel="stylesheet" href="css/base.css?v=20260913e">
-<link rel="stylesheet" href="css/components.css?v=20260913e">
-<link rel="stylesheet" href="css/pages/spenden.css?v=20260913e">
+<link rel="stylesheet" href="css/tokens.css?v=20260913d">
+<link rel="stylesheet" href="css/base.css?v=20260913d">
+<link rel="stylesheet" href="css/components.css?v=20260913d">
+<link rel="stylesheet" href="css/pages/spenden.css?v=20260913d">
 <style>
   /* Optimale Lesbarkeit und Proportionen im Spenden-Widget */
   .widget .widget__title {
@@ -246,8 +246,11 @@
           <h2 class="widget__title">Deine Spende zum Kochbuch oder einfach so</h2>
 
           <h3 class="method-heading">Online per PayPal oder Karte</h3>
-          <form id="spenden-form">
-            <input type="hidden" id="paypal-amount" value="40">
+          <form id="spenden-form" action="https://www.paypal.com/donate" method="post" target="_blank" rel="noopener">
+            <input type="hidden" name="hosted_button_id" value="BWK48NNFGLMQJ">
+            <input type="hidden" name="currency_code" value="EUR">
+            <input type="hidden" name="return" value="https://aquisito.de/spenden/danke">
+            <input type="hidden" name="amount" id="paypal-amount" value="40">
 
             <fieldset class="pills">
               <legend class="sr-only">Spendenbetrag wählen</legend>
@@ -560,18 +563,10 @@
       });
 
       if (form) {
-        form.addEventListener('submit', (event) => {
-          event.preventDefault();
-          
-          let finalAmount = paypalAmount.value;
+        form.addEventListener('submit', () => {
           if (customInput.value && Number(customInput.value) > 0) {
-            finalAmount = customInput.value;
+            paypalAmount.value = customInput.value;
           }
-          
-          const returnUrl = encodeURIComponent("https://aquisito.de/spenden/danke");
-          const paypalUrl = `https://www.paypal.com/donate/?hosted_button_id=BWK48NNFGLMQJ&amount=${encodeURIComponent(finalAmount)}&currency_code=EUR&return=${returnUrl}`;
-          
-          window.open(paypalUrl, '_blank', 'noopener');
         });
       }
     }
@@ -620,8 +615,8 @@
   });
 </script>
 
-<script type="module" src="js/nav.js?v=20260913e"></script>
-<script type="module" src="js/donate.js?v=20260913e"></script>
-<script type="module" src="js/parallax.js?v=20260913e"></script>
+<script type="module" src="js/nav.js?v=20260913d"></script>
+<script type="module" src="js/donate.js?v=20260913d"></script>
+<script type="module" src="js/parallax.js?v=20260913d"></script>
 </body>
 </html>
