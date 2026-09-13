@@ -1,55 +1,103 @@
-/* donate.js — amount selector and live outcome line.
-   Enhancement only. Without JS the radios still submit their value to PayPal
-   and the default outcome line stays in the DOM as real text. */
+/* donate.js — the donation widget on /spenden.
+
+   One amount, two ways to set it: a preset radio (name="betrag") or the free
+   field (#betrag-custom). The two never hold a value at the same time — typing
+   in the field clears the presets, picking a preset clears the field — so what
+   is submitted is always what is visibly selected.
+
+   On submit the form is intercepted and the visitor is sent to PayPal with the
+   amount in the query string. The <form action> stays a working POST fallback
+   for the case where this script never runs. */
 
 const form = document.getElementById('spenden-form');
+
 if (form) {
-  const outcome = document.getElementById('spenden-outcome');
   const custom = document.getElementById('betrag-custom');
-  const customRadio = document.getElementById('betrag-eigener');
   const amountField = document.getElementById('paypal-amount');
+  const radios = [...form.querySelectorAll('input[name="betrag"]')];
 
-  /* Outcome lines live in the markup as data-outcome on each radio, so the
-     copy stays with the content and out of the script. */
-  function sync(radio) {
-    if (!radio) return;
-    if (outcome && radio.dataset.outcome) outcome.textContent = radio.dataset.outcome;
-    if (amountField && radio.value !== 'custom') amountField.value = radio.value;
-  }
+  const PAYPAL = 'https://www.paypal.com/cgi-bin/webscr';
+  /* Keeps /spenden/danke reachable after a donation; the hosted-button form
+     carried the same return URL in a hidden field. */
+  const RETURN_URL = 'https://aquisito.de/spenden/danke';
 
-  form.addEventListener('change', (event) => {
-    const radio = event.target.closest('input[name="betrag"]');
-    if (radio) {
-      /* Selecting a preset clears the custom field, and vice versa. */
-      if (radio.value !== 'custom' && custom) custom.value = '';
-      sync(radio);
+  /* Accepts "12", "12,50" and "12.50" alike — a German keyboard gives a comma,
+     and PayPal wants a dot with at most two decimals. */
+  const parseAmount = (raw) => {
+    const n = Number.parseFloat(String(raw ?? '').replace(',', '.').trim());
+    return Number.isFinite(n) && n > 0 ? Math.round(n * 100) / 100 : null;
+  };
+
+  const customAmount = () => parseAmount(custom?.value);
+  const presetAmount = () =>
+    parseAmount(radios.find((r) => r.checked)?.value);
+
+  /* The free field wins whenever it holds something usable. */
+  const currentAmount = () => customAmount() ?? presetAmount();
+
+  /* Mirrored into the hidden field so the no-JS POST fallback and the visible
+     selection never disagree. */
+  const syncHiddenField = () => {
+    const amount = currentAmount();
+    if (amountField && amount !== null) amountField.value = amount.toFixed(2);
+  };
+
+  /* The preset to come back to when the free field is emptied again, so the
+     widget is never left with nothing selected at all. */
+  let lastPreset = radios.find((r) => r.checked) ?? radios.find((r) => r.defaultChecked);
+
+  /* Typing a free amount clears the presets, so only one is ever lit. */
+  custom?.addEventListener('input', () => {
+    if (custom.value.trim() !== '') {
+      radios.forEach((radio) => { radio.checked = false; });
+    } else if (lastPreset) {
+      lastPreset.checked = true;
+    }
+    custom.setCustomValidity('');
+    syncHiddenField();
+  });
+
+  /* And the other direction, so picking a preset empties the free field. */
+  radios.forEach((radio) => {
+    radio.addEventListener('change', () => {
+      if (radio.checked) {
+        lastPreset = radio;
+        if (custom) {
+          custom.value = '';
+          custom.setCustomValidity('');
+        }
+      }
+      syncHiddenField();
+    });
+  });
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const amount = currentAmount();
+
+    if (amount === null) {
+      /* Nothing usable: say so on the field the visitor was last in rather
+         than navigating to PayPal with an empty amount. */
+      if (custom) {
+        custom.setCustomValidity('Bitte wähle einen Betrag oder gib einen eigenen ein.');
+        custom.reportValidity();
+        custom.focus();
+      }
       return;
     }
 
-    if (event.target === custom) {
-      if (customRadio) customRadio.checked = true;
-      if (amountField) amountField.value = custom.value;
-      if (outcome && custom.value) {
-        outcome.textContent = `${formatEuro(custom.value)} gehen direkt in die Projekte von CADSE.`;
-      }
-    }
+    const params = new URLSearchParams({
+      cmd: '_donations',
+      business: 'info@aquisito.de',
+      item_name: 'Spende Aquisito e.V.',
+      currency_code: 'EUR',
+      amount: amount.toFixed(2),
+      return: RETURN_URL,
+    });
+
+    window.location.href = `${PAYPAL}?${params}`;
   });
 
-  /* Typing in the custom field selects its radio immediately, so the two
-     controls never disagree about what is selected. */
-  custom?.addEventListener('focus', () => {
-    if (customRadio) customRadio.checked = true;
-  });
-
-  function formatEuro(value) {
-    const number = Number.parseFloat(String(value).replace(',', '.'));
-    if (!Number.isFinite(number) || number <= 0) return '';
-    return new Intl.NumberFormat('de-DE', {
-      style: 'currency',
-      currency: 'EUR',
-      minimumFractionDigits: number % 1 === 0 ? 0 : 2
-    }).format(number);
-  }
-
-  sync(form.querySelector('input[name="betrag"]:checked'));
+  syncHiddenField();
 }

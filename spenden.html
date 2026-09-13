@@ -9,10 +9,10 @@
 <link rel="icon" href="assets/img/sonne.ico" sizes="any">
 <link rel="preload" href="assets/fonts/familjen-grotesk-500-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/atkinson-hyperlegible-400-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=20260913f">
-<link rel="stylesheet" href="css/base.css?v=20260913f">
-<link rel="stylesheet" href="css/components.css?v=20260913f">
-<link rel="stylesheet" href="css/pages/spenden.css?v=20260913f">
+<link rel="stylesheet" href="css/tokens.css?v=20260913g">
+<link rel="stylesheet" href="css/base.css?v=20260913g">
+<link rel="stylesheet" href="css/components.css?v=20260913g">
+<link rel="stylesheet" href="css/pages/spenden.css?v=20260913g">
 <style>
   /* Optimale Lesbarkeit und Proportionen im Spenden-Widget */
   .widget .widget__title {
@@ -246,7 +246,10 @@
           <h2 class="widget__title">Deine Spende zum Kochbuch oder einfach so</h2>
 
           <h3 class="method-heading">Online per PayPal oder Karte</h3>
-          <form id="spenden-form" action="https://www.paypal.com/donate" method="post" target="_blank" rel="noopener">
+          <!-- action/method sind der Weg ohne JavaScript. Läuft js/donate.js,
+               fängt es das Absenden ab und leitet mit dem Betrag in der URL
+               weiter — im selben Tab, deshalb hier kein target="_blank". -->
+          <form id="spenden-form" action="https://www.paypal.com/donate" method="post">
             <input type="hidden" name="hosted_button_id" value="BWK48NNFGLMQJ">
             <input type="hidden" name="currency_code" value="EUR">
             <input type="hidden" name="return" value="https://aquisito.de/spenden/danke">
@@ -270,7 +273,9 @@
 
             <div class="widget__custom">
               <label class="sr-only" for="betrag-custom">Eigener Betrag in Euro</label>
-              <input type="number" id="betrag-custom" name="betrag_eigener" min="1" step="1" inputmode="numeric" placeholder="Oder freier Betrag">
+              <!-- step="0.01": mit step="1" wies der Browser 12,50 € schon vor
+                   dem Absenden ab, und der eigene Betrag konnte nie Cent haben. -->
+              <input type="number" id="betrag-custom" name="betrag_eigener" min="1" step="0.01" inputmode="decimal" placeholder="Eigener Betrag">
               <span class="widget__custom-unit" aria-hidden="true">€</span>
             </div>
 
@@ -540,41 +545,6 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('spenden-form');
-    const customInput = document.getElementById('betrag-custom');
-    const paypalAmount = document.getElementById('paypal-amount');
-    const radios = form ? form.querySelectorAll('input[name="betrag"]') : [];
-
-    if (customInput && paypalAmount) {
-      customInput.addEventListener('input', () => {
-        if (customInput.value && Number(customInput.value) > 0) {
-          paypalAmount.value = customInput.value;
-          radios.forEach(radio => radio.checked = false);
-        }
-      });
-
-      radios.forEach(radio => {
-        radio.addEventListener('change', () => {
-          if (radio.checked) {
-            customInput.value = '';
-            paypalAmount.value = radio.value;
-          }
-        });
-      });
-
-      if (form) {
-        form.addEventListener('submit', () => {
-          if (customInput.value && Number(customInput.value) > 0) {
-            paypalAmount.value = customInput.value;
-          }
-        });
-      }
-    }
-  });
-</script>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
     const copyButtons = document.querySelectorAll('.copy-btn');
     copyButtons.forEach(btn => {
       btn.addEventListener('click', async () => {
@@ -615,8 +585,8 @@
   });
 </script>
 
-<script type="module" src="js/nav.js?v=20260913f"></script>
-<script type="module" src="js/donate.js?v=20260913f"></script>
-<script type="module" src="js/parallax.js?v=20260913f"></script>
+<script type="module" src="js/nav.js?v=20260913g"></script>
+<script type="module" src="js/donate.js?v=20260913g"></script>
+<script type="module" src="js/parallax.js?v=20260913g"></script>
 </body>
 </html>
