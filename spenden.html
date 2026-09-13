@@ -35,10 +35,6 @@
         <li><a class="nav__link" href="index.html#was-wir-tun">Was wir tun</a></li>
         <li><a class="nav__link" href="index.html#team">Über uns</a></li>
         <li><a class="nav__link" href="freiwillige.html">Freiwillige</a></li>
-        <!-- On this page the donate affordance is NOT gold. CLAUDE.md rule 4
-             allows one gold element per screenful and it belongs to the submit
-             button below. The link keeps its position — it simply stops
-             shouting, because the visitor has already arrived. -->
         <li><a class="nav__link" href="spenden.html" aria-current="page">Spenden</a></li>
       </ul>
     </nav>
@@ -48,8 +44,7 @@
 <main id="main">
 
   <!-- ====================================================================
-       Hero — forest surface. The widget is above the fold and, on mobile,
-       directly under the lead before anything else.
+       Hero: Spenden-Widget
        ==================================================================== -->
   <section class="section section--inverse spenden-hero on-dark">
     <div class="wrap">
@@ -60,7 +55,7 @@
           <h1>Deine Spende kommt <span class="marker">direkt</span> an</h1>
           <p class="lead" style="margin-top: var(--space-6);">
             Aquisito e.V. arbeitet komplett ehrenamtlich. Was du gibst, geht an das
-            Kinder- und Jugendzentrum CADSE in Cochabamba — für Hausaufgabenhilfe,
+            Kinder- und Jugendzentrum CADSE in Cochabamba: für Hausaufgabenhilfe,
             Sport, Kunst und Englischunterricht.
           </p>
           <p>
@@ -84,35 +79,33 @@
           </ul>
         </div>
 
-        <!-- ---- the widget ---- -->
+        <!-- Widget -->
         <div class="widget">
-          <h2 class="widget__title">Einmalig spenden</h2>
+          <h2 class="widget__title">Deine Spende zum Kochbuch oder einfach so</h2>
 
           <form id="spenden-form" action="https://www.paypal.com/donate" method="post" target="_blank" rel="noopener">
             <input type="hidden" name="hosted_button_id" value="BWK48NNFGLMQJ">
             <input type="hidden" name="currency_code" value="EUR">
             <input type="hidden" name="return" value="https://aquisito.de/spenden/danke">
-            <!-- Kept in sync with the selected pill by js/donate.js. Without JS
-                 the checked radio submits its own value under this name. -->
             <input type="hidden" name="amount" id="paypal-amount" value="40">
 
             <fieldset class="pills">
               <legend class="sr-only">Spendenbetrag wählen</legend>
               <label class="pill">
-                <input type="radio" name="betrag" value="20" data-outcome="{{OUTCOME_20}}">
-                <span>20 €</span>
+                <input type="radio" name="betrag" value="25">
+                <span>25 €</span>
               </label>
               <label class="pill">
-                <input type="radio" name="betrag" value="40" checked data-outcome="{{OUTCOME_40}}">
+                <input type="radio" name="betrag" value="40" checked>
                 <span>40 €</span>
               </label>
               <label class="pill">
-                <input type="radio" name="betrag" value="80" data-outcome="{{OUTCOME_80}}">
-                <span>80 €</span>
+                <input type="radio" name="betrag" value="50">
+                <span>50 €</span>
               </label>
               <label class="pill">
-                <input type="radio" name="betrag" value="custom" id="betrag-eigener" data-outcome="Jeder Betrag hilft — auch kleine Summen decken bei CADSE ein ganzes Projekt.">
-                <span>Anderer</span>
+                <input type="radio" name="betrag" value="custom" id="betrag-eigener">
+                <span>Anderer Betrag</span>
               </label>
             </fieldset>
 
@@ -121,8 +114,6 @@
               <input type="number" id="betrag-custom" name="betrag_eigener" min="1" step="1" inputmode="numeric" placeholder="Betrag">
               <span aria-hidden="true">€</span>
             </div>
-
-            <p class="widget__outcome" id="spenden-outcome" aria-live="polite">{{OUTCOME_40}}</p>
 
             <button class="btn btn--donate btn--block" type="submit">Jetzt spenden</button>
 
@@ -153,14 +144,14 @@
   </section>
 
   <!-- ====================================================================
-       Where the money goes
+       Mittelverwendung
        ==================================================================== -->
   <section class="section" id="mittelverwendung">
     <div class="wrap">
       <p class="eyebrow">Mittelverwendung</p>
       <h2>Wohin dein Geld geht</h2>
       <p class="prose">
-        Wir arbeiten ausschließlich ehrenamtlich — niemand bei Aquisito bekommt ein
+        Wir arbeiten ausschließlich ehrenamtlich: niemand bei Aquisito bekommt ein
         Gehalt. Die Zahlen stammen aus dem Finanzbericht und sind Jahr für Jahr
         nachlesbar.
       </p>
@@ -190,7 +181,7 @@
   </section>
 
   <!-- ====================================================================
-       The band — one per page. DESIGN.md §5.1.
+       Band
        ==================================================================== -->
   <section class="band" aria-labelledby="band-line">
     <picture>
@@ -206,7 +197,7 @@
   </section>
 
   <!-- ====================================================================
-       Other ways to help
+       Andere Wege
        ==================================================================== -->
   <section class="section section--alt">
     <div class="wrap">
@@ -244,7 +235,7 @@
           <svg class="card__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V8l7-4 7 4v13"/><path d="M9.5 21v-5h5v5"/></svg>
           <h3 class="card__title">Als Unternehmen</h3>
           <p class="card__body">
-            Wir arbeiten mit Stiftungen und Unternehmen zusammen — die Schmitz
+            Wir arbeiten mit Stiftungen und Unternehmen zusammen: die Schmitz
             Stiftung hat mit 9.990 € den zweiten CADSE-Standort ermöglicht. Für
             Kooperationen melde dich bei Natha oder Thomas.
           </p>
@@ -254,7 +245,7 @@
         </article>
       </div>
 
-      <!-- ---- Kochbuch ---- -->
+      <!-- Kochbuch -->
       <div class="kochbuch" id="kochbuch" style="margin-top: var(--space-10);">
         <div>
           <h3>Unser Kochbuch</h3>
@@ -269,15 +260,7 @@
           </a>
         </div>
         <div>
-          <!-- 9,7 MB. preload="none" und ein Poster: niemals Autoplay, niemals
-               vorgeladen. Ohne Poster lädt Safari sonst den ersten Frame. -->
-          <!-- TODO {{KOCHBUCH_POSTER}}: ein Standbild als poster="" ergänzen.
-               Ohne Poster zeigt der Browser bei preload="none" eine leere Fläche
-               (hier die --forest-tint-Fläche aus pages/spenden.css). Ein echtes
-               Poster ist kein Muss, aber besser. Erzeugen mit:
-               ffmpeg -i assets/video/kochbuch.mp4 -ss 3 -frames:v 1 assets/img/kochbuch-poster.jpg -->
-          <video controls preload="none" playsinline
-                 width="1280" height="720">
+          <video controls preload="none" playsinline width="1280" height="720">
             <source src="assets/video/kochbuch.mp4" type="video/mp4">
             <p>Dein Browser kann das Video nicht abspielen.
               <a href="assets/video/kochbuch.mp4">Video herunterladen</a> (MP4, 9,7 MB).</p>
@@ -335,7 +318,7 @@
           <h3>Offene Zahlen</h3>
           <p class="small">
             Wir legen die wesentlichen Angaben über den Verein offen und halten sie
-            aktuell — von der Satzung bis zur Mittelherkunft.
+            aktuell: von der Satzung bis zur Mittelherkunft.
           </p>
           <p class="small" style="margin-top: var(--space-5);">
             <a href="transparenz.html">Alle Angaben ansehen</a>
@@ -389,7 +372,7 @@
     <p class="site-footer__legal">
       Aquisito e.V. · Vereinsregister Aachen VR 6037 · SteuerNr. 201/5905/6228 ·
       als gemeinnützig anerkannt nach § 5 Abs. 1 Nr. 9 KStG (Freistellungsbescheid 2023) ·
-      <a href="transparenz.html">Finanzberichte 2020–2025</a>
+      <a href="transparenz.html">Finanzberichte 2020 bis 2025</a>
     </p>
   </div>
 </footer>
