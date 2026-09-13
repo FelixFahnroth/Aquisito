@@ -3,310 +3,555 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Spenden — Aquisito e.V.</title>
-<meta name="description" content="Jede Spende an Aquisito e.V. geht an das Kinder- und Jugendzentrum CADSE in Cochabamba, Bolivien. Per PayPal, Überweisung oder als Fördermitglied.">
-<link rel="canonical" href="https://aquisito.de/spenden">
+<title>Aquisito e.V. — Gemeinsam groß werden</title>
+<meta name="description" content="Aquisito e.V. unterstützt das Kinder- und Jugendzentrum CADSE in Cochabamba, Bolivien: Hausaufgabenhilfe, Sport, Kunst und Englischunterricht für Kinder aus Ushpa Ushpa.">
+<link rel="canonical" href="https://aquisito.de/">
 <link rel="icon" href="assets/img/sonne.ico" sizes="any">
+<meta property="og:title" content="Aquisito e.V. — Gemeinsam groß werden">
+<meta property="og:description" content="Eine Kooperation zwischen dem Kinder- und Jugendzentrum CADSE in Bolivien und Aquisito e.V. in Deutschland.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aquisito.de/">
+<meta property="og:locale" content="de_DE">
 <link rel="preload" href="assets/fonts/familjen-grotesk-500-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/atkinson-hyperlegible-400-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=20260913c">
-<link rel="stylesheet" href="css/base.css?v=20260913c">
-<link rel="stylesheet" href="css/components.css?v=20260913c">
-<link rel="stylesheet" href="css/pages/spenden.css?v=20260913c">
+<link rel="stylesheet" href="css/tokens.css?v=20260913d">
+<link rel="stylesheet" href="css/base.css?v=20260913d">
+<link rel="stylesheet" href="css/components.css?v=20260913d">
+<link rel="stylesheet" href="css/pages/index.css?v=20260913d">
 <style>
-  /* Optimale Lesbarkeit und Proportionen im Spenden-Widget */
-  .widget .widget__title {
-    color: var(--forest, #1b4332) !important;
-    font-size: 1.7rem;
-    line-height: 1.15;
-    margin-bottom: 28px;
-  }
-  
-  /* Neue Zwischenueberschriften und Trenner */
-  .method-heading {
-    color: var(--forest, #1b4332) !important;
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 14px;
-  }
-  .widget__divider {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    margin: 28px 0;
-    color: #6b7280;
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-  .widget__divider::before,
-  .widget__divider::after {
-    content: "";
-    flex: 1;
-    border-bottom: 1px solid rgba(27, 67, 50, 0.15);
-  }
-  .widget__divider::before {
-    margin-right: 14px;
-  }
-  .widget__divider::after {
-    margin-left: 14px;
-  }
+  /* Der Hero liegt vollständig in css/pages/index.css: zweispaltiges Raster mit
+     dem Foto-Stapel (js/hero-stack.js) statt Hintergrundbild und Luftballon. */
 
-  .widget .pills {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 8px;
-    margin-bottom: 12px;
-  }
-  /* Freifeld fuer eigene Betraege */
-  .widget .widget__custom {
-    display: flex !important;
+  /* Kennzahlen-Banner. Dieselbe ruhige grüne Fläche wie die
+     Freiwilligendienst-Kachel weiter unten (--surface-quiet). */
+  .stats-band {
+    background: var(--surface-quiet);
+    padding: var(--space-7) 0;
+    width: 100%;
     position: relative;
-    width: 100%;
-    margin-bottom: 16px;
+    z-index: 2;
   }
-  .widget .widget__custom input {
-    width: 100%;
-    padding: 10px 38px 10px 16px;
-    border: 1.5px solid rgba(27, 67, 50, 0.25);
-    border-radius: 9999px;
-    font-size: 0.95rem;
-    font-family: inherit;
-    color: var(--forest, #1b4332);
-    background: #ffffff;
+
+  /* Reihe 1: die laufende Dauer. */
+  .stats-band__since {
+    margin: 0;
     text-align: center;
-    outline: none;
-    box-sizing: border-box;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: var(--font-display);
+    font-size: var(--step-h3);
+    font-weight: var(--weight-medium);
+    color: var(--text-heading);
+    line-height: 1.3;
+    text-wrap: balance;
   }
-  .widget .widget__custom input:focus {
-    border-color: var(--forest, #1b4332);
-    box-shadow: 0 0 0 3px rgba(27, 67, 50, 0.15);
+  /* tabular-nums hält die Sekunden ruhig, statt die Zeile im Sekundentakt
+     springen zu lassen. */
+  .stats-band__timer {
+    font-variant-numeric: tabular-nums;
+    white-space: normal;
   }
-  .widget .widget__custom input::placeholder {
-    color: #6b7280;
-    font-weight: 500;
-  }
-  .widget .widget__custom-unit {
-    position: absolute;
-    right: 18px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #6b7280;
-    font-weight: 700;
-    pointer-events: none;
-  }
-  .widget .widget__note {
-    color: #4b5563 !important;
-  }
-  
-  /* Bank-Box & Alt */
-  .bank-box {
-    background: rgba(27, 67, 50, 0.04);
-    border: 1px solid rgba(27, 67, 50, 0.12);
-    border-radius: 8px;
-    padding: 12px 14px;
-    margin-bottom: 0;
-  }
-  .bank-box__meta {
+
+  /* Reihe 2: die beiden Jahreszahlen. */
+  .stats-band__figures {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
-    font-size: 0.85rem;
-    color: #4b5563;
-  }
-  .bank-box__item {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .bank-box__meta strong {
-    color: var(--forest, #1b4332);
-  }
-
-  /* Minimalistische Kopierbuttons */
-  .copy-btn {
-    display: inline-flex;
-    align-items: center;
     justify-content: center;
-    width: 22px;
-    height: 22px;
-    padding: 0;
-    border: 1px solid rgba(27, 67, 50, 0.2);
-    background: #ffffff;
-    color: var(--forest, #1b4332);
-    border-radius: 4px;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: all 0.15s ease;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--space-5) var(--space-9);
+    margin-top: var(--space-6);
+    padding-top: var(--space-6);
+    border-top: 1px solid rgb(0 87 0 / 0.12);
   }
-  .copy-btn:hover {
-    background: rgba(27, 67, 50, 0.08);
-    border-color: var(--forest, #1b4332);
+  .stats-band__item {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-4);
   }
-  .copy-btn:focus-visible {
-    outline: 2px solid var(--forest, #1b4332);
-    outline-offset: 1px;
+  .stats-band__figure {
+    font-family: var(--font-display);
+    font-size: var(--step-h2);
+    font-weight: var(--weight-bold);
+    color: var(--text-heading);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
   }
-  .copy-btn__icon--check {
-    display: none;
-    stroke: #2d6a4f;
-  }
-  .copy-btn.is-copied {
-    background: #e8f5e9;
-    border-color: #2d6a4f;
-    color: #2d6a4f;
-  }
-  .copy-btn.is-copied .copy-btn__icon--copy {
-    display: none;
-  }
-  .copy-btn.is-copied .copy-btn__icon--check {
-    display: block;
+  .stats-band__label {
+    font-size: var(--step-small);
+    font-weight: var(--weight-medium);
+    color: var(--text-muted);
+    line-height: 1.25;
   }
 
-  /* Entfernt die doppelte Trennlinie unterhalb des Oder-Trenners */
-  .widget__alt {
-    border-top: none !important;
-    padding-top: 0 !important;
+  @media (max-width: 560px) {
+    .stats-band__figures { flex-direction: column; align-items: center; gap: var(--space-5); }
   }
-  .widget__alt p,
-  .widget__alt .muted {
-    color: #4b5563 !important;
+
+  /* Wörterbuch-Stil für Aquisito */
+  #aquisito {
+    padding-top: 28px !important;
+    padding-bottom: 20px !important;
   }
-  .widget__alt a {
-    color: var(--forest, #1b4332) !important;
-    text-decoration: underline;
+  .dictionary-card {
+    background: #ffffff;
+    border: 1px solid var(--color-border, #e5e7eb);
+    border-left: 4px solid #2d6a4f;
+    border-radius: 16px;
+    padding: 20px 28px;
+    max-width: 720px;
+    margin: 0 auto;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.03);
+  }
+  .dictionary-card__header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .dictionary-card__word {
+    font-family: var(--font-heading, sans-serif);
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: #111827;
+  }
+  .dictionary-card__phonetic {
+    font-family: monospace;
+    font-size: 1rem;
+    color: #6b7280;
+    background: #f3f4f6;
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+  .dictionary-card__pos {
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #2d6a4f;
     font-weight: 600;
   }
+  .dictionary-card__def {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+    color: #374151;
+  }
+
+  /* ====================================================================
+     Kochbuch Sektion
+     ==================================================================== */
+  .kochbuch-new-section {
+    background: #fdfbf7 url('assets/img/Hintergrund_Kochbuch.png') center/cover no-repeat;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 64px 0;
+    position: relative;
+  }
+  .kochbuch-new-grid {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  @media (max-width: 1024px) {
+    .kochbuch-new-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+
+  .kochbuch-left {
+    padding-right: 32px;
+    border-right: 1px solid rgba(45, 106, 79, 0.2);
+  }
+  @media (max-width: 1024px) {
+    .kochbuch-left {
+      padding-right: 0;
+      border-right: none;
+      border-bottom: 1px solid rgba(45, 106, 79, 0.2);
+      padding-bottom: 32px;
+    }
+  }
+
+  .kochbuch-eyebrow {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #6b7280;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .kochbuch-title-text {
+    font-family: var(--font-heading, sans-serif);
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #1b4332;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  .kochbuch-desc {
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: #374151;
+    margin-top: 14px;
+  }
+
+  .kochbuch-features {
+    list-style: none;
+    padding: 0;
+    margin: 14px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .kochbuch-feature-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: #1b4332;
+    line-height: 1.3;
+  }
+  .kochbuch-feature-item::before {
+    content: "•";
+    color: #2d6a4f;
+    font-size: 1.3rem;
+  }
+
+  .kochbuch-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: hidden;
+  }
+
+  .kochbuch-cards-track {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding: 6px 4px 14px 4px;
+  }
+  .kochbuch-cards-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .kochbuch-card-item {
+    flex: 0 0 240px;
+    scroll-snap-align: start;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 16px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .kochbuch-card-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+  }
+
+  .kochbuch-card-img-wrap {
+    width: 100%;
+    height: 160px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f3f4f6;
+    margin-bottom: 12px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .kochbuch-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .kochbuch-card-subtitle {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #1b4332;
+    margin-bottom: 6px;
+  }
+
+  .kochbuch-card-text {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: #4b5563;
+    margin: 0;
+  }
+
+  .kochbuch-slider-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .kochbuch-nav-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .kochbuch-nav-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid #1b4332;
+    background: #ffffff;
+    color: #1b4332;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: bold;
+    transition: all 0.2s ease;
+  }
+  .kochbuch-nav-btn:hover {
+    background: #1b4332;
+    color: #ffffff;
+  }
+  .kochbuch-nav-label {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #1b4332;
+  }
 </style>
-<script>document.documentElement.className = 'js';</script>
+<script>
+  document.documentElement.className = 'js';
+</script>
 </head>
 <body>
 
 <a class="skip-link" href="#main">Zum Inhalt springen</a>
 
-<header class="site-header site-header--solid">
+<!-- Transparent over the hero, solid after 80px — js/nav.js toggles .is-stuck -->
+<header class="site-header">
   <div class="site-header__inner">
     <a class="wordmark" href="index.html">
       <img class="wordmark__mark" src="assets/img/sonne.svg" width="34" height="34" alt="" aria-hidden="true">
       Aquisito
     </a>
-
     <nav class="nav" aria-label="Hauptnavigation">
       <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-list">
         <span class="sr-only">Menü öffnen</span>
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       </button>
       <ul class="nav__list" id="nav-list">
-        <li><a class="nav__link" href="index.html#was-wir-tun">Was wir tun</a></li>
-        <li><a class="nav__link" href="index.html#team">Über uns</a></li>
-        <li><a class="nav__link" href="freiwillige.html">Freiwillige</a></li>
-        <li><a class="nav__link" href="spenden.html" aria-current="page">Spenden</a></li>
+        <li><a class="nav__link" href="#team">Über uns</a></li>
+        <li><a class="nav__link" href="#kochbuch">Kochbuch</a></li>
+        <li><a class="nav__link" href="freiwillige.html">Freiwilligendienst</a></li>
       </ul>
+      <a class="btn btn--donate" href="spenden.html">Spenden</a>
     </nav>
   </div>
 </header>
 
 <main id="main">
 
-  <section class="section section--inverse spenden-hero on-dark">
+  <!-- ====================================================================
+       1. Hero Section (ohne Buttons)
+       Zweispaltiges Raster mit einem automatisch blätternden Foto-Stapel
+       (js/hero-stack.js) statt Hintergrundbild und Luftballon: flexibler und
+       auf kleinen Bildschirmen verlässlicher.
+       ==================================================================== -->
+  <section class="section hero">
+    <div class="wrap hero__grid">
+      <div class="hero__text">
+        <h1>Gemeinsam <span class="marker">groß</span> werden</h1>
+        <p class="lead" style="margin-top: var(--space-6);">
+          Unter diesem Motto engagiert sich Aquisito e.V. für das Kinder- und Jugendzentrum CADSE in Cochabamba, Bolivien. Gemeinsam mit dem Team vor Ort fördern wir Kinder und Jugendliche durch Hausaufgabenhilfe, Freizeitangebote und gesunde Ernährung.
+        </p>
+      </div>
+      <figure class="hero__photo hero__stack" aria-label="Eindrücke aus dem Kinder- und Jugendzentrum CADSE in Cochabamba">
+        <div class="hero__card">
+          <picture>
+            <source type="image/webp" srcset="assets/img/hero-stack-0.webp">
+            <img src="assets/img/hero-stack-0.jpg" width="1000" height="667" alt="" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__card">
+          <picture>
+            <source type="image/webp" srcset="assets/img/hero-stack-1.webp">
+            <img src="assets/img/hero-stack-1.jpg" width="1000" height="667" alt="" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__card">
+          <picture>
+            <source type="image/webp" srcset="assets/img/hero-stack-2.webp">
+            <img src="assets/img/hero-stack-2.jpg" width="1000" height="667" alt="" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__card">
+          <picture>
+            <source type="image/webp" srcset="assets/img/hero-stack-3.webp">
+            <img src="assets/img/hero-stack-3.jpg" width="1000" height="667" alt="" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__card">
+          <picture>
+            <source type="image/webp" srcset="assets/img/hero-stack-4.webp">
+            <img src="assets/img/hero-stack-4.jpg" width="1000" height="667" alt="" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__card">
+          <picture>
+            <source type="image/webp" srcset="assets/img/hero-stack-5.webp">
+            <img src="assets/img/hero-stack-5.jpg" width="1000" height="667" alt="" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__card">
+          <picture>
+            <source type="image/webp" srcset="assets/img/hero-stack-6.webp">
+            <img src="assets/img/hero-stack-6.jpg" width="1000" height="667" alt="" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__card">
+          <picture>
+            <source type="image/webp" srcset="assets/img/hero-stack-7.webp">
+            <img src="assets/img/hero-stack-7.jpg" width="1000" height="667" alt="" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__card">
+          <picture>
+            <source type="image/webp" srcset="assets/img/hero-stack-8.webp">
+            <img src="assets/img/hero-stack-8.jpg" width="1000" height="667" alt="" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__card">
+          <picture>
+            <source type="image/webp" srcset="assets/img/hero-stack-9.webp">
+            <img src="assets/img/hero-stack-9.jpg" width="1000" height="667" alt="" loading="lazy" decoding="async">
+          </picture>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       2. Kennzahlen-Banner. Zwei Reihen: oben die laufende Dauer seit der
+       Gründung, darunter die beiden Jahreszahlen. Ohne JavaScript bleibt das
+       Gründungsdatum stehen — js/stats-timer.js ersetzt es durch die Dauer.
+       ==================================================================== -->
+  <section class="stats-band" aria-label="Aquisito in Zahlen">
     <div class="wrap">
-      <div class="spenden-hero__grid">
+      <p class="stats-band__since">
+        Kinder unterstützen seit
+        <time class="stats-band__timer" id="aktiv-seit" datetime="2020-05-09T12:00:00+02:00">dem 9. Mai 2020</time>
+      </p>
+      <div class="stats-band__figures">
+        <div class="stats-band__item">
+          <span class="stats-band__figure">&gt;50</span>
+          <span class="stats-band__label">Kinder jährlich</span>
+        </div>
+        <div class="stats-band__item">
+          <span class="stats-band__figure">~10.000 €</span>
+          <span class="stats-band__label">pro Jahr gespendet</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <div>
-          <p class="eyebrow">Spenden</p>
-          <h1>Deine Spende kommt <span class="marker">direkt</span> an</h1>
-          <p class="lead" style="margin-top: var(--space-6);">
-            Aquisito e.V. arbeitet komplett ehrenamtlich. Was du gibst, geht an das
-            Kinder- und Jugendzentrum CADSE in Cochabamba: für Hausaufgabenhilfe,
-            Sport, Kunst und Englischunterricht.
-          </p>
-          <p>
-            Mery und ihr Team kommen selbst aus dem Stadtteil. Sie entscheiden vor
-            Ort, was gebraucht wird, und rechnen jedes Projekt einzeln ab.
+  <!-- ====================================================================
+       3. Textblock "Aquisito" im Wörterbuch-Stil
+       ==================================================================== -->
+  <section class="section reveal" id="aquisito">
+    <div class="wrap">
+      <div class="dictionary-card">
+        <div class="dictionary-card__header">
+          <span class="dictionary-card__word" lang="es">aquisito</span>
+          <span class="dictionary-card__phonetic">[a.ki.ˈsi.to]</span>
+          <span class="dictionary-card__pos">Spanische Verniedlichung für „hier“</span>
+        </div>
+        <p class="dictionary-card__def">
+          Das Wort ist typisch für Cochabamba, Bolivien, wo fast alles verniedlicht wird. Da Mery und ihr Team selbst aus dem Viertel stammen, wissen sie genau, welche Unterstützung die Familien vor Ort brauchen.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       4. Kochbuch-Sektion (Mit robusten Bild-Fallbacks)
+       ==================================================================== -->
+  <section class="section kochbuch-new-section reveal" id="kochbuch">
+    <div class="wrap">
+      <div class="kochbuch-new-grid">
+        
+        <!-- Linke Spalte: Text & Features -->
+        <div class="kochbuch-left">
+          <div class="kochbuch-eyebrow">ENTDECKE BOLIVIEN KOCHT!</div>
+          <h2 class="kochbuch-title-text">Unser bolivianisches Kochbuch</h2>
+
+          <p class="kochbuch-desc">
+            Mehr als nur Rezepte: Unser bolivianisches Kochbuch öffnet eine Tür zur lebendigen Kultur des Landes und rückt die Menschen bei CADSE in den Mittelpunkt, die ihre Küchen und ihre liebsten Familiengerichte für uns geöffnet haben. <strong>Über 180 Rezepte! Gedruckt auf 100% Recyclingpapier.</strong>
           </p>
 
-          <ul class="spenden-hero__trust">
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4.5 12.5 5 5 10-10"/></svg>
-              Steuerlich absetzbar
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4.5 12.5 5 5 10-10"/></svg>
-              Als gemeinnützig anerkannt
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4.5 12.5 5 5 10-10"/></svg>
-              Alle Finanzberichte öffentlich
-            </li>
+          <ul class="kochbuch-features">
+            <li class="kochbuch-feature-item">Authentisch</li>
+            <li class="kochbuch-feature-item">Traditionell &amp; Vegan</li>
+            <li class="kochbuch-feature-item">Persönliche Geschichten</li>
           </ul>
+
+          <div style="margin-top: 24px;">
+            <a class="btn btn--primary" href="spenden.html#kochbuch">Kochbuch bestellen <span aria-hidden="true">→</span></a>
+          </div>
         </div>
 
-        <!-- Widget -->
-        <div class="widget">
-          <h2 class="widget__title">Deine Spende zum Kochbuch oder einfach so</h2>
-
-          <h3 class="method-heading">Online per PayPal oder Karte</h3>
-          <form id="spenden-form">
-            <fieldset class="pills">
-              <legend class="sr-only">Spendenbetrag wählen</legend>
-              <label class="pill">
-                <input type="radio" name="betrag" value="25">
-                <span>25 €</span>
-              </label>
-              <label class="pill">
-                <input type="radio" name="betrag" value="40" checked>
-                <span>40 €</span>
-              </label>
-              <label class="pill">
-                <input type="radio" name="betrag" value="50">
-                <span>50 €</span>
-              </label>
-            </fieldset>
-
-            <div class="widget__custom">
-              <label class="sr-only" for="betrag-custom">Eigener Betrag in Euro</label>
-              <input type="number" id="betrag-custom" name="betrag_eigener" min="1" step="1" inputmode="numeric" placeholder="Oder freier Betrag">
-              <span class="widget__custom-unit" aria-hidden="true">€</span>
-            </div>
-
-            <button class="btn btn--donate btn--block" type="submit">Jetzt spenden</button>
-
-            <p class="widget__note">
-              Weiter zu PayPal. Dort kannst du auch mit Karte zahlen, ohne PayPal-Konto.
-            </p>
-          </form>
-
-          <div class="widget__divider">Oder</div>
-
-          <div class="widget__alt">
-            <h3 class="method-heading">Per Banküberweisung</h3>
-            <div class="bank-box">
-              <div class="bank-box__meta">
-                <span class="bank-box__item">
-                  Empfänger: <strong>Aquisito e.V.</strong>
-                  <button type="button" class="copy-btn" data-copy="Aquisito e.V." data-copy-label="Empfänger kopieren" aria-label="Empfänger kopieren" title="Empfänger kopieren">
-                    <svg class="copy-btn__icon copy-btn__icon--copy" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                    <svg class="copy-btn__icon copy-btn__icon--check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  </button>
-                </span>
-                <span class="bank-box__item">
-                  BIC: <strong>GENODEM1GLS</strong>
-                  <button type="button" class="copy-btn" data-copy="GENODEM1GLS" data-copy-label="BIC kopieren" aria-label="BIC kopieren" title="BIC kopieren">
-                    <svg class="copy-btn__icon copy-btn__icon--copy" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                    <svg class="copy-btn__icon copy-btn__icon--check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  </button>
-                </span>
-                <span class="bank-box__item">
-                  IBAN: <strong>DE72 4306 0967 1003 9179 00</strong>
-                  <button type="button" class="copy-btn" data-copy="DE72430609671003917900" data-copy-label="IBAN kopieren" aria-label="IBAN kopieren" title="IBAN kopieren">
-                    <svg class="copy-btn__icon copy-btn__icon--copy" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                    <svg class="copy-btn__icon copy-btn__icon--check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  </button>
-                </span>
+        <!-- Rechte Spalte: 3 Rezept-Karten -->
+        <div class="kochbuch-right">
+          <div class="kochbuch-cards-track" id="kochbuch-cards-track">
+            
+            <!-- Karte 1: Sopa de Quinoa -->
+            <div class="kochbuch-card-item">
+              <div class="kochbuch-card-img-wrap">
+                <img class="kochbuch-card-img" src="assets/img/quinoa.jpeg" alt="Sopa de Quinoa" loading="lazy" decoding="async">
               </div>
+              <div class="kochbuch-card-subtitle">Sopa de Quinoa</div>
+              <p class="kochbuch-card-text">
+                Traditionelle Quinoasuppe aus den Anden – nahrhaft, wärmend und voll von bolivianischem Geschmack.
+              </p>
             </div>
+
+            <!-- Karte 2: Papas a la Huancaína -->
+            <div class="kochbuch-card-item">
+              <div class="kochbuch-card-img-wrap">
+                <img class="kochbuch-card-img" src="assets/img/huancaina.jpeg" alt="Papas a la Huancaína" loading="lazy" decoding="async">
+              </div>
+              <div class="kochbuch-card-subtitle">Papas a la Huancaína</div>
+              <p class="kochbuch-card-text">
+                Würzige Kartoffeln in cremig-pikanter Käsesauce – ein beliebter Südamerika-Klassiker.
+              </p>
+            </div>
+
+            <!-- Karte 3: Brownie Boliviano -->
+            <div class="kochbuch-card-item">
+              <div class="kochbuch-card-img-wrap">
+                <img class="kochbuch-card-img" src="assets/img/brownie.jpeg" alt="Brownie Boliviano" loading="lazy" decoding="async">
+              </div>
+              <div class="kochbuch-card-subtitle">Brownie Boliviano</div>
+              <p class="kochbuch-card-text">
+                Saftiger Schokoladenbrownie mit bolivianischem Kakao und feiner Würze.
+              </p>
+            </div>
+
+          </div>
+
+          <!-- Slider Navigation & Grüner "Blick ins Buch" Button unten -->
+          <div class="kochbuch-slider-footer">
+            <div class="kochbuch-nav-row">
+              <button class="kochbuch-nav-btn" id="kochbuch-new-prev" type="button" aria-label="Vorheriges Rezept">←</button>
+              <span class="kochbuch-nav-label">Schau ins Buch und stöbere</span>
+              <button class="kochbuch-nav-btn" id="kochbuch-new-next" type="button" aria-label="Nächstes Rezept">→</button>
+            </div>
+            <a class="btn btn--primary" href="spenden.html#kochbuch" style="margin-top: 4px;">Blick ins Buch <span aria-hidden="true">→</span></a>
           </div>
         </div>
 
@@ -314,175 +559,125 @@
     </div>
   </section>
 
-  <section class="section" id="mittelverwendung">
+  <!-- ====================================================================
+       5. Ziele von Aquisito e.V.
+       ==================================================================== -->
+  <section class="section reveal" id="was-wir-tun">
     <div class="wrap">
-      <p class="eyebrow">Mittelverwendung</p>
-      <h2>Wohin dein Geld geht</h2>
-      <p class="prose">
-        Wir arbeiten ausschließlich ehrenamtlich: niemand bei Aquisito bekommt ein
-        Gehalt. Die Zahlen stammen aus dem Finanzbericht und sind Jahr für Jahr
-        nachlesbar.
+      <h2>Ziele von Aquisito e.V.</h2>
+      <p class="prose" style="margin-top: 16px;">
+        Unser Verein wurde gegründet, um Kindern und Jugendlichen in benachteiligten Regionen ein sicheres, chancenreiches Aufwachsen zu ermöglichen. Wir fokussieren uns dabei auf drei zentrale Schwerpunkte: die ganzheitliche Förderung von Erziehung und Bildung, die nachhaltige Stärkung der Jugendhilfe sowie den aktiven Einsatz für die Gleichberechtigung von Frauen und Männern.
       </p>
 
-      <div class="split">
-        <div class="split__bar" role="img" aria-label="Mittelverwendung: {{SPLIT_PROJEKTE}} Prozent Projekte, {{SPLIT_VERWALTUNG}} Prozent Verwaltung, {{SPLIT_FUNDRAISING}} Prozent Öffentlichkeitsarbeit">
-          <div class="split__segment split__segment--projekte" style="width: {{SPLIT_PROJEKTE}}%"></div>
-          <div class="split__segment split__segment--verwaltung" style="width: {{SPLIT_VERWALTUNG}}%"></div>
-          <div class="split__segment split__segment--fundraising" style="width: {{SPLIT_FUNDRAISING}}%"></div>
-        </div>
+      <div class="cards">
+        <article class="card card--linked">
+          <svg class="card__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A2.5 2.5 0 0 1 5.5 4H11v16H5.5A2.5 2.5 0 0 1 3 17.5Z"/><path d="M21 6.5A2.5 2.5 0 0 0 18.5 4H13v16h5.5a2.5 2.5 0 0 0 2.5-2.5Z"/></svg>
+          <h3 class="card__title">Erziehung &amp; Bildung</h3>
+          <p class="card__body">
+            Ganzheitliche Förderung durch gezielte Hausaufgabenbetreuung, Unterstützung beim Erlernen der englischen Sprache sowie praxisnahe Lern- und Kreativangebote, die schulische Lücken schließen und den Spaß am Lernen wecken.
+          </p>
+          <a class="card__link arrow-link" href="transparenz.html#projekte">Was das kostet <span aria-hidden="true">→</span></a>
+        </article>
 
-        <ul class="split__key">
-          <li><span class="split__swatch" style="background: var(--forest)" aria-hidden="true"></span><span class="split__value">{{SPLIT_PROJEKTE}} %</span> Projekte bei CADSE in Bolivien</li>
-          <li><span class="split__swatch" style="background: var(--olive)" aria-hidden="true"></span><span class="split__value">{{SPLIT_VERWALTUNG}} %</span> Verwaltung, Kontoführung, Vereinsrecht</li>
-          <li><span class="split__swatch" style="background: var(--gray)" aria-hidden="true"></span><span class="split__value">{{SPLIT_FUNDRAISING}} %</span> Öffentlichkeitsarbeit und Material</li>
-        </ul>
+        <article class="card card--linked">
+          <svg class="card__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3c2.6 2.4 2.6 15.6 0 18M12 3C9.4 5.4 9.4 18.6 12 21M3.2 9.5h17.6M3.2 14.5h17.6"/></svg>
+          <h3 class="card__title">Jugendhilfe &amp; Schutzraum</h3>
+          <p class="card__body">
+            Ein sicherer Rückzugsort im Stadtteil Ushpa Ushpa, der Schutz vor Gefahren wie Straßenkriminalität bietet. Durch persönliche Begleitung, offene Ohren und Hausbesuche werden Kinder und Familien in schwierigen Lebenslagen gestärkt.
+          </p>
+          <a class="card__link arrow-link" href="transparenz.html#projekte">Was das kostet <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="card card--linked">
+          <svg class="card__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8Z"/><path d="M12 12c0-3.3 2.7-6 6-6 0 3.3-2.7 6-6 6Z"/><path d="M12 12C12 9.2 9.8 7 7 7c0 2.8 2.2 5 5 5Z"/></svg>
+          <h3 class="card__title">Gleichberechtigung &amp; Entwicklung</h3>
+          <p class="card__body">
+            Aktive Förderung des selbstbestimmten und verlässlichen Miteinanders durch gemeinsame Projekte in Sport, Kunst und Umwelt. Es wird Raum geschaffen für die freie Entfaltung aller Kinder und Jugendlichen – unabhängig vom Geschlecht.
+          </p>
+          <a class="card__link arrow-link" href="transparenz.html#projekte">Was das kostet <span aria-hidden="true">→</span></a>
+        </article>
       </div>
-
-      <h3 style="margin-top: var(--space-8);">Die Berichte im Volltext</h3>
-      <ul class="reports">
-        <li><a href="documents/Finanzbericht-2025.pdf">Finanzbericht 2025</a> <span class="muted small">PDF, 0,7 MB</span></li>
-        <li><a href="documents/Finanzbericht-2024.pdf">Finanzbericht 2024</a> <span class="muted small">PDF, 4,2 MB</span></li>
-        <li><a href="documents/Finanzbericht-2023.pdf">Finanzbericht 2023</a> <span class="muted small">PDF, 1,6 MB</span></li>
-        <li><a href="transparenz.html">Alle Berichte seit 2020 und die Kassenstände</a></li>
-      </ul>
     </div>
   </section>
 
+  <!-- ====================================================================
+       6. Team (Über uns)
+       ==================================================================== -->
+  <section class="section section--alt reveal" id="team">
+    <div class="wrap">
+      <p class="eyebrow">Über uns</p>
+      <h2>Wer hinter Aquisito steckt</h2>
+      <p class="prose">
+        Wir sind {{STAT_MITGLIEDER}} aktive Mitglieder, alle ehrenamtlich, in
+        Deutschland und in Bolivien. Wenn du Teil der Aquisito-Familie werden
+        möchtest, schreib uns an
+        <a href="mailto:info@aquisito.de">info@aquisito.de</a>.
+      </p>
+
+      <ul class="team">
+        <li class="team__cell"><button class="team__flip" type="button"><span class="team__face team__front"><img class="team__portrait" src="assets/img/mery.jpg" alt="" loading="lazy"></span><span class="team__face team__back"><span class="team__name">Mery</span><span class="team__role">Koordinatorin von CADSE · Leitung und Außenrepräsentation</span></span></button></li>
+        <li class="team__cell"><button class="team__flip" type="button"><span class="team__face team__front"><img class="team__portrait" src="assets/img/erika.jpg" alt="" loading="lazy"></span><span class="team__face team__back"><span class="team__name">Erika</span><span class="team__role">Interne Leitung von CADSE · Management und Betreuung</span></span></button></li>
+        <li class="team__cell"><button class="team__flip" type="button"><span class="team__face team__front"><img class="team__portrait" src="assets/img/toni.jpg" alt="" loading="lazy"></span><span class="team__face team__back"><span class="team__name">Toni</span><span class="team__role">Erste Vorsitzende</span></span></button></li>
+        <li class="team__cell"><button class="team__flip" type="button"><span class="team__face team__front"><img class="team__portrait" src="assets/img/natha.jpg" alt="" loading="lazy"></span><span class="team__face team__back"><span class="team__name">Natha</span><span class="team__role">Stellvertretende Vorsitzende · Kooperationen</span></span></button></li>
+        <li class="team__cell"><button class="team__flip" type="button"><span class="team__face team__front"><img class="team__portrait" src="assets/img/thomas.jpeg" alt="" loading="lazy"></span><span class="team__face team__back"><span class="team__name">Thomas</span><span class="team__role">Rechnungsführer · Finanzen und Kooperationen</span></span></button></li>
+        <li class="team__cell"><button class="team__flip" type="button"><span class="team__face team__front team__front--placeholder"><img class="team__sun" src="assets/img/sonne.svg" alt="" aria-hidden="true" width="56" height="56"></span><span class="team__face team__back"><span class="team__name">Maria</span><span class="team__role">Vorstandsbeisitzerin · Marketing</span></span></button></li>
+        <li class="team__cell"><button class="team__flip" type="button"><span class="team__face team__front team__front--placeholder"><img class="team__sun" src="assets/img/sonne.svg" alt="" aria-hidden="true" width="56" height="56"></span><span class="team__face team__back"><span class="team__name">Felix</span><span class="team__role">Vorstandsbeisitzer · Marketing</span></span></button></li>
+      </ul>
+
+      <p style="margin-top: var(--space-8);">
+        <a class="arrow-link" href="freiwillige.html">Selbst mitmachen <span aria-hidden="true">→</span></a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       7. Zitat-Banner (unter "Wer hinter Aquisito steckt")
+       ==================================================================== -->
   <section class="band" aria-labelledby="band-line">
     <picture>
-      <source type="image/webp" srcset="assets/img/band-spenden-1200.webp 1200w, assets/img/band-spenden-2400.webp 2400w" sizes="100vw">
-      <img class="band__media" src="assets/img/band-spenden-1200.jpg"
-           srcset="assets/img/band-spenden-1200.jpg 1200w, assets/img/band-spenden-2400.jpg 2400w" sizes="100vw"
+      <source type="image/webp" srcset="assets/img/band-index-1200.webp 1200w, assets/img/band-index-2400.webp 2400w" sizes="100vw">
+      <img class="band__media" src="assets/img/band-index-1200.jpg"
+           srcset="assets/img/band-index-1200.jpg 1200w, assets/img/band-index-2400.jpg 2400w" sizes="100vw"
            width="2400" height="1350" alt="" loading="lazy" decoding="async">
     </picture>
     <div class="band__scrim" aria-hidden="true"></div>
-    <svg class="band__arc band__arc--top" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0,30 Q120,6 240,30 T480,30 T720,30 T960,30 T1200,30 T1440,30 V0 H0 Z"/></svg>
-    <svg class="band__arc band__arc--bottom" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0,30 Q120,54 240,30 T480,30 T720,30 T960,30 T1200,30 T1440,30 V60 H0 Z"/></svg>
-    <p class="band__line" id="band-line">Aquisito heißt hier. Nicht dort, nicht irgendwann.</p>
+    <svg class="band__arc band__arc--top" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0,44 C480,10 960,38 1440,12 L1440,0 L0,0 Z"/></svg>
+    <svg class="band__arc band__arc--bottom" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0,36 C480,2 960,30 1440,4 L1440,48 L0,48 Z"/></svg>
+    <p class="band__line" id="band-line">Wo Mery hingeht, da sind auch Kinder.</p>
   </section>
 
-  <section class="section section--alt">
+  <!-- ====================================================================
+       8. Dreier-Box (Freiwilligendienst, Kochbuch, Spenden)
+       ==================================================================== -->
+  <section class="section reveal">
     <div class="wrap">
-      <p class="eyebrow">Andere Wege</p>
-      <h2>Es geht auch anders</h2>
-
-      <div class="cards">
-        <article class="card" id="foerdermitglied">
-          <svg class="card__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5S3.5 15.4 3.5 9.6A4.6 4.6 0 0 1 12 7a4.6 4.6 0 0 1 8.5 2.6c0 5.8-8.5 10.9-8.5 10.9Z"/></svg>
-          <h3 class="card__title">Fördermitglied werden</h3>
-          <p class="card__body">
-            Der beste Weg, uns zu helfen. CADSE kann mit einem festen Betrag rechnen
-            und für die Zukunft planen. Du bestimmst die Höhe selbst, hast sonst
-            keine Verpflichtungen und kannst jederzeit austreten.
+      <div class="routing">
+        <article class="routing__card routing__card--freiwillige">
+          <h3>Freiwilligendienst</h3>
+          <p>
+            Sechs bis zwölf Monate bei CADSE in Cochabamba, teilfinanziert durch das
+            BMFSFJ — oder auf eigene Faust ab drei Monaten.
           </p>
-          <a class="arrow-link card__link" href="documents/Aquisito_Fördermitgliedsantrag.pdf">
-            Antrag herunterladen <span aria-hidden="true">→</span>
-          </a>
+          <a class="arrow-link" href="freiwillige.html">Zu den Einsatzbereichen <span aria-hidden="true">→</span></a>
         </article>
 
-        <article class="card">
-          <svg class="card__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12v8.5H4V12"/><path d="M2.5 7.5h19V12h-19z"/><path d="M12 21V7.5"/><path d="M12 7.5H7.75a2.25 2.25 0 1 1 0-4.5C10.5 3 12 7.5 12 7.5Z"/><path d="M12 7.5h4.25a2.25 2.25 0 1 0 0-4.5C13.5 3 12 7.5 12 7.5Z"/></svg>
-          <h3 class="card__title">Anlassspende</h3>
-          <p class="card__body">
-            Geburtstag, Hochzeit, Jubiläum: statt Geschenken um eine Spende für CADSE
-            bitten. Wir stellen für alle Beteiligten Bescheinigungen aus und schicken
-            dir hinterher, was damit passiert ist.
+        <article class="routing__card routing__card--kochbuch">
+          <h3>Kochbuch</h3>
+          <p>
+            Bolivianische Rezepte, gesammelt von der Aquisito-Familie. Der ganze
+            Erlös geht an CADSE in Cochabamba.
           </p>
-          <a class="arrow-link card__link" href="mailto:info@aquisito.de?subject=Anlassspende">
-            Schreib uns <span aria-hidden="true">→</span>
-          </a>
+          <a class="arrow-link" href="#kochbuch">Zum Kochbuch <span aria-hidden="true">→</span></a>
         </article>
 
-        <article class="card">
-          <svg class="card__icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V8l7-4 7 4v13"/><path d="M9.5 21v-5h5v5"/></svg>
-          <h3 class="card__title">Als Unternehmen</h3>
-          <p class="card__body">
-            Wir arbeiten mit Stiftungen und Unternehmen zusammen: die Schmitz
-            Stiftung hat mit 9.990 € den zweiten CADSE-Standort ermöglicht. Für
-            Kooperationen melde dich bei Natha oder Thomas.
+        <article class="routing__card routing__card--spenden">
+          <h3>Spenden</h3>
+          <p>
+            Per PayPal, Überweisung oder als Fördermitglied. Alle Finanzberichte seit
+            2020 sind öffentlich, Position für Position.
           </p>
-          <a class="arrow-link card__link" href="mailto:nathalie@aquisito.de?subject=Kooperation">
-            Kooperation anfragen <span aria-hidden="true">→</span>
-          </a>
+          <a class="arrow-link" href="spenden.html">Zur Spendenseite <span aria-hidden="true">→</span></a>
         </article>
-      </div>
-
-      <!-- Kochbuch -->
-      <div class="kochbuch" id="kochbuch" style="margin-top: var(--space-10);">
-        <div>
-          <h3>Unser Kochbuch</h3>
-          <p>
-            In einem großen Gemeinschaftsprojekt haben CADSE und Aquisito zusammen ein
-            Kochbuch geschrieben, das Deutschland die Türen zur bolivianischen Küche
-            öffnet. Bestell dir dein Exemplar und unterstütze damit die Arbeit von
-            CADSE in Bolivien.
-          </p>
-          <a class="btn btn--ghost" href="https://www.paypal.com/donate/?hosted_button_id=7LRKA636K85E6" target="_blank" rel="noopener">
-            Kochbuch bestellen
-          </a>
-        </div>
-        <div>
-          <video controls preload="none" playsinline width="1280" height="720">
-            <source src="assets/video/kochbuch.mp4" type="video/mp4">
-            <p>Dein Browser kann das Video nicht abspielen.
-              <a href="assets/video/kochbuch.mp4">Video herunterladen</a> (MP4, 9,7 MB).</p>
-          </video>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-      <p class="eyebrow">Vertrauen</p>
-      <h2>Was mit deiner Spende passiert</h2>
-
-      <div class="trust" style="margin-top: var(--space-7);">
-        <div>
-          <h3>Spendenbescheinigung</h3>
-          <p>
-            Sowohl der Beitrag von Fördermitgliedern als auch einzelne Spenden können
-            steuerlich abgesetzt werden. Für Beträge bis 300 € im Jahr genügt dem
-            Finanzamt dein Kontoauszug. Darüber stellen wir eine Bescheinigung aus und
-            verschicken sie im Februar des Folgejahres.
-          </p>
-          <p class="small muted">
-            Für eine Bescheinigung schick uns deine Adresse an
-            <a href="mailto:info@aquisito.de?subject=Spendenbescheinigung">info@aquisito.de</a>.
-          </p>
-
-          <h3 style="margin-top: var(--space-8);">Gemeinnützigkeit</h3>
-          <p>
-            Aquisito e.V. ist nach § 5 Abs. 1 Nr. 9 KStG von der Körperschaftsteuer und
-            nach § 3 Nr. 6 GewStG von der Gewerbesteuer befreit. Zuständig ist das
-            Finanzamt Aachen-Stadt, Steuernummer 201/5905/6228. Wir fördern
-            ausschließlich Jugendhilfe, Erziehung und die Gleichberechtigung von Frauen
-            und Männern.
-          </p>
-
-          <div class="trust__contact" style="margin-top: var(--space-8);">
-            <h3>Fragen zur Spende?</h3>
-            <p>
-              {{KONTAKT_SPENDEN_NAME}} führt bei uns die Kasse und beantwortet alles zu
-              Bescheinigungen, Fördermitgliedschaft und Finanzberichten.
-            </p>
-            <p>
-              <a href="mailto:thomas@aquisito.de">thomas@aquisito.de</a><br>
-              <a href="tel:{{KONTAKT_SPENDEN_TEL}}">{{KONTAKT_SPENDEN_TEL}}</a>
-            </p>
-          </div>
-        </div>
-
-        <div>
-          <h3>Offene Zahlen</h3>
-          <p class="small">
-            Wir legen die wesentlichen Angaben über den Verein offen und halten sie
-            aktuell: von der Satzung bis zur Mittelherkunft.
-          </p>
-          <p class="small" style="margin-top: var(--space-5);">
-            <a href="transparenz.html">Alle Angaben ansehen</a>
-          </p>
-        </div>
       </div>
     </div>
   </section>
@@ -514,11 +709,10 @@
       <div>
         <h2>Rechtliches</h2>
         <ul class="small">
-          <li><a href="impressum.html">Impressum</a></li>
-          <li><a href="datenschutz.html">Datenschutz</a></li>
           <li><a href="satzung.html">Satzung</a></li>
           <li><a href="foerdervereinbarung.html">Fördervereinbarung</a></li>
           <li><a href="transparenz.html">Transparenz</a></li>
+          <li><a href="transparenz.html#finanzberichte">Finanzberichte</a></li>
         </ul>
       </div>
       <div>
@@ -529,103 +723,37 @@
       </div>
     </div>
     <p class="site-footer__legal">
-      Aquisito e.V. · Vereinsregister Aachen VR 6037 · SteuerNr. 201/5905/6228 ·
-      als gemeinnützig anerkannt nach § 5 Abs. 1 Nr. 9 KStG (Freistellungsbescheid 2023) ·
-      <a href="transparenz.html">Finanzberichte 2020 bis 2025</a>
+      Aquisito e.V. ·
+      <a href="impressum.html">Impressum</a> ·
+      <a href="datenschutz.html">Datenschutz</a>
     </p>
   </div>
 </footer>
 
-<!-- Automatische Synchronisation von Freifeld und Generierung der sauberen URL -->
+<!-- Script für Karten-Slider in der Kochbuch-Sektion -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('spenden-form');
-    const customInput = document.getElementById('betrag-custom');
-    const radios = form ? form.querySelectorAll('input[name="betrag"]') : [];
+    const track = document.getElementById('kochbuch-cards-track');
+    const prevBtn = document.getElementById('kochbuch-new-prev');
+    const nextBtn = document.getElementById('kochbuch-new-next');
+    if (!track) return;
 
-    if (customInput) {
-      customInput.addEventListener('input', () => {
-        if (customInput.value && Number(customInput.value) > 0) {
-          radios.forEach(radio => radio.checked = false);
-        }
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        track.scrollBy({ left: -260, behavior: 'smooth' });
       });
-
-      radios.forEach(radio => {
-        radio.addEventListener('change', () => {
-          if (radio.checked) {
-            customInput.value = '';
-          }
-        });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        track.scrollBy({ left: 260, behavior: 'smooth' });
       });
-
-      if (form) {
-        form.addEventListener('submit', (ereignis) => {
-          ereignis.preventDefault();
-          
-          let amount = '40';
-          const checkedRadio = Array.from(radios).find(r => r.checked);
-          
-          if (customInput.value && Number(customInput.value) > 0) {
-            amount = customInput.value;
-          } else if (checkedRadio) {
-            amount = checkedRadio.value;
-          }
-          
-          const returnUrl = encodeURIComponent('https://aquisito.de/spenden/danke');
-          const paypalUrl = `https://www.paypal.com/donate/?hosted_button_id=BWK48NNFGLMQJ&amount=${amount}&currency_code=EUR&return=${returnUrl}`;
-          
-          window.open(paypalUrl, '_blank', 'noopener,noreferrer');
-        });
-      }
     }
   });
 </script>
-
-<!-- Skript fuer die Kopierbuttons -->
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const copyButtons = document.querySelectorAll('.copy-btn');
-    copyButtons.forEach(btn => {
-      btn.addEventListener('click', async () => {
-        const textToCopy = btn.getAttribute('data-copy');
-        if (!textToCopy) return;
-
-        try {
-          if (navigator.clipboard && window.isSecureContext) {
-            await navigator.clipboard.writeText(textToCopy);
-          } else {
-            const textArea = document.createElement('textarea');
-            textArea.value = textToCopy;
-            textArea.style.position = 'fixed';
-            textArea.style.left = '-999999px';
-            textArea.style.top = '-999999px';
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            document.execCommand('copy');
-            textArea.remove();
-          }
-
-          btn.classList.add('is-copied');
-          btn.setAttribute('aria-label', 'Kopiert!');
-          btn.setAttribute('title', 'Kopiert!');
-
-          setTimeout(() => {
-            btn.classList.remove('is-copied');
-            const originalLabel = btn.getAttribute('data-copy-label') || 'In Zwischenablage kopieren';
-            btn.setAttribute('aria-label', originalLabel);
-            btn.setAttribute('title', originalLabel);
-          }, 2000);
-        } catch (err) {
-          console.error('Fehler beim Kopieren:', err);
-        }
-      });
-    });
-  });
-</script>
-
-<script type="module" src="js/nav.js?v=20260913c"></script>
-<script type="module" src="js/donate.js?v=20260913c"></script>
-<script type="module" src="js/parallax.js?v=20260913c"></script>
+<script type="module" src="js/nav.js?v=20260913d"></script>
+<script type="module" src="js/reveal.js?v=20260913d"></script>
+<script type="module" src="js/hero-stack.js?v=20260913d"></script>
+<script type="module" src="js/team-flip.js?v=20260913d"></script>
+<script type="module" src="js/stats-timer.js?v=20260913d"></script>
 </body>
 </html>
