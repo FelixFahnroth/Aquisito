@@ -33,9 +33,10 @@ SMTP_HOST = os.environ.get("SMTP_HOST", "")
 SMTP_PORT = int(os.environ.get("SMTP_PORT", "587"))
 SMTP_USER = os.environ.get("SMTP_USER", "")
 SMTP_PASSWORD = os.environ.get("SMTP_PASSWORD", "")
-# Absender muss eine Adresse der eigenen Domain sein, sonst scheitert SPF/DKIM
-# und die Mail landet im Spam.
-MAIL_FROM = os.environ.get("MAIL_FROM", "website@aquisito.de")
+# Absender. Die meisten Mailserver erlauben nur die Adresse, mit der man sich
+# auch angemeldet hat — im Zweifel also dieselbe wie SMTP_USER. Eine fremde
+# Adresse wird entweder abgelehnt oder scheitert später an SPF/DKIM.
+MAIL_FROM = os.environ.get("MAIL_FROM", "info@aquisito.de")
 MAIL_TO = os.environ.get("MAIL_TO", "info@aquisito.de")
 SUCCESS_URL = os.environ.get("SUCCESS_URL", "/anfrage-gesendet")
 ERROR_URL = os.environ.get("ERROR_URL", "/freiwillige?fehler=1#anmeldung")
@@ -231,12 +232,73 @@ class Handler(BaseHTTPRequestHandler):
         self._ok()
 
 
+def selftest() -> int:
+    """Prüft die Zugangsdaten und schickt eine Testmail an MAIL_TO.
+
+        docker compose exec anmeldung python /app/anmeldung.py --selftest
+
+    Gibt niemals das Passwort aus, nur ob es funktioniert hat."""
+    print("Konfiguration:")
+    print(f"  SMTP_HOST     {SMTP_HOST or '(leer!)'}")
+    print(f"  SMTP_PORT     {SMTP_PORT}")
+    print(f"  SMTP_USER     {SMTP_USER or '(leer — ohne Anmeldung)'}")
+    print(f"  SMTP_PASSWORD {'gesetzt (%d Zeichen)' % len(SMTP_PASSWORD) if SMTP_PASSWORD else '(leer!)'}")
+    print(f"  MAIL_FROM     {MAIL_FROM}")
+    print(f"  MAIL_TO       {MAIL_TO}")
+    print()
+
+    if not SMTP_HOST:
+        print("FEHLER: SMTP_HOST ist leer. Die .env wird nicht gelesen oder ist leer.")
+        return 2
+    if SMTP_USER and MAIL_FROM.lower() != SMTP_USER.lower():
+        print(f"Hinweis: MAIL_FROM ({MAIL_FROM}) und SMTP_USER ({SMTP_USER}) sind "
+              "verschieden. Viele Anbieter lehnen das ab. Wenn es gleich unten "
+              "scheitert, setzt beides auf dieselbe Adresse.")
+        print()
+
+    msg = EmailMessage()
+    msg["Subject"] = "Testmail vom Anmeldeformular"
+    msg["From"] = MAIL_FROM
+    msg["To"] = MAIL_TO
+    msg.set_content(
+        "Das ist eine Testmail von api/anmeldung.py.\n"
+        "Wenn sie angekommen ist, funktioniert das Formular auf "
+        "aquisito.de/freiwillige.\n"
+    )
+
+    try:
+        _send(msg)
+    except Exception as exc:                         # noqa: BLE001
+        print(f"FEHLGESCHLAGEN: {type(exc).__name__}: {exc}")
+        print()
+        name = type(exc).__name__
+        if name == "SMTPAuthenticationError":
+            print("Der Server hat Benutzer oder Passwort abgelehnt. Falls euer "
+                  "Anbieter App-Passwörter kennt, nehmt eins davon.")
+        elif name in ("SMTPConnectError", "TimeoutError", "OSError", "gaierror"):
+            print("Keine Verbindung. Stimmen SMTP_HOST und SMTP_PORT? "
+                  "Üblich sind 587 (STARTTLS) und 465 (SSL).")
+        elif name == "SMTPSenderRefused":
+            print("Der Server akzeptiert MAIL_FROM nicht als Absender. "
+                  "Setzt MAIL_FROM auf dieselbe Adresse wie SMTP_USER.")
+        elif name == "SMTPRecipientsRefused":
+            print(f"Der Server nimmt {MAIL_TO} nicht als Empfänger an.")
+        return 1
+
+    print(f"OK — Testmail an {MAIL_TO} verschickt. Schaut ins Postfach.")
+    return 0
+
+
 def main():
+    if "--selftest" in sys.argv:
+        sys.exit(selftest())
+
     missing = [k for k in ("SMTP_HOST", "MAIL_FROM", "MAIL_TO") if not os.environ.get(k)]
     if missing:
         sys.stderr.write(
             "Warnung: %s nicht gesetzt — Absenden wird fehlschlagen. "
-            "Siehe .env.example.\n" % ", ".join(missing)
+            "Siehe .env.example und 'python /app/anmeldung.py --selftest'.\n"
+            % ", ".join(missing)
         )
     srv = ThreadingHTTPServer(("0.0.0.0", LISTEN_PORT), Handler)
     sys.stderr.write(f"anmeldung: hört auf Port {LISTEN_PORT}, Ziel {MAIL_TO}\n")

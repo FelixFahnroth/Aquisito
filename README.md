@@ -38,9 +38,18 @@ It stores nothing: no database, and form contents never reach a log. `.env`
 holds the mailbox password and is git-ignored; `.env.example` documents the
 variables and contains no secrets.
 
-Check it is alive with `docker compose logs -f anmeldung`. Without `SMTP_HOST`
-set, the service starts and warns, and submissions fail with a message pointing
-the visitor at `info@aquisito.de`.
+Check the mail settings without touching the form:
+
+```bash
+docker compose exec anmeldung python /app/anmeldung.py --selftest
+```
+
+It prints the configuration it sees (never the password), sends one test mail
+to `MAIL_TO`, and on failure says which of host, port, credentials or sender
+address the server objected to.
+
+Without `SMTP_HOST` set, the service still starts and warns, and submissions
+fail with a message pointing the visitor at `info@aquisito.de`.
 
 ## Layout
 
