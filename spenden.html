@@ -178,6 +178,57 @@
     text-decoration: underline;
     font-weight: 600;
   }
+
+  /* Layout fuer Text und Finanzberichte-Box */
+  .content-sidebar-layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 48px;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .content-sidebar-layout {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+  .reports-box {
+    background: rgba(27, 67, 50, 0.04);
+    border: 1px solid rgba(27, 67, 50, 0.12);
+    border-radius: 12px;
+    padding: 24px;
+    position: sticky;
+    top: 100px;
+  }
+  .reports-box__title {
+    font-size: 1.2rem;
+    color: var(--forest, #1b4332);
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+  .reports-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .reports-list li {
+    display: flex;
+    flex-direction: column;
+  }
+  .reports-list a {
+    color: var(--forest, #1b4332);
+    text-decoration: underline;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .reports-list .muted {
+    color: #6b7280;
+    font-size: 0.85rem;
+    margin-top: 2px;
+  }
 </style>
 <script>document.documentElement.className = 'js';</script>
 </head>
@@ -185,24 +236,23 @@
 
 <a class="skip-link" href="#main">Zum Inhalt springen</a>
 
-<header class="site-header site-header--solid">
+<header class="site-header">
   <div class="site-header__inner">
     <a class="wordmark" href="index.html">
       <img class="wordmark__mark" src="assets/img/sonne.svg" width="34" height="34" alt="" aria-hidden="true">
       Aquisito
     </a>
-
     <nav class="nav" aria-label="Hauptnavigation">
       <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-list">
         <span class="sr-only">Menü öffnen</span>
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       </button>
       <ul class="nav__list" id="nav-list">
-        <li><a class="nav__link" href="index.html#was-wir-tun">Was wir tun</a></li>
         <li><a class="nav__link" href="index.html#team">Über uns</a></li>
-        <li><a class="nav__link" href="freiwillige.html">Freiwillige</a></li>
-        <li><a class="nav__link" href="spenden.html" aria-current="page">Spenden</a></li>
+        <li><a class="nav__link" href="index.html#kochbuch">Kochbuch</a></li>
+        <li><a class="nav__link" href="freiwillige.html">Freiwilligendienst</a></li>
       </ul>
+      <a class="btn btn--donate" href="spenden.html" aria-current="page">Spenden</a>
     </nav>
   </div>
 </header>
@@ -330,33 +380,62 @@
 
   <section class="section">
     <div class="wrap">
-      <h2>Wohin dein Geld geht</h2>
-      
-      <h3 style="margin-top: var(--space-8);">Fast 100 Prozent kommen direkt in Bolivien an</h3>
-      <p class="prose">
-        Wir arbeiten vollständig ehrenamtlich. Niemand bei Aquisito bezieht ein Gehalt und wir halten Verwaltungskosten minimal. Dadurch fließt dein Geld nahezu ungeschmälert in die Projekte von CADSE vor Ort.
-      </p>
+      <div class="content-sidebar-layout">
+        
+        <div class="main-text">
+          <h2>Wohin dein Geld geht</h2>
+          
+          <h3 style="margin-top: var(--space-8);">Fast 100 Prozent kommen direkt in Bolivien an</h3>
+          <p class="prose">
+            Wir arbeiten vollständig ehrenamtlich. Niemand bei Aquisito bezieht ein Gehalt und wir halten Verwaltungskosten minimal. Dadurch fließt dein Geld nahezu ungeschmälert in die Projekte von CADSE vor Ort.
+          </p>
 
-      <h3 style="margin-top: var(--space-8);">Lückenlose Transparenz</h3>
-      <p class="prose">
-        Wir legen alle Einnahmen und Ausgaben offen. Unsere Kassenstände und die ausführlichen Finanzberichte der letzten Jahre kannst du jederzeit online nachlesen und herunterladen.
-      </p>
+          <h3 style="margin-top: var(--space-8);">Lückenlose Transparenz</h3>
+          <p class="prose">
+            Wir legen alle Einnahmen und Ausgaben offen. Unsere Kassenstände und die ausführlichen Finanzberichte der letzten Jahre kannst du jederzeit online nachlesen und herunterladen.
+          </p>
 
-      <h3 style="margin-top: var(--space-8);">Geprüfte Gemeinnützigkeit</h3>
-      <p class="prose">
-        Aquisito e.V. ist vom Finanzamt Aachen-Stadt (Steuernummer 201/5905/6228) offiziell als gemeinnützig anerkannt und fördert Jugendhilfe sowie Bildung. Jede Spende ist steuerlich absetzbar. Bis 300 Euro genügt dein Kontoauszug als Nachweis für das Finanzamt, für höhere Beträge stellen wir dir gerne eine Spendenbescheinigung aus.
-      </p>
+          <h3 style="margin-top: var(--space-8);">Geprüfte Gemeinnützigkeit</h3>
+          <p class="prose">
+            Aquisito e.V. ist vom Finanzamt Aachen-Stadt (Steuernummer 201/5905/6228) offiziell als gemeinnützig anerkannt und fördert Jugendhilfe sowie Bildung. Jede Spende ist steuerlich absetzbar. Bis 300 Euro genügt dein Kontoauszug als Nachweis für das Finanzamt, für höhere Beträge stellen wir dir gerne eine Spendenbescheinigung aus.
+          </p>
 
-      <h3 style="margin-top: var(--space-8);">Anlassspenden</h3>
-      <p class="prose">
-        Ob Geburtstag, Hochzeit oder Jubiläum: Du kannst deinen Anlass nutzen, um gemeinsam mit deinen Gästen Spenden für CADSE zu sammeln. Wir stellen für alle Beteiligten Bescheinigungen aus und zeigen euch genau, was mit den Spenden bewirkt wurde.
-      </p>
+          <h3 style="margin-top: var(--space-8);">Anlassspenden</h3>
+          <p class="prose">
+            Ob Geburtstag, Hochzeit oder Jubiläum: Du kannst deinen Anlass nutzen, um gemeinsam mit deinen Gästen Spenden für CADSE zu sammeln. Wir stellen für alle Beteiligten Bescheinigungen aus und zeigen euch genau, was mit den Spenden bewirkt wurde.
+          </p>
 
-      <h3 style="margin-top: var(--space-8);">Fragen zur Spende?</h3>
-      <p class="prose">
-        Bei Fragen zu Spenden, Bescheinigungen oder unseren Finanzberichten erreichst du uns direkt per E-Mail:<br>
-        <a href="mailto:info@aquisito.de">info@aquisito.de</a>
-      </p>
+          <h3 style="margin-top: var(--space-8);">Fragen zur Spende?</h3>
+          <p class="prose">
+            Bei Fragen zu Spenden, Bescheinigungen oder unseren Finanzberichten erreichst du uns direkt per E-Mail:<br>
+            <a href="mailto:info@aquisito.de">info@aquisito.de</a>
+          </p>
+        </div>
+
+        <aside class="sidebar">
+          <div class="reports-box">
+            <h3 class="reports-box__title">Die Berichte im Volltext</h3>
+            <ul class="reports-list">
+              <li>
+                <a href="documents/Finanzbericht-2025.pdf">Finanzbericht 2025</a>
+                <span class="muted small">PDF, 0,7 MB</span>
+              </li>
+              <li>
+                <a href="documents/Finanzbericht-2024.pdf">Finanzbericht 2024</a>
+                <span class="muted small">PDF, 4,2 MB</span>
+              </li>
+              <li>
+                <a href="documents/Finanzbericht-2023.pdf">Finanzbericht 2023</a>
+                <span class="muted small">PDF, 1,6 MB</span>
+              </li>
+              <li style="margin-top: 12px;">
+                <a href="transparenz.html">Alle Berichte seit 2020 und die Kassenstände ansehen</a>
+              </li>
+            </ul>
+          </div>
+        </aside>
+
+      </div>
     </div>
   </section>
 
