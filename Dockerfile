@@ -13,6 +13,14 @@ RUN echo 'server { \
     index index.html; \
     charset utf-8; \
     \
+    # Kein Zugriffsprotokoll. Die Website misst nichts, wertet nichts aus und \
+    # braucht die Daten fuer nichts — dann ist es ehrlicher, die IP-Adressen \
+    # der Besucherinnen gar nicht erst aufzuschreiben, statt eine Loeschfrist \
+    # zu versprechen, die niemand kontrolliert. Siehe datenschutz.html. \
+    # error_log bleibt an: der protokolliert keine normalen Aufrufe, sondern \
+    # nur echte Fehler, und ohne ihn ist eine Stoerung nicht zu finden. \
+    access_log off; \
+    \
     # Gzip-Komprimierung aktivieren \
     gzip on; \
     gzip_types text/plain text/css application/javascript application/json image/svg+xml; \
@@ -43,6 +51,9 @@ RUN echo 'server { \
     # diesen einen Pfad. 127.0.0.11 ist der DNS von Docker. \
     location = /api/anmeldung { \
         resolver 127.0.0.11 ipv6=off valid=10s; \
+        # Ohne das wartet nginx im Fehlerfall 30 Sekunden auf die \
+        # Namensaufloesung, und der Absende-Klick haengt so lange. \
+        resolver_timeout 5s; \
         set $upstream_anmeldung anmeldung:8080; \
         proxy_pass http://$upstream_anmeldung; \
         proxy_set_header Host $host; \

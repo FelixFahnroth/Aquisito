@@ -76,16 +76,20 @@ reaches production any more** — rule 10 is satisfied for the first time.
   company, and the prose above it says "unser Server" rather than "unser
   Hoster". **If the machine is a rented VPS or root server, the datacentre
   operator is normally still named here** — revisit if that is the case.
-- **`{{LOG_SPEICHERDAUER}}` → 14 Tage** (client estimate, not a measurement).
+- **`{{LOG_SPEICHERDAUER}}` → kein Zugriffsprotokoll.** First set to 14 days,
+  then reconsidered: Docker's json-file driver rotates by size, not time, so a
+  14-day promise would not have been self-enforcing. The nginx access log is
+  switched off instead (`access_log off`), which is both simpler and stronger —
+  the site has no analytics, so nothing depended on it. `error_log` stays on and
+  records only real faults. The section in `datenschutz.html` was rewritten to
+  describe that rather than a retention period.
 
-  ⚠️ **The 14 days are not yet enforced.** Docker's json-file driver had no
-  rotation at all, so logs grew without limit; `docker-compose.yml` now caps
-  them at 10 MB × 3 per service, which stops the disk filling but rotates by
-  **size, not time**. On a quiet site that can hold far more than 14 days.
-  To make the sentence literally true, either run `logrotate` on the host
-  against `/var/lib/docker/containers/*/*-json.log` with `daily` + `rotate 14`,
-  or turn the nginx access log off entirely and reword the section — the site
-  has no analytics, so almost nothing depends on it.
+  The 10 MB x 3 cap in `docker-compose.yml` stays: it bounds the error log and
+  the relay's own output so the disk cannot fill.
+
+  Verified against the built image, not just read: 12 requests produced zero
+  access-log lines, and the relay logs only nginx's internal address
+  (172.18.0.3), never a visitor IP.
 
 `{{DATENSCHUTZ_STAND}}` was listed here but never existed in any page.
 

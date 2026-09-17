@@ -15,10 +15,9 @@ services:
     ports:
       - "80:80"
     # Protokolle begrenzen. Ohne diese Angabe wächst das Docker-Log
-    # unbegrenzt — die Datenschutzerklärung nennt 14 Tage, und eine Datei,
-    # die nie gelöscht wird, widerspricht dem. Siehe auch die Notiz in
-    # inventory/placeholders.md: Docker rotiert nur nach Größe, nicht nach
-    # Zeit. Für exakt 14 Tage braucht es zusätzlich logrotate auf dem Host.
+    # unbegrenzt, bis die Platte voll ist. Zugriffe schreibt nginx gar nicht
+    # mehr mit (access_log off, siehe Dockerfile); übrig bleiben echte Fehler
+    # und die Startmeldungen — die sind hier gedeckelt.
     logging:
       driver: json-file
       options:
@@ -31,10 +30,9 @@ services:
     build: ./api
     restart: unless-stopped
     # Protokolle begrenzen. Ohne diese Angabe wächst das Docker-Log
-    # unbegrenzt — die Datenschutzerklärung nennt 14 Tage, und eine Datei,
-    # die nie gelöscht wird, widerspricht dem. Siehe auch die Notiz in
-    # inventory/placeholders.md: Docker rotiert nur nach Größe, nicht nach
-    # Zeit. Für exakt 14 Tage braucht es zusätzlich logrotate auf dem Host.
+    # unbegrenzt, bis die Platte voll ist. Zugriffe schreibt nginx gar nicht
+    # mehr mit (access_log off, siehe Dockerfile); übrig bleiben echte Fehler
+    # und die Startmeldungen — die sind hier gedeckelt.
     logging:
       driver: json-file
       options:
