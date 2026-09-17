@@ -63,17 +63,31 @@ three landing figures. Now filled and out of the register:
   *required* to appoint one under Art. 37 DSGVO was never established —
   Satzung § 10 only says "if legally required".
 
-## Blocked on operations
+## Resolved 2026-09-17 (second batch)
 
-Introduced by the rewritten Datenschutzerklärung. Each one describes something
-the site actually does, so none can be dropped — they have to be answered.
+All three remaining tokens in `datenschutz.html` are filled. **No placeholder
+reaches production any more** — rule 10 is satisfied for the first time.
 
-| Token | Where | Needs |
-|---|---|---|
-| `{{HOSTING_ANBIETER}}` | `datenschutz.html` | the chosen host, plus a signed Art. 28 DSGVO processing agreement |
-| `{{LOG_SPEICHERDAUER}}` | `datenschutz.html` | how long the host keeps server logs — ask them, typically 7–14 days |
-| `{{ANFRAGE_SPEICHERDAUER}}` | `datenschutz.html` | internal retention decision for volunteer enquiries. Suggested: 12 months |
-| `{{DATENSCHUTZ_STAND}}` | `datenschutz.html` | the date the reviewed policy is signed off |
+- **`{{ANFRAGE_SPEICHERDAUER}}` → 12 Monate** (client decision). Means: how long
+  enquiries stay in the `info@aquisito.de` mailbox, since the relay stores
+  nothing.
+- **`{{HOSTING_ANBIETER}}` → no external processor.** The Verein runs the server
+  itself, so the Auftragsverarbeiter line now says so instead of naming a
+  company, and the prose above it says "unser Server" rather than "unser
+  Hoster". **If the machine is a rented VPS or root server, the datacentre
+  operator is normally still named here** — revisit if that is the case.
+- **`{{LOG_SPEICHERDAUER}}` → 14 Tage** (client estimate, not a measurement).
+
+  ⚠️ **The 14 days are not yet enforced.** Docker's json-file driver had no
+  rotation at all, so logs grew without limit; `docker-compose.yml` now caps
+  them at 10 MB × 3 per service, which stops the disk filling but rotates by
+  **size, not time**. On a quiet site that can hold far more than 14 days.
+  To make the sentence literally true, either run `logrotate` on the host
+  against `/var/lib/docker/containers/*/*-json.log` with `daily` + `rotate 14`,
+  or turn the nginx access log off entirely and reword the section — the site
+  has no analytics, so almost nothing depends on it.
+
+`{{DATENSCHUTZ_STAND}}` was listed here but never existed in any page.
 
 ~~The volunteer form posts to `/api/anmeldung`, which **does not exist yet**.~~
 **Resolved 2026-09-13.** `/api/anmeldung` is now a small self-hosted service
