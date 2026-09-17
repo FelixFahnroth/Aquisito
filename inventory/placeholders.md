@@ -53,6 +53,16 @@ three landing figures. Now filled and out of the register:
 |---|---|---|
 | `{{IMPRESSUM_MSTV}}` | `impressum.html` | the person responsible under §18 Abs. 2 MStV |
 
+## Resolved 2026-09-17
+
+- **`{{DATENSCHUTZBEAUFTRAGTE}}` → Maria**, named as Datenschutzbeauftragte on
+  `datenschutz.html` and in the team grid (her role there changed from
+  Vorstandsbeisitzerin · Marketing). Contact runs through `info@aquisito.de`
+  with a subject line, because the Strato tariff allows only one mailbox.
+  Open: she is published by first name only, and whether the Verein is even
+  *required* to appoint one under Art. 37 DSGVO was never established —
+  Satzung § 10 only says "if legally required".
+
 ## Blocked on operations
 
 Introduced by the rewritten Datenschutzerklärung. Each one describes something
@@ -63,7 +73,6 @@ the site actually does, so none can be dropped — they have to be answered.
 | `{{HOSTING_ANBIETER}}` | `datenschutz.html` | the chosen host, plus a signed Art. 28 DSGVO processing agreement |
 | `{{LOG_SPEICHERDAUER}}` | `datenschutz.html` | how long the host keeps server logs — ask them, typically 7–14 days |
 | `{{ANFRAGE_SPEICHERDAUER}}` | `datenschutz.html` | internal retention decision for volunteer enquiries. Suggested: 12 months |
-| `{{DATENSCHUTZBEAUFTRAGTE}}` | `datenschutz.html` | Satzung § 10 provides for electing one *if legally required*. If none is required, replace the whole line with a sentence saying so — do not leave it blank |
 | `{{DATENSCHUTZ_STAND}}` | `datenschutz.html` | the date the reviewed policy is signed off |
 
 ~~The volunteer form posts to `/api/anmeldung`, which **does not exist yet**.~~

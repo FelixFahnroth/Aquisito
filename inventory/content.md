@@ -105,7 +105,7 @@ Olli · Kathi · JD · Antonia · Marit · Lea · Lukas (Aquisito-Familie)
 are two people or one duplicated entry before the grid is built.
 
 ⚠️ `team.md` lists **Antonia** and **Toni** separately, while `footer.md` gives
-the Vorsitzende as *Antonia Tröll*. Likely the same person listed twice. Resolve.
+the Vorsitzende as *Antonia Fischbach*. Likely the same person listed twice. Resolve.
 
 ### Team page intro
 > Das sind wir! Wenn du auch Teil der Aquisito-Familie werden möchtest, schreib
@@ -275,7 +275,7 @@ original, not against intuition.**
 | SteuerNr. `201 5905 6228` / `201/5905/6228` | `footer.md:38`, `transparenz.md:27` |
 | Registernummer `VR6037` | `footer.md:39` |
 | Sitz `Ant Stäppken 33, 46348 Raesfeld` | `footer.md:37` |
-| Vorsitzende `Antonia Tröll`, Tel. `015774266766` | `footer.md:23` |
+| Vorsitzende `Antonia Fischbach`, Tel. `015774266766` | `footer.md:23` |
 | Finanzamt `Aachen-Stadt` | `transparenz.md:26` |
 | `§ 5 Abs. 1 Nr. 9 KStG`, `§ 3 Nr. 6 GewStG`, Freistellungsbescheid 2023 | `transparenz.md:16` |
 | 22 aktive Mitglieder + 16 Fördermitglieder | `transparenz.md:45` |
@@ -288,7 +288,7 @@ original, not against intuition.**
    Dorsten/Recklinghausen, not Aachen. Either the seat moved and the footer was
    half-updated, or the court is misstated. The Impressum cannot be written until
    this is settled — `{{REGISTERGERICHT}}`.
-2. **Address and representative.** `datenschutz.md:17` gives *Antonia Tröll,
+2. **Address and representative.** `datenschutz.md:17` gives *Antonia Fischbach,
    Pontwall 2, 52062 Aachen* and *Vertretungsberechtigte Personen: Julia Moj*,
    with contact `antonia@troell.de`. `footer.md` gives Raesfeld and
    `info@aquisito.de`. The 2020 policy is stale.
