@@ -45,7 +45,7 @@ three landing figures. Now filled and out of the register:
 | `{{SPLIT_PROJEKTE}}` / `{{SPLIT_VERWALTUNG}}` / `{{SPLIT_FUNDRAISING}}` | `spenden.html` | percentages from Finanzbericht 2025. Must total 100. |
 | `{{KONTAKT_SPENDEN_NAME}}` / `{{KONTAKT_SPENDEN_TEL}}` | `spenden.html` | a named human for the trust block — a named contact converts better than any badge |
 | `{{PORTRAIT_*}}` | `index.html` | the full team portrait set, or none at all |
-| `{{KOCHBUCH_POSTER}}` | `spenden.html` | poster frame for the 9,7 MB cookbook video. Optional but better than an empty box: `ffmpeg -i assets/video/kochbuch.mp4 -ss 3 -frames:v 1 assets/img/kochbuch-poster.jpg` |
+| ~~`{{KOCHBUCH_POSTER}}`~~ | `index.html` | Resolved 2026-09-18: 16:9 crop of the printed front cover (`assets/img/kochbuch-poster.webp`, 1280×720). Source PDF from the printer is 10 MB and stays out of the repo. |
 
 ## Blocked on a factual decision
 
