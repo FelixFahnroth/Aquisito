@@ -45,6 +45,7 @@ three landing figures. Now filled and out of the register:
 | `{{SPLIT_PROJEKTE}}` / `{{SPLIT_VERWALTUNG}}` / `{{SPLIT_FUNDRAISING}}` | `spenden.html` | percentages from Finanzbericht 2025. Must total 100. |
 | `{{KONTAKT_SPENDEN_NAME}}` / `{{KONTAKT_SPENDEN_TEL}}` | `spenden.html` | a named human for the trust block — a named contact converts better than any badge |
 | `{{PORTRAIT_*}}` | `index.html` | the full team portrait set, or none at all |
+| Jahresrückblick 2021 | `jahresrueckblicke.html`, `transparenz.html` | `documents/Jahresbericht-2021.pdf` is truncated at exactly 1 MiB (no EOF marker, no trailer) — the upload was cut off. Nothing can open it, and `/transparenz` still links it. Re-upload the intact file; its card title is **"Jahresrückblick 2021"** (client, 18.09.2026). Then: render a cover, make a 150 dpi light copy like the other years, add the card, fix the transparenz link. |
 | `{{KOCHBUCH_POSTER}}` | `spenden.html` | poster frame for the 9,7 MB cookbook video. Optional but better than an empty box: `ffmpeg -i assets/video/kochbuch.mp4 -ss 3 -frames:v 1 assets/img/kochbuch-poster.jpg` |
 
 ## Blocked on a factual decision
