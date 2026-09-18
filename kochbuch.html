@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="de" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kochbuch bestellen — Aquisito e.V.</title>
+<meta name="description" content="„Bolivien kocht“ bestellen: über 180 Rezepte aus Cochabamba, gedruckt auf Recyclingpapier. Du entscheidest, was dir das Buch wert ist. Versand 2,65 €.">
+<link rel="canonical" href="https://aquisito.de/kochbuch">
+<link rel="icon" href="assets/img/sonne.ico" sizes="any">
+<link rel="preload" href="assets/fonts/familjen-grotesk-500-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/atkinson-hyperlegible-400-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css?v=20260918b">
+<link rel="stylesheet" href="css/base.css?v=20260918b">
+<link rel="stylesheet" href="css/components.css?v=20260918b">
+<link rel="stylesheet" href="css/pages/kochbuch.css?v=20260918b">
+<script>document.documentElement.className = 'js';</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="wordmark" href="index.html">
+      <img class="wordmark__mark" src="assets/img/sonne.svg" width="34" height="34" alt="" aria-hidden="true">
+      Aquisito
+    </a>
+    <nav class="nav" aria-label="Hauptnavigation">
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-list">
+        <span class="sr-only">Menü öffnen</span>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <ul class="nav__list" id="nav-list">
+        <li><a class="nav__link" href="index.html#team">Über uns</a></li>
+        <li><a class="nav__link" href="index.html#kochbuch">Kochbuch</a></li>
+        <li><a class="nav__link" href="freiwillige.html">Freiwilligendienst</a></li>
+      </ul>
+      <a class="btn btn--donate" href="spenden.html">Spenden</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section section--inverse order-hero on-dark">
+    <div class="wrap">
+      <div class="order-hero__grid">
+
+        <div>
+          <p class="eyebrow">Bolivien kocht</p>
+          <h1>Das Kochbuch <span class="marker">bestellen</span></h1>
+
+          <div class="order-hero__intro" style="margin-top: var(--space-6);">
+            <picture>
+              <source type="image/webp" srcset="assets/img/kochbuch-cover.webp">
+              <img class="order-hero__cover" src="assets/img/kochbuch-cover.jpg"
+                   width="720" height="1072" alt="Buchcover „Bolivien kocht – Ein einzigartiges Kochbuch“: Kartoffeln, Reis und Mais auf einem Holzbrett" decoding="async">
+            </picture>
+            <div>
+              <p class="lead">
+                Über 180 Rezepte aus den Küchen von Cochabamba, aufgeschrieben mit
+                den Familien bei CADSE. Traditionell, vegan, mit den Geschichten
+                der Menschen dahinter.
+              </p>
+              <p>
+                Es gibt keinen festen Preis. Du siehst unten, was ein Buch uns
+                kostet, und entscheidest selbst, was es dir wert ist. Alles über
+                den Kosten geht als Spende nach Bolivien.
+              </p>
+            </div>
+          </div>
+
+          <ul class="order-hero__facts">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4.5 12.5 5 5 10-10"/></svg>
+              Über 180 Rezepte
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4.5 12.5 5 5 10-10"/></svg>
+              100 % Recyclingpapier, klimaneutral gedruckt
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4.5 12.5 5 5 10-10"/></svg>
+              Versand 2,65 € innerhalb Deutschlands
+            </li>
+          </ul>
+        </div>
+
+        <div class="order">
+          <h2 class="order__title">Wie viel ist dir das Buch wert?</h2>
+          <p class="order__hint">Pro Buch. Die drei Stufen entsprechen den Kosten unten auf der Seite.</p>
+
+          <!-- Same PayPal endpoint the script uses, as a plain POST: without
+               JavaScript the hidden fields carry a working order for one book
+               at the preselected tier. -->
+          <form id="kochbuch-form" action="https://www.paypal.com/cgi-bin/webscr" method="post" data-shipping="2.65">
+            <input type="hidden" name="cmd" value="_xclick">
+            <input type="hidden" name="business" value="info@aquisito.de">
+            <input type="hidden" name="item_name" value="Kochbuch „Bolivien kocht“">
+            <input type="hidden" name="item_number" value="kochbuch">
+            <input type="hidden" name="currency_code" value="EUR">
+            <input type="hidden" name="shipping" value="2.65">
+            <input type="hidden" name="no_shipping" value="2">
+            <input type="hidden" name="no_note" value="1">
+            <input type="hidden" name="lc" value="DE">
+            <input type="hidden" name="return" value="https://aquisito.de/kochbuch/danke">
+            <input type="hidden" name="cancel_return" value="https://aquisito.de/kochbuch">
+            <input type="hidden" name="amount" id="paypal-amount" value="20.00">
+
+            <fieldset class="pills">
+              <legend class="sr-only">Betrag pro Buch wählen</legend>
+              <label class="pill">
+                <input type="radio" name="betrag" value="10.50">
+                <span>10,50 €<small>Kosten in Bolivien gedeckt</small></span>
+              </label>
+              <label class="pill">
+                <input type="radio" name="betrag" value="20" checked>
+                <span>20 €<small>Kosten in Deutschland gedeckt</small></span>
+              </label>
+              <label class="pill">
+                <input type="radio" name="betrag" value="25">
+                <span>25 €<small>Alles gedeckt + kleine Spende</small></span>
+              </label>
+            </fieldset>
+
+            <div class="order__custom">
+              <label class="sr-only" for="betrag-custom">Eigener Betrag pro Buch in Euro, mindestens 10,50</label>
+              <input type="number" id="betrag-custom" name="betrag_eigener" min="10.50" step="0.01" inputmode="decimal" placeholder="Eigener Betrag">
+              <span aria-hidden="true">€</span>
+            </div>
+
+            <div class="order__qty">
+              <label class="order__label" for="anzahl">Anzahl</label>
+              <input type="number" id="anzahl" name="quantity" value="1" min="1" max="20" step="1" inputmode="numeric">
+            </div>
+
+            <div class="order__sum" aria-live="polite">
+              <dl>
+                <dt>Bücher</dt>
+                <dd id="sum-amount">1 × 20,00 €</dd>
+                <dt>Versand</dt>
+                <dd id="sum-shipping">2,65 €</dd>
+                <div class="order__sum-total">
+                  <dt>Gesamt</dt>
+                  <dd id="sum-total">22,65 €</dd>
+                </div>
+              </dl>
+            </div>
+
+            <button class="btn btn--donate btn--block" type="submit">Jetzt bestellen</button>
+
+            <p class="order__note">
+              Weiter zu PayPal. Dort gibst du deine Lieferadresse an und kannst
+              auch ohne PayPal-Konto mit Karte zahlen.
+            </p>
+          </form>
+
+          <div class="order__alt">
+            <h3 class="small" style="margin-bottom: var(--space-3);">Lieber per Überweisung?</h3>
+            <p>
+              Schreib uns Anzahl und Lieferadresse an
+              <a href="mailto:info@aquisito.de?subject=Kochbuch-Bestellung&amp;body=Hallo%20Aquisito-Team%2C%0A%0Aich%20m%C3%B6chte%20___%20Exemplar(e)%20von%20%E2%80%9EBolivien%20kocht%E2%80%9C%20bestellen.%0A%0ALieferadresse%3A%0A%0A">info@aquisito.de</a>,
+              wir schicken dir die Bankverbindung und das Buch geht raus, sobald
+              das Geld da ist.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="kosten">
+    <div class="wrap">
+      <div class="costs">
+        <picture>
+          <source type="image/webp" srcset="assets/img/kochbuch-kosten.webp">
+          <img class="costs__img" src="assets/img/kochbuch-kosten.jpg" width="800" height="1132"
+               alt="Kostenkarte „Was steckt hinter jedem Kochbuch?“ — die Aufstellung steht daneben als Text"
+               loading="lazy" decoding="async">
+        </picture>
+        <div>
+          <p class="eyebrow">Auflistung der Kosten pro Buch</p>
+          <h2>Was steckt hinter jedem Kochbuch?</h2>
+          <p class="prose" style="margin-top: var(--space-5);">
+            Das Buch ist in Bolivien und Deutschland ehrenamtlich entstanden. Was
+            trotzdem Geld kostet, steht hier offen — so kannst du entscheiden, was
+            du davon tragen möchtest.
+          </p>
+          <dl class="costs__list">
+            <dt>Druckkosten pro Buch</dt>
+            <dd>2,50 €</dd>
+            <dt>Produktionskosten pro Buch</dt>
+            <dd>3,50 €</dd>
+            <dt>Inklusive Arbeitsstunden in Bolivien</dt>
+            <dd>10,50 €</dd>
+            <div class="is-highlight">
+              <dt>Inklusive Arbeitsstunden in Deutschland</dt>
+              <dd>20 €</dd>
+            </div>
+            <dt>Abdeckung aller Kosten + eine kleine Spende</dt>
+            <dd>25 €</dd>
+          </dl>
+          <p class="costs__q">Wie viel ist <em>dir</em> das Buch wert?</p>
+          <p style="margin-top: var(--space-5);">
+            <a class="btn btn--primary" href="#kochbuch-form">Zum Bestellformular <span aria-hidden="true">↑</span></a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="wrap">
+      <div class="faq">
+        <div>
+          <h3>Versand</h3>
+          <p>
+            Wir verschicken per Post innerhalb Deutschlands für pauschal
+            2,65 € pro Bestellung, egal wie viele Bücher. Verpackt und zur Post
+            gebracht wird ehrenamtlich — hab bitte etwas Geduld, wenn es ein paar
+            Tage dauert. Versand ins Ausland gern auf Anfrage per E-Mail.
+          </p>
+        </div>
+        <div>
+          <h3>Fragen zur Bestellung?</h3>
+          <p>
+            Ob Sammelbestellung für Freund:innen, Geschenkverpackung oder eine
+            Frage zum Buch selbst:
+            <a href="mailto:info@aquisito.de?subject=Frage%20zum%20Kochbuch">info@aquisito.de</a>
+          </p>
+          <p class="small">
+            Der Anteil über den Kosten ist eine Spende an Aquisito e.V. Bis 300 €
+            im Jahr genügt dem Finanzamt die PayPal-Bestätigung als Nachweis.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer on-dark">
+  <div class="wrap">
+    <div class="site-footer__grid">
+      <div>
+        <a class="wordmark" href="index.html">
+          <img class="wordmark__mark" src="assets/img/sonne.svg" width="30" height="30" alt="" aria-hidden="true">
+          Aquisito
+        </a>
+        <p class="small" style="margin-top: var(--space-5);">
+          Wir unterstützen das Kinder- und Jugendzentrum CADSE in Cochabamba, Bolivien.
+        </p>
+        <p class="small">Ant Stäppken 33<br>46348 Raesfeld</p>
+      </div>
+      <div>
+        <h2>Seiten</h2>
+        <ul class="small">
+          <li><a href="index.html#was-wir-tun">Was wir tun</a></li>
+          <li><a href="index.html#team">Über uns</a></li>
+          <li><a href="freiwillige.html">Freiwillige</a></li>
+          <li><a href="spenden.html">Spenden</a></li>
+          <li><a href="kochbuch.html" aria-current="page">Kochbuch</a></li>
+          <li><a href="jahresrueckblicke.html">Jahresrückblicke</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Rechtliches</h2>
+        <ul class="small">
+          <li><a href="satzung.html">Satzung</a></li>
+          <li><a href="foerdervereinbarung.html">Fördervereinbarung</a></li>
+          <li><a href="transparenz.html">Transparenz</a></li>
+          <li><a href="transparenz.html#finanzberichte">Finanzberichte</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Kontakt</h2>
+        <ul class="small">
+          <li><a href="mailto:info@aquisito.de">info@aquisito.de</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="site-footer__legal">
+      Aquisito e.V. ·
+      <a href="impressum.html">Impressum</a> ·
+      <a href="datenschutz.html">Datenschutz</a>
+    </p>
+  </div>
+</footer>
+
+<script type="module" src="js/nav.js?v=20260918b"></script>
+<script type="module" src="js/kochbuch-bestellen.js?v=20260918b"></script>
+</body>
+</html>

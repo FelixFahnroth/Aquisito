@@ -38,6 +38,11 @@ RUN echo 'server { \
         try_files /danke.html =404; \
     } \
     \
+    # Danke-Seite nach einer Kochbuch-Bestellung (PayPal return-URL) \
+    location = /kochbuch/danke { \
+        try_files /kochbuch-danke.html =404; \
+    } \
+    \
     # Das Freiwilligen-Formular. Der Weiterleiter laeuft als eigener Dienst \
     # im internen Netz (siehe docker-compose.yml) und ist von aussen nur \
     # ueber genau diesen Pfad erreichbar. \

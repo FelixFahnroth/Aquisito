@@ -1,0 +1,195 @@
+/* ==========================================================================
+   pages/kochbuch.css — the cookbook order page
+   ========================================================================== */
+
+@layer pages {
+
+  /* ---- hero -------------------------------------------------------------
+     Same shape as the donation hero: forest surface, white order card on the
+     right. The cover sits beside the text so the page is recognisably about
+     one physical thing. */
+
+  .order-hero { padding-block: var(--space-9) var(--space-10); }
+
+  .order-hero__grid {
+    display: grid;
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  @media (min-width: 900px) {
+    .order-hero__grid { grid-template-columns: 1fr minmax(360px, 26rem); gap: var(--space-9); }
+  }
+
+  .order-hero__intro {
+    display: grid;
+    gap: var(--space-7);
+    align-items: start;
+  }
+
+  @media (min-width: 640px) {
+    .order-hero__intro { grid-template-columns: minmax(160px, 220px) 1fr; }
+  }
+
+  .order-hero__cover {
+    width: 100%;
+    max-width: 220px;
+    height: auto;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .order-hero__facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-6);
+    list-style: none;
+    padding: 0;
+    margin: var(--space-7) 0 0;
+    font-size: var(--step-small);
+    color: var(--lemon);
+  }
+
+  .order-hero__facts li { margin: 0; max-width: none; display: flex; align-items: center; gap: var(--space-3); }
+
+  /* ---- order card -------------------------------------------------------- */
+
+  .order {
+    background: var(--white);
+    color: var(--text-body);
+    border-radius: var(--radius-lg);
+    padding: var(--space-7);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .order h2, .order h3 { color: var(--text-heading); }
+  .order a { color: var(--text-heading); }
+
+  .order__title { font-size: var(--step-h3); margin-bottom: var(--space-3); }
+  .order__hint { font-size: var(--step-small); color: var(--text-muted); margin: 0 0 var(--space-6); }
+
+  .order__label {
+    display: block;
+    font-weight: var(--weight-bold);
+    margin-bottom: var(--space-3);
+  }
+
+  /* Three tiers from the printed cost card, each with its one-line meaning. */
+  .order .pills { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
+  .order .pill span {
+    min-width: 0;
+    width: 100%;
+    height: auto;
+    min-height: 48px;
+    padding: var(--space-3);
+    display: grid;
+    gap: 2px;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .order .pill small { font-size: 0.72em; font-weight: var(--weight-regular); opacity: 0.85; }
+
+  .order__custom {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  .order__custom input,
+  .order__qty input {
+    min-height: 48px;
+    padding: var(--space-4) var(--space-5);
+    font: inherit;
+    border: 1.5px solid var(--line-control);
+    border-radius: var(--radius-pill);
+    background: var(--white);
+    color: var(--text-body);
+  }
+
+  .order__custom input { width: 11rem; }
+  .order__qty { display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-6); }
+  .order__qty input { width: 5rem; text-align: center; }
+  .order__qty .order__label { margin: 0; }
+
+  /* Live total. Visible without JavaScript too, just static. */
+  .order__sum {
+    margin: 0 0 var(--space-6);
+    padding: var(--space-4) var(--space-5);
+    background: var(--surface-quiet);
+    border-radius: var(--radius-sm);
+    font-size: var(--step-small);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .order__sum dl { display: grid; grid-template-columns: 1fr auto; gap: var(--space-2) var(--space-5); margin: 0; }
+  .order__sum dt, .order__sum dd { margin: 0; }
+  .order__sum-total { display: contents; }
+  .order__sum dd { text-align: right; }
+  .order__sum .order__sum-total { font-weight: var(--weight-bold); color: var(--text-heading); }
+  .order__sum .order__sum-total dt,
+  .order__sum .order__sum-total dd {
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--line-hairline);
+  }
+
+  .order__note { font-size: var(--step-small); color: var(--text-muted); margin: var(--space-5) 0 0; }
+
+  .order__alt {
+    margin-top: var(--space-6);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--line-hairline);
+    font-size: var(--step-small);
+  }
+  .order__alt p:last-child { margin-bottom: 0; }
+
+  /* ---- what is behind each book ----------------------------------------
+     The printed card as image, its content repeated as real text beside it —
+     an image of a table is not a table to a screen reader or to search. */
+
+  .costs {
+    display: grid;
+    gap: var(--space-8);
+    align-items: center;
+  }
+
+  @media (min-width: 800px) {
+    .costs { grid-template-columns: minmax(260px, 420px) 1fr; gap: var(--space-9); }
+  }
+
+  .costs__img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .costs__list {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-4) var(--space-6);
+    margin: var(--space-6) 0 0;
+    max-width: var(--width-prose);
+  }
+
+  .costs__list dt, .costs__list dd { margin: 0; }
+  .costs__list .is-highlight { display: contents; }
+  .costs__list dd { text-align: right; font-variant-numeric: tabular-nums; font-weight: var(--weight-bold); white-space: nowrap; }
+
+  .costs__list .is-highlight dt,
+  .costs__list .is-highlight dd {
+    background: var(--surface-soft);
+    color: var(--text-on-lemon);
+  }
+  .costs__list .is-highlight dt { padding: var(--space-2) 0 var(--space-2) var(--space-3); border-radius: var(--radius-sm) 0 0 var(--radius-sm); }
+  .costs__list .is-highlight dd { padding: var(--space-2) var(--space-3) var(--space-2) 0; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+
+  .costs__q { margin-top: var(--space-7); font-family: var(--font-display); font-size: var(--step-h3); color: var(--text-heading); }
+
+  /* ---- shipping and questions -------------------------------------------- */
+
+  .faq { display: grid; gap: var(--space-7); }
+  @media (min-width: 800px) { .faq { grid-template-columns: 1fr 1fr; gap: var(--space-9); } }
+  .faq h3 { margin-bottom: var(--space-3); }
+  .faq p { max-width: var(--width-prose); }
+}
