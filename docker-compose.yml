@@ -1,12 +1,9 @@
-# Zwei Dienste: der Webserver wie bisher, dazu der kleine Mail-Weiterleiter
-# für das Freiwilligen-Formular. nginx reicht /api/anmeldung an ihn weiter,
-# alles andere bleibt statisch.
+# Ein Dienst: nginx liefert die statische Seite aus, sonst nichts.
 #
-# Start:  docker compose up -d --build
+# Start:  docker compose up -d --build --remove-orphans
 #
-# Die Zugangsdaten stehen in .env (nicht im Repo, siehe .env.example). Fehlt
-# die Datei, startet trotzdem alles — nur das Absenden des Formulars meldet
-# dann einen Fehler, statt dass die ganze Seite nicht hochkommt.
+# --remove-orphans raeumt den frueheren Mail-Weiterleiter (anmeldung) ab,
+# falls er auf dem Server noch laeuft; das Formular gibt es nicht mehr.
 
 services:
   web:
@@ -23,35 +20,3 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-    depends_on:
-      - anmeldung
-
-  anmeldung:
-    build: ./api
-    restart: unless-stopped
-    # Protokolle begrenzen. Ohne diese Angabe wächst das Docker-Log
-    # unbegrenzt, bis die Platte voll ist. Zugriffe schreibt nginx gar nicht
-    # mehr mit (access_log off, siehe Dockerfile); übrig bleiben echte Fehler
-    # und die Startmeldungen — die sind hier gedeckelt.
-    logging:
-      driver: json-file
-      options:
-        max-size: "10m"
-        max-file: "3"
-    # Kein ports-Eintrag: der Dienst ist nur im internen Netz erreichbar,
-    # von außen kommt man ausschließlich über nginx an ihn heran.
-    #
-    # Bewusst kein env_file: fehlt die .env, bricht "docker compose up" damit
-    # komplett ab. Compose liest .env im Projektordner ohnehin automatisch für
-    # ${...} ein, und eine fehlende Datei ist dabei kein Fehler — die Defaults
-    # unten greifen dann einfach.
-    environment:
-      SMTP_HOST: ${SMTP_HOST:-smtp.strato.de}
-      SMTP_PORT: ${SMTP_PORT:-587}
-      SMTP_USER: ${SMTP_USER:-info@aquisito.de}
-      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
-      # Alternative: Pfad zu einer Datei mit dem Passwort (Docker-Secret o. Ä.).
-      # Ist sie gesetzt, hat sie Vorrang vor SMTP_PASSWORD.
-      SMTP_PASSWORD_FILE: ${SMTP_PASSWORD_FILE:-}
-      MAIL_FROM: ${MAIL_FROM:-info@aquisito.de}
-      MAIL_TO: ${MAIL_TO:-info@aquisito.de}

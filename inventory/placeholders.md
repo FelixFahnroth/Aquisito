@@ -102,15 +102,10 @@ reaches production any more** — rule 10 is satisfied for the first time.
 `{{DATENSCHUTZ_STAND}}` was listed here but never existed in any page.
 
 ~~The volunteer form posts to `/api/anmeldung`, which **does not exist yet**.~~
-**Resolved 2026-09-13.** `/api/anmeldung` is now a small self-hosted service
-(`api/anmeldung.py`, started by `docker-compose.yml`, reached through an nginx
-`proxy_pass`). It takes the POST, sends the contents to `MAIL_TO` over SMTP and
-keeps nothing — no database, no log of form contents.
-
-Because it runs on the Verein's own infrastructure, **no new processor is
-involved** and `{{HOSTING_ANBIETER}}` remains the only one to name. The mailbox
-provider behind `SMTP_HOST` does process the message in transit, so if that is
-someone other than the host already named, add them.
+Resolved 2026-09-13 with a self-hosted mail relay; **removed 2026-09-18**
+together with the form itself. Volunteers now write to `info@aquisito.de`
+(prefilled mailto with the former form's questions) or apply directly with
+Beethovianos Internacional. No backend, no processor.
 
 `{{ANFRAGE_SPEICHERDAUER}}` is still open and now means something concrete: how
 long enquiries stay in the `info@aquisito.de` mailbox, since that is the only

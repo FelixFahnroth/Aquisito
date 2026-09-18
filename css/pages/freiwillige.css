@@ -138,44 +138,20 @@
   .steps h3 { margin-bottom: var(--space-3); }
   .steps p { font-size: var(--step-small); margin: 0; }
 
-  /* ---- form --------------------------------------------------------------- */
+  /* ---- contact ------------------------------------------------------------ */
 
-  .signup { max-width: 40rem; margin-top: var(--space-7); }
-  .signup__required { font-size: var(--step-small); color: var(--text-muted); margin-bottom: var(--space-7); }
+  .contact { max-width: var(--width-prose); margin-top: var(--space-7); }
+  .contact ul { margin: var(--space-4) 0 var(--space-7); }
 
-  .signup fieldset { border: 0; padding: 0; margin: 0 0 var(--space-6); }
-
-  .signup legend {
-    font-family: var(--font-display);
-    font-weight: var(--weight-medium);
-    font-size: var(--step-small);
-    color: var(--text-heading);
-    margin-bottom: var(--space-4);
-    padding: 0;
-  }
-
-  .signup__options { display: grid; gap: var(--space-4); }
-
-  .signup__status:not(:empty) {
+  .contact__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
     margin-bottom: var(--space-6);
-    padding: var(--space-5);
-    background: var(--surface-quiet);
-    border-radius: var(--radius-sm);
-    color: var(--forest);
-    font-weight: var(--weight-bold);
-  }
-
-  /* Die Meldung trägt sonst nur Farbe über den Text. Ein linker Balken macht
-     den Unterschied zwischen "angekommen" und "schiefgegangen" auch dann
-     erkennbar, wenn Farbe allein nicht ankommt. */
-  .signup__status.is-success { border-left: 4px solid var(--forest); }
-  .signup__status.is-error {
-    background: var(--surface-alt);
-    border-left: 4px solid var(--gold);
   }
 
   /* ---- background essay ---------------------------------------------------
-     Long-form, deliberately below the form so it cannot push the sign-up down. */
+     Long-form, deliberately below the contact block so it cannot push it down. */
 
   .background { max-width: var(--width-prose); }
   .background h3 { margin-top: var(--space-7); margin-bottom: var(--space-4); }

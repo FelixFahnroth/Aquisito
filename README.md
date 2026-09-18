@@ -18,44 +18,25 @@ python -m http.server 8080     # or any static server
 Then open <http://127.0.0.1:8080/>. There is nothing to install and nothing to
 compile.
 
-The one exception is the volunteer form, which needs a server that can send
-mail. Everything else on the site works without it.
+There is no form and no backend: volunteers and buyers write an e-mail or go
+to PayPal.
 
 ## Deploy it
 
 ```bash
-cp .env.example .env           # then fill in the SMTP details
-docker compose up -d --build
+docker compose up -d --build --remove-orphans
 ```
 
-Two containers: `web` is the nginx image built from `Dockerfile` and serves
-every page; `anmeldung` is a ~200-line Python service (standard library only)
-that receives `POST /api/anmeldung` from the volunteer form and mails it to
-`MAIL_TO`. nginx proxies that one path to it and nothing else — the service is
-not published on a port of its own.
-
-It stores nothing: no database, and form contents never reach a log. `.env`
-holds the mailbox password and is git-ignored; `.env.example` documents the
-variables and contains no secrets.
-
-Check the mail settings without touching the form:
-
-```bash
-docker compose exec anmeldung python /app/anmeldung.py --selftest
-```
-
-It prints the configuration it sees (never the password), sends one test mail
-to `MAIL_TO`, and on failure says which of host, port, credentials or sender
-address the server objected to.
-
-Without `SMTP_HOST` set, the service still starts and warns, and submissions
-fail with a message pointing the visitor at `info@aquisito.de`.
+One container: `web`, the nginx image built from `Dockerfile`, serving every
+page. `--remove-orphans` clears the former `anmeldung` mail relay if it is
+still running on the server — the volunteer form it served was removed on
+2026-09-18 (in git history if ever needed again).
 
 ## Layout
 
 ```
 index.html                 /                      landing
-freiwillige.html           /freiwillige           volunteer sign-up
+freiwillige.html           /freiwillige           volunteering, contact by e-mail
 spenden.html               /spenden               donations
 danke.html                 /spenden/danke         after a donation
 impressum.html             /impressum         ┐
@@ -73,7 +54,6 @@ css/pages/*.css       page-specific
 js/nav.js             mobile menu, focus trap, sticky header
 js/reveal.js          scroll reveal, fires once
 js/donate.js          amount selector, live outcome line
-js/form.js            inline validation for the sign-up
 
 inventory/            what the old site contained and where it went
 _redirects            every old URL. Test individually, never sampled.
@@ -155,7 +135,6 @@ confirm exactly one element is gold on any screenful.
 
 ## Hosting
 
-Runs as two containers from `docker-compose.yml` behind nginx; the redirect map
-in `_redirects` is mirrored by the `location` blocks in `Dockerfile`, which is
-what actually serves them. The volunteer form needs the `anmeldung` service —
-see Deploy it above.
+Runs as one container from `docker-compose.yml`; the redirect map in
+`_redirects` is mirrored by the `location` blocks in `Dockerfile`, which is
+what actually serves them.

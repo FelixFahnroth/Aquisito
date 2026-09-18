@@ -9,10 +9,10 @@
 <link rel="icon" href="assets/img/sonne.ico" sizes="any">
 <link rel="preload" href="assets/fonts/familjen-grotesk-500-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/atkinson-hyperlegible-400-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=20260918d">
-<link rel="stylesheet" href="css/base.css?v=20260918d">
-<link rel="stylesheet" href="css/components.css?v=20260918d">
-<link rel="stylesheet" href="css/pages/freiwillige.css?v=20260918d">
+<link rel="stylesheet" href="css/tokens.css?v=20260918e">
+<link rel="stylesheet" href="css/base.css?v=20260918e">
+<link rel="stylesheet" href="css/components.css?v=20260918e">
+<link rel="stylesheet" href="css/pages/freiwillige.css?v=20260918e">
 <script>document.documentElement.className = 'js';</script>
 </head>
 <body>
@@ -267,7 +267,7 @@
       <ol class="steps">
         <li>
           <h3>Melden</h3>
-          <p>Du schreibst uns über das Formular unten oder direkt per Mail. Wir antworten innerhalb einer Woche.</p>
+          <p>Du schreibst uns eine Mail — was hinein soll, steht unten. Wir antworten innerhalb einer Woche.</p>
         </li>
         <li>
           <h3>Kennenlernen</h3>
@@ -323,94 +323,50 @@
   </section>
 
   <!-- ====================================================================
-       Sign-up — the page exists for this
+       Contact — the page exists for this. No form: a plain e-mail, with the
+       questions the form used to ask, and the Beethovianos for the funded
+       route.
        ==================================================================== -->
-  <section class="section reveal" id="anmeldung-section">
+  <section class="section reveal" id="kontakt">
     <div class="wrap">
-      <p class="eyebrow">Anmeldung</p>
+      <p class="eyebrow">Kontakt</p>
       <h2>Schreib uns</h2>
       <p class="prose">
         Erzähl uns kurz, wer du bist und wann du Zeit hättest. Wir melden uns
         innerhalb einer Woche — auch wenn wir gerade keinen Platz haben.
       </p>
 
-      <!-- /api/anmeldung ist der Mail-Weiterleiter aus api/anmeldung.py, den
-           nginx durchreicht (docker-compose.yml). Mit JavaScript sendet
-           js/form.js im Hintergrund und die Antwort erscheint oben im
-           Statusabsatz; ohne JavaScript verschickt der Browser dasselbe
-           Formular ganz normal und landet auf /anfrage-gesendet. -->
-      <form class="signup" id="anmeldung" method="post" action="/api/anmeldung">
-        <p class="signup__required">Felder mit * brauchen wir. Alles andere ist freiwillig.</p>
+      <div class="contact">
+        <p>Damit wir dir gut antworten können, schreib am besten dazu:</p>
+        <ul>
+          <li>deinen Namen und, wenn du magst, eine Telefonnummer</li>
+          <li>was dich interessiert: der Internationale Jugendfreiwilligendienst
+              (6–12 Monate), ein Dienst auf eigene Faust (ab drei Monaten) oder
+              die Mitarbeit im Verein in Deutschland</li>
+          <li>ab wann du Zeit hättest</li>
+          <li>ein paar Sätze zu dir</li>
+        </ul>
 
-        <p class="signup__status" id="anmeldung-status" role="status" aria-live="polite"></p>
-
-        <div class="field">
-          <label for="name">Name *</label>
-          <input type="text" id="name" name="name" autocomplete="name" required>
+        <div class="contact__actions">
+          <!-- The template puts exactly those questions into the mail body. -->
+          <a class="btn btn--primary" href="mailto:info@aquisito.de?subject=Freiwilligendienst&amp;body=Hallo%20Aquisito-Team%2C%0A%0Aich%20interessiere%20mich%20f%C3%BCr%20einen%20Freiwilligendienst.%0A%0AName%3A%20%0ATelefon%20%28freiwillig%29%3A%20%0AWas%20mich%20interessiert%20%28bitte%20stehen%20lassen%2C%20was%20passt%29%3A%0A-%20Internationaler%20Jugendfreiwilligendienst%20%286%E2%80%9312%20Monate%29%0A-%20Auf%20eigene%20Faust%20%28ab%20drei%20Monaten%29%0A-%20Mitarbeit%20im%20Verein%20in%20Deutschland%0AAb%20wann%20ich%20Zeit%20h%C3%A4tte%3A%20%0A%0AEin%20paar%20S%C3%A4tze%20zu%20mir%3A%0A%0A">E-Mail an info@aquisito.de</a>
+          <a class="btn btn--ghost" href="https://beethovianos-internacional.de/freiwilligendienste/" target="_blank" rel="noopener">
+            Direkt bei den Beethovianos bewerben
+          </a>
         </div>
 
-        <div class="field">
-          <label for="email">E-Mail *</label>
-          <input type="email" id="email" name="email" autocomplete="email" required aria-describedby="email-hint">
-          <p class="field__hint" id="email-hint">Hierüber melden wir uns bei dir.</p>
-        </div>
-
-        <div class="field">
-          <label for="telefon">Telefon</label>
-          <input type="tel" id="telefon" name="telefon" autocomplete="tel">
-        </div>
-
-        <fieldset>
-          <legend>Was interessiert dich?</legend>
-          <div class="signup__options">
-            <div class="field field--checkbox">
-              <input type="checkbox" id="weg-gefoerdert" name="interesse" value="Jugendfreiwilligendienst">
-              <label for="weg-gefoerdert">Internationaler Jugendfreiwilligendienst (6–12 Monate)</label>
-            </div>
-            <div class="field field--checkbox">
-              <input type="checkbox" id="weg-eigen" name="interesse" value="Auf eigene Faust">
-              <label for="weg-eigen">Auf eigene Faust (ab drei Monaten)</label>
-            </div>
-            <div class="field field--checkbox">
-              <input type="checkbox" id="weg-deutschland" name="interesse" value="Mitarbeit in Deutschland">
-              <label for="weg-deutschland">Mitarbeit im Verein in Deutschland</label>
-            </div>
-          </div>
-        </fieldset>
-
-        <div class="field">
-          <label for="zeitraum">Ab wann hättest du Zeit?</label>
-          <input type="text" id="zeitraum" name="zeitraum" placeholder="z. B. ab Sommer 2027" autocomplete="off">
-        </div>
-
-        <div class="field">
-          <label for="nachricht">Deine Nachricht</label>
-          <textarea id="nachricht" name="nachricht" rows="6"></textarea>
-        </div>
-
-        <!-- Honeypot, not a CAPTCHA: a CAPTCHA on a volunteer form costs more
-             sign-ups than it saves spam. PAGES.md §2. -->
-        <div class="honeypot" aria-hidden="true">
-          <label for="website">Website (bitte frei lassen)</label>
-          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
-        </div>
-
-        <div class="field field--checkbox">
-          <input type="checkbox" id="einwilligung" name="einwilligung" value="ja" required>
-          <label for="einwilligung">
-            Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage
-            gespeichert werden. Mehr dazu in der
-            <a href="datenschutz.html">Datenschutzerklärung</a>. *
-          </label>
-        </div>
-
-        <button class="btn btn--primary" type="submit">Anfrage senden</button>
-      </form>
+        <p class="small">
+          Für den geförderten Jugendfreiwilligendienst laufen Bewerbung und
+          Auswahl über die Beethovianos; für alles andere sind wir die richtige
+          Adresse. Deine Angaben nutzen wir nur, um deine Anfrage zu beantworten —
+          mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.
+        </p>
+      </div>
     </div>
   </section>
 
   <!-- ====================================================================
-       Background — deliberately last, so it cannot push the form down
+       Background — deliberately last, so it cannot push the contact block down
        ==================================================================== -->
   <section class="section section--alt reveal">
     <div class="wrap">
@@ -519,9 +475,8 @@
   </div>
 </footer>
 
-<script type="module" src="js/nav.js?v=20260918d"></script>
-<script type="module" src="js/reveal.js?v=20260918d"></script>
-<script type="module" src="js/parallax.js?v=20260918d"></script>
-<script type="module" src="js/form.js?v=20260918d"></script>
+<script type="module" src="js/nav.js?v=20260918e"></script>
+<script type="module" src="js/reveal.js?v=20260918e"></script>
+<script type="module" src="js/parallax.js?v=20260918e"></script>
 </body>
 </html>
