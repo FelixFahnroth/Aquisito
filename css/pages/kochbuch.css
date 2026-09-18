@@ -65,73 +65,17 @@
   .order h2, .order h3 { color: var(--text-heading); }
   .order a { color: var(--text-heading); }
 
-  .order__title { font-size: var(--step-h3); margin-bottom: var(--space-3); }
-  .order__hint { font-size: var(--step-small); color: var(--text-muted); margin: 0 0 var(--space-6); }
+  .order__title { font-size: var(--step-h3); margin-bottom: var(--space-5); }
 
-  .order__label {
-    display: block;
-    font-weight: var(--weight-bold);
-    margin-bottom: var(--space-3);
-  }
-
-  /* Three tiers from the printed cost card, each with its one-line meaning. */
-  .order .pills { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
-  .order .pill span {
-    min-width: 0;
-    width: 100%;
-    height: auto;
-    min-height: 48px;
-    padding: var(--space-3);
-    display: grid;
-    gap: 2px;
-    line-height: 1.2;
-    text-align: center;
-  }
-  .order .pill small { font-size: 0.72em; font-weight: var(--weight-regular); opacity: 0.85; }
-
-  .order__custom {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    margin-bottom: var(--space-6);
-  }
-
-  .order__custom input,
-  .order__qty input {
-    min-height: 48px;
-    padding: var(--space-4) var(--space-5);
-    font: inherit;
-    border: 1.5px solid var(--line-control);
-    border-radius: var(--radius-pill);
-    background: var(--white);
-    color: var(--text-body);
-  }
-
-  .order__custom input { width: 11rem; }
-  .order__qty { display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-6); }
-  .order__qty input { width: 5rem; text-align: center; }
-  .order__qty .order__label { margin: 0; }
-
-  /* Live total. Visible without JavaScript too, just static. */
-  .order__sum {
+  .order__steps {
     margin: 0 0 var(--space-6);
-    padding: var(--space-4) var(--space-5);
-    background: var(--surface-quiet);
-    border-radius: var(--radius-sm);
+    padding-left: 1.4em;
+    display: grid;
+    gap: var(--space-4);
     font-size: var(--step-small);
-    font-variant-numeric: tabular-nums;
   }
-
-  .order__sum dl { display: grid; grid-template-columns: 1fr auto; gap: var(--space-2) var(--space-5); margin: 0; }
-  .order__sum dt, .order__sum dd { margin: 0; }
-  .order__sum-total { display: contents; }
-  .order__sum dd { text-align: right; }
-  .order__sum .order__sum-total { font-weight: var(--weight-bold); color: var(--text-heading); }
-  .order__sum .order__sum-total dt,
-  .order__sum .order__sum-total dd {
-    padding-top: var(--space-2);
-    border-top: 1px solid var(--line-hairline);
-  }
+  .order__steps li { margin: 0; max-width: none; }
+  .order__steps li::marker { color: var(--text-heading); font-weight: var(--weight-bold); }
 
   .order__note { font-size: var(--step-small); color: var(--text-muted); margin: var(--space-5) 0 0; }
 

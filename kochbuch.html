@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kochbuch bestellen — Aquisito e.V.</title>
-<meta name="description" content="„Bolivien kocht“ bestellen: über 180 Rezepte aus Cochabamba, gedruckt auf Recyclingpapier. Du entscheidest, was dir das Buch wert ist. Versand 2,65 €.">
+<meta name="description" content="„Bolivien kocht“ bestellen: über 180 Rezepte aus Cochabamba, gedruckt auf Recyclingpapier. Du entscheidest, was dir das Buch wert ist. Versand 2,70 €.">
 <link rel="canonical" href="https://aquisito.de/kochbuch">
 <link rel="icon" href="assets/img/sonne.ico" sizes="any">
 <link rel="preload" href="assets/fonts/familjen-grotesk-500-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/atkinson-hyperlegible-400-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=20260918b">
-<link rel="stylesheet" href="css/base.css?v=20260918b">
-<link rel="stylesheet" href="css/components.css?v=20260918b">
-<link rel="stylesheet" href="css/pages/kochbuch.css?v=20260918b">
+<link rel="stylesheet" href="css/tokens.css?v=20260918d">
+<link rel="stylesheet" href="css/base.css?v=20260918d">
+<link rel="stylesheet" href="css/components.css?v=20260918d">
+<link rel="stylesheet" href="css/pages/kochbuch.css?v=20260918d">
 <script>document.documentElement.className = 'js';</script>
 </head>
 <body>
@@ -81,79 +81,35 @@
             </li>
             <li>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4.5 12.5 5 5 10-10"/></svg>
-              Versand 2,65 € innerhalb Deutschlands
+              Versand 2,70 € innerhalb Deutschlands
             </li>
           </ul>
         </div>
 
         <div class="order">
-          <h2 class="order__title">Wie viel ist dir das Buch wert?</h2>
-          <p class="order__hint">Pro Buch. Die drei Stufen entsprechen den Kosten unten auf der Seite.</p>
+          <h2 class="order__title">So bestellst du</h2>
+          <ol class="order__steps">
+            <li>
+              <strong>Betrag wählen.</strong> Bei PayPal gibt es Vorschläge und
+              ein freies Feld — der Versand von 2,70 € ist dort schon eingerechnet.
+              Was ein Buch uns kostet, steht <a href="#kosten">weiter unten</a>.
+            </li>
+            <li>
+              <strong>Lieferadresse angeben.</strong> Bitte gib bei PayPal die Adresse
+              an, an die das Buch gehen soll.
+            </li>
+            <li>
+              <strong>Wir verschicken.</strong> Ehrenamtlich, aus Raesfeld, per Post.
+            </li>
+          </ol>
 
-          <!-- Same PayPal endpoint the script uses, as a plain POST: without
-               JavaScript the hidden fields carry a working order for one book
-               at the preselected tier. -->
-          <form id="kochbuch-form" action="https://www.paypal.com/cgi-bin/webscr" method="post" data-shipping="2.65">
-            <input type="hidden" name="cmd" value="_xclick">
-            <input type="hidden" name="business" value="info@aquisito.de">
-            <input type="hidden" name="item_name" value="Kochbuch „Bolivien kocht“">
-            <input type="hidden" name="item_number" value="kochbuch">
-            <input type="hidden" name="currency_code" value="EUR">
-            <input type="hidden" name="shipping" value="2.65">
-            <input type="hidden" name="no_shipping" value="2">
-            <input type="hidden" name="no_note" value="1">
-            <input type="hidden" name="lc" value="DE">
-            <input type="hidden" name="return" value="https://aquisito.de/kochbuch/danke">
-            <input type="hidden" name="cancel_return" value="https://aquisito.de/kochbuch">
-            <input type="hidden" name="amount" id="paypal-amount" value="20.00">
+          <a class="btn btn--donate btn--block" href="https://www.paypal.com/donate/?hosted_button_id=7LRKA636K85E6" rel="noopener">
+            Bei PayPal bestellen
+          </a>
 
-            <fieldset class="pills">
-              <legend class="sr-only">Betrag pro Buch wählen</legend>
-              <label class="pill">
-                <input type="radio" name="betrag" value="10.50">
-                <span>10,50 €<small>Kosten in Bolivien gedeckt</small></span>
-              </label>
-              <label class="pill">
-                <input type="radio" name="betrag" value="20" checked>
-                <span>20 €<small>Kosten in Deutschland gedeckt</small></span>
-              </label>
-              <label class="pill">
-                <input type="radio" name="betrag" value="25">
-                <span>25 €<small>Alles gedeckt + kleine Spende</small></span>
-              </label>
-            </fieldset>
-
-            <div class="order__custom">
-              <label class="sr-only" for="betrag-custom">Eigener Betrag pro Buch in Euro, mindestens 10,50</label>
-              <input type="number" id="betrag-custom" name="betrag_eigener" min="10.50" step="0.01" inputmode="decimal" placeholder="Eigener Betrag">
-              <span aria-hidden="true">€</span>
-            </div>
-
-            <div class="order__qty">
-              <label class="order__label" for="anzahl">Anzahl</label>
-              <input type="number" id="anzahl" name="quantity" value="1" min="1" max="20" step="1" inputmode="numeric">
-            </div>
-
-            <div class="order__sum" aria-live="polite">
-              <dl>
-                <dt>Bücher</dt>
-                <dd id="sum-amount">1 × 20,00 €</dd>
-                <dt>Versand</dt>
-                <dd id="sum-shipping">2,65 €</dd>
-                <div class="order__sum-total">
-                  <dt>Gesamt</dt>
-                  <dd id="sum-total">22,65 €</dd>
-                </div>
-              </dl>
-            </div>
-
-            <button class="btn btn--donate btn--block" type="submit">Jetzt bestellen</button>
-
-            <p class="order__note">
-              Weiter zu PayPal. Dort gibst du deine Lieferadresse an und kannst
-              auch ohne PayPal-Konto mit Karte zahlen.
-            </p>
-          </form>
+          <p class="order__note">
+            Weiter zu PayPal. Dort kannst du auch ohne PayPal-Konto mit Karte zahlen.
+          </p>
 
           <div class="order__alt">
             <h3 class="small" style="margin-bottom: var(--space-3);">Lieber per Überweisung?</h3>
@@ -203,7 +159,7 @@
           </dl>
           <p class="costs__q">Wie viel ist <em>dir</em> das Buch wert?</p>
           <p style="margin-top: var(--space-5);">
-            <a class="btn btn--primary" href="#kochbuch-form">Zum Bestellformular <span aria-hidden="true">↑</span></a>
+            <a class="btn btn--primary" href="https://www.paypal.com/donate/?hosted_button_id=7LRKA636K85E6" rel="noopener">Bei PayPal bestellen <span aria-hidden="true">→</span></a>
           </p>
         </div>
       </div>
@@ -217,7 +173,7 @@
           <h3>Versand</h3>
           <p>
             Wir verschicken per Post innerhalb Deutschlands für pauschal
-            2,65 € pro Bestellung, egal wie viele Bücher. Verpackt und zur Post
+            2,70 € pro Bestellung, egal wie viele Bücher. Verpackt und zur Post
             gebracht wird ehrenamtlich — hab bitte etwas Geduld, wenn es ein paar
             Tage dauert. Versand ins Ausland gern auf Anfrage per E-Mail.
           </p>
@@ -288,7 +244,6 @@
   </div>
 </footer>
 
-<script type="module" src="js/nav.js?v=20260918b"></script>
-<script type="module" src="js/kochbuch-bestellen.js?v=20260918b"></script>
+<script type="module" src="js/nav.js?v=20260918d"></script>
 </body>
 </html>
