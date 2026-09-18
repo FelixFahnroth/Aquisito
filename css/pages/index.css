@@ -274,3 +274,59 @@
   .routing__card .arrow-link { margin-top: auto; }
   .routing__card .arrow-link::after { content: ""; position: absolute; inset: 0; }
 }
+
+@layer pages {
+
+  /* ---- Kochbuch-Video-Dialog -----------------------------------------------
+     Natives <dialog>, geöffnet per showModal(): der Browser liefert Fokusfalle,
+     Escape zum Schließen und den ::backdrop von selbst. Das Video lädt erst,
+     wenn jemand auf Play drückt (preload="none" im Markup). */
+  .video-dialog {
+    width: min(92vw, 1080px);
+    max-width: none;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-lg);
+    background: var(--forest);
+    color: var(--white);
+    box-shadow: var(--shadow-lift);
+    overflow: hidden;
+  }
+  .video-dialog::backdrop { background: rgb(0 20 0 / 0.72); }
+
+  .video-dialog__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-5);
+    padding: var(--space-4) var(--space-5) var(--space-4) var(--space-6);
+  }
+  .video-dialog__title {
+    margin: 0;
+    font-size: var(--step-h3);
+    color: var(--white);
+  }
+  .video-dialog__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.12);
+    color: var(--white);
+    cursor: pointer;
+  }
+  .video-dialog__close:hover { background: rgb(255 255 255 / 0.22); }
+  .video-dialog__close:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+  .video-dialog__video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    background: #000;
+  }
+}

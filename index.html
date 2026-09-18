@@ -14,10 +14,10 @@
 <meta property="og:locale" content="de_DE">
 <link rel="preload" href="assets/fonts/familjen-grotesk-500-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/atkinson-hyperlegible-400-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=20260917b">
-<link rel="stylesheet" href="css/base.css?v=20260917b">
-<link rel="stylesheet" href="css/components.css?v=20260917b">
-<link rel="stylesheet" href="css/pages/index.css?v=20260917b">
+<link rel="stylesheet" href="css/tokens.css?v=20260918a">
+<link rel="stylesheet" href="css/base.css?v=20260918a">
+<link rel="stylesheet" href="css/components.css?v=20260918a">
+<link rel="stylesheet" href="css/pages/index.css?v=20260918a">
 <style>
   /* Der Hero liegt vollständig in css/pages/index.css: zweispaltiges Raster mit
      dem Foto-Stapel (js/hero-stack.js) statt Hintergrundbild und Luftballon. */
@@ -630,7 +630,10 @@
               <span class="kochbuch-nav-label">Schau ins Buch und stöbere</span>
               <button class="kochbuch-nav-btn" id="kochbuch-new-next" type="button" aria-label="Nächstes Rezept">→</button>
             </div>
-            <a class="btn btn--primary" href="spenden.html#kochbuch" style="margin-top: 4px;">Blick ins Buch <span aria-hidden="true">→</span></a>
+            <!-- href zeigt direkt auf die Datei: ohne JavaScript öffnet der Browser
+                 das Video in seinem eigenen Player. Mit JavaScript fängt
+                 js/kochbuch-video.js den Klick ab und öffnet den Dialog unten. -->
+            <a class="btn btn--primary" href="assets/video/kochbuch.mp4" data-video-dialog="kochbuch-video" style="margin-top: 4px;">Blick ins Buch <span aria-hidden="true">→</span></a>
           </div>
         </div>
 
@@ -770,6 +773,25 @@
     </div>
   </section>
 
+
+  <!-- ====================================================================
+       Kochbuch-Video. Natives <dialog>, keine Bibliothek. Das Video ist
+       selbst gehostet, es wird nichts von fremden Servern geladen.
+       ==================================================================== -->
+  <dialog class="video-dialog" id="kochbuch-video" aria-labelledby="kochbuch-video-title">
+    <div class="video-dialog__bar">
+      <h2 class="video-dialog__title" id="kochbuch-video-title">Ein Blick ins Kochbuch</h2>
+      <button class="video-dialog__close" type="button" data-video-close aria-label="Video schließen">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <video class="video-dialog__video" controls preload="none" playsinline
+           width="1280" height="720">
+      <source src="assets/video/kochbuch.mp4" type="video/mp4">
+      Dein Browser kann das Video nicht abspielen.
+      <a href="assets/video/kochbuch.mp4">Video herunterladen</a> (MP4, 9,7 MB).
+    </video>
+  </dialog>
 </main>
 
 <footer class="site-footer on-dark">
@@ -839,10 +861,11 @@
     }
   });
 </script>
-<script type="module" src="js/nav.js?v=20260917b"></script>
-<script type="module" src="js/reveal.js?v=20260917b"></script>
-<script type="module" src="js/hero-stack.js?v=20260917b"></script>
-<script type="module" src="js/team-flip.js?v=20260917b"></script>
-<script type="module" src="js/stats-timer.js?v=20260917b"></script>
+<script type="module" src="js/nav.js?v=20260918a"></script>
+<script type="module" src="js/reveal.js?v=20260918a"></script>
+<script type="module" src="js/hero-stack.js?v=20260918a"></script>
+<script type="module" src="js/team-flip.js?v=20260918a"></script>
+<script type="module" src="js/stats-timer.js?v=20260918a"></script>
+<script type="module" src="js/kochbuch-video.js?v=20260918a"></script>
 </body>
 </html>
